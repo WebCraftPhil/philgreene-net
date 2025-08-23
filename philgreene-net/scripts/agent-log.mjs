@@ -13,7 +13,7 @@ const utc = new Date();
 const id = utc.toISOString().replace(/[-:TZ.]/g,"").slice(0,12) + "-" + intent.replace(/\s+/g,"-").toLowerCase().slice(0,28);
 const fp = crypto.createHash("sha256").update(JSON.stringify({intent, inputs}), "utf8").digest("hex");
 
-const ledgerPath = "docs/agents/ledger.json";
+const ledgerPath = "/Volumes/Shared File/philg-net/philgreene-net/philgreene-net/docs/agents/ledger.json";
 const arr = JSON.parse(fs.readFileSync(ledgerPath, "utf8"));
 
 const dup = arr.find(e => e.fingerprint === `sha256:${fp}` && e.status === "done");
