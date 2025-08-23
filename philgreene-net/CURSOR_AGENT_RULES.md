@@ -54,6 +54,11 @@ These rules apply to ALL automated agents (Cursor, Copilot, Claude, etc.) and hu
 
 ---
 
+> This repo uses **Cursor Agent Rules** in `CURSOR_AGENT_RULES.md`. All automated work must:
+> 1) read the ledger, 2) plan, 3) diff, 4) test, 5) log.  
+> Duplicate work with identical intent/inputs must be skipped.
+
+
 ## 4) Commit Discipline
 
 **Commit message (Conventional Commits + Task Summary):**

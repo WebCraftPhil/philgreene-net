@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CHANGED=$(git diff --cached --name-only)
+NEEDS_LEDGER=false
+for f in $CHANGED; do
+  case "$f" in
+    app/*|components/*|lib/*|scripts/*|pages/*)
+      NEEDS_LEDGER=true
+      ;;
+  esac
+done
+
+if $NEEDS_LEDGER; then
+  # If commit message contains 'skip-ledger:' allow
+  if git var GIT_AUTHOR_IDENT >/dev/null 2>&1; then :; fi
+  if git rev-parse -q --verify HEAD >/dev/null; then :; fi
+  MSG=$(git cat-file -p :/.git/COMMIT_EDITMSG 2>/dev/null || true)
+  if echo "$MSG" | grep -qi "skip-ledger:"; then
+    exit 0
+  fi
+
+  # Ensure ledger changed in this commit
+  if ! echo "$CHANGED" | grep -q "^docs/agents/ledger.json$"; then
+    echo "❌ Changes touch source but no ledger update detected."
+    echo "   Run: npm run agent:log \"<intent>\" '{\"key\":\"val\"}'"
+    echo "   Or add 'skip-ledger: <reason>' to the commit body."
+    exit 1
+  fi
+fi
