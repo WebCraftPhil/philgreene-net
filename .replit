@@ -1,0 +1,15 @@
+modules = ["nodejs-20"]
+[nix]
+channel = "stable-25_05"
+
+[workflows]
+runButton = "Run"
+
+[[workflows.workflow]]
+name = "Run"
+author = 40465367
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd philgreene-net && npm run dev -- --hostname 0.0.0.0 --port 5000"
