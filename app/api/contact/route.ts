@@ -14,15 +14,16 @@ function isValidEmail(email: string): boolean {
   return /.+@.+\..+/.test(email);
 }
 
-function validate(body: any): { valid: boolean; errors?: string[]; data?: ContactPayload } {
+function validate(body: unknown): { valid: boolean; errors?: string[]; data?: ContactPayload } {
   const errors: string[] = [];
+  const bodyObj = body as Record<string, unknown>;
   const data: ContactPayload = {
-    name: String(body?.name || "").trim(),
-    email: String(body?.email || "").trim(),
-    company: body?.company ? String(body.company).trim() : undefined,
-    projectType: body?.projectType ? String(body.projectType).trim() : undefined,
-    budget: body?.budget ? String(body.budget).trim() : undefined,
-    message: String(body?.message || "").trim(),
+    name: String(bodyObj?.name || "").trim(),
+    email: String(bodyObj?.email || "").trim(),
+    company: bodyObj?.company ? String(bodyObj.company).trim() : undefined,
+    projectType: bodyObj?.projectType ? String(bodyObj.projectType).trim() : undefined,
+    budget: bodyObj?.budget ? String(bodyObj.budget).trim() : undefined,
+    message: String(bodyObj?.message || "").trim(),
   };
 
   if (!data.name) errors.push("name is required");
@@ -40,6 +41,8 @@ export async function POST(req: NextRequest) {
     if (!valid) {
       return NextResponse.json({ ok: false, errors }, { status: 400 });
     }
+    // mark as used without exposing
+    void data;
 
     // At this point, you can forward to an email service, a webhook,
     // or persist to a datastore. Example (pseudo):
@@ -53,8 +56,7 @@ export async function POST(req: NextRequest) {
 
     // For now, just return success with minimal echo (no secrets)
     return NextResponse.json({ ok: true });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ ok: false, error: "invalid JSON" }, { status: 400 });
   }
 }
-
