@@ -35,31 +35,15 @@ export const projects: Project[] = [
     slug: 'legal-leaflet'
   },
   {
-    id: 'property-iq',
-    title: 'PropertyIQ',
-    description: 'Real estate investment analysis platform with predictive modeling',
-    role: 'Data Scientist & Backend Developer',
-    stack: ['Python', 'Pandas', 'Scikit-learn', 'FastAPI', 'PostgreSQL', 'Docker'],
-    outcomes: [
-      'Generated $2M+ in investment opportunities',
-      'Predicted market trends with 85% accuracy',
-      'Analyzed 100,000+ property listings'
-    ],
-    screenshot: '/projects/property-iq-screenshot.svg',
-    featured: true,
-    category: 'data-analysis',
-    slug: 'property-iq'
-  },
-  {
     id: 'etsy-analytics',
     title: 'Etsy Analytics',
-    description: 'Comprehensive analytics dashboard for Etsy sellers with growth insights',
+    description: 'Scrapes Etsy data and analyzes high‑demand, low‑competition product niches with actionable insights.',
     role: 'Product Developer & Data Analyst',
-    stack: ['React', 'Node.js', 'Etsy API', 'Chart.js', 'MongoDB', 'AWS'],
+    stack: ['Next.js', 'TypeScript', 'Node.js', 'Puppeteer/Playwright', 'Etsy API', 'PostgreSQL', 'Tailwind CSS'],
     outcomes: [
-      'Increased seller revenue by 30% on average',
-      'Identified 500+ optimization opportunities',
-      'Tracked 1M+ product listings'
+      'Identified hundreds of viable niches automatically',
+      'Surfaced opportunities by balancing demand vs. competition',
+      'Enabled faster product validation and listing decisions'
     ],
     screenshot: '/projects/etsy-analytics-screenshot.svg',
     featured: true,

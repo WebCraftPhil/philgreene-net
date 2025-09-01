@@ -1,22 +1,73 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Phil Greene - Data Analyst & Full Stack Developer",
-  description: "Professional portfolio showcasing data analysis, automation, and full-stack development projects. Specializing in AI integration, Etsy analytics, and business intelligence solutions.",
-  keywords: ["data analyst", "full stack developer", "AI automation", "Etsy analytics", "business intelligence", "portfolio"],
+  title: "Phil Greene - Creator Automation & SaaS Developer",
+  description: "I build automation and analytics tools that help creators earn more with less work. From scaling Etsy revenue by 1000% to launching AI-powered SaaS prototypes.",
+  keywords: [
+    "creator automation", 
+    "SaaS developer", 
+    "Etsy automation", 
+    "social media automation", 
+    "AI tools", 
+    "creator economy", 
+    "business automation", 
+    "revenue optimization",
+    "portfolio"
+  ],
   authors: [{ name: "Phil Greene" }],
+  creator: "Phil Greene",
+  publisher: "Phil Greene",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
-    title: "Phil Greene - Data Analyst & Full Stack Developer",
-    description: "Professional portfolio showcasing data analysis, automation, and full-stack development projects.",
+    title: "Phil Greene - Creator Automation & SaaS Developer",
+    description: "I build automation and analytics tools that help creators earn more with less work. From scaling Etsy revenue by 1000% to launching AI-powered SaaS prototypes.",
     type: "website",
     locale: "en_US",
+    siteName: "Phil Greene Portfolio",
+    url: "https://philgreene-net.vercel.app",
+    images: [
+      {
+        url: "https://philgreene-net.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Phil Greene - Creator Automation & SaaS Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Phil Greene - Data Analyst & Full Stack Developer",
-    description: "Professional portfolio showcasing data analysis, automation, and full-stack development projects.",
+    title: "Phil Greene - Creator Automation & SaaS Developer",
+    description: "I build automation and analytics tools that help creators earn more with less work.",
+    creator: "@philgreene",
+    images: ["https://philgreene-net.vercel.app/og-image.png"],
+  },
+  alternates: {
+    canonical: "https://philgreene-net.vercel.app",
+  },
+  category: "technology",
+  classification: "Portfolio",
+  other: {
+    "theme-color": "#33658a",
+    "msapplication-TileColor": "#33658a",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "Phil Greene Portfolio",
+    "application-name": "Phil Greene Portfolio",
+    "mobile-web-app-capable": "yes",
   },
 };
 
@@ -27,11 +78,72 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-background text-foreground antialiased">
+      <head>
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Phil Greene",
+              "jobTitle": "Creator Automation Developer & SaaS Builder",
+              "description": "I build automation and analytics tools that help creators earn more with less work.",
+              "url": "https://philgreene-net.vercel.app",
+              "sameAs": [
+                "https://github.com/philgreene",
+                "https://linkedin.com/in/philgreene"
+              ],
+              "knowsAbout": [
+                "Creator Automation",
+                "SaaS Development", 
+                "Etsy Optimization",
+                "AI Tools",
+                "Business Intelligence",
+                "Revenue Optimization"
+              ],
+              "hasOccupation": {
+                "@type": "Occupation",
+                "name": "Creator Automation Developer",
+                "description": "Building tools that help creators scale their businesses through automation and AI"
+              }
+            })
+          }}
+        />
+        
+        {/* Preconnect to external domains for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Favicon and app icons */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
+      
+      <Script id="theme-init" strategy="beforeInteractive">
+        {`
+          try {
+            const stored = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const useDark = stored ? stored === 'dark' : prefersDark;
+            if (useDark) {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+          } catch {}
+        `}
+      </Script>
+      
+      <body className="bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-white">
         <Header />
         <main className="min-h-screen">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

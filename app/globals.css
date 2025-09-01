@@ -130,7 +130,7 @@
 /* Enhanced Typography System */
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-neutral-200;
   }
   
   html {
@@ -139,7 +139,7 @@
   }
   
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-slate-900 dark:bg-slate-900 dark:text-white;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
@@ -197,7 +197,7 @@
   
   /* Enhanced Focus Styles */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-ring;
+    @apply outline-2 outline-offset-2 outline-blue-500;
   }
   
   /* Enhanced Selection Styles */
@@ -304,7 +304,7 @@
   }
   
   .btn-secondary {
-    @apply rounded-xl border-2 border-border bg-secondary px-6 py-3 font-semibold text-secondary-foreground transition-all duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary;
+    @apply rounded-xl border-2 border-neutral-300 bg-secondary px-6 py-3 font-semibold text-secondary-foreground transition-all duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary;
   }
   
   .btn-ghost {
