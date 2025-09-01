@@ -2,87 +2,24 @@
 import Link from "next/link";
 import { getFeaturedProjects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
+import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100 py-20 dark:from-gray-900 dark:to-gray-800">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Hero Content */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl dark:text-white">
-                  Data Analyst &{" "}
-                  <span className="text-blue-600 dark:text-blue-400">
-                    Full Stack Developer
-                  </span>
-                </h1>
-                <p className="text-xl text-gray-600 dark:text-gray-300">
-                  I build data-driven solutions that drive business growth. 
-                  Specializing in AI automation, analytics platforms, and scalable web applications.
-                </p>
-              </div>
-              
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Link
-                  href="/projects"
-                  className="rounded-lg bg-blue-600 px-6 py-3 text-center font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-                >
-                  View My Work
-                </Link>
-                <Link
-                  href="/contact"
-                  className="rounded-lg border border-gray-300 px-6 py-3 text-center font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800"
-                >
-                  Work With Me
-                </Link>
-              </div>
-              
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 pt-8">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">4+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">50+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Projects Completed</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">$2M+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Revenue Generated</div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Hero Image */}
-            <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 p-8">
-                <div className="flex h-full items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="mb-4 text-6xl">📊</div>
-                    <div className="text-xl font-semibold">Data-Driven Solutions</div>
-                    <div className="text-sm opacity-90">AI • Analytics • Automation</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Enhanced Hero Section */}
+      <HeroSection />
 
       {/* Featured Projects Section */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+            <h2 className="text-gradient-coolors">
               Featured Projects
             </h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+            <p className="mt-4 text-lg text-muted-foreground">
               Showcasing my expertise in data analysis, automation, and full-stack development
             </p>
           </div>
@@ -96,7 +33,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/projects"
-              className="rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800"
+              className="btn-secondary"
             >
               View All Projects
             </Link>
@@ -105,46 +42,46 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gray-50 py-20 dark:bg-gray-900">
+      <section className="bg-muted py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-white">
+            <h2 className="text-gradient-coolors">
               What I Do
             </h2>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+            <p className="mt-4 text-lg text-muted-foreground">
               Comprehensive solutions for data-driven businesses
             </p>
           </div>
           
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="rounded-xl bg-white p-6 shadow-sm dark:bg-gray-800">
+            <div className="card card-hover border-[#28965a]/20 hover:border-[#28965a]/40">
               <div className="mb-4 text-3xl">📈</div>
-              <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+              <h3 className="mb-2 text-xl font-semibold text-card-foreground">
                 Data Analysis & BI
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-muted-foreground">
                 Transform raw data into actionable insights with custom dashboards, 
                 predictive modeling, and automated reporting systems.
               </p>
             </div>
             
-            <div className="rounded-xl bg-white p-6 shadow-sm dark:bg-gray-800">
+            <div className="card card-hover border-[#e09f3e]/20 hover:border-[#e09f3e]/40">
               <div className="mb-4 text-3xl">🤖</div>
-              <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+              <h3 className="mb-2 text-xl font-semibold text-card-foreground">
                 AI & Automation
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-muted-foreground">
                 Build intelligent systems that automate workflows, analyze documents, 
                 and optimize business processes using cutting-edge AI technologies.
               </p>
             </div>
             
-            <div className="rounded-xl bg-white p-6 shadow-sm dark:bg-gray-800">
+            <div className="card card-hover border-[#33658a]/20 hover:border-[#33658a]/40">
               <div className="mb-4 text-3xl">💻</div>
-              <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+              <h3 className="mb-2 text-xl font-semibold text-card-foreground">
                 Full Stack Development
               </h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-muted-foreground">
                 Create scalable web applications from concept to deployment, 
                 with modern frameworks and cloud-native architectures.
               </p>
@@ -156,16 +93,16 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl bg-blue-600 px-8 py-12 text-center dark:bg-blue-500">
+          <div className="rounded-3xl bg-gradient-to-r from-[#33658a] via-[#28965a] to-[#e09f3e] px-8 py-12 text-center shadow-2xl">
             <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
               Ready to Build Something Amazing?
             </h2>
-            <p className="mb-8 text-xl text-blue-100">
+            <p className="mb-8 text-xl text-white/90">
               Let&apos;s discuss how I can help you achieve your data and development goals.
             </p>
             <Link
               href="/contact"
-              className="rounded-lg bg-white px-8 py-3 font-medium text-blue-600 transition-colors hover:bg-gray-100"
+              className="btn-secondary bg-white text-[#33658a] hover:bg-gray-100 hover:text-[#28965a]"
             >
               Get In Touch
             </Link>
