@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Project } from '@/types/projects';
+import { Project } from '../types/projects';
 
 interface ProjectCardProps {
   project: Project;

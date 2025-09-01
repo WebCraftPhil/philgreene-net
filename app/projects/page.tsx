@@ -1,5 +1,5 @@
-import { projects } from "@/lib/projects";
-import ProjectCard from "@/components/ProjectCard";
+import { projects } from "../../lib/projects";
+import ProjectCard from "../../components/ProjectCard";
 
 export const metadata = {
   title: "Projects - Phil Greene",

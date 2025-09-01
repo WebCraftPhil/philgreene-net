@@ -1,8 +1,8 @@
 
 import Link from "next/link";
-import { getFeaturedProjects } from "@/lib/projects";
-import ProjectCard from "@/components/ProjectCard";
-import HeroSection from "@/components/HeroSection";
+import { getFeaturedProjects } from "../lib/projects";
+import ProjectCard from "../components/ProjectCard";
+import HeroSection from "../components/HeroSection";
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
