@@ -1,12 +1,14 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { trackEvent } from "../lib/analytics";
 
 export default function HeroSection() {
-  const [currentText, setCurrentText] = useState('');
-  const fullText = "I build automation and analytics tools that help creators earn more with less work";
+  const [currentText, setCurrentText] = useState("");
+  const fullText =
+    "I build automation and analytics tools that help creators earn more with less work";
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
@@ -43,7 +45,7 @@ export default function HeroSection() {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
         />
         <motion.div
@@ -55,7 +57,7 @@ export default function HeroSection() {
           transition={{
             duration: 25,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
         />
       </div>
@@ -106,18 +108,19 @@ export default function HeroSection() {
                   )}
                 </span>
               </motion.h1>
-              
+
               <motion.p
                 className="text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl md:text-2xl max-w-2xl"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                From scaling Etsy revenue by 1000% in a year to launching AI-powered SaaS prototypes, 
-                I create systems that drive growth and cut busywork.
+                From scaling Etsy revenue by 1000% in a year to launching
+                AI-powered SaaS prototypes, I create systems that drive growth
+                and cut busywork.
               </motion.p>
             </div>
-            
+
             <motion.div
               className="flex flex-col gap-3 sm:gap-4 md:flex-row"
               initial={{ opacity: 0, y: 30 }}
@@ -126,12 +129,15 @@ export default function HeroSection() {
             >
               <Link
                 href="/contact"
-                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#33658a] to-[#28965a] px-6 py-3 md:px-8 md:py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 text-sm md:text-base"
+                onClick={() => trackEvent("book_call")}
+                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#33658a] to-[#28965a] px-6 py-3 md:px-8 md:py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 text-sm md:text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#33658a]"
               >
-                <span className="relative z-10">👉 Let&apos;s Build Something</span>
+                <span className="relative z-10">
+                  👉 Let&apos;s Build Something
+                </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#28965a] to-[#e09f3e] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </Link>
-              
+
               <Link
                 href="/projects"
                 className="group rounded-xl border-2 border-slate-300 px-6 py-3 md:px-8 md:py-3 text-center font-semibold text-slate-700 transition-all duration-300 hover:border-[#e09f3e] hover:bg-[#e09f3e]/5 hover:text-[#e09f3e] dark:border-slate-600 dark:text-slate-300 dark:hover:border-[#e09f3e] dark:hover:bg-[#e09f3e]/10 dark:hover:text-[#e09f3e] text-sm md:text-base"
@@ -139,7 +145,7 @@ export default function HeroSection() {
                 See My Work
               </Link>
             </motion.div>
-            
+
             {/* Enhanced Stats - Responsive grid */}
             <motion.div
               className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8"
@@ -165,7 +171,7 @@ export default function HeroSection() {
               ))}
             </motion.div>
           </motion.div>
-          
+
           {/* Enhanced Hero Visual - Mobile optimized */}
           <motion.div
             className="relative order-1 lg:order-2 mb-8 lg:mb-0"
@@ -184,30 +190,47 @@ export default function HeroSection() {
                   <motion.div
                     className="mb-4 md:mb-6 text-6xl md:text-8xl"
                     animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                   >
                     🤖
                   </motion.div>
                   <div className="space-y-2">
-                    <div className="text-xl md:text-2xl font-bold">Creator Automation</div>
-                    <div className="text-xs md:text-sm opacity-90">Social Media • E-commerce • AI Tools</div>
+                    <div className="text-xl md:text-2xl font-bold">
+                      Creator Automation
+                    </div>
+                    <div className="text-xs md:text-sm opacity-90">
+                      Social Media • E-commerce • AI Tools
+                    </div>
                   </div>
                 </div>
               </motion.div>
-              
+
               {/* Floating Elements - Hidden on mobile for cleaner look */}
               <motion.div
                 className="absolute -top-2 -right-2 md:-top-4 md:-right-4 h-12 w-12 md:h-16 md:w-16 rounded-full bg-gradient-to-br from-[#28965a] to-[#c6f91f] p-3 md:p-4 shadow-lg hidden md:block"
                 animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 <div className="text-white text-sm md:text-base">📱</div>
               </motion.div>
-              
+
               <motion.div
                 className="absolute -bottom-2 -left-2 md:-bottom-4 md:-left-4 h-12 w-12 md:h-16 md:w-16 rounded-full bg-gradient-to-br from-[#e09f3e] to-[#c6f91f] p-3 md:p-4 shadow-lg hidden md:block"
                 animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
               >
                 <div className="text-white text-sm md:text-base">💰</div>
               </motion.div>
