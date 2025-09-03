@@ -96,8 +96,8 @@ export default function RootLayout({
                 "I build automation and analytics tools that help creators earn more with less work.",
               url: siteUrl,
               sameAs: [
-                "https://github.com/philgreene",
-                "https://linkedin.com/in/philgreene",
+                "https://github.com/WebCraftPhil",
+                "https://linkedin.com/in/phil.greene1",
               ],
               knowsAbout: [
                 "Creator Automation",

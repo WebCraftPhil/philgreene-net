@@ -30,6 +30,9 @@ export default function ProjectCard({ project, variant = 'default' }: ProjectCar
           src={project.screenshot}
           alt={`${project.title} screenshot`}
           fill
+          priority={isFeatured}
+          loading={isFeatured ? "eager" : "lazy"}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-transparent opacity-60" />
