@@ -8,7 +8,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
 export const metadata: Metadata = {
   title: "Phil Greene - Creator Automation & SaaS Developer",
   description:
-    "I build automation and analytics tools that help creators earn more with less work. From scaling Etsy revenue by 1000% to launching AI-powered SaaS prototypes.",
+    "I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.",
   keywords: [
     "creator automation",
     "SaaS developer",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Phil Greene - Creator Automation & SaaS Developer",
     description:
-      "I build automation and analytics tools that help creators earn more with less work. From scaling Etsy revenue by 1000% to launching AI-powered SaaS prototypes.",
+      "I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.",
     type: "website",
     locale: "en_US",
     siteName: "Phil Greene Portfolio",

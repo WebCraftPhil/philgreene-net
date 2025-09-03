@@ -11,10 +11,9 @@ export default function Header() {
   const pathname = usePathname();
 
   const navigation = [
-    { name: "Home", href: "/" },
+    { name: "Services", href: "/#services" },
     { name: "Projects", href: "/projects" },
     { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -36,7 +35,7 @@ export default function Header() {
           <nav className="hidden md:flex items-center space-x-4">
             {navigation.map((item) => {
               const active =
-                item.href === "/"
+                item.href.startsWith("/#")
                   ? pathname === "/"
                   : pathname?.startsWith(item.href);
               const base =
@@ -61,7 +60,7 @@ export default function Header() {
               onClick={() => trackEvent("book_call")}
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
             >
-              Work With Me
+              Book a Call
             </Link>
           </nav>
 
@@ -98,7 +97,7 @@ export default function Header() {
             <div className="space-y-1 pb-3 pt-2">
               {navigation.map((item) => {
                 const active =
-                  item.href === "/"
+                  item.href.startsWith("/#")
                     ? pathname === "/"
                     : pathname?.startsWith(item.href);
                 const base =
@@ -132,7 +131,7 @@ export default function Header() {
                   setIsMenuOpen(false);
                 }}
               >
-                Work With Me
+                Book a Call
               </Link>
             </div>
           </div>

@@ -30,4 +30,41 @@
     ],
     "fingerprint": "portfolio-features-v1"
   }
+  ,
+  {
+    "id": "20250903-0130-navigation-cta-seo",
+    "actor": "agent:cursor",
+    "intent": "improve navigation, hero CTA, SEO metadata, robots, and contact booking",
+    "inputs": {
+      "primaryCTA": "Book a 20-min Call",
+      "secondaryCTA": "View Projects",
+      "navigation": ["Services", "Projects", "About", "Contact"],
+      "calendly": true,
+      "robotsAllow": true
+    },
+    "relatedFiles": [
+      "worklog.md",
+      "components/HeroSection.tsx",
+      "components/Header.tsx",
+      "app/page.tsx",
+      "app/layout.tsx",
+      "app/robots.ts",
+      "app/sitemap.ts",
+      "public/robots.txt",
+      "public/sitemap.xml",
+      "components/ContactForm.tsx",
+      "app/contact/page.tsx",
+      "components/AboutContent.tsx",
+      "app/about/page.tsx",
+      "README.md"
+    ],
+    "status": "done",
+    "evidence": "commit 103ebc8535cc24abd4ee6c6f1bdec48224f15b96; lint, build, test, audit passed",
+    "notes": [
+      "Simplified navigation and CTAs",
+      "Added Calendly embed and SEO files",
+      "Enabled site crawling via robots.txt"
+    ],
+    "fingerprint": "eb7b066070a67ad51eb0a999f02e31f8debd326b2918d588adf48c787ec3c405"
+  }
 ]

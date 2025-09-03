@@ -17,5 +17,16 @@ export const metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactForm />;
+  return (
+    <div>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 pt-20">
+        <iframe
+          src="https://calendly.com/philgreene/20min?embed_domain=philgreene.net&embed_type=Inline"
+          className="w-full h-[700px] rounded-lg border"
+          title="Book a 20-min Call"
+        ></iframe>
+      </div>
+      <ContactForm />
+    </div>
+  );
 }

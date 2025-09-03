@@ -68,7 +68,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="min-h-screen py-20">
+    <div className="py-20">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 text-center">

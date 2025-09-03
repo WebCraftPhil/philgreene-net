@@ -1,8 +1,12 @@
 import { MetadataRoute } from "next";
+
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
   return {
-    rules: [{ userAgent: "*", allow: "/" }],
-    sitemap: `${siteUrl}/sitemap.xml`,
+    rules: {
+      userAgent: "*",
+      allow: "/",
+    },
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
