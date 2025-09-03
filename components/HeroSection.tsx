@@ -115,9 +115,12 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                From scaling Etsy revenue by 1000% in a year to launching
-                AI-powered SaaS prototypes, I create systems that drive growth
-                and cut busywork.
+                Scaled Etsy revenue by over 1000% year over year — see{' '}
+                <Link href="/projects" className="underline">
+                  case study
+                </Link>{' '}
+                — and launched AI-powered SaaS prototypes to drive growth and
+                cut busywork.
               </motion.p>
             </div>
 
@@ -132,9 +135,7 @@ export default function HeroSection() {
                 onClick={() => trackEvent("book_call")}
                 className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#33658a] to-[#28965a] px-6 py-3 md:px-8 md:py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 text-sm md:text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#33658a]"
               >
-                <span className="relative z-10">
-                  👉 Let&apos;s Build Something
-                </span>
+                <span className="relative z-10">Book a 20-min Call</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#28965a] to-[#e09f3e] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </Link>
 
@@ -142,7 +143,7 @@ export default function HeroSection() {
                 href="/projects"
                 className="group rounded-xl border-2 border-slate-300 px-6 py-3 md:px-8 md:py-3 text-center font-semibold text-slate-700 transition-all duration-300 hover:border-[#e09f3e] hover:bg-[#e09f3e]/5 hover:text-[#e09f3e] dark:border-slate-600 dark:text-slate-300 dark:hover:border-[#e09f3e] dark:hover:bg-[#e09f3e]/10 dark:hover:text-[#e09f3e] text-sm md:text-base"
               >
-                See My Work
+                View Projects
               </Link>
             </motion.div>
 

@@ -37,8 +37,11 @@ export default function Home() {
                 Year-over-Year Growth
               </div>
               <div className="text-xs text-muted-foreground">
-                Scaled Etsy shop revenue through smart design, SEO, and product
-                expansion.
+                Scaled Etsy shop revenue by over 1000% year over year —
+                <Link href="/projects" className="underline">
+                  see case study
+                </Link>
+                .
               </div>
             </div>
 
@@ -231,7 +234,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
+      <section id="services" className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <h2 className="text-gradient-coolors text-3xl font-bold sm:text-4xl">
