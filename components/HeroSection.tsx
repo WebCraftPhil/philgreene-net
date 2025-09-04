@@ -7,8 +7,7 @@ import { trackEvent } from "../lib/analytics";
 
 export default function HeroSection() {
   const [currentText, setCurrentText] = useState("");
-  const fullText =
-    "I build automation and analytics tools that help creators earn more with less work";
+  const fullText = "I build modern web experiences that drive results.";
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
@@ -21,60 +20,59 @@ export default function HeroSection() {
         setIsTyping(false);
         clearInterval(timer);
       }
-    }, 50);
+    }, 40); // Faster typing speed
 
     return () => clearInterval(timer);
   }, []);
 
-
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900">
-      {/* Animated Background Elements - Hidden on mobile for performance */}
-      <div className="absolute inset-0 overflow-hidden hidden md:block">
+    <section className="relative min-h-screen overflow-hidden bg-background">
+      {/* Subtle Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden hidden md:block opacity-50">
         <motion.div
-          className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-[#33658a]/20 to-[#28965a]/20 blur-3xl"
+          className="absolute -top-80 -right-80 h-[40rem] w-[40rem] rounded-full bg-gradient-to-br from-primary/10 to-accent-green/10 blur-3xl"
           animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 180],
           }}
           transition={{
-            duration: 20,
+            duration: 40,
             repeat: Infinity,
             ease: "linear",
           }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-gradient-to-tr from-[#e09f3e]/20 to-[#c6f91f]/20 blur-3xl"
+          className="absolute -bottom-80 -left-80 h-[40rem] w-[40rem] rounded-full bg-gradient-to-tr from-accent-orange/10 to-accent-lime/10 blur-3xl"
           animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
+            scale: [1.1, 1, 1.1],
+            rotate: [180, 90, 0],
           }}
           transition={{
-            duration: 25,
+            duration: 50,
             repeat: Infinity,
             ease: "linear",
           }}
         />
       </div>
 
-      {/* Floating Particles - Reduced on mobile */}
+      {/* Subtle Floating Particles */}
       <div className="absolute inset-0">
-        {[...Array(10)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute h-1 w-1 md:h-2 md:w-2 rounded-full bg-[#c6f91f]/40"
+            className="absolute h-1.5 w-1.5 rounded-full bg-accent-lime/50"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.8, 0.3],
+              y: [0, -15, 0],
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 3,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: Math.random() * 3,
             }}
           />
         ))}
@@ -91,71 +89,62 @@ export default function HeroSection() {
           >
             <div className="space-y-4 md:space-y-6">
               <motion.h1
-                className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl dark:text-white leading-tight"
-                initial={{ opacity: 0, y: 30 }}
+                className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-tight"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
                 <span className="block">
                   {currentText}
                   {isTyping && (
-                    <span className="ml-2 inline-block h-6 w-1 md:h-8 md:w-1 animate-pulse bg-[#33658a] dark:bg-[#33658a]" />
+                    <span className="ml-2 inline-block h-8 w-1 animate-pulse bg-primary" />
                   )}
                 </span>
               </motion.h1>
 
               <motion.p
-                className="text-lg leading-relaxed text-slate-600 dark:text-slate-300 sm:text-xl md:text-2xl max-w-2xl"
-                initial={{ opacity: 0, y: 30 }}
+                className="text-lg leading-relaxed text-muted-foreground sm:text-xl md:text-2xl max-w-2xl"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Achieved 10x Etsy revenue growth — see{' '}
-                <Link href="/projects/etsy-analytics" className="underline">
-                  case study
-                </Link>{' '}
-                — and launched AI-powered SaaS prototypes to drive growth and
-                cut busywork.
+                From sleek landing pages to complex web applications, I bring your vision to life with clean code and great user experiences.
               </motion.p>
             </div>
 
             <motion.div
               className="flex flex-col gap-3 sm:gap-4 md:flex-row"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Link
                 href="/contact"
-                onClick={() => trackEvent("book_call")}
-                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#33658a] to-[#28965a] px-6 py-3 md:px-8 md:py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 text-sm md:text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#33658a]"
+                onClick={() => trackEvent("start_project_call")}
+                className="btn-primary"
               >
-                <span className="relative z-10">Book a 20-min Call</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#28965a] to-[#e09f3e] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                Start a Project
               </Link>
 
               <Link
                 href="/projects"
-                className="group rounded-xl border-2 border-slate-300 px-6 py-3 md:px-8 md:py-3 text-center font-semibold text-slate-700 transition-all duration-300 hover:border-[#e09f3e] hover:bg-[#e09f3e]/5 hover:text-[#e09f3e] dark:border-slate-600 dark:text-slate-300 dark:hover:border-[#e09f3e] dark:hover:bg-[#e09f3e]/10 dark:hover:text-[#e09f3e] text-sm md:text-base"
+                className="btn-secondary"
               >
-                See My Work
+                Explore My Work
               </Link>
             </motion.div>
 
             <motion.div
-              className="pt-6 md:pt-8 space-y-2 text-center text-sm text-slate-600 dark:text-slate-400"
-              initial={{ opacity: 0, y: 30 }}
+              className="pt-6 md:pt-8 space-y-2 text-center text-sm text-muted-foreground"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
             >
-              <p>Who I work with: creators, small businesses, and startups.</p>
-              <p>
-                Built with Next.js, Tailwind, and Vercel.
-              </p>
+              <p>Specializing in React, Next.js, and Tailwind CSS.</p>
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Hero Visual - Mobile optimized */}
+          {/* Enhanced Hero Visual */}
           <motion.div
             className="relative order-1 lg:order-2 mb-8 lg:mb-0"
             initial={{ opacity: 0, x: 50 }}
@@ -163,59 +152,23 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="relative flex justify-center lg:justify-end">
-              {/* Main Card - Responsive sizing */}
               <motion.div
-                className="aspect-square w-64 md:w-80 lg:w-96 rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#33658a] via-[#28965a] to-[#e09f3e] p-6 md:p-8 shadow-2xl"
-                whileHover={{ scale: 1.02, rotateY: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                className="aspect-square w-64 md:w-80 lg:w-96 rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary to-accent-green p-1 shadow-2xl"
+                whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 300 } }}
               >
-                <div className="flex h-full flex-col items-center justify-center text-center text-white">
+                <div className="flex h-full w-full items-center justify-center rounded-xl md:rounded-2xl bg-background/80 backdrop-blur-sm">
                   <motion.div
-                    className="mb-4 md:mb-6 text-6xl md:text-8xl"
-                    animate={{ rotate: [0, 10, -10, 0] }}
+                    className="text-6xl md:text-8xl"
+                    animate={{ rotate: [0, 5, -5, 0] }}
                     transition={{
-                      duration: 4,
+                      duration: 5,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
                   >
-                    🤖
+                    🚀
                   </motion.div>
-                  <div className="space-y-2">
-                    <div className="text-xl md:text-2xl font-bold">
-                      Creator Automation
-                    </div>
-                    <div className="text-xs md:text-sm opacity-90">
-                      Social Media • E-commerce • AI Tools
-                    </div>
-                  </div>
                 </div>
-              </motion.div>
-
-              {/* Floating Elements - Hidden on mobile for cleaner look */}
-              <motion.div
-                className="absolute -top-2 -right-2 md:-top-4 md:-right-4 h-12 w-12 md:h-16 md:w-16 rounded-full bg-gradient-to-br from-[#28965a] to-[#c6f91f] p-3 md:p-4 shadow-lg hidden md:block"
-                animate={{ y: [0, -10, 0] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <div className="text-white text-sm md:text-base">📱</div>
-              </motion.div>
-
-              <motion.div
-                className="absolute -bottom-2 -left-2 md:-bottom-4 md:-left-4 h-12 w-12 md:h-16 md:w-16 rounded-full bg-gradient-to-br from-[#e09f3e] to-[#c6f91f] p-3 md:p-4 shadow-lg hidden md:block"
-                animate={{ y: [0, 10, 0] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-              >
-                <div className="text-white text-sm md:text-base">💰</div>
               </motion.div>
             </div>
           </motion.div>
