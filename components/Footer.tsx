@@ -21,10 +21,22 @@ export default function Footer() {
             <a href="mailto:hello@philgreene.net" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" aria-label="Email">
               <Mail className="h-5 w-5" />
             </a>
-            <a href="https://github.com/philgreene" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" aria-label="GitHub">
+            <a
+              href="https://github.com/WebCraftPhil"
+              target="_blank"
+              rel="me noopener noreferrer"
+              className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+              aria-label="GitHub"
+            >
               <Github className="h-5 w-5" />
             </a>
-            <a href="https://www.linkedin.com/in/phil-greene" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" aria-label="LinkedIn">
+            <a
+              href="https://www.linkedin.com/in/phil.greene1"
+              target="_blank"
+              rel="me noopener noreferrer"
+              className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+              aria-label="LinkedIn"
+            >
               <Linkedin className="h-5 w-5" />
             </a>
           </div>
