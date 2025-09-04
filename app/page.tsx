@@ -31,14 +31,14 @@ export default function Home() {
             <div className="card card-hover text-center border-[#28965a]/20 hover:border-[#28965a]/40">
               <div className="mb-4 text-4xl">🚀</div>
               <div className="text-2xl font-bold text-[#28965a] mb-2">
-                1000%
+                10x
               </div>
               <div className="text-sm font-semibold text-card-foreground mb-2">
                 Year-over-Year Growth
               </div>
               <div className="text-xs text-muted-foreground">
-                Scaled Etsy shop revenue by over 1000% year over year —
-                <Link href="/projects" className="underline">
+                Achieved 10x Etsy shop revenue growth —
+                <Link href="/projects/etsy-analytics" className="underline">
                   see case study
                 </Link>
                 .
@@ -80,7 +80,11 @@ export default function Home() {
               </div>
               <div className="text-xs text-muted-foreground">
                 Custom AI workflows that cut social posting and launch tasks
-                nearly in half.
+                nearly in half —
+                <Link href="/projects/cronpost" className="underline">
+                  see case study
+                </Link>
+                .
               </div>
             </div>
           </div>
