@@ -1,8 +1,9 @@
-
 import Link from "next/link";
 import { getFeaturedProjects } from "../lib/projects";
 import ProjectCard from "../components/ProjectCard";
 import HeroSection from "../components/HeroSection";
+import Script from "next/script";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
@@ -20,7 +21,8 @@ export default function Home() {
               Real Results, Real Growth
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              From Etsy scaling to SaaS launches, here’s what I’ve actually built and achieved
+              From Etsy scaling to SaaS launches, here’s what I’ve actually
+              built and achieved
             </p>
           </div>
 
@@ -28,10 +30,18 @@ export default function Home() {
             {/* Stat 1 */}
             <div className="card card-hover text-center border-[#28965a]/20 hover:border-[#28965a]/40">
               <div className="mb-4 text-4xl">🚀</div>
-              <div className="text-2xl font-bold text-[#28965a] mb-2">1000%</div>
-              <div className="text-sm font-semibold text-card-foreground mb-2">Year-over-Year Growth</div>
+              <div className="text-2xl font-bold text-[#28965a] mb-2">
+                10x
+              </div>
+              <div className="text-sm font-semibold text-card-foreground mb-2">
+                Year-over-Year Growth
+              </div>
               <div className="text-xs text-muted-foreground">
-                Scaled Etsy shop revenue through smart design, SEO, and product expansion.
+                Achieved 10x Etsy shop revenue growth —
+                <Link href="/projects/etsy-analytics" className="underline">
+                  see case study
+                </Link>
+                .
               </div>
             </div>
 
@@ -39,9 +49,12 @@ export default function Home() {
             <div className="card card-hover text-center border-[#e09f3e]/20 hover:border-[#e09f3e]/40">
               <div className="mb-4 text-4xl">📊</div>
               <div className="text-2xl font-bold text-[#e09f3e] mb-2">20+</div>
-              <div className="text-sm font-semibold text-card-foreground mb-2">Monthly Orders & Insights</div>
+              <div className="text-sm font-semibold text-card-foreground mb-2">
+                Monthly Orders & Insights
+              </div>
               <div className="text-xs text-muted-foreground">
-                Proved demand in competitive niches and gained access to advanced analytics.
+                Proved demand in competitive niches and gained access to
+                advanced analytics.
               </div>
             </div>
 
@@ -49,9 +62,12 @@ export default function Home() {
             <div className="card card-hover text-center border-[#33658a]/20 hover:border-[#33658a]/40">
               <div className="mb-4 text-4xl">⚡</div>
               <div className="text-2xl font-bold text-[#33658a] mb-2">3</div>
-              <div className="text-sm font-semibold text-card-foreground mb-2">SaaS Prototypes in 12 Months</div>
+              <div className="text-sm font-semibold text-card-foreground mb-2">
+                SaaS Prototypes in 12 Months
+              </div>
               <div className="text-xs text-muted-foreground">
-                CronPost, LegalLeaflet, Etsy Analytics — built and tested in the market.
+                CronPost, LegalLeaflet, Etsy Analytics — built and tested in the
+                market.
               </div>
             </div>
 
@@ -59,9 +75,16 @@ export default function Home() {
             <div className="card card-hover text-center border-[#c6f91f]/20 hover:border-[#c6f91f]/40">
               <div className="mb-4 text-4xl">⏰</div>
               <div className="text-2xl font-bold text-[#c6f91f] mb-2">80%</div>
-              <div className="text-sm font-semibold text-card-foreground mb-2">Time Saved with Automation</div>
+              <div className="text-sm font-semibold text-card-foreground mb-2">
+                Time Saved with Automation
+              </div>
               <div className="text-xs text-muted-foreground">
-                Custom AI workflows that cut social posting and launch tasks nearly in half.
+                Custom AI workflows that cut social posting and launch tasks
+                nearly in half —
+                <Link href="/projects/cronpost" className="underline">
+                  see case study
+                </Link>
+                .
               </div>
             </div>
           </div>
@@ -76,7 +99,8 @@ export default function Home() {
               Now Building
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Active projects that show I&apos;m iterating, learning, and shipping real value
+              Active projects that show I&apos;m iterating, learning, and
+              shipping real value
             </p>
           </div>
 
@@ -92,11 +116,16 @@ export default function Home() {
                     CronPost
                   </h3>
                   <p className="text-muted-foreground mb-3">
-                    Multi-platform AI content automation that reduces posting time by 80%.
+                    Multi-platform AI content automation that reduces posting
+                    time by 80%.
                   </p>
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">AI Automation</span>
-                    <span className="px-2 py-1 bg-[#e09f3e]/10 text-[#e09f3e] rounded-full">Social Media</span>
+                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">
+                      AI Automation
+                    </span>
+                    <span className="px-2 py-1 bg-[#e09f3e]/10 text-[#e09f3e] rounded-full">
+                      Social Media
+                    </span>
                   </div>
                 </div>
               </div>
@@ -116,8 +145,12 @@ export default function Home() {
                     AI contracts for freelancers, creators, and startups.
                   </p>
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="px-2 py-1 bg-[#33658a]/10 text-[#33658a] rounded-full">Legal Tech</span>
-                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">AI</span>
+                    <span className="px-2 py-1 bg-[#33658a]/10 text-[#33658a] rounded-full">
+                      Legal Tech
+                    </span>
+                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">
+                      AI
+                    </span>
                   </div>
                 </div>
               </div>
@@ -134,11 +167,16 @@ export default function Home() {
                     Etsy Analytics
                   </h3>
                   <p className="text-muted-foreground mb-3">
-                    Finds high‑demand, low‑competition product opportunities with automated scraping and analysis.
+                    Finds high‑demand, low‑competition product opportunities
+                    with automated scraping and analysis.
                   </p>
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="px-2 py-1 bg-[#33658a]/10 text-[#33658a] rounded-full">E-commerce</span>
-                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">Data Analysis</span>
+                    <span className="px-2 py-1 bg-[#33658a]/10 text-[#33658a] rounded-full">
+                      E-commerce
+                    </span>
+                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">
+                      Data Analysis
+                    </span>
                   </div>
                 </div>
               </div>
@@ -158,8 +196,12 @@ export default function Home() {
                     Profitable POD shop with proven year-over-year growth.
                   </p>
                   <div className="flex items-center space-x-2 text-sm">
-                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">Etsy</span>
-                    <span className="px-2 py-1 bg-[#33658a]/10 text-[#33658a] rounded-full">POD</span>
+                    <span className="px-2 py-1 bg-[#28965a]/10 text-[#28965a] rounded-full">
+                      Etsy
+                    </span>
+                    <span className="px-2 py-1 bg-[#33658a]/10 text-[#33658a] rounded-full">
+                      POD
+                    </span>
                   </div>
                 </div>
               </div>
@@ -176,21 +218,19 @@ export default function Home() {
               Featured Projects
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Showcasing my expertise in data analysis, automation, and full-stack development
+              Showcasing my expertise in data analysis, automation, and
+              full-stack development
             </p>
           </div>
-          
+
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
-            <Link
-              href="/projects"
-              className="btn-secondary"
-            >
+            <Link href="/projects" className="btn-secondary">
               View All Projects
             </Link>
           </div>
@@ -198,7 +238,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
+      <section id="services" className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <h2 className="text-gradient-coolors text-3xl font-bold sm:text-4xl">
@@ -208,7 +248,7 @@ export default function Home() {
               Comprehensive solutions for data-driven businesses
             </p>
           </div>
-          
+
           <div className="grid gap-8 md:grid-cols-3">
             <div className="card card-hover border-[#28965a]/20 hover:border-[#28965a]/40">
               <div className="mb-4 text-3xl">📈</div>
@@ -216,29 +256,31 @@ export default function Home() {
                 Data Analysis & BI
               </h3>
               <p className="text-muted-foreground">
-                Transform raw data into actionable insights with custom dashboards, 
-                predictive modeling, and automated reporting systems.
+                Transform raw data into actionable insights with custom
+                dashboards, predictive modeling, and automated reporting
+                systems.
               </p>
             </div>
-            
+
             <div className="card card-hover border-[#e09f3e]/20 hover:border-[#e09f3e]/40">
               <div className="mb-4 text-3xl">🤖</div>
               <h3 className="mb-2 text-xl font-semibold text-card-foreground">
                 AI & Automation
               </h3>
               <p className="text-muted-foreground">
-                Build intelligent systems that automate workflows, analyze documents, 
-                and optimize business processes using cutting-edge AI technologies.
+                Build intelligent systems that automate workflows, analyze
+                documents, and optimize business processes using cutting-edge AI
+                technologies.
               </p>
             </div>
-            
+
             <div className="card card-hover border-[#33658a]/20 hover:border-[#33658a]/40">
               <div className="mb-4 text-3xl">💻</div>
               <h3 className="mb-2 text-xl font-semibold text-card-foreground">
                 Full Stack Development
               </h3>
               <p className="text-muted-foreground">
-                Create scalable web applications from concept to deployment, 
+                Create scalable web applications from concept to deployment,
                 with modern frameworks and cloud-native architectures.
               </p>
             </div>
@@ -254,7 +296,8 @@ export default function Home() {
               Ready to Build Something Amazing?
             </h2>
             <p className="mb-8 text-xl text-white/90">
-              Let&apos;s discuss how I can help you achieve your data and development goals.
+              Let&apos;s discuss how I can help you achieve your data and
+              development goals.
             </p>
             <Link
               href="/contact"
@@ -265,6 +308,23 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Script
+        id="service-schema"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          provider: {
+            "@type": "Person",
+            name: "Phil Greene",
+            url: siteUrl,
+          },
+          serviceType: "Creator Automation & SaaS Development",
+          areaServed: "Worldwide",
+        })}
+      </Script>
     </div>
   );
 }

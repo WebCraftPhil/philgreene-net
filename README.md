@@ -75,6 +75,8 @@ npm run lint
 
 - Environment variables: none required for local development.
 - Tailwind: Tailwind v4 is imported in `app/globals.css` with a custom design token system (CSS variables for colors, radii, shadows, etc.). Dark mode uses the `.dark` variant (`@custom-variant dark`).
+- Global styles are loaded via `import "./globals.css"` in `app/layout.tsx`.
+- Tailwind scans `pages`, `components`, and `app` directories in `tailwind.config.js`.
 - ESLint: Flat config extends `next/core-web-vitals` and `next/typescript`.
 
 ## Content & Data
@@ -105,6 +107,7 @@ Recommended: Vercel
 - Build command: `next build` (uses Turbopack flag in package script)
 - Install command: `npm install`
 - Output: `.next` (default)
+- Ensure the Vercel project uses `philgreene.net` as the primary domain with `www` redirect so `_next/static/*` assets resolve correctly.
 
 No special `next.config.ts` options are required for a basic deployment.
 

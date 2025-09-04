@@ -172,10 +172,6 @@
 
 /* Enhanced Typography System */
 @layer base {
-  * {
-    @apply border-neutral-200;
-  }
-  
   html {
     @apply scroll-smooth;
     font-feature-settings: "rlig" 1, "calt" 1;

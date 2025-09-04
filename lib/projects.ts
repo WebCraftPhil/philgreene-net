@@ -81,6 +81,68 @@ export const caseStudies: CaseStudy[] = [
       'Analytics drive feature development decisions',
       'API reliability requires robust error handling'
     ]
+  },
+  {
+    ...projects[1], // LegalLeaflet
+    problem:
+      'Legal teams spend hours reviewing contracts manually, risking inconsistencies and slow deal cycles.',
+    solution:
+      'Developed an AI-powered platform to analyze and summarize legal documents with high accuracy.',
+    results: {
+      metrics: [
+        '70% reduction in contract review time',
+        '95% accuracy compared to manual review',
+        '50,000+ documents processed'
+      ],
+      impact:
+        'Enabled faster deal cycles and reduced legal spend for small teams.'
+    },
+    nextSteps: [
+      'Expand language coverage',
+      'Integrate with e-sign platforms',
+      'Add collaborative review features'
+    ],
+    challenges: [
+      'Ensuring model compliance with legal standards',
+      'Handling diverse document formats',
+      'Maintaining data privacy'
+    ],
+    learnings: [
+      'User trust grows with transparent AI outputs',
+      'Edge cases require human-in-the-loop review',
+      'Performance tuning is ongoing'
+    ]
+  },
+  {
+    ...projects[2], // Etsy Analytics
+    problem:
+      'New Etsy sellers struggle to identify high-demand, low-competition niches.',
+    solution:
+      'Built a data pipeline that scrapes marketplace data and highlights viable product opportunities.',
+    results: {
+      metrics: [
+        'Hundreds of profitable niches discovered automatically',
+        '10x revenue growth for pilot shop',
+        'Faster validation of product ideas'
+      ],
+      impact:
+        'Helped sellers focus on listings with real demand and less competition.'
+    },
+    nextSteps: [
+      'Add real-time market alerts',
+      'Expand to other marketplaces',
+      'Introduce collaborative research dashboards'
+    ],
+    challenges: [
+      'Staying within marketplace rate limits',
+      'Normalizing inconsistent category data',
+      'Presenting insights clearly to non-technical users'
+    ],
+    learnings: [
+      'Data freshness matters for trend spotting',
+      'Visualization drives decision making',
+      'Scrapers require constant maintenance'
+    ]
   }
 ];
 
