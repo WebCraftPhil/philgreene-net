@@ -26,11 +26,6 @@ export default function HeroSection() {
     return () => clearInterval(timer);
   }, []);
 
-  const stats = [
-    { value: "1000%", label: "Etsy Growth", icon: "📈" },
-    { value: "3", label: "SaaS Launches", icon: "🚀" },
-    { value: "80%", label: "Time Saved", icon: "⚡" },
-  ];
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900">
@@ -115,8 +110,8 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                Scaled Etsy revenue by over 1000% year over year — see{' '}
-                <Link href="/projects" className="underline">
+                Achieved 10x Etsy revenue growth — see{' '}
+                <Link href="/projects/etsy-analytics" className="underline">
                   case study
                 </Link>{' '}
                 — and launched AI-powered SaaS prototypes to drive growth and
@@ -143,33 +138,20 @@ export default function HeroSection() {
                 href="/projects"
                 className="group rounded-xl border-2 border-slate-300 px-6 py-3 md:px-8 md:py-3 text-center font-semibold text-slate-700 transition-all duration-300 hover:border-[#e09f3e] hover:bg-[#e09f3e]/5 hover:text-[#e09f3e] dark:border-slate-600 dark:text-slate-300 dark:hover:border-[#e09f3e] dark:hover:bg-[#e09f3e]/10 dark:hover:text-[#e09f3e] text-sm md:text-base"
               >
-                View Projects
+                See My Work
               </Link>
             </motion.div>
 
-            {/* Enhanced Stats - Responsive grid */}
             <motion.div
-              className="grid grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-8"
+              className="pt-6 md:pt-8 space-y-2 text-center text-sm text-slate-600 dark:text-slate-400"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
             >
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  className="group text-center"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <div className="mb-2 text-xl md:text-2xl">{stat.icon}</div>
-                  <div className="text-2xl md:text-3xl font-bold text-[#33658a] dark:text-[#33658a]">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs md:text-sm font-medium text-slate-600 dark:text-slate-400 leading-tight">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
+              <p>Who I work with: creators, small businesses, and startups.</p>
+              <p>
+                Built with Next.js, Tailwind, and Vercel.
+              </p>
             </motion.div>
           </motion.div>
 

@@ -13,6 +13,7 @@ export default function Header() {
   const navigation = [
     { name: "Services", href: "/#services" },
     { name: "Projects", href: "/projects" },
+    { name: "Blog", href: "/blog" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
@@ -60,7 +61,7 @@ export default function Header() {
               onClick={() => trackEvent("book_call")}
               className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
             >
-              Book a Call
+              Book a 20-min Call
             </Link>
           </nav>
 
@@ -131,7 +132,7 @@ export default function Header() {
                   setIsMenuOpen(false);
                 }}
               >
-                Book a Call
+                Book a 20-min Call
               </Link>
             </div>
           </div>
