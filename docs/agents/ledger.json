@@ -71,5 +71,57 @@
       "Enabled site crawling via robots.txt"
     ],
     "fingerprint": "eb7b066070a67ad51eb0a999f02e31f8debd326b2918d588adf48c787ec3c405"
+  },
+  {
+    "id": "20250105-1500-git-cleanup-dev-setup",
+    "actor": "agent:cursor",
+    "intent": "fix git tracking issues, set up comprehensive development environment, and improve CSS styling",
+    "inputs": {
+      "gitIssues": [
+        "divergent branches with merge conflicts",
+        "tracking build artifacts and system files",
+        "old project structure cluttering repo"
+      ],
+      "devTools": [
+        "vitest testing framework",
+        "eslint with typescript rules",
+        "prettier code formatting",
+        "vscode debugging configs"
+      ],
+      "stylingIssues": [
+        "tailwind config mismatch",
+        "css variables not working",
+        "generic hero section"
+      ]
+    },
+    "relatedFiles": [
+      ".gitignore",
+      "package.json",
+      "eslint.config.mjs",
+      "tailwind.config.js",
+      "app/globals.css",
+      "tsconfig.json",
+      ".prettierrc",
+      ".prettierignore",
+      ".vscode/launch.json",
+      "tests/setup.ts",
+      "tests/components.test.tsx",
+      "vitest.config.ts",
+      "components/HeroSection.tsx",
+      "components/HeroSectionGratefulDead.tsx",
+      "components/HeroSectionWithPhoto.tsx",
+      "worklog.md"
+    ],
+    "status": "done",
+    "evidence": "git status clean, all tests passing, linting working, build successful",
+    "notes": [
+      "Resolved git merge conflicts and cleaned up tracking",
+      "Set up comprehensive testing, linting, and debugging environment",
+      "Fixed Tailwind CSS configuration with HSL color format",
+      "Created multiple hero section variants (professional, Grateful Dead themed)",
+      "Added proper .gitignore to exclude build artifacts and system files",
+      "Repository now properly organized and ready for professional development"
+    ],
+    "fingerprint": "git-cleanup-dev-setup-v1"
   }
 ]

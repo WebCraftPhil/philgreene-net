@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { trackEvent } from '../lib/analytics';
+import Image from 'next/image';
 
-export default function HeroSection() {
+export default function HeroSectionWithPhoto() {
   const [currentText, setCurrentText] = useState('');
   const fullText =
     'I build automation and analytics tools that help creators earn more with less work';
@@ -28,7 +29,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900">
-      {/* Animated Background Elements - Hidden on mobile for performance */}
+      {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden hidden md:block">
         <motion.div
           className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-[#33658a]/20 to-[#28965a]/20 blur-3xl"
@@ -54,29 +55,6 @@ export default function HeroSection() {
             ease: 'linear',
           }}
         />
-      </div>
-
-      {/* Floating Particles - Reduced on mobile */}
-      <div className="absolute inset-0">
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute h-1 w-1 md:h-2 md:w-2 rounded-full bg-[#c6f91f]/40"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -152,7 +130,7 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Enhanced Hero Visual - Mobile optimized */}
+          {/* Professional Portrait Visual */}
           <motion.div
             className="relative order-1 lg:order-2 mb-8 lg:mb-0"
             initial={{ opacity: 0, x: 50 }}
@@ -160,20 +138,19 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="relative flex justify-center lg:justify-end">
-              {/* Main Card - Professional Portrait Style */}
+              {/* Main Portrait Card */}
               <motion.div
                 className="aspect-square w-64 md:w-80 lg:w-96 rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#33658a] via-[#28965a] to-[#e09f3e] p-6 md:p-8 shadow-2xl overflow-hidden"
                 whileHover={{ scale: 1.02, rotateY: 5 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                {/* Portrait Placeholder - Replace with your actual photo */}
                 <div className="relative h-full w-full">
                   {/* Background Pattern */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
                   
                   {/* Portrait Circle */}
                   <motion.div
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30 shadow-2xl"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full bg-white/20 backdrop-blur-sm border-4 border-white/30 shadow-2xl overflow-hidden"
                     animate={{ 
                       scale: [1, 1.05, 1],
                       rotate: [0, 2, -2, 0]
@@ -184,8 +161,21 @@ export default function HeroSection() {
                       ease: 'easeInOut',
                     }}
                   >
-                    {/* Placeholder for your photo - replace with <img> tag */}
+                    {/* Replace this with your actual photo */}
                     <div className="w-full h-full rounded-full bg-gradient-to-br from-white/30 to-white/10 flex items-center justify-center">
+                      {/* 
+                        TO ADD YOUR PHOTO:
+                        1. Put your photo in /public/images/phil-portrait.jpg
+                        2. Replace the div below with:
+                        
+                        <Image
+                          src="/images/phil-portrait.jpg"
+                          alt="Phil Greene"
+                          width={200}
+                          height={200}
+                          className="w-full h-full object-cover rounded-full"
+                        />
+                      */}
                       <motion.div
                         className="text-4xl md:text-5xl lg:text-6xl"
                         animate={{ 
@@ -232,7 +222,7 @@ export default function HeroSection() {
                 </div>
               </motion.div>
 
-              {/* Floating Elements - Hidden on mobile for cleaner look */}
+              {/* Floating Elements */}
               <motion.div
                 className="absolute -top-2 -right-2 md:-top-4 md:-right-4 h-12 w-12 md:h-16 md:w-16 rounded-full bg-gradient-to-br from-[#28965a] to-[#c6f91f] p-3 md:p-4 shadow-lg hidden md:block"
                 animate={{ y: [0, -10, 0] }}
