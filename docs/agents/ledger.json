@@ -4,12 +4,18 @@
     "actor": "agent:cursor",
     "intent": "build professional portfolio with project grid, case studies, about page, and contact form",
     "inputs": {
-      "features": ["project portfolio grid", "case study pages", "about/resume section", "contact form", "professional design"],
+      "features": [
+        "project portfolio grid",
+        "case study pages",
+        "about/resume section",
+        "contact form",
+        "professional design"
+      ],
       "projects": ["CronPost", "LegalLeaflet", "PropertyIQ", "Etsy Analytics"]
     },
     "relatedFiles": [
       "types/projects.ts",
-      "lib/projects.ts", 
+      "lib/projects.ts",
       "components/ProjectCard.tsx",
       "components/Header.tsx",
       "app/layout.tsx",
@@ -29,8 +35,7 @@
       "Created SVG placeholder images for project screenshots"
     ],
     "fingerprint": "portfolio-features-v1"
-  }
-  ,
+  },
   {
     "id": "20250903-0130-navigation-cta-seo",
     "actor": "agent:cursor",

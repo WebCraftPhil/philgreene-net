@@ -149,4 +149,4 @@ This document explains how automated agents (e.g., GitHub Copilot, OpenAI Codex,
 
 ---
 
-*Thank you for helping keep this project healthy and maintainable!*
+_Thank you for helping keep this project healthy and maintainable!_

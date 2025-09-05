@@ -1,56 +1,56 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { trackEvent } from "../lib/analytics";
+import { useState } from 'react';
+import { trackEvent } from '../lib/analytics';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    projectType: "",
-    budget: "",
-    message: "",
+    name: '',
+    email: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+    'idle' | 'success' | 'error'
+  >('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus("idle");
+    setSubmitStatus('idle');
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       if (!res.ok) {
-        setSubmitStatus("error");
+        setSubmitStatus('error');
         return;
       }
 
       const data = await res.json();
       if (data?.ok) {
-        setSubmitStatus("success");
-        trackEvent("contact_submit");
+        setSubmitStatus('success');
+        trackEvent('contact_submit');
         setFormData({
-          name: "",
-          email: "",
-          company: "",
-          projectType: "",
-          budget: "",
-          message: "",
+          name: '',
+          email: '',
+          company: '',
+          projectType: '',
+          budget: '',
+          message: '',
         });
       } else {
-        setSubmitStatus("error");
+        setSubmitStatus('error');
       }
     } catch {
-      setSubmitStatus("error");
+      setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
@@ -59,9 +59,9 @@ export default function ContactForm() {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+    >
   ) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
@@ -270,12 +270,12 @@ export default function ContactForm() {
               disabled={isSubmitting}
               className="w-full rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-blue-500 dark:hover:bg-blue-600"
             >
-              {isSubmitting ? "Sending..." : "Send Message"}
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
-            {submitStatus === "success" && (
+            {submitStatus === 'success' && (
               <p className="text-green-600">Message sent successfully!</p>
             )}
-            {submitStatus === "error" && (
+            {submitStatus === 'error' && (
               <p className="text-red-600">
                 Something went wrong. Please try again.
               </p>

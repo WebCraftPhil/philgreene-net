@@ -11,14 +11,20 @@ export default function Footer() {
               <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
                 <span className="text-sm font-bold text-white">PG</span>
               </div>
-              <span className="text-lg font-bold text-gray-900 dark:text-white">Phil Greene</span>
+              <span className="text-lg font-bold text-gray-900 dark:text-white">
+                Phil Greene
+              </span>
             </div>
             <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
               Data analysis, AI automation, and full‑stack development.
             </p>
           </div>
           <div className="flex items-center gap-4 md:justify-center">
-            <a href="mailto:hello@philgreene.net" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" aria-label="Email">
+            <a
+              href="mailto:hello@philgreene.net"
+              className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+              aria-label="Email"
+            >
               <Mail className="h-5 w-5" />
             </a>
             <a
@@ -41,7 +47,9 @@ export default function Footer() {
             </a>
           </div>
           <div className="md:text-right">
-            <div className="text-sm text-gray-600 dark:text-gray-400">© {new Date().getFullYear()} Phil Greene</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              © {new Date().getFullYear()} Phil Greene
+            </div>
             <div className="mt-2 text-sm text-gray-500 dark:text-gray-500">
               Built with Next.js, Tailwind, and love.
             </div>

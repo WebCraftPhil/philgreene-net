@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
 type ContactPayload = {
   name: string;
@@ -14,24 +14,41 @@ function isValidEmail(email: string): boolean {
   return /.+@.+\..+/.test(email);
 }
 
-function validate(body: unknown): { valid: boolean; errors?: string[]; data?: ContactPayload } {
+function validate(body: unknown): {
+  valid: boolean;
+  errors?: string[];
+  data?: ContactPayload;
+} {
   const errors: string[] = [];
   const bodyObj = body as Record<string, unknown>;
   const data: ContactPayload = {
-    name: String(bodyObj?.name || "").trim(),
-    email: String(bodyObj?.email || "").trim(),
+    name: String(bodyObj?.name || '').trim(),
+    email: String(bodyObj?.email || '').trim(),
     company: bodyObj?.company ? String(bodyObj.company).trim() : undefined,
-    projectType: bodyObj?.projectType ? String(bodyObj.projectType).trim() : undefined,
+    projectType: bodyObj?.projectType
+      ? String(bodyObj.projectType).trim()
+      : undefined,
     budget: bodyObj?.budget ? String(bodyObj.budget).trim() : undefined,
-    message: String(bodyObj?.message || "").trim(),
+    message: String(bodyObj?.message || '').trim(),
   };
 
-  if (!data.name) {errors.push("name is required");}
-  if (!data.email) {errors.push("email is required");}
-  else if (!isValidEmail(data.email)) {errors.push("email is invalid");}
-  if (!data.message || data.message.length < 10) {errors.push("message must be at least 10 characters");}
+  if (!data.name) {
+    errors.push('name is required');
+  }
+  if (!data.email) {
+    errors.push('email is required');
+  } else if (!isValidEmail(data.email)) {
+    errors.push('email is invalid');
+  }
+  if (!data.message || data.message.length < 10) {
+    errors.push('message must be at least 10 characters');
+  }
 
-  return { valid: errors.length === 0, errors: errors.length ? errors : undefined, data };
+  return {
+    valid: errors.length === 0,
+    errors: errors.length ? errors : undefined,
+    data,
+  };
 }
 
 export async function POST(req: NextRequest) {
@@ -57,6 +74,9 @@ export async function POST(req: NextRequest) {
     // For now, just return success with minimal echo (no secrets)
     return NextResponse.json({ ok: true });
   } catch {
-    return NextResponse.json({ ok: false, error: "invalid JSON" }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, error: 'invalid JSON' },
+      { status: 400 }
+    );
   }
 }

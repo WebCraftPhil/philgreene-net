@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { getFeaturedProjects } from "../lib/projects";
-import ProjectCard from "../components/ProjectCard";
-import HeroSection from "../components/HeroSection";
-import Script from "next/script";
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
+import Link from 'next/link';
+import { getFeaturedProjects } from '../lib/projects';
+import ProjectCard from '../components/ProjectCard';
+import HeroSection from '../components/HeroSection';
+import Script from 'next/script';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://philgreene.net';
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
@@ -30,9 +30,7 @@ export default function Home() {
             {/* Stat 1 */}
             <div className="card card-hover text-center border-[#28965a]/20 hover:border-[#28965a]/40">
               <div className="mb-4 text-4xl">🚀</div>
-              <div className="text-2xl font-bold text-[#28965a] mb-2">
-                10x
-              </div>
+              <div className="text-2xl font-bold text-[#28965a] mb-2">10x</div>
               <div className="text-sm font-semibold text-card-foreground mb-2">
                 Year-over-Year Growth
               </div>
@@ -224,7 +222,7 @@ export default function Home() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
+            {featuredProjects.map(project => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
@@ -314,15 +312,15 @@ export default function Home() {
         strategy="afterInteractive"
       >
         {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
+          '@context': 'https://schema.org',
+          '@type': 'Service',
           provider: {
-            "@type": "Person",
-            name: "Phil Greene",
+            '@type': 'Person',
+            name: 'Phil Greene',
             url: siteUrl,
           },
-          serviceType: "Creator Automation & SaaS Development",
-          areaServed: "Worldwide",
+          serviceType: 'Creator Automation & SaaS Development',
+          areaServed: 'Worldwide',
         })}
       </Script>
     </div>

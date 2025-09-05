@@ -7,6 +7,7 @@ These rules apply to ALL automated agents (Cursor, Copilot, Claude, etc.) and hu
 ---
 
 ## 0) Golden Order of Operations
+
 1. **READ MEMORY** → Scan `docs/agents/ledger.json`, `worklog.md`, `journey.md`, and open PRs.
 2. **PLAN** → Propose a minimal, testable plan (bullets, ≤10 lines).
 3. **DIFF** → Change only what the plan requires. Prefer small PRs.
@@ -55,9 +56,9 @@ These rules apply to ALL automated agents (Cursor, Copilot, Claude, etc.) and hu
 ---
 
 > This repo uses **Cursor Agent Rules** in `CURSOR_AGENT_RULES.md`. All automated work must:
-> 1) read the ledger, 2) plan, 3) diff, 4) test, 5) log.  
-> Duplicate work with identical intent/inputs must be skipped.
-
+>
+> 1. read the ledger, 2) plan, 3) diff, 4) test, 5) log.  
+>    Duplicate work with identical intent/inputs must be skipped.
 
 ## 4) Commit Discipline
 

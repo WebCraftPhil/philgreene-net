@@ -1,77 +1,77 @@
-import type { Metadata } from "next";
-import Script from "next/script";
-import "./globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
+import type { Metadata } from 'next';
+import Script from 'next/script';
+import './globals.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://philgreene.net';
 
 export const metadata: Metadata = {
-  title: "Phil Greene - Creator Automation & SaaS Developer",
+  title: 'Phil Greene - Creator Automation & SaaS Developer',
   description:
-    "I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.",
+    'I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.',
   keywords: [
-    "creator automation",
-    "SaaS developer",
-    "Etsy automation",
-    "social media automation",
-    "AI tools",
-    "creator economy",
-    "business automation",
-    "revenue optimization",
-    "portfolio",
+    'creator automation',
+    'SaaS developer',
+    'Etsy automation',
+    'social media automation',
+    'AI tools',
+    'creator economy',
+    'business automation',
+    'revenue optimization',
+    'portfolio',
   ],
-  authors: [{ name: "Phil Greene" }],
-  creator: "Phil Greene",
-  publisher: "Phil Greene",
+  authors: [{ name: 'Phil Greene' }],
+  creator: 'Phil Greene',
+  publisher: 'Phil Greene',
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   openGraph: {
-    title: "Phil Greene - Creator Automation & SaaS Developer",
+    title: 'Phil Greene - Creator Automation & SaaS Developer',
     description:
-      "I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.",
-    type: "website",
-    locale: "en_US",
-    siteName: "Phil Greene Portfolio",
+      'I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Phil Greene Portfolio',
     url: siteUrl,
     images: [
       {
         url: `${siteUrl}/og-image.svg`,
         width: 1200,
         height: 630,
-        alt: "Phil Greene - Creator Automation & SaaS Developer",
+        alt: 'Phil Greene - Creator Automation & SaaS Developer',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Phil Greene - Creator Automation & SaaS Developer",
+    card: 'summary_large_image',
+    title: 'Phil Greene - Creator Automation & SaaS Developer',
     description:
-      "I build automation and analytics tools that help creators earn more with less work.",
-    creator: "@philgreene",
+      'I build automation and analytics tools that help creators earn more with less work.',
+    creator: '@philgreene',
     images: [`${siteUrl}/og-image.svg`],
   },
   alternates: {
     canonical: siteUrl,
   },
-  category: "technology",
-  classification: "Portfolio",
+  category: 'technology',
+  classification: 'Portfolio',
   other: {
-    "theme-color": "#33658a",
-    "msapplication-TileColor": "#33658a",
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "default",
-    "apple-mobile-web-app-title": "Phil Greene Portfolio",
-    "application-name": "Phil Greene Portfolio",
-    "mobile-web-app-capable": "yes",
+    'theme-color': '#33658a',
+    'msapplication-TileColor': '#33658a',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
+    'apple-mobile-web-app-title': 'Phil Greene Portfolio',
+    'application-name': 'Phil Greene Portfolio',
+    'mobile-web-app-capable': 'yes',
   },
 };
 
@@ -88,30 +88,30 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Phil Greene",
-              jobTitle: "Creator Automation Developer & SaaS Builder",
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Phil Greene',
+              jobTitle: 'Creator Automation Developer & SaaS Builder',
               description:
-                "I build automation and analytics tools that help creators earn more with less work.",
+                'I build automation and analytics tools that help creators earn more with less work.',
               url: siteUrl,
               sameAs: [
-                "https://github.com/WebCraftPhil",
-                "https://linkedin.com/in/phil.greene1",
+                'https://github.com/WebCraftPhil',
+                'https://linkedin.com/in/phil.greene1',
               ],
               knowsAbout: [
-                "Creator Automation",
-                "SaaS Development",
-                "Etsy Optimization",
-                "AI Tools",
-                "Business Intelligence",
-                "Revenue Optimization",
+                'Creator Automation',
+                'SaaS Development',
+                'Etsy Optimization',
+                'AI Tools',
+                'Business Intelligence',
+                'Revenue Optimization',
               ],
               hasOccupation: {
-                "@type": "Occupation",
-                name: "Creator Automation Developer",
+                '@type': 'Occupation',
+                name: 'Creator Automation Developer',
                 description:
-                  "Building tools that help creators scale their businesses through automation and AI",
+                  'Building tools that help creators scale their businesses through automation and AI',
               },
             }),
           }}

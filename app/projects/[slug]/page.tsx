@@ -1,11 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getCaseStudyBySlug, caseStudies } from "../../../lib/projects";
-import type { Metadata } from "next";
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { getCaseStudyBySlug, caseStudies } from '../../../lib/projects';
+import type { Metadata } from 'next';
 
 export function generateStaticParams() {
-  return caseStudies.map((cs) => ({ slug: cs.slug }));
+  return caseStudies.map(cs => ({ slug: cs.slug }));
 }
 
 export async function generateMetadata({
@@ -15,18 +15,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
-  if (!study) {return {};}
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
+  if (!study) {
+    return {};
+  }
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://philgreene.net';
   return {
     title: `${study.title} Case Study - Phil Greene`,
     description: study.description,
     openGraph: {
       title: `${study.title} Case Study - Phil Greene`,
       url: `${siteUrl}/projects/${study.slug}`,
-      images: [{ url: `${siteUrl}${study.screenshot}`, width: 1200, height: 630 }],
+      images: [
+        { url: `${siteUrl}${study.screenshot}`, width: 1200, height: 630 },
+      ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: `${study.title} Case Study - Phil Greene`,
       images: [`${siteUrl}${study.screenshot}`],
     },
@@ -40,7 +44,9 @@ export default async function CaseStudyPage({
 }) {
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
-  if (!study) {return notFound();}
+  if (!study) {
+    return notFound();
+  }
 
   return (
     <div className="py-20">
@@ -63,7 +69,7 @@ export default async function CaseStudyPage({
         <section>
           <h2 className="text-2xl font-semibold mb-4">Results</h2>
           <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
-            {study.results.metrics.map((m) => (
+            {study.results.metrics.map(m => (
               <li key={m}>{m}</li>
             ))}
           </ul>
@@ -73,15 +79,23 @@ export default async function CaseStudyPage({
         <section>
           <h2 className="text-2xl font-semibold mb-4">Screens</h2>
           <div className="relative aspect-video w-full mb-4">
-            <Image src={study.screenshot} alt={`${study.title} screenshot`} fill className="object-cover rounded-lg" />
+            <Image
+              src={study.screenshot}
+              alt={`${study.title} screenshot`}
+              fill
+              className="object-cover rounded-lg"
+            />
           </div>
         </section>
 
         <section>
           <h2 className="text-2xl font-semibold mb-4">Stack</h2>
           <div className="flex flex-wrap gap-2">
-            {study.stack.map((tech) => (
-              <span key={tech} className="rounded-md bg-muted px-2 py-1 text-xs text-foreground/70 dark:bg-gray-800 dark:text-gray-300">
+            {study.stack.map(tech => (
+              <span
+                key={tech}
+                className="rounded-md bg-muted px-2 py-1 text-xs text-foreground/70 dark:bg-gray-800 dark:text-gray-300"
+              >
                 {tech}
               </span>
             ))}
@@ -100,4 +114,3 @@ export default async function CaseStudyPage({
     </div>
   );
 }
-

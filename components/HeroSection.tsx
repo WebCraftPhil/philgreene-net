@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { trackEvent } from "../lib/analytics";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { trackEvent } from '../lib/analytics';
 
 export default function HeroSection() {
-  const [currentText, setCurrentText] = useState("");
+  const [currentText, setCurrentText] = useState('');
   const fullText =
-    "I build automation and analytics tools that help creators earn more with less work";
+    'I build automation and analytics tools that help creators earn more with less work';
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
@@ -26,7 +26,6 @@ export default function HeroSection() {
     return () => clearInterval(timer);
   }, []);
 
-
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-900">
       {/* Animated Background Elements - Hidden on mobile for performance */}
@@ -40,7 +39,7 @@ export default function HeroSection() {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear",
+            ease: 'linear',
           }}
         />
         <motion.div
@@ -52,7 +51,7 @@ export default function HeroSection() {
           transition={{
             duration: 25,
             repeat: Infinity,
-            ease: "linear",
+            ease: 'linear',
           }}
         />
       </div>
@@ -127,7 +126,7 @@ export default function HeroSection() {
             >
               <Link
                 href="/contact"
-                onClick={() => trackEvent("book_call")}
+                onClick={() => trackEvent('book_call')}
                 className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#33658a] to-[#28965a] px-6 py-3 md:px-8 md:py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 text-sm md:text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#33658a]"
               >
                 <span className="relative z-10">Book a 20-min Call</span>
@@ -149,9 +148,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 1.0 }}
             >
               <p>Who I work with: creators, small businesses, and startups.</p>
-              <p>
-                Built with Next.js, Tailwind, and Vercel.
-              </p>
+              <p>Built with Next.js, Tailwind, and Vercel.</p>
             </motion.div>
           </motion.div>
 
@@ -167,7 +164,7 @@ export default function HeroSection() {
               <motion.div
                 className="aspect-square w-64 md:w-80 lg:w-96 rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#33658a] via-[#28965a] to-[#e09f3e] p-6 md:p-8 shadow-2xl"
                 whileHover={{ scale: 1.02, rotateY: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                transition={{ type: 'spring', stiffness: 300 }}
               >
                 <div className="flex h-full flex-col items-center justify-center text-center text-white">
                   <motion.div
@@ -176,7 +173,7 @@ export default function HeroSection() {
                     transition={{
                       duration: 4,
                       repeat: Infinity,
-                      ease: "easeInOut",
+                      ease: 'easeInOut',
                     }}
                   >
                     🤖
@@ -199,7 +196,7 @@ export default function HeroSection() {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: 'easeInOut',
                 }}
               >
                 <div className="text-white text-sm md:text-base">📱</div>
@@ -211,7 +208,7 @@ export default function HeroSection() {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: 'easeInOut',
                   delay: 1,
                 }}
               >

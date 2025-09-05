@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { trackEvent } from "../lib/analytics";
+import Link from 'next/link';
+import { trackEvent } from '../lib/analytics';
 
 export default function AboutContent() {
   return (
@@ -61,16 +61,16 @@ export default function AboutContent() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "Python",
-                      "Pandas",
-                      "NumPy",
-                      "Scikit-learn",
-                      "SQL",
-                      "PostgreSQL",
-                      "MongoDB",
-                      "Tableau",
-                      "Power BI",
-                    ].map((skill) => (
+                      'Python',
+                      'Pandas',
+                      'NumPy',
+                      'Scikit-learn',
+                      'SQL',
+                      'PostgreSQL',
+                      'MongoDB',
+                      'Tableau',
+                      'Power BI',
+                    ].map(skill => (
                       <span
                         key={skill}
                         className="rounded-md bg-blue-100 px-3 py-1 text-sm text-blue-800 dark:bg-blue-900/20 dark:text-blue-300"
@@ -86,15 +86,15 @@ export default function AboutContent() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "React",
-                      "Next.js",
-                      "TypeScript",
-                      "Node.js",
-                      "FastAPI",
-                      "Docker",
-                      "AWS",
-                      "Tailwind CSS",
-                    ].map((skill) => (
+                      'React',
+                      'Next.js',
+                      'TypeScript',
+                      'Node.js',
+                      'FastAPI',
+                      'Docker',
+                      'AWS',
+                      'Tailwind CSS',
+                    ].map(skill => (
                       <span
                         key={skill}
                         className="rounded-md bg-green-100 px-3 py-1 text-sm text-green-800 dark:bg-green-900/20 dark:text-green-300"
@@ -110,13 +110,13 @@ export default function AboutContent() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "OpenAI GPT-4",
-                      "LangChain",
-                      "Automation",
-                      "API Integration",
-                      "Web Scraping",
-                      "RPA",
-                    ].map((skill) => (
+                      'OpenAI GPT-4',
+                      'LangChain',
+                      'Automation',
+                      'API Integration',
+                      'Web Scraping',
+                      'RPA',
+                    ].map(skill => (
                       <span
                         key={skill}
                         className="rounded-md bg-purple-100 px-3 py-1 text-sm text-purple-800 dark:bg-purple-900/20 dark:text-purple-300"
@@ -132,15 +132,15 @@ export default function AboutContent() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "Git",
-                      "GitHub",
-                      "Vercel",
-                      "Notion",
-                      "Slack",
-                      "Figma",
-                      "Jira",
-                      "Linear",
-                    ].map((skill) => (
+                      'Git',
+                      'GitHub',
+                      'Vercel',
+                      'Notion',
+                      'Slack',
+                      'Figma',
+                      'Jira',
+                      'Linear',
+                    ].map(skill => (
                       <span
                         key={skill}
                         className="rounded-md bg-orange-100 px-3 py-1 text-sm text-orange-800 dark:bg-orange-900/20 dark:text-orange-300"
@@ -219,7 +219,7 @@ export default function AboutContent() {
               <a
                 href="/resume-phil-greene.pdf"
                 download
-                onClick={() => trackEvent("download_resume")}
+                onClick={() => trackEvent('download_resume')}
                 className="inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
               >
                 Download PDF
@@ -264,7 +264,7 @@ export default function AboutContent() {
               </p>
               <Link
                 href="/contact"
-                onClick={() => trackEvent("book_call")}
+                onClick={() => trackEvent('book_call')}
                 className="inline-flex w-full items-center justify-center rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 dark:focus-visible:outline-white"
               >
                 Get In Touch
