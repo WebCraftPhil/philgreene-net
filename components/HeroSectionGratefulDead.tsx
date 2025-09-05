@@ -124,7 +124,7 @@ export default function HeroSectionGratefulDead() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                "What a long, strange trip it's been" — from Etsy scaling to AI automation, 
+                &ldquo;What a long, strange trip it&apos;s been&rdquo; — from Etsy scaling to AI automation, 
                 I help creators turn their wildest ideas into profitable reality.
               </motion.p>
             </div>
@@ -140,7 +140,7 @@ export default function HeroSectionGratefulDead() {
                 onClick={() => trackEvent('book_call')}
                 className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-red-500 to-yellow-500 px-6 py-3 md:px-8 md:py-4 text-center font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 text-sm md:text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
               >
-                <span className="relative z-10">Let's Jam Together</span>
+                <span className="relative z-10">Let&apos;s Jam Together</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-green-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               </Link>
 
