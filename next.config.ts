@@ -2,16 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || undefined,
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.philgreene.net' }],
-        destination: 'https://philgreene.net/:path*',
-        permanent: true,
-      },
-    ];
-  },
+  // Domain-level redirects are handled by the hosting platform to
+  // avoid redirect loops between `www` and the apex domain.
 };
 
 export default nextConfig;
