@@ -87,9 +87,9 @@ npm run lint
 
 ### Adding a Project
 
-1) Add a new object to `projects` in `philgreene-net-fresh/lib/projects.ts#L1`.
-2) Provide a unique `id` and `slug`, `title`, `description`, `role`, `stack`, `outcomes`, `category`, `featured`, and `screenshot` path.
-3) Optionally add a case study entry in `caseStudies` if you want deeper details.
+1. Add a new object to `projects` in `philgreene-net-fresh/lib/projects.ts#L1`.
+2. Provide a unique `id` and `slug`, `title`, `description`, `role`, `stack`, `outcomes`, `category`, `featured`, and `screenshot` path.
+3. Optionally add a case study entry in `caseStudies` if you want deeper details.
 
 ## Pages Overview
 
@@ -107,7 +107,9 @@ Recommended: Vercel
 - Build command: `next build` (uses Turbopack flag in package script)
 - Install command: `npm install`
 - Output: `.next` (default)
-- Ensure the Vercel project uses `philgreene.net` as the primary domain with `www` redirect so `_next/static/*` assets resolve correctly.
+- Use a single primary domain in your hosting provider and avoid conflicting
+  redirects between `philgreene.net` and `www.philgreene.net` to prevent redirect
+  loops.
 
 No special `next.config.ts` options are required for a basic deployment.
 
