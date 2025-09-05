@@ -197,7 +197,7 @@ export default function HeroSectionGratefulDead() {
                       Creator Automation
                     </div>
                     <div className="text-xs md:text-sm opacity-90">
-                      What a long, strange trip it's been
+                      What a long, strange trip it&apos;s been
                     </div>
                   </div>
                 </div>

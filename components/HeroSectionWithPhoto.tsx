@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { trackEvent } from '../lib/analytics';
-import Image from 'next/image';
 
 export default function HeroSectionWithPhoto() {
   const [currentText, setCurrentText] = useState('');
