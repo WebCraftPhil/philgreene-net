@@ -21,6 +21,8 @@
     "agent:log": "node scripts/agent-log.mjs"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "@vercel/analytics": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",

@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'tw-animate-css';
-
 /* Enhanced Color Scheme & Typography System */
 :root {
   /* Base Radius */
