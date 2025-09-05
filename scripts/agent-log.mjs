@@ -8,7 +8,7 @@ if (!intentRaw) { console.error("Usage: agent-log <intent> [inputs-json]"); proc
 
 const intent = intentRaw.trim();
 let inputs = {};
-try { if (inputsJson) inputs = JSON.parse(inputsJson); } catch { /* ignore */ }
+try { if (inputsJson) {inputs = JSON.parse(inputsJson);} } catch { /* ignore */ }
 
 const utc = new Date();
 const id = utc.toISOString().replace(/[-:TZ.]/g,"").slice(0,12) + "-" + intent.replace(/\s+/g,"-").toLowerCase().slice(0,28);

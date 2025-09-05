@@ -26,10 +26,10 @@ function validate(body: unknown): { valid: boolean; errors?: string[]; data?: Co
     message: String(bodyObj?.message || "").trim(),
   };
 
-  if (!data.name) errors.push("name is required");
-  if (!data.email) errors.push("email is required");
-  else if (!isValidEmail(data.email)) errors.push("email is invalid");
-  if (!data.message || data.message.length < 10) errors.push("message must be at least 10 characters");
+  if (!data.name) {errors.push("name is required");}
+  if (!data.email) {errors.push("email is required");}
+  else if (!isValidEmail(data.email)) {errors.push("email is invalid");}
+  if (!data.message || data.message.length < 10) {errors.push("message must be at least 10 characters");}
 
   return { valid: errors.length === 0, errors: errors.length ? errors : undefined, data };
 }

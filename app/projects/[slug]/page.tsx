@@ -15,7 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
-  if (!study) return {};
+  if (!study) {return {};}
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
   return {
     title: `${study.title} Case Study - Phil Greene`,
@@ -40,7 +40,7 @@ export default async function CaseStudyPage({
 }) {
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
-  if (!study) return notFound();
+  if (!study) {return notFound();}
 
   return (
     <div className="py-20">
