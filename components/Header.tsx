@@ -19,15 +19,15 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80">
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-accent/80 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
-              <span className="text-sm font-bold text-white">PG</span>
+            <div className="h-8 w-8 rounded-lg bg-secondary text-secondary-foreground flex items-center justify-center logo-pulse shadow-md">
+              <span className="text-sm font-bold">PG</span>
             </div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
+            <span className="text-xl font-bold text-foreground font-display">
               Phil Greene
             </span>
           </Link>
@@ -39,11 +39,9 @@ export default function Header() {
                 ? pathname === '/'
                 : pathname?.startsWith(item.href);
               const base =
-                'text-sm font-medium transition-colors border-b-2 border-transparent pb-1';
-              const inactive =
-                'text-gray-700 hover:text-blue-600 hover:border-blue-400 dark:text-gray-300 dark:hover:text-blue-400';
-              const activeCls =
-                'text-blue-600 border-blue-600 dark:text-blue-400';
+                'text-sm font-medium transition-colors border-b-2 border-transparent pb-1 underline-grow';
+              const inactive = 'text-foreground/80 hover:text-secondary';
+              const activeCls = 'text-secondary border-secondary';
               return (
                 <Link
                   key={item.name}
@@ -58,16 +56,16 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => trackEvent('book_call')}
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+              className="btn-primary"
             >
-              Book a 20-min Call
+              Work with me
             </Link>
           </nav>
 
           {/* Mobile menu button */}
           <button
             type="button"
-            className="md:hidden rounded-md p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+            className="md:hidden rounded-md p-2 text-foreground hover:bg-muted"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <span className="sr-only">Open main menu</span>
@@ -101,10 +99,8 @@ export default function Header() {
                   : pathname?.startsWith(item.href);
                 const base =
                   'block px-3 py-2 text-base font-medium transition-colors rounded-md border-l-2 border-transparent';
-                const inactive =
-                  'text-gray-700 hover:bg-gray-100 hover:text-blue-600 hover:border-blue-400 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-blue-400';
-                const activeCls =
-                  'bg-gray-100 text-blue-700 border-blue-600 dark:bg-gray-800 dark:text-blue-400';
+                const inactive = 'text-foreground/80 hover:bg-muted hover:text-secondary hover:border-secondary';
+                const activeCls = 'bg-muted text-secondary border-secondary';
                 return (
                   <Link
                     key={item.name}
@@ -117,20 +113,20 @@ export default function Header() {
                 );
               })}
               <div className="flex items-center justify-between px-3 py-2">
-                <span className="text-sm text-gray-600 dark:text-gray-400">
+                <span className="text-sm text-foreground/70">
                   Theme
                 </span>
                 <ThemeToggle />
               </div>
               <Link
                 href="/contact"
-                className="mx-3 mt-4 block rounded-lg bg-blue-600 px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+                className="mx-3 mt-4 block btn-primary text-center"
                 onClick={() => {
                   trackEvent('book_call');
                   setIsMenuOpen(false);
                 }}
               >
-                Book a 20-min Call
+                Work with me
               </Link>
             </div>
           </div>

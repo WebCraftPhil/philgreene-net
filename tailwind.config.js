@@ -76,9 +76,9 @@ module.exports = {
         '2xl': 'var(--shadow-2xl)',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Lato', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        display: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

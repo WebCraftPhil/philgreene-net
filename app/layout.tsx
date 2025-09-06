@@ -7,9 +7,9 @@ import Footer from '../components/Footer';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://philgreene.net';
 
 export const metadata: Metadata = {
-  title: 'Phil Greene - Creator Automation & SaaS Developer',
+  title: 'Phil Greene — Building creative tools, designs, and systems that pay for themselves.',
   description:
-    'I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.',
+    'Phil Greene — Building creative tools, designs, and systems that pay for themselves.',
   keywords: [
     'creator automation',
     'SaaS developer',
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Phil Greene - Creator Automation & SaaS Developer',
+    title: 'Phil Greene — Building creative tools, designs, and systems that pay for themselves.',
     description:
-      'I build automation and analytics tools that help creators earn more with less work. Scaled Etsy revenue by over 1000% year over year — see case study — and launched AI-powered SaaS prototypes.',
+      'Phil Greene — Building creative tools, designs, and systems that pay for themselves.',
     type: 'website',
     locale: 'en_US',
     siteName: 'Phil Greene Portfolio',
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Phil Greene - Creator Automation & SaaS Developer',
+    title: 'Phil Greene — Building creative tools, designs, and systems that pay for themselves.',
     description:
-      'I build automation and analytics tools that help creators earn more with less work.',
+      'Phil Greene — Building creative tools, designs, and systems that pay for themselves.',
     creator: '@philgreene',
     images: [`${siteUrl}/og-image.svg`],
   },
@@ -66,8 +66,8 @@ export const metadata: Metadata = {
   category: 'technology',
   classification: 'Portfolio',
   other: {
-    'theme-color': '#33658a',
-    'msapplication-TileColor': '#33658a',
+    'theme-color': '#1a2a4a',
+    'msapplication-TileColor': '#1a2a4a',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'default',
     'apple-mobile-web-app-title': 'Phil Greene Portfolio',
@@ -84,6 +84,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        {/* Fonts: Space Grotesk for display, Inter/Lato for body */}
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -187,9 +189,9 @@ export default function RootLayout({
         `}
       </Script>
 
-      <body className="bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-white">
+      <body className="bg-background text-foreground antialiased">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen bg-circuit-subtle">{children}</main>
         <Footer />
         <Analytics />
       </body>

@@ -2,128 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Enhanced Color Scheme & Typography System */
+/* Enhanced Color Scheme & Typography System - Retro Digital */
 :root {
   /* Base Radius */
   --radius: 0.75rem;
 
-  /* Enhanced Color Palette - Light Mode */
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  
-  /* Primary Colors - Deep Blue (#33658a) */
-  --primary: 210 40% 35%;
-  --primary-foreground: 0 0% 98%;
-  --primary-light: 210 40% 45%;
-  --primary-dark: 210 40% 25%;
+  /* Retro Digital Palette - Light Mode */
+  /* Warm Beige (base) */
+  --background: 35 35% 88%; /* warm beige */
+  --foreground: 220 60% 18%; /* midnight blue (text) */
 
-  /* Secondary Colors - Dark Charcoal (#393e41) */
-  --secondary: 240 5.9% 10%;
-  --secondary-foreground: 0 0% 98%;
-  --secondary-light: 240 5.9% 20%;
-  --secondary-dark: 240 5.9% 5%;
+  /* Midnight Blue as primary */
+  --primary: 220 60% 18%;
+  --primary-foreground: 45 100% 96%; /* cream */
+  --primary-light: 220 40% 30%;
+  --primary-dark: 220 65% 12%;
 
-  /* Accent Colors */
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --accent-green: 142 76% 36%; /* #28965a */
-  --accent-orange: 38 92% 50%; /* #e09f3e */
-  --accent-lime: 84 81% 44%; /* #c6f91f */
-  --accent-blue: 210 40% 35%; /* #33658a */
+  /* Muted Orange as secondary */
+  --secondary: 28 64% 55%;
+  --secondary-foreground: 45 100% 98%;
+  --secondary-light: 28 64% 65%;
+  --secondary-dark: 28 64% 45%;
+
+  /* Cream / Accent Neutrals */
+  --accent: 45 100% 96%; /* cream */
+  --accent-foreground: 220 60% 18%;
+
+  /* Accent variants tuned to palette */
+  --accent-green: 84 30% 40%; /* mossy green accent */
+  --accent-orange: 28 64% 55%; /* muted orange */
+  --accent-lime: 48 100% 80%; /* pale butter */
+  --accent-blue: 220 60% 18%; /* midnight */
 
   /* Semantic Colors */
-  --success: 142 76% 36%; /* #28965a */
-  --warning: 38 92% 50%; /* #e09f3e */
-  --error: 0 84% 60%;
-  --info: 210 40% 35%; /* #33658a */
+  --success: 142 40% 35%;
+  --warning: 28 64% 55%;
+  --error: 0 70% 50%;
+  --info: 220 60% 18%;
 
   /* Neutral Colors */
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 210 40% 35%;
+  --muted: 45 30% 94%;
+  --muted-foreground: 220 15% 35%;
+  --border: 35 20% 80%;
+  --input: 35 20% 80%;
+  --ring: 28 64% 55%;
 
   /* Component Colors */
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --destructive: 0 84% 60%;
+  --card: 45 100% 96%; /* cream card */
+  --card-foreground: 220 60% 18%;
+  --popover: 45 100% 96%;
+  --popover-foreground: 220 60% 18%;
+  --destructive: 0 70% 50%;
 
   /* Chart Colors */
-  --chart-1: 210 40% 35%; /* #33658a */
-  --chart-2: 142 76% 36%; /* #28965a */
-  --chart-3: 38 92% 50%; /* #e09f3e */
-  --chart-4: 84 81% 44%; /* #c6f91f */
-  --chart-5: 240 5.9% 10%; /* #393e41 */
+  --chart-1: 220 60% 18%;
+  --chart-2: 28 64% 55%;
+  --chart-3: 84 30% 40%;
+  --chart-4: 48 100% 80%;
+  --chart-5: 35 20% 40%;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(51 101 138 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(51 101 138 / 0.1), 0 2px 4px -2px rgb(51 101 138 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(51 101 138 / 0.1), 0 4px 6px -4px rgb(51 101 138 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(51 101 138 / 0.1), 0 8px 10px -6px rgb(51 101 138 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(51 101 138 / 0.25);
+  /* Shadows - tuned darker hue */
+  --shadow-sm: 0 1px 2px 0 rgb(15 27 61 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(15 27 61 / 0.12), 0 2px 4px -2px rgb(15 27 61 / 0.12);
+  --shadow-lg: 0 10px 15px -3px rgb(15 27 61 / 0.16), 0 4px 6px -4px rgb(15 27 61 / 0.16);
+  --shadow-xl: 0 20px 25px -5px rgb(15 27 61 / 0.18), 0 8px 10px -6px rgb(15 27 61 / 0.18);
+  --shadow-2xl: 0 25px 50px -12px rgb(15 27 61 / 0.28);
 }
 
 .dark {
-  /* Enhanced Color Palette - Dark Mode */
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+  /* Retro Digital Palette - Dark Mode */
+  --background: 220 60% 8%; /* deep midnight */
+  --foreground: 45 100% 96%; /* cream text */
 
-  /* Primary Colors - Deep Blue (#33658a) */
-  --primary: 210 40% 45%;
-  --primary-foreground: 240 10% 3.9%;
-  --primary-light: 210 40% 55%;
-  --primary-dark: 210 40% 35%;
+  --primary: 28 64% 55%; /* orange pop */
+  --primary-foreground: 220 60% 10%;
+  --primary-light: 28 64% 65%;
+  --primary-dark: 28 64% 45%;
 
-  /* Secondary Colors - Dark Charcoal (#393e41) */
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --secondary-light: 240 3.7% 25.9%;
-  --secondary-dark: 240 3.7% 5.9%;
+  --secondary: 220 60% 18%; /* midnight accents */
+  --secondary-foreground: 45 100% 96%;
+  --secondary-light: 220 40% 28%;
+  --secondary-dark: 220 65% 12%;
 
-  /* Accent Colors */
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --accent-green: 142 76% 46%; /* #28965a */
-  --accent-orange: 38 92% 60%; /* #e09f3e */
-  --accent-lime: 84 81% 54%; /* #c6f91f */
-  --accent-blue: 210 40% 45%; /* #33658a */
+  --accent: 220 40% 14%;
+  --accent-foreground: 45 100% 96%;
+  --accent-green: 84 30% 48%;
+  --accent-orange: 28 64% 60%;
+  --accent-lime: 48 100% 84%;
+  --accent-blue: 220 60% 30%;
 
-  /* Semantic Colors */
-  --success: 142 76% 46%; /* #28965a */
-  --warning: 38 92% 60%; /* #e09f3e */
-  --error: 0 84% 70%;
-  --info: 210 40% 45%; /* #33658a */
+  --success: 142 40% 46%;
+  --warning: 28 64% 60%;
+  --error: 0 70% 60%;
+  --info: 220 60% 40%;
 
-  /* Neutral Colors */
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 210 40% 45%;
+  --muted: 220 40% 12%;
+  --muted-foreground: 45 20% 80%;
+  --border: 220 30% 16%;
+  --input: 220 30% 16%;
+  --ring: 28 64% 60%;
 
-  /* Component Colors */
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --destructive: 0 84% 70%;
+  --card: 220 40% 10%;
+  --card-foreground: 45 100% 96%;
+  --popover: 220 40% 10%;
+  --popover-foreground: 45 100% 96%;
+  --destructive: 0 70% 60%;
 
-  /* Chart Colors */
-  --chart-1: 210 40% 45%; /* #33658a */
-  --chart-2: 142 76% 46%; /* #28965a */
-  --chart-3: 38 92% 60%; /* #e09f3e */
-  --chart-4: 84 81% 54%; /* #c6f91f */
-  --chart-5: 240 3.7% 15.9%; /* #393e41 */
+  --chart-1: 28 64% 60%;
+  --chart-2: 220 60% 40%;
+  --chart-3: 84 30% 48%;
+  --chart-4: 48 100% 84%;
+  --chart-5: 220 30% 20%;
 
   /* Enhanced Shadows for Dark Mode */
-  --shadow-sm: 0 1px 2px 0 rgb(51 101 138 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(51 101 138 / 0.4), 0 2px 4px -2px rgb(51 101 138 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(51 101 138 / 0.4), 0 4px 6px -4px rgb(51 101 138 / 0.4);
-  --shadow-xl: 0 20px 25px -5px rgb(51 101 138 / 0.4), 0 8px 10px -6px rgb(51 101 138 / 0.4);
-  --shadow-2xl: 0 25px 50px -12px rgb(51 101 138 / 0.6);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.45), 0 2px 4px -2px rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.7);
 }
 
 /* Enhanced Typography System */
@@ -140,7 +136,7 @@
 
   /* Enhanced Heading Styles */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
+    @apply font-bold tracking-tight font-display;
     text-wrap: balance;
   }
 
@@ -220,6 +216,18 @@
 
 /* Enhanced Animation Classes */
 @layer utilities {
+  /* Underline grow micro-interaction */
+  .underline-grow {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size 200ms ease-out;
+  }
+  .underline-grow:hover {
+    background-size: 100% 2px;
+  }
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -248,6 +256,20 @@
 
   .bg-gradient-conic {
     background: conic-gradient(from 0deg at 50% 50%, var(--tw-gradient-stops));
+  }
+
+  /* Subtle circuit board pattern - branded accent */
+  .bg-circuit-subtle {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='rgba(15,27,61,0.06)' stroke-width='1'%3E%3Cpath d='M0 80h40M20 60v40M80 0v40M60 20h40M120 80h40M140 60v40M80 120v40M60 140h40' /%3E%3Ccircle cx='20' cy='80' r='2' fill='rgba(15,27,61,0.12)'/%3E%3Ccircle cx='80' cy='20' r='2' fill='rgba(15,27,61,0.12)'/%3E%3Ccircle cx='140' cy='80' r='2' fill='rgba(15,27,61,0.12)'/%3E%3Ccircle cx='80' cy='140' r='2' fill='rgba(15,27,61,0.12)'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* Fractal divider line */
+  .divider-fractal {
+    height: 12px;
+    background:
+      repeating-conic-gradient(from 0deg, hsl(var(--accent-blue) / 0.08) 0 10deg, transparent 10deg 20deg);
+    mask: linear-gradient(transparent, black 30%, black 70%, transparent);
   }
 }
 
@@ -290,11 +312,11 @@
   }
 
   .btn-primary {
-    @apply rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-lg transition-all duration-200 hover:bg-primary-dark hover:shadow-xl hover:scale-105;
+    @apply rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105 hover:brightness-110;
   }
 
   .btn-secondary {
-    @apply rounded-xl border-2 border-neutral-300 bg-secondary px-6 py-3 font-semibold text-secondary-foreground transition-all duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary;
+    @apply rounded-xl border-2 border-border bg-accent px-6 py-3 font-semibold text-foreground transition-all duration-200 hover:border-secondary hover:bg-secondary/10 hover:text-secondary;
   }
 
   .btn-ghost {
@@ -302,10 +324,18 @@
   }
 
   .btn-accent-green {
-    @apply rounded-xl bg-accent-green px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:bg-accent-green/90 hover:shadow-xl hover:scale-105;
+    @apply rounded-xl bg-accent-green px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105 hover:brightness-110;
   }
 
   .btn-accent-orange {
-    @apply rounded-xl bg-accent-orange px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:bg-accent-orange/90 hover:shadow-xl hover:scale-105;
+    @apply rounded-xl bg-accent-orange px-6 py-3 font-semibold text-white shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105 hover:brightness-110;
   }
 }
+
+/* Animated PG logo mark */
+@keyframes logoPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
+  50% { transform: scale(1.06); filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
+}
+.logo-pulse { animation: logoPulse 2.4s ease-in-out infinite; }
