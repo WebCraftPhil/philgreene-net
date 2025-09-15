@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phil Greene – AI & SaaS Builder</title>
+    <meta
+      name="description"
+      content="Portfolio of Phil Greene, product-focused engineer building AI & SaaS applications."
+    />
+    <meta
+      property="og:title"
+      content="Phil Greene – Builder of AI & SaaS Projects"
+    />
+    <meta
+      property="og:description"
+      content="Portfolio of Phil Greene, product-focused engineer building AI & SaaS applications."
+    />
+    <meta property="og:image" content="https://placehold.co/1200x630/png" />
+    <meta property="og:url" content="https://example.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Phil Greene – Builder of AI & SaaS Projects"
+    />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Phil Greene, product-focused engineer building AI & SaaS applications."
+    />
+    <meta name="twitter:image" content="https://placehold.co/1200x630/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      .text-glow {
+        text-shadow: 0 0 8px rgba(0, 246, 255, 0.6);
+      }
+      .button-glow:hover {
+        box-shadow: 0 0 15px rgba(0, 246, 255, 0.6);
+      }
+      .card-glow {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      }
+      .card-glow:hover {
+        box-shadow: 0 0 20px rgba(0, 246, 255, 0.2);
+      }
+      .avatar-glow {
+        box-shadow: 0 0 20px rgba(255, 0, 200, 0.6);
+      }
+      .send-glow:hover {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+      }
+    </style>
+  </head>
+  <body class="bg-black text-gray-100 antialiased">
+    <!-- Navigation -->
+    <header
+      class="sticky top-0 z-50 bg-black/80 backdrop-blur border-b border-white/10"
+    >
+      <nav class="max-w-6xl mx-auto flex items-center justify-between p-4">
+        <a href="#home" class="flex items-center space-x-2">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="text-[#00F6FF]"
+          >
+            <rect
+              x="1"
+              y="1"
+              width="22"
+              height="22"
+              rx="2"
+              stroke="url(#grad1)"
+              stroke-width="2"
+            />
+            <defs>
+              <linearGradient
+                id="grad1"
+                x1="1"
+                y1="1"
+                x2="23"
+                y2="23"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#00F6FF" />
+                <stop offset="1" stop-color="#FF00C8" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="font-bold tracking-widest">PHIL GREENE</span>
+        </a>
+        <div class="space-x-6 font-medium">
+          <a
+            href="#projects"
+            class="hover:text-[#00F6FF] focus:outline-none focus:text-[#00F6FF]"
+            >Projects</a
+          >
+          <a
+            href="#about"
+            class="hover:text-[#00F6FF] focus:outline-none focus:text-[#00F6FF]"
+            >About</a
+          >
+          <a
+            href="#contact"
+            class="hover:text-[#00F6FF] focus:outline-none focus:text-[#00F6FF]"
+            >Contact</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="relative min-h-[90vh] flex items-center justify-center overflow-hidden"
+      >
+        <div class="absolute inset-0 -z-10 bg-black">
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_top,#00F6FF33,transparent_60%)]"
+          ></div>
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_bottom,#FF00C833,transparent_60%)]"
+          ></div>
+        </div>
+        <div class="text-center px-4">
+          <h1 class="text-4xl sm:text-6xl font-bold mb-6 text-glow">
+            Phil Greene – Builder of AI &amp; SaaS Projects
+          </h1>
+          <p class="max-w-2xl mx-auto mb-8 text-lg text-gray-300">
+            Product-focused engineer building AI &amp; SaaS apps that turn
+            complex ideas into reality.
+          </p>
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <a href="#projects" class="relative inline-block rounded-md">
+              <span
+                class="absolute inset-0 rounded-md bg-gradient-to-r from-[#00F6FF] to-[#FF00C8] p-[2px]"
+              ></span>
+              <span
+                class="relative block bg-black px-6 py-3 rounded-md button-glow"
+                >View Projects</span
+              >
+            </a>
+            <a href="/resume.pdf" class="relative inline-block rounded-md">
+              <span
+                class="absolute inset-0 rounded-md bg-gradient-to-r from-[#00F6FF] to-[#FF00C8] p-[2px] opacity-50"
+              ></span>
+              <span class="relative block bg-black px-6 py-3 rounded-md"
+                >Resume</span
+              >
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="relative py-20">
+        <div
+          class="absolute inset-0 -z-10 bg-[radial-gradient(circle,#00F6FF11,transparent_70%)]"
+        ></div>
+        <div class="max-w-6xl mx-auto px-4">
+          <h2 class="text-3xl font-bold mb-12 text-center">
+            Latest Insights/Projects
+          </h2>
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Card 1 -->
+            <article
+              class="relative rounded-lg p-[1px] bg-gradient-to-r from-[#00F6FF] to-[#FF00C8] card-glow transition-transform hover:-translate-y-1"
+            >
+              <div class="bg-black rounded-lg h-full flex flex-col">
+                <img
+                  src="https://placehold.co/600x400/png"
+                  alt="Project 1"
+                  class="rounded-t-lg"
+                />
+                <div class="p-6 flex-1 flex flex-col">
+                  <h3 class="text-xl font-semibold mb-2">Project One</h3>
+                  <p class="text-sm text-gray-400 flex-1">
+                    Short description of the project highlighting key features
+                    and technologies used.
+                  </p>
+                  <a
+                    href="#"
+                    class="mt-4 inline-block text-[#00F6FF] hover:underline"
+                    >Read More →</a
+                  >
+                </div>
+              </div>
+            </article>
+            <!-- Card 2 -->
+            <article
+              class="relative rounded-lg p-[1px] bg-gradient-to-r from-[#00F6FF] to-[#FF00C8] card-glow transition-transform hover:-translate-y-1"
+            >
+              <div class="bg-black rounded-lg h-full flex flex-col">
+                <img
+                  src="https://placehold.co/600x400/png"
+                  alt="Project 2"
+                  class="rounded-t-lg"
+                />
+                <div class="p-6 flex-1 flex flex-col">
+                  <h3 class="text-xl font-semibold mb-2">Project Two</h3>
+                  <p class="text-sm text-gray-400 flex-1">
+                    A brief overview describing the problem solved and the
+                    impact of the project.
+                  </p>
+                  <a
+                    href="#"
+                    class="mt-4 inline-block text-[#00F6FF] hover:underline"
+                    >Read More →</a
+                  >
+                </div>
+              </div>
+            </article>
+            <!-- Card 3 -->
+            <article
+              class="relative rounded-lg p-[1px] bg-gradient-to-r from-[#00F6FF] to-[#FF00C8] card-glow transition-transform hover:-translate-y-1"
+            >
+              <div class="bg-black rounded-lg h-full flex flex-col">
+                <img
+                  src="https://placehold.co/600x400/png"
+                  alt="Project 3"
+                  class="rounded-t-lg"
+                />
+                <div class="p-6 flex-1 flex flex-col">
+                  <h3 class="text-xl font-semibold mb-2">Project Three</h3>
+                  <p class="text-sm text-gray-400 flex-1">
+                    Description emphasizing the innovative approach and
+                    technologies leveraged.
+                  </p>
+                  <a
+                    href="#"
+                    class="mt-4 inline-block text-[#00F6FF] hover:underline"
+                    >Read More →</a
+                  >
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="relative py-20">
+        <div
+          class="absolute inset-0 -z-10 bg-[radial-gradient(circle,#FF00C811,transparent_70%)]"
+        ></div>
+        <div
+          class="max-w-6xl mx-auto px-4 grid gap-12 md:grid-cols-2 items-center"
+        >
+          <div class="flex justify-center md:justify-start">
+            <div
+              class="relative p-2 rounded-full bg-gradient-to-r from-[#00F6FF] to-[#FF00C8] avatar-glow"
+            >
+              <img
+                src="https://placehold.co/300x300/png"
+                alt="Phil Greene portrait"
+                class="rounded-full w-48 h-48 object-cover"
+              />
+            </div>
+          </div>
+          <div>
+            <h2 class="text-3xl font-bold mb-6">About</h2>
+            <p class="mb-4 text-gray-300">
+              Phil Greene is a product-focused engineer who builds AI and SaaS
+              applications that transform complex ideas into elegant,
+              user-friendly solutions.
+            </p>
+            <p class="text-gray-300">
+              With a passion for design and development, Phil bridges the gap
+              between visionary concepts and real-world products.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="relative py-20">
+        <div
+          class="absolute inset-0 -z-10 bg-[radial-gradient(circle,#00F6FF11,transparent_70%)]"
+        ></div>
+        <div class="max-w-6xl mx-auto px-4 grid gap-12 md:grid-cols-2">
+          <div>
+            <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
+            <p class="mb-6 text-gray-300">
+              Interested in collaborating or have a project in mind? Let's
+              connect.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="https://x.com/vtguy65"
+                class="p-2 rounded-full bg-gradient-to-r from-[#00F6FF] to-[#FF00C8]"
+                aria-label="X/Twitter"
+                ><svg
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.506 11.24H16.23l-5.3-6.936-6.062 6.936H1.56l7.73-8.848L1.149 2.25h5.495l4.78 6.231 6.82-6.231Z"
+                  /></svg
+              ></a>
+              <a
+                href="https://www.linkedin.com/in/phil-greene/"
+                class="p-2 rounded-full bg-gradient-to-r from-[#00F6FF] to-[#FF00C8]"
+                aria-label="LinkedIn"
+                ><svg
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.98 3.5C3.32 3.5 2 4.82 2 6.48c0 1.65 1.32 2.98 2.98 2.98s2.98-1.33 2.98-2.98C7.96 4.82 6.64 3.5 4.98 3.5ZM2.4 21.5h5.16V9H2.4v12.5ZM16.8 9.65c-1.71 0-3.18.93-3.7 1.88h-.05V9H8.94v12.5h5.16v-6.6c0-1.74.33-3.42 2.48-3.42 2.13 0 2.16 1.99 2.16 3.54v6.48H24v-7.23c0-3.52-.76-6.22-4.84-6.22Z"
+                  /></svg
+              ></a>
+              <a
+                href="https://github.com/WebCraftPhil"
+                class="p-2 rounded-full bg-gradient-to-r from-[#00F6FF] to-[#FF00C8]"
+                aria-label="GitHub"
+                ><svg
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.1.79-.25.79-.56 0-.27-.01-1.17-.01-2.14-3.19.69-3.86-1.54-3.86-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.07-.73.08-.72.08-.72 1.18.08 1.8 1.22 1.8 1.22 1.05 1.79 2.75 1.27 3.42.97.11-.76.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.71 0-1.26.45-2.29 1.2-3.1-.12-.3-.52-1.51.11-3.15 0 0 .98-.31 3.2 1.18a11.09 11.09 0 0 1 2.92-.39c.99.01 1.98.13 2.92.39 2.22-1.49 3.19-1.18 3.19-1.18.63 1.64.23 2.85.11 3.15.75.81 1.2 1.84 1.2 3.1 0 4.44-2.69 5.41-5.25 5.69.42.36.79 1.08.79 2.18 0 1.57-.01 2.83-.01 3.22 0 .31.21.67.8.56A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+                    clip-rule="evenodd"
+                  /></svg
+              ></a>
+            </div>
+          </div>
+          <form class="space-y-4">
+            <div>
+              <label for="name" class="block mb-1">Name</label>
+              <input
+                id="name"
+                type="text"
+                class="w-full rounded-md bg-black/50 border border-white/20 focus:border-[#00F6FF]"
+              />
+            </div>
+            <div>
+              <label for="email" class="block mb-1">Email</label>
+              <input
+                id="email"
+                type="email"
+                class="w-full rounded-md bg-black/50 border border-white/20 focus:border-[#00F6FF]"
+              />
+            </div>
+            <div>
+              <label for="subject" class="block mb-1">Subject</label>
+              <input
+                id="subject"
+                type="text"
+                class="w-full rounded-md bg-black/50 border border-white/20 focus:border-[#00F6FF]"
+              />
+            </div>
+            <div>
+              <label for="message" class="block mb-1">Message</label>
+              <textarea
+                id="message"
+                rows="4"
+                class="w-full rounded-md bg-black/50 border border-white/20 focus:border-[#00F6FF]"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="relative inline-flex items-center justify-center px-6 py-3 font-bold text-white bg-blue-600 rounded-md send-glow"
+            >
+              Send Message ▶
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-6 text-center text-sm">
+      <p>© <span id="year"></span> Phil Greene</p>
+      <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+      </script>
+    </footer>
+  </body>
+</html>
