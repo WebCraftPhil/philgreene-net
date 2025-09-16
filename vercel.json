@@ -1,16 +1,11 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/client",
   "framework": null,
-  "functions": {
-    "server/index.ts": {
-      "runtime": "@vercel/node"
-    }
-  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/server/index.ts"
+      "destination": "/api/$1"
     },
     {
       "source": "/(.*)",
