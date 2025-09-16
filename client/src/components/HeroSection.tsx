@@ -22,13 +22,13 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 backdrop-blur-sm rounded-full text-primary-foreground mb-8 border border-primary/30">
-          <Sparkles className="w-4 h-4" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 backdrop-blur-sm rounded-full text-primary-foreground mb-8 border border-primary/30 particle-effect cosmic-hover">
+          <Sparkles className="w-4 h-4 icon-disco" />
           <span className="text-sm font-medium">Available for Freelance Projects</span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight glitch-hover" data-text="Web Solutions">
+          <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent text-rainbow-hover">
             Web Solutions
           </span>
         </h1>
@@ -41,16 +41,16 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg group"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 text-lg group ripple-button particle-effect cosmic-hover"
             data-testid="button-view-projects"
           >
             View My Projects
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 h-5 w-5 icon-disco" />
           </Button>
           <Button 
             variant="outline" 
             size="lg"
-            className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg"
+            className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg ripple-button particle-effect"
             data-testid="button-get-in-touch"
           >
             Get In Touch
@@ -58,14 +58,14 @@ export default function HeroSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover-elevate">
-            <Code className="w-8 h-8 text-primary mb-4 mx-auto" />
-            <h3 className="text-lg font-semibold text-white mb-2">Web Development</h3>
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 cosmic-hover card-3d-hover">
+            <Code className="w-8 h-8 text-primary mb-4 mx-auto icon-disco" />
+            <h3 className="text-lg font-semibold text-white mb-2 text-rainbow-hover">Web Development</h3>
             <p className="text-white/80">Modern, responsive websites and applications using cutting-edge technologies</p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 hover-elevate">
-            <BarChart3 className="w-8 h-8 text-accent mb-4 mx-auto" />
-            <h3 className="text-lg font-semibold text-white mb-2">Data Analysis</h3>
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 cosmic-hover card-3d-hover">
+            <BarChart3 className="w-8 h-8 text-accent mb-4 mx-auto icon-disco" />
+            <h3 className="text-lg font-semibold text-white mb-2 text-rainbow-hover">Data Analysis</h3>
             <p className="text-white/80">Transform raw data into actionable insights and beautiful visualizations</p>
           </div>
         </div>

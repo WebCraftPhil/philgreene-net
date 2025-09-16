@@ -129,10 +129,10 @@ export default function ProjectsSection() {
                 setFilter(category.id)
                 console.log('Filter changed to:', category.label)
               }}
-              className="group"
+              className="group ripple-button particle-effect"
               data-testid={`button-filter-${category.id}`}
             >
-              <Filter className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
+              <Filter className="w-4 h-4 mr-2 icon-disco" />
               {category.label}
             </Button>
           ))}
@@ -143,7 +143,7 @@ export default function ProjectsSection() {
           {filteredProjects.map((project) => (
             <Card 
               key={project.id} 
-              className="group hover-elevate transition-all duration-300 overflow-hidden border-border/50"
+              className="group cosmic-hover card-3d-hover transition-all duration-300 overflow-visible border-border/50"
               data-testid={`card-project-${project.id}`}
             >
               <div className="relative overflow-hidden">
@@ -164,7 +164,7 @@ export default function ProjectsSection() {
               </div>
 
               <CardHeader className="pb-4">
-                <CardTitle className="text-lg font-bold text-card-foreground group-hover:text-primary transition-colors">
+                <CardTitle className="text-lg font-bold text-card-foreground group-hover:text-primary transition-colors text-rainbow-hover">
                   {project.title}
                 </CardTitle>
                 <CardDescription className="text-sm text-muted-foreground leading-relaxed">
@@ -213,22 +213,22 @@ export default function ProjectsSection() {
                     <Button 
                       size="sm" 
                       variant="outline" 
-                      className="flex-1 group"
+                      className="flex-1 group ripple-button particle-effect"
                       onClick={() => window.open(project.link, '_blank')}
                       data-testid={`button-live-${project.id}`}
                     >
-                      <ExternalLink className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
+                      <ExternalLink className="w-4 h-4 mr-2 icon-disco" />
                       Live Demo
                     </Button>
                   )}
                   <Button 
                     size="sm" 
                     variant="outline"
-                    className="flex-1 group"
+                    className="flex-1 group ripple-button particle-effect"
                     onClick={() => console.log('View case study:', project.title)}
                     data-testid={`button-case-study-${project.id}`}
                   >
-                    <Github className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                    <Github className="w-4 h-4 mr-2 icon-disco" />
                     Case Study
                   </Button>
                 </div>
