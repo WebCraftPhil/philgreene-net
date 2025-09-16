@@ -25,7 +25,11 @@ export default function AboutSection() {
           <div className="space-y-6">
             <div className="flex items-center gap-4 mb-8">
               <Avatar className="w-20 h-20 border-4 border-primary/20">
-                <AvatarImage src={profilePhoto} alt="Phillip Greene" />
+                <AvatarImage 
+                  src={profilePhoto} 
+                  alt="Phillip Greene"
+                  className="object-cover object-center"
+                />
                 <AvatarFallback className="bg-primary text-primary-foreground text-2xl font-bold">
                   PG
                 </AvatarFallback>
