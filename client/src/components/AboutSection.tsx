@@ -44,13 +44,17 @@ export default function AboutSection() {
             </div>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a passionate full-stack developer and data analyst who has been creating digital solutions 
-              for the past 7 months. I love turning complex problems into simple, beautiful designs that users adore.
+              I'm a full-stack developer and beginner data analyst who loves turning complex challenges into simple, intuitive solutions. 
+              Over the past year, I've been sharpening my skills by building real projects—from AI-powered SaaS tools to Etsy shop automations—that let me learn by doing and delivering.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              When I'm not coding, you'll find me running my Etsy shop "Stellar Styles and More", exploring the latest technologies, 
-              or analyzing interesting datasets to uncover hidden patterns. I believe in combining technical expertise with creative vision.
+              Alongside my tech work, I run an Etsy shop, "Stellar Styles and More," where I design and sell products across home décor, apparel, and accessories. 
+              While it's a side venture, it reflects my drive to create and build—whether in code, data, or business.
+            </p>
+
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              I believe technology is the ultimate creative medium, and I'm committed to growing every day as a developer and analyst.
             </p>
 
             <div className="flex items-center gap-4 text-muted-foreground">
@@ -89,12 +93,12 @@ export default function AboutSection() {
               <h4 className="text-xl font-semibold text-card-foreground">Experience Highlights</h4>
               <div className="space-y-3">
                 <div className="bg-background rounded-lg p-4 border border-border hover-elevate">
-                  <h5 className="font-semibold text-foreground">7 Months</h5>
-                  <p className="text-muted-foreground">Full-Stack Development</p>
+                  <h5 className="font-semibold text-foreground">One Year</h5>
+                  <p className="text-muted-foreground">Full-Stack Development & Data Analysis</p>
                 </div>
                 <div className="bg-background rounded-lg p-4 border border-border hover-elevate">
-                  <h5 className="font-semibold text-foreground">Growing Portfolio</h5>
-                  <p className="text-muted-foreground">Projects & Learning</p>
+                  <h5 className="font-semibold text-foreground">Real Projects</h5>
+                  <p className="text-muted-foreground">AI-powered SaaS & Automations</p>
                 </div>
                 <div className="bg-background rounded-lg p-4 border border-border hover-elevate">
                   <h5 className="font-semibold text-foreground">Etsy Shop Owner</h5>

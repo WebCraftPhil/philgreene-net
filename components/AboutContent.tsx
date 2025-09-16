@@ -25,13 +25,15 @@ export default function AboutContent() {
               <h2 className="text-2xl font-bold text-foreground mb-4 font-display">Who we are</h2>
               <div className="prose prose-gray dark:prose-invert max-w-none">
                 <p className="text-lg text-foreground/70 mb-6">
-                  We operate like a studio: fast, opinionated, quality-obsessed. The work sits at the intersection of creative commerce, legal tech, and automation.
+                  I'm a full-stack developer and beginner data analyst who loves turning complex challenges into simple, intuitive solutions. 
+                  Over the past year, I've been sharpening my skills by building real projects—from AI-powered SaaS tools to Etsy shop automations—that let me learn by doing and delivering.
                 </p>
                 <p className="text-lg text-foreground/70 mb-6">
-                  The philosophy is simple: make things beautiful, useful, and profitable. Ship small, iterate quickly, and reuse a consistent visual language across apps, sites, and social.
+                  Alongside my tech work, I run an Etsy shop, "Stellar Styles and More," where I design and sell products across home décor, apparel, and accessories. 
+                  While it's a side venture, it reflects my drive to create and build—whether in code, data, or business.
                 </p>
                 <p className="text-lg text-foreground/70">
-                  Open to collaborations with founders, agencies, and creators.
+                  I believe technology is the ultimate creative medium, and I'm committed to growing every day as a developer and analyst.
                 </p>
               </div>
             </div>
@@ -151,11 +153,11 @@ export default function AboutContent() {
                     <div className="text-2xl">🚀</div>
                     <div>
                       <h3 className="font-semibold text-foreground">
-                        Scaled Products to 10K+ Users
+                        One Year of Focused Development
                       </h3>
                       <p className="text-foreground/70">
-                        Built and launched multiple SaaS products that have
-                        collectively served over 10,000 active users.
+                        Building real-world projects from AI-powered SaaS tools to e-commerce automations,
+                        learning by doing and delivering solutions.
                       </p>
                     </div>
                   </div>
@@ -165,11 +167,11 @@ export default function AboutContent() {
                     <div className="text-2xl">💰</div>
                     <div>
                       <h3 className="font-semibold text-foreground">
-                        Generated $2M+ in Revenue
+                        Etsy Shop Owner & Creator
                       </h3>
                       <p className="text-foreground/70">
-                        Data-driven insights and automation solutions have
-                        directly contributed to over $2 million in revenue.
+                        Running "Stellar Styles and More" - designing and selling products across 
+                        home décor, apparel, and accessories while applying tech skills to business growth.
                       </p>
                     </div>
                   </div>
@@ -179,11 +181,11 @@ export default function AboutContent() {
                     <div className="text-2xl">⚡</div>
                     <div>
                       <h3 className="font-semibold text-foreground">
-                        80% Time Savings Through Automation
+                        Full-Stack & Data Skills
                       </h3>
                       <p className="text-foreground/70">
-                        Implemented AI-powered automation that reduced manual
-                        work by 80% across multiple projects.
+                        Combining development expertise with growing data analysis skills,
+                        turning complex challenges into simple, intuitive solutions.
                       </p>
                     </div>
                   </div>
