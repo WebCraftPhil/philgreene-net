@@ -26,14 +26,14 @@ export default function AboutContent() {
               <div className="prose prose-gray dark:prose-invert max-w-none">
                 <p className="text-lg text-foreground/70 mb-6">
                   I'm a full-stack developer and beginner data analyst who loves turning complex challenges into simple, intuitive solutions. 
-                  Over the past year, I've been sharpening my skills by building real projects—from AI-powered SaaS tools to Etsy shop automations—that let me learn by doing and delivering.
+                  I've been sharpening my skills by building real projects that apply both coding and data analysis in practical ways.
                 </p>
                 <p className="text-lg text-foreground/70 mb-6">
-                  Alongside my tech work, I run an Etsy shop, "Stellar Styles and More," where I design and sell products across home décor, apparel, and accessories. 
-                  While it's a side venture, it reflects my drive to create and build—whether in code, data, or business.
+                  Alongside my tech work, I run an Etsy shop, "Stellar Styles and More," where I design and sell home décor, apparel, and accessories. 
+                  It's my creative outlet and a way to experiment with building products and managing a business.
                 </p>
                 <p className="text-lg text-foreground/70">
-                  I believe technology is the ultimate creative medium, and I'm committed to growing every day as a developer and analyst.
+                  I see technology as the most powerful creative medium of our time—and I'm committed to growing every day as a developer and analyst.
                 </p>
               </div>
             </div>
