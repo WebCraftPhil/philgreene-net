@@ -75,6 +75,55 @@ export const projects: Project[] = [
     category: 'ecommerce',
     slug: 'etsy-analytics',
   },
+  {
+    id: 'gumroad-digital-products',
+    title: 'VtGuy65 Digital Products',
+    description:
+      'Digital marketplace featuring templates, guides, and resources for entrepreneurs and creators looking to grow their businesses.',
+    role: 'Product Creator & Digital Entrepreneur',
+    stack: [
+      'Gumroad Platform',
+      'Digital Design',
+      'Content Creation',
+      'Marketing Analytics',
+      'Customer Support',
+    ],
+    outcomes: [
+      'Built diverse catalog of digital products',
+      'Established recurring revenue stream',
+      'Developed customer feedback system',
+    ],
+    screenshot: '/projects/gumroad-digital-products-screenshot.png',
+    link: 'https://vtguy65.gumroad.com',
+    featured: true,
+    category: 'digital-products',
+    slug: 'gumroad-digital-products',
+  },
+  {
+    id: 'stellar-styles-etsy',
+    title: 'Stellar Styles and More',
+    description:
+      'Handcrafted jewelry, accessories, and unique items sold on Etsy marketplace, focusing on quality craftsmanship and customer satisfaction.',
+    role: 'Shop Owner & Artisan',
+    stack: [
+      'Etsy Platform',
+      'Product Photography',
+      'Inventory Management',
+      'Customer Relations',
+      'SEO Optimization',
+      'Social Media',
+    ],
+    outcomes: [
+      'Established successful Etsy storefront',
+      'Built loyal customer base',
+      'Achieved consistent monthly sales',
+    ],
+    screenshot: '/projects/stellar-styles-etsy-screenshot.png',
+    link: 'https://stellarstylesandmore.etsy.com',
+    featured: true,
+    category: 'ecommerce',
+    slug: 'stellar-styles-etsy',
+  },
 ];
 
 export const caseStudies: CaseStudy[] = [
