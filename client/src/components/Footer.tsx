@@ -17,7 +17,7 @@ export default function Footer() {
     { icon: Github, href: '#', label: 'GitHub' },
     { icon: Linkedin, href: '#', label: 'LinkedIn' },
     { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Mail, href: 'mailto:hello@developer.com', label: 'Email' }
+    { icon: Mail, href: 'mailto:me@philgreene.net', label: 'Email' }
   ]
 
   const scrollToTop = () => {
@@ -36,7 +36,7 @@ export default function Footer() {
             </div>
             <p className="text-muted-foreground leading-relaxed max-w-md">
               Creating digital experiences that blend cutting-edge technology with human-centered design. 
-              Available for freelance projects and collaborations.
+              Also running Stellar Styles and More on Etsy. Available for freelance projects and collaborations.
             </p>
             <div className="flex items-center gap-2">
               <Coffee className="w-4 h-4 text-primary" />

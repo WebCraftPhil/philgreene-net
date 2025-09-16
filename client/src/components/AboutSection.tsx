@@ -26,11 +26,11 @@ export default function AboutSection() {
               <Avatar className="w-20 h-20 border-4 border-primary/20">
                 <AvatarImage src="" alt="Profile" />
                 <AvatarFallback className="bg-primary text-primary-foreground text-2xl font-bold">
-                  JD
+                  PG
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h3 className="text-2xl font-bold text-card-foreground">John Developer</h3>
+                <h3 className="text-2xl font-bold text-card-foreground">Phillip Greene</h3>
                 <p className="text-muted-foreground flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
                   San Francisco, CA
@@ -45,8 +45,8 @@ export default function AboutSection() {
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              When I'm not coding, you'll find me exploring the latest technologies, contributing to 
-              open-source projects, or analyzing interesting datasets to uncover hidden patterns.
+              When I'm not coding, you'll find me running my Etsy shop "Stellar Styles and More", exploring the latest technologies, 
+              or analyzing interesting datasets to uncover hidden patterns. I believe in combining technical expertise with creative vision.
             </p>
 
             <div className="flex items-center gap-4 text-muted-foreground">

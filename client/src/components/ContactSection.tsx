@@ -53,7 +53,7 @@ export default function ContactSection() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'hello@developer.com',
+      value: 'me@philgreene.net',
       description: 'Drop me a line anytime'
     },
     {
