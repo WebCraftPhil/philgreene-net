@@ -59,7 +59,7 @@ export default function ContactSection() {
     {
       icon: MapPin,
       label: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Manchester, NH',
       description: 'Available for remote work worldwide'
     },
     {

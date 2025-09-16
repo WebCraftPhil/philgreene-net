@@ -33,15 +33,14 @@ export default function AboutSection() {
                 <h3 className="text-2xl font-bold text-card-foreground">Phillip Greene</h3>
                 <p className="text-muted-foreground flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  San Francisco, CA
+                  Manchester, NH
                 </p>
               </div>
             </div>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a passionate full-stack developer and data analyst with over 5 years of experience 
-              creating digital solutions that make a difference. I love turning complex problems into 
-              simple, beautiful designs that users adore.
+              I'm a passionate full-stack developer and data analyst who has been creating digital solutions 
+              for the past 7 months. I love turning complex problems into simple, beautiful designs that users adore.
             </p>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -85,16 +84,16 @@ export default function AboutSection() {
               <h4 className="text-xl font-semibold text-card-foreground">Experience Highlights</h4>
               <div className="space-y-3">
                 <div className="bg-background rounded-lg p-4 border border-border hover-elevate">
-                  <h5 className="font-semibold text-foreground">5+ Years</h5>
+                  <h5 className="font-semibold text-foreground">7 Months</h5>
                   <p className="text-muted-foreground">Full-Stack Development</p>
                 </div>
                 <div className="bg-background rounded-lg p-4 border border-border hover-elevate">
-                  <h5 className="font-semibold text-foreground">50+ Projects</h5>
-                  <p className="text-muted-foreground">Successfully Delivered</p>
+                  <h5 className="font-semibold text-foreground">Growing Portfolio</h5>
+                  <p className="text-muted-foreground">Projects & Learning</p>
                 </div>
                 <div className="bg-background rounded-lg p-4 border border-border hover-elevate">
-                  <h5 className="font-semibold text-foreground">3+ Years</h5>
-                  <p className="text-muted-foreground">Data Analysis & ML</p>
+                  <h5 className="font-semibold text-foreground">Etsy Shop Owner</h5>
+                  <p className="text-muted-foreground">Stellar Styles and More</p>
                 </div>
               </div>
             </div>
