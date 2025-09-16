@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Download, MapPin, Coffee } from 'lucide-react'
+import profilePhoto from '../assets/profile-photo.jpg'
 
 export default function AboutSection() {
   const skills = [
@@ -24,7 +25,7 @@ export default function AboutSection() {
           <div className="space-y-6">
             <div className="flex items-center gap-4 mb-8">
               <Avatar className="w-20 h-20 border-4 border-primary/20">
-                <AvatarImage src="" alt="Profile" />
+                <AvatarImage src={profilePhoto} alt="Phillip Greene" />
                 <AvatarFallback className="bg-primary text-primary-foreground text-2xl font-bold">
                   PG
                 </AvatarFallback>
