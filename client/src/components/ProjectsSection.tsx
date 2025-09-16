@@ -2,85 +2,69 @@ import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { ExternalLink, Github, Filter } from 'lucide-react'
+import { ExternalLink, Github, Filter, Star } from 'lucide-react'
+
+// Import your actual project data
+const projects = [
+  {
+    id: 'cronpost',
+    title: 'CronPost',
+    description: 'Automated social media posting platform with intelligent scheduling and analytics',
+    role: 'Full Stack Developer & Product Manager',
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Redis', 'AWS', 'Tailwind CSS'],
+    outcomes: [
+      'Reduced manual posting time by 80%',
+      'Increased engagement rates by 45%',
+      'Scaled to 10,000+ active users',
+    ],
+    screenshot: '/projects/cronpost-screenshot.svg',
+    link: 'https://cronpost.com',
+    featured: true,
+    category: 'automation',
+    slug: 'cronpost',
+  },
+  {
+    id: 'legal-leaflet',
+    title: 'LegalLeaflet',
+    description: 'AI-powered legal document analysis and contract review platform',
+    role: 'Lead Developer & AI Integration Specialist',
+    stack: ['Python', 'FastAPI', 'OpenAI GPT-4', 'React', 'PostgreSQL', 'Docker'],
+    outcomes: [
+      'Reduced contract review time by 70%',
+      'Improved accuracy to 95% vs human review',
+      'Processed 50,000+ legal documents',
+    ],
+    screenshot: '/projects/legal-leaflet-screenshot.svg',
+    featured: true,
+    category: 'legal-tech',
+    slug: 'legal-leaflet',
+  },
+  {
+    id: 'etsy-analytics',
+    title: 'Etsy Analytics',
+    description: 'Scrapes Etsy data and analyzes high‑demand, low‑competition product niches with actionable insights.',
+    role: 'Product Developer & Data Analyst',
+    stack: ['Next.js', 'TypeScript', 'Node.js', 'Puppeteer/Playwright', 'Etsy API', 'PostgreSQL', 'Tailwind CSS'],
+    outcomes: [
+      'Identified hundreds of viable niches automatically',
+      'Surfaced opportunities by balancing demand vs. competition',
+      'Enabled faster product validation and listing decisions',
+    ],
+    screenshot: '/projects/etsy-analytics-screenshot.svg',
+    featured: true,
+    category: 'ecommerce',
+    slug: 'etsy-analytics',
+  },
+];
 
 export default function ProjectsSection() {
   const [filter, setFilter] = useState('all')
 
-  // todo: remove mock functionality
-  const projects = [
-    {
-      id: 1,
-      title: 'E-commerce Dashboard',
-      description: 'A comprehensive analytics dashboard for online retailers with real-time sales data, customer insights, and inventory management.',
-      image: '/api/placeholder/400/250',
-      category: 'web',
-      tech: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Chart.js'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'Sales Prediction Model',
-      description: 'Machine learning model that predicts sales trends using historical data and market indicators with 95% accuracy.',
-      image: '/api/placeholder/400/250',
-      category: 'data',
-      tech: ['Python', 'Scikit-learn', 'Pandas', 'Jupyter', 'Matplotlib'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
-    },
-    {
-      id: 3,
-      title: 'Task Management App',
-      description: 'A collaborative project management tool with real-time updates, team chat, and advanced reporting features.',
-      image: '/api/placeholder/400/250',
-      category: 'web',
-      tech: ['Next.js', 'Prisma', 'Socket.io', 'Tailwind CSS'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
-    },
-    {
-      id: 4,
-      title: 'Customer Sentiment Analysis',
-      description: 'NLP-powered tool that analyzes customer reviews and feedback to provide actionable insights for businesses.',
-      image: '/api/placeholder/400/250',
-      category: 'data',
-      tech: ['Python', 'NLTK', 'TensorFlow', 'Flask', 'React'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
-    },
-    {
-      id: 5,
-      title: 'Real Estate Platform',
-      description: 'Modern property listing platform with advanced search, virtual tours, and market analysis tools.',
-      image: '/api/placeholder/400/250',
-      category: 'web',
-      tech: ['React', 'Express', 'MongoDB', 'AWS', 'Stripe'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
-    },
-    {
-      id: 6,
-      title: 'Supply Chain Analytics',
-      description: 'Data visualization platform that tracks and optimizes supply chain operations for manufacturing companies.',
-      image: '/api/placeholder/400/250',
-      category: 'data',
-      tech: ['Python', 'Plotly', 'FastAPI', 'PostgreSQL', 'Docker'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
-    }
-  ]
-
   const categories = [
     { id: 'all', label: 'All Projects' },
-    { id: 'web', label: 'Web Development' },
-    { id: 'data', label: 'Data Analysis' }
+    { id: 'automation', label: 'Automation' },
+    { id: 'legal-tech', label: 'Legal Tech' },
+    { id: 'ecommerce', label: 'E-commerce' }
   ]
 
   const filteredProjects = filter === 'all' 
@@ -95,7 +79,7 @@ export default function ProjectsSection() {
             Featured Projects
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            A showcase of my recent work in web development and data analysis.
+            Real projects that combine full-stack development with data analysis to solve complex business challenges.
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto"></div>
         </div>
@@ -128,17 +112,17 @@ export default function ProjectsSection() {
               data-testid={`card-project-${project.id}`}
             >
               <div className="relative overflow-hidden">
-                {/* Placeholder for project image */}
-                <div className="w-full h-48 bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-background/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-2xl">🚀</span>
-                    </div>
-                    <p className="text-sm text-white/80 font-medium">{project.title}</p>
-                  </div>
+                {/* Project Screenshot */}
+                <div className="w-full h-48 overflow-hidden">
+                  <img
+                    src={project.screenshot}
+                    alt={`${project.title} screenshot`}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
                 </div>
                 {project.featured && (
                   <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
+                    <Star className="w-3 h-3 mr-1" />
                     Featured
                   </Badge>
                 )}
@@ -151,11 +135,27 @@ export default function ProjectsSection() {
                 <CardDescription className="text-sm text-muted-foreground leading-relaxed">
                   {project.description}
                 </CardDescription>
+                <div className="text-xs text-muted-foreground/70 mt-2">
+                  <span className="font-medium">Role:</span> {project.role}
+                </div>
               </CardHeader>
 
               <CardContent className="space-y-4">
+                {/* Key Outcomes */}
+                <div>
+                  <span className="text-sm font-medium text-card-foreground">Key Results:</span>
+                  <ul className="mt-1 space-y-1">
+                    {project.outcomes.slice(0, 2).map((outcome, index) => (
+                      <li key={index} className="text-xs text-muted-foreground">
+                        • {outcome}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Tech Stack */}
                 <div className="flex flex-wrap gap-1">
-                  {project.tech.map((tech) => (
+                  {project.stack.slice(0, 4).map((tech) => (
                     <Badge 
                       key={tech} 
                       variant="secondary" 
@@ -165,28 +165,36 @@ export default function ProjectsSection() {
                       {tech}
                     </Badge>
                   ))}
+                  {project.stack.length > 4 && (
+                    <Badge variant="secondary" className="text-xs">
+                      +{project.stack.length - 4} more
+                    </Badge>
+                  )}
                 </div>
 
+                {/* Action Buttons */}
                 <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="flex-1 group"
-                    onClick={() => console.log('View live project:', project.title)}
-                    data-testid={`button-live-${project.id}`}
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
-                    Live Demo
-                  </Button>
+                  {project.link && (
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="flex-1 group"
+                      onClick={() => window.open(project.link, '_blank')}
+                      data-testid={`button-live-${project.id}`}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
+                      Live Demo
+                    </Button>
+                  )}
                   <Button 
                     size="sm" 
                     variant="outline"
                     className="flex-1 group"
-                    onClick={() => console.log('View code:', project.title)}
-                    data-testid={`button-code-${project.id}`}
+                    onClick={() => console.log('View case study:', project.title)}
+                    data-testid={`button-case-study-${project.id}`}
                   >
                     <Github className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                    Code
+                    Case Study
                   </Button>
                 </div>
               </CardContent>
