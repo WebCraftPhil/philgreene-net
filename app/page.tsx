@@ -43,6 +43,10 @@ export default function Home() {
               />
             </div>
           </a>
+
+          <p className="mt-6 text-center text-base text-muted-foreground sm:text-lg">
+            Analyzed 43 weeks of e-commerce data to identify a critical 35% Q2 revenue spike, enabling strategic, profit-first inventory and marketing planning.
+          </p>
         </div>
       </section>
 
