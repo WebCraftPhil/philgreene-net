@@ -1,0 +1,70 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" rx="32" fill="#F8FAFC"/>
+  <rect x="48" y="48" width="1344" height="804" rx="28" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="48" y="48" width="1344" height="92" rx="28" fill="#E8F7EE"/>
+  <rect x="80" y="84" width="160" height="24" rx="12" fill="#22C55E" opacity="0.15"/>
+  <text x="90" y="102" fill="#15803D" font-family="'Inter', system-ui" font-size="16" font-weight="700">Printify Dashboard</text>
+  <rect x="1216" y="82" width="136" height="32" rx="16" fill="#22C55E"/>
+  <text x="1258" y="103" fill="white" font-family="'Inter', system-ui" font-size="15" font-weight="700">Live</text>
+  <circle cx="1236" cy="98" r="6" fill="#B9F6CA" stroke="#15803D" stroke-width="2"/>
+
+  <rect x="96" y="170" width="1248" height="220" rx="24" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="120" y="206" fill="#0F172A" font-family="'Inter', system-ui" font-size="18" font-weight="700">Revenue snapshot</text>
+  <text x="120" y="236" fill="#475569" font-family="'Inter', system-ui" font-size="14">Last 30 days</text>
+  <rect x="120" y="256" width="384" height="116" rx="16" fill="#0F172A"/>
+  <text x="150" y="294" fill="#22C55E" font-family="'Inter', system-ui" font-size="14" font-weight="700">TOTAL SALES</text>
+  <text x="150" y="338" fill="white" font-family="'Inter', system-ui" font-size="38" font-weight="800">$78,240</text>
+  <text x="150" y="368" fill="#A5B4FC" font-family="'Inter', system-ui" font-size="14" font-weight="600">+148% vs previous</text>
+  <line x1="538" y1="272" x2="1200" y2="272" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="6 8"/>
+
+  <path d="M552 356C612 292 660 318 706 284C752 250 790 216 844 240C898 264 934 340 988 344C1042 348 1090 286 1148 296" stroke="#22C55E" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <path d="M552 386C612 340 660 366 706 330C752 294 790 272 844 288C898 304 934 352 988 356C1042 360 1090 320 1148 330" stroke="#A3E635" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 14" fill="none"/>
+  <circle cx="906" cy="280" r="10" fill="white" stroke="#22C55E" stroke-width="6"/>
+  <circle cx="1024" cy="344" r="10" fill="white" stroke="#A3E635" stroke-width="6"/>
+
+  <rect x="96" y="416" width="1248" height="200" rx="24" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="120" y="452" fill="#0F172A" font-family="'Inter', system-ui" font-size="18" font-weight="700">Top products</text>
+  <text x="120" y="482" fill="#475569" font-family="'Inter', system-ui" font-size="14">Sorted by sales volume</text>
+  <rect x="120" y="504" width="118" height="24" rx="12" fill="#DCFCE7"/>
+  <text x="142" y="521" fill="#15803D" font-family="'Inter', system-ui" font-size="13" font-weight="700">Hoodies</text>
+  <rect x="248" y="504" width="118" height="24" rx="12" fill="#ECFEFF"/>
+  <text x="272" y="521" fill="#0891B2" font-family="'Inter', system-ui" font-size="13" font-weight="700">Mugs</text>
+  <rect x="376" y="504" width="148" height="24" rx="12" fill="#FEE2E2"/>
+  <text x="400" y="521" fill="#B91C1C" font-family="'Inter', system-ui" font-size="13" font-weight="700">Stickers</text>
+
+  <rect x="120" y="548" width="1160" height="28" rx="12" fill="#F8FAFC"/>
+  <rect x="120" y="592" width="1160" height="28" rx="12" fill="#F8FAFC"/>
+  <rect x="120" y="636" width="1160" height="28" rx="12" fill="#F8FAFC"/>
+  <rect x="120" y="680" width="1160" height="28" rx="12" fill="#F8FAFC"/>
+  <rect x="120" y="724" width="1160" height="28" rx="12" fill="#F8FAFC"/>
+
+  <text x="136" y="568" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">Dark Forest Hoodie</text>
+  <text x="136" y="612" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">Sunrise Mug</text>
+  <text x="136" y="656" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">Neon Sticker Pack</text>
+  <text x="136" y="700" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">Campus Hoodie</text>
+  <text x="136" y="744" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">Studio Mug</text>
+
+  <text x="520" y="568" fill="#475569" font-family="'Inter', system-ui" font-size="13">842 orders</text>
+  <text x="520" y="612" fill="#475569" font-family="'Inter', system-ui" font-size="13">630 orders</text>
+  <text x="520" y="656" fill="#475569" font-family="'Inter', system-ui" font-size="13">588 orders</text>
+  <text x="520" y="700" fill="#475569" font-family="'Inter', system-ui" font-size="13">462 orders</text>
+  <text x="520" y="744" fill="#475569" font-family="'Inter', system-ui" font-size="13">418 orders</text>
+
+  <text x="720" y="568" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">$18,420</text>
+  <text x="720" y="612" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">$14,070</text>
+  <text x="720" y="656" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">$12,410</text>
+  <text x="720" y="700" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">$10,360</text>
+  <text x="720" y="744" fill="#0F172A" font-family="'Inter', system-ui" font-size="13" font-weight="700">$9,880</text>
+
+  <rect x="940" y="556" width="320" height="16" rx="8" fill="#DCFCE7"/>
+  <rect x="940" y="600" width="280" height="16" rx="8" fill="#DCFCE7"/>
+  <rect x="940" y="644" width="248" height="16" rx="8" fill="#DCFCE7"/>
+  <rect x="940" y="688" width="220" height="16" rx="8" fill="#DCFCE7"/>
+  <rect x="940" y="732" width="204" height="16" rx="8" fill="#DCFCE7"/>
+
+  <rect x="96" y="744" width="1248" height="92" rx="24" fill="#0F172A"/>
+  <text x="120" y="798" fill="#E2E8F0" font-family="'Inter', system-ui" font-size="16" font-weight="600">Orders shipped within SLA</text>
+  <text x="414" y="798" fill="#22C55E" font-family="'Inter', system-ui" font-size="16" font-weight="800">98.6%</text>
+  <rect x="620" y="770" width="652" height="20" rx="10" fill="#1E293B"/>
+  <rect x="620" y="770" width="608" height="20" rx="10" fill="#22C55E"/>
+</svg>
