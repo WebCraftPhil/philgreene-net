@@ -8,7 +8,7 @@ import { trackEvent } from "../lib/analytics";
 export default function HeroSection() {
   const [currentText, setCurrentText] = useState("");
   const fullText =
-    "I build automation and analytics tools that help creators earn more with less work";
+    "Operational Analyst & Developer: I Build Systems That Drive Revenue.";
   const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
