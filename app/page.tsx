@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getFeaturedProjects } from "../lib/projects";
 import ProjectCard from "../components/ProjectCard";
@@ -12,6 +13,38 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Enhanced Hero Section */}
       <HeroSection />
+
+      {/* Verified Proof of Value */}
+      <section className="py-16 bg-muted/50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 text-center">
+            <h2 className="text-gradient-coolors text-3xl font-bold sm:text-4xl">
+              Verified Proof of Value
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              A live, data-driven Printify dashboard showcasing fulfilled orders and revenue growth.
+            </p>
+          </div>
+
+          <a
+            href="https://webcraftphil.github.io/Kimi-Data-Viz-Printify-Insights-11-25/printify_dashboard.html"
+            target="_blank"
+            rel="noreferrer"
+            className="group block"
+          >
+            <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-xl transition duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl">
+              <Image
+                src="/projects/printify-dashboard.svg"
+                alt="Screenshot of a Printify performance dashboard"
+                width={1440}
+                height={900}
+                className="h-auto w-full"
+                priority
+              />
+            </div>
+          </a>
+        </div>
+      </section>
 
       {/* Real Results Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-blue-900">
