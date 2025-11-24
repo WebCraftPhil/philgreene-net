@@ -8,6 +8,60 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
+  const services = [
+    {
+      title: "Revenue Validation Sprint",
+      price: "from $1,250",
+      description:
+        "Fast-track your offer, landing page, and analytics so you can see if revenue is ready to scale.",
+      features: [
+        "Launch-ready landing page with tracking in 14 days",
+        "Offer + positioning tuned to buyer intent",
+        "Proof-of-revenue dashboard you can share with stakeholders",
+      ],
+      accent: "#28965a",
+      icon: "🚀",
+    },
+    {
+      title: "Automation & AI Ops",
+      price: "from $1,800",
+      description:
+        "Remove manual busywork with custom automations and AI workflows that keep quality high.",
+      features: [
+        "Workflow audit to prioritize ROI-positive automations",
+        "Custom GPT + no-code flows for content, ops, and customer success",
+        "Runbook, monitoring, and team handoff included",
+      ],
+      accent: "#e09f3e",
+      icon: "🤖",
+    },
+    {
+      title: "Conversion & Insights Engine",
+      price: "from $1,400",
+      description:
+        "Turn your data into guardrails: clean tracking, dashboards, and experiments that lift revenue.",
+      features: [
+        "KPI instrumentation across web, product, and revenue events",
+        "Dashboards with weekly signal reports and next best actions",
+        "A/B tests and funnel fixes targeting 20–30% lift",
+      ],
+      accent: "#33658a",
+      icon: "📊",
+    },
+    {
+      title: "MVP to Launch (Full Stack)",
+      price: "from $4,500",
+      description:
+        "Design, build, and ship a production-ready MVP with telemetry, payments, and onboarding baked in.",
+      features: [
+        "Scope, UX, and architecture aligned to revenue milestones",
+        "Auth, billing, and usage analytics wired from day one",
+        "Launch playbook plus onboarding and lifecycle assets",
+      ],
+      accent: "#c6f91f",
+      icon: "💻",
+    },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -275,52 +329,51 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20">
+      <section id="services" className="py-20 bg-muted/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <h2 className="text-gradient-coolors text-3xl font-bold sm:text-4xl">
-              What I Do
+              4 Services Focused on Your ROI.
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Comprehensive solutions for data-driven businesses
+            <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+              Clear packages, transparent starter pricing, and deliverables that ship revenue-ready assets—not just tasks.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="card card-hover border-[#28965a]/20 hover:border-[#28965a]/40">
-              <div className="mb-4 text-3xl">📈</div>
-              <h3 className="mb-2 text-xl font-semibold text-card-foreground">
-                Data Analysis & BI
-              </h3>
-              <p className="text-muted-foreground">
-                Transform raw data into actionable insights with custom
-                dashboards, predictive modeling, and automated reporting
-                systems.
-              </p>
-            </div>
-
-            <div className="card card-hover border-[#e09f3e]/20 hover:border-[#e09f3e]/40">
-              <div className="mb-4 text-3xl">🤖</div>
-              <h3 className="mb-2 text-xl font-semibold text-card-foreground">
-                AI & Automation
-              </h3>
-              <p className="text-muted-foreground">
-                Build intelligent systems that automate workflows, analyze
-                documents, and optimize business processes using cutting-edge AI
-                technologies.
-              </p>
-            </div>
-
-            <div className="card card-hover border-[#33658a]/20 hover:border-[#33658a]/40">
-              <div className="mb-4 text-3xl">💻</div>
-              <h3 className="mb-2 text-xl font-semibold text-card-foreground">
-                Full Stack Development
-              </h3>
-              <p className="text-muted-foreground">
-                Create scalable web applications from concept to deployment,
-                with modern frameworks and cloud-native architectures.
-              </p>
-            </div>
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+            {services.map((service) => (
+              <div
+                key={service.title}
+                className="card card-hover flex flex-col h-full"
+                style={{ borderColor: `${service.accent}33` }}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="text-3xl" aria-hidden>
+                    {service.icon}
+                  </div>
+                  <span
+                    className="rounded-full px-3 py-1 text-sm font-semibold"
+                    style={{ backgroundColor: `${service.accent}1a`, color: service.accent }}
+                  >
+                    {service.price}
+                  </span>
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-card-foreground">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground mb-6">{service.description}</p>
+                <ul className="space-y-2 mt-auto">
+                  {service.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2 text-sm text-card-foreground">
+                      <span className="mt-0.5 text-lg" aria-hidden>
+                        ✓
+                      </span>
+                      <span className="text-muted-foreground">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
