@@ -29,8 +29,7 @@
       "Created SVG placeholder images for project screenshots"
     ],
     "fingerprint": "portfolio-features-v1"
-  }
-  ,
+  },
   {
     "id": "20250903-0130-navigation-cta-seo",
     "actor": "agent:cursor",
@@ -66,5 +65,25 @@
       "Enabled site crawling via robots.txt"
     ],
     "fingerprint": "eb7b066070a67ad51eb0a999f02e31f8debd326b2918d588adf48c787ec3c405"
+  },
+  {
+    "id": "20251123-2319-roi-services-packages",
+    "actor": "agent:cursor",
+    "intent": "add ROI-focused services section with four packages and pricing",
+    "inputs": {
+      "sectionTitle": "4 Services Focused on Your ROI.",
+      "serviceCount": 4
+    },
+    "relatedFiles": [
+      "app/page.tsx"
+    ],
+    "status": "done",
+    "evidence": "npm run lint (warnings), CI=1 npm run build, npm test, npm audit (1 moderate vulnerability remains)",
+    "notes": [
+      "Replaced services section with ROI-focused packages",
+      "Added pricing chips and deliverable lists",
+      "Audit reports existing moderate js-yaml vulnerability"
+    ],
+    "fingerprint": "1fd99d0cc05e609cae62e4cc74fcccad09d68086691d2a1c30f490fb52300dab"
   }
 ]
