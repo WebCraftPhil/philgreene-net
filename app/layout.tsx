@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import StickyCta from "../components/StickyCta";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://philgreene.net";
 
 export const metadata: Metadata = {
@@ -188,7 +189,8 @@ export default function RootLayout({
 
       <body className="bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-white">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen pb-24">{children}</main>
+        <StickyCta />
         <Footer />
       </body>
     </html>
