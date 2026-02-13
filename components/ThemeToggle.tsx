@@ -5,10 +5,14 @@ import { Sun, Moon } from 'lucide-react';
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
-  
+
   useEffect(() => {
-    const stored = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
-    const prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const stored =
+      typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
+    const prefersDark =
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialDark = stored ? stored === 'dark' : prefersDark;
     setIsDark(initialDark);
     document.documentElement.classList.toggle('dark', initialDark);
@@ -32,4 +36,3 @@ export default function ThemeToggle() {
     </button>
   );
 }
-

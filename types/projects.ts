@@ -8,7 +8,7 @@ export interface Project {
   screenshot: string;
   link?: string;
   featured: boolean;
-  category: 'data-analysis' | 'automation' | 'ecommerce' | 'legal-tech';
+  category: 'data-analysis' | 'automation' | 'ecommerce' | 'legal-tech' | 'digital-products';
   slug: string;
 }
 

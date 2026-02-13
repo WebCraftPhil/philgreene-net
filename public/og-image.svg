@@ -1,50 +1,53 @@
+
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="630" fill="url(#gradient)"/>
   
   <!-- Background Pattern -->
-  <circle cx="1000" cy="150" r="200" fill="rgba(51, 101, 138, 0.1)"/>
-  <circle cx="200" cy="480" r="150" fill="rgba(40, 150, 90, 0.1)"/>
-  <circle cx="1100" cy="500" r="100" fill="rgba(224, 159, 62, 0.1)"/>
+  <circle cx="1000" cy="150" r="200" fill="rgba(0, 246, 255, 0.1)"/>
+  <circle cx="200" cy="480" r="150" fill="rgba(255, 0, 200, 0.1)"/>
+  <circle cx="1100" cy="500" r="100" fill="rgba(0, 246, 255, 0.05)"/>
   
   <!-- Main Content -->
-  <text x="600" y="200" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="bold" fill="white">
+  <text x="600" y="180" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="bold" fill="white">
     Phil Greene
   </text>
   
-  <text x="600" y="280" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="500" fill="rgba(255, 255, 255, 0.9)">
-    Creator Automation & SaaS Developer
+  <text x="600" y="260" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="500" fill="rgba(255, 255, 255, 0.9)">
+    Full-Stack Developer &amp; Data Analyst
   </text>
   
-  <text x="600" y="350" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="400" fill="rgba(255, 255, 255, 0.8)">
-    Building tools that help creators earn more with less work
+  <text x="600" y="320" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="400" fill="rgba(255, 255, 255, 0.8)">
+    Turning complex challenges into simple, intuitive solutions
   </text>
   
-  <!-- Stats -->
-  <g transform="translate(600, 450)">
-    <text x="0" y="0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="bold" fill="#28965a">1000%</text>
-    <text x="0" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="rgba(255, 255, 255, 0.8)">Etsy Growth</text>
+  <!-- Feature Pills -->
+  <g transform="translate(600, 420)">
+    <rect x="-250" y="-20" width="160" height="40" rx="20" fill="rgba(0, 246, 255, 0.2)" stroke="rgba(0, 246, 255, 0.5)" stroke-width="1"/>
+    <text x="-170" y="5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#00F6FF">Full-Stack Dev</text>
+    
+    <rect x="-70" y="-20" width="140" height="40" rx="20" fill="rgba(255, 0, 200, 0.2)" stroke="rgba(255, 0, 200, 0.5)" stroke-width="1"/>
+    <text x="0" y="5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#FF00C8">Data Analysis</text>
+    
+    <rect x="90" y="-20" width="160" height="40" rx="20" fill="rgba(0, 246, 255, 0.2)" stroke="rgba(0, 246, 255, 0.5)" stroke-width="1"/>
+    <text x="170" y="5" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#00F6FF">Etsy Business</text>
   </g>
   
-  <g transform="translate(400, 450)">
-    <text x="0" y="0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="bold" fill="#e09f3e">3</text>
-    <text x="0" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="rgba(255, 255, 255, 0.8)">SaaS Launches</text>
-  </g>
-  
-  <g transform="translate(800, 450)">
-    <text x="0" y="0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="bold" fill="#c6f91f">80%</text>
-    <text x="0" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="rgba(255, 255, 255, 0.8)">Time Saved</text>
-  </g>
+  <!-- Website URL -->
+  <text x="600" y="520" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="400" fill="rgba(255, 255, 255, 0.7)">
+    philgreene.net
+  </text>
   
   <!-- Decorative Elements -->
-  <circle cx="150" cy="150" r="8" fill="#28965a"/>
-  <circle cx="1050" cy="400" r="6" fill="#e09f3e"/>
-  <circle cx="300" cy="300" r="4" fill="#c6f91f"/>
+  <circle cx="150" cy="150" r="8" fill="#00F6FF"/>
+  <circle cx="1050" cy="400" r="6" fill="#FF00C8"/>
+  <circle cx="300" cy="300" r="4" fill="#00F6FF"/>
+  <circle cx="900" cy="200" r="5" fill="#FF00C8"/>
   
   <defs>
     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#33658a"/>
-      <stop offset="50%" style="stop-color:#28965a"/>
-      <stop offset="100%" style="stop-color:#e09f3e"/>
+      <stop offset="0%" style="stop-color:#000000"/>
+      <stop offset="50%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#000000"/>
     </linearGradient>
   </defs>
 </svg>
