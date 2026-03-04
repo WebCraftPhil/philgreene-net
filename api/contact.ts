@@ -1,4 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { db } from '../server/db';
+import { contactSubmissions } from '../shared/schema';
 import { sendEmail } from '../server/sendgrid';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -31,6 +33,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         error: 'Message must be at least 10 characters long' 
       });
     }
+
+    // Save submission to the database
+    await db.insert(contactSubmissions).values({
+      name,
+      email,
+      message,
+      projectType,
+      budget,
+    });
 
     // Send email notification to me@philgreene.net
     const emailSent = await sendEmail({
