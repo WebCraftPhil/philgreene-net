@@ -56,7 +56,8 @@ export default function Footer() {
                 { href: '#services', label: 'Services' },
                 { href: '#projects', label: 'Projects' },
                 { href: '#contact', label: 'Contact' },
-                { href: '/privacy', label: 'Privacy Policy' }
+                { href: '/privacy', label: 'Privacy Policy' },
+                { href: '/terms', label: 'Terms of Service' }
               ].map((link) => {
                 if (link.href.startsWith('/')) {
                   return (

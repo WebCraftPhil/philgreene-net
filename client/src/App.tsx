@@ -13,6 +13,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/not-found";
 import PrivacyPage from "@/pages/privacy";
+import TermsPage from "@/pages/terms";
 
 function HomePage() {
   const { theme, toggleTheme } = useTheme();
@@ -40,6 +41,7 @@ function AppLayout() {
       <Switch>
         <Route path="/" component={HomePage} />
         <Route path="/privacy" component={PrivacyPage} />
+        <Route path="/terms" component={TermsPage} />
         <Route component={NotFound} />
       </Switch>
       {location !== "/" && <Footer />}
