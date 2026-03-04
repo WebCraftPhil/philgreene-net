@@ -5,13 +5,8 @@ import heroImage from '@assets/generated_images/futuristic_cosmic_hero_backgroun
 export default function HeroSection() {
   return (
     <section 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(rgba(37, 26, 96, 0.8), rgba(37, 26, 96, 0.6)), url(${heroImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden hero-background"
+      style={{ '--hero-background-image': `url(${heroImage})` } as React.CSSProperties}
     >
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
