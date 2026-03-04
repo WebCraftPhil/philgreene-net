@@ -1,3 +1,4 @@
+import { Link } from "wouter"
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { 
@@ -54,17 +55,33 @@ export default function Footer() {
                 { href: '#about', label: 'About' },
                 { href: '#services', label: 'Services' },
                 { href: '#projects', label: 'Projects' },
-                { href: '#contact', label: 'Contact' }
-              ].map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-primary transition-colors w-fit hover-elevate px-1 py-1 rounded"
-                  data-testid={`link-footer-${link.label.toLowerCase()}`}
-                >
-                  {link.label}
-                </a>
-              ))}
+                { href: '#contact', label: 'Contact' },
+                { href: '/privacy', label: 'Privacy Policy' }
+              ].map((link) => {
+                if (link.href.startsWith('/')) {
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-muted-foreground hover:text-primary transition-colors w-fit hover-elevate px-1 py-1 rounded"
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                }
+
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-muted-foreground hover:text-primary transition-colors w-fit hover-elevate px-1 py-1 rounded"
+                    data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    {link.label}
+                  </a>
+                )
+              })}
             </nav>
           </div>
 

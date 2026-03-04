@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -12,6 +12,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import NotFound from "@/pages/not-found";
+import PrivacyPage from "@/pages/privacy";
 
 function HomePage() {
   const { theme, toggleTheme } = useTheme();
@@ -31,12 +32,18 @@ function HomePage() {
   );
 }
 
-function Router() {
+function AppLayout() {
+  const [location] = useLocation();
+
   return (
-    <Switch>
-      <Route path="/" component={HomePage} />
-      <Route component={NotFound} />
-    </Switch>
+    <div className="min-h-screen">
+      <Switch>
+        <Route path="/" component={HomePage} />
+        <Route path="/privacy" component={PrivacyPage} />
+        <Route component={NotFound} />
+      </Switch>
+      {location !== "/" && <Footer />}
+    </div>
   );
 }
 
@@ -46,7 +53,7 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <AppLayout />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
