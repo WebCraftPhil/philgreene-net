@@ -17,6 +17,7 @@ import {
   CheckCircle
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { apiRequest } from '@/lib/queryClient'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -33,16 +34,23 @@ export default function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // todo: remove mock functionality
-    setTimeout(() => {
-      console.log('Form submitted:', formData)
+    try {
+      await apiRequest('POST', '/api/contact', formData)
+
       toast({
         title: "Message Sent!",
         description: "Thank you for reaching out. I'll get back to you within 24 hours.",
       })
       setFormData({ name: '', email: '', projectType: '', budget: '', message: '' })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
       setIsSubmitting(false)
-    }, 2000)
+    }
   }
 
   const handleInputChange = (field: string, value: string) => {
