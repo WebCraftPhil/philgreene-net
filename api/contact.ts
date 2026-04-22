@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { sendEmail } from '../server/sendgrid';
+import { storage } from '../server/storage';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only allow POST requests
@@ -74,6 +75,9 @@ Submitted at: ${new Date().toISOString()}
         timestamp: new Date().toISOString()
       });
     }
+
+    // Store in database for backup
+    await storage.insertContactSubmission({ name, email, projectType, budget, message });
 
     return res.json({ ok: true });
   } catch (error) {

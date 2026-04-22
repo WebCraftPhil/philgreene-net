@@ -74,8 +74,8 @@ Submitted at: ${new Date().toISOString()}
         });
       }
 
-      // TODO: Consider storing in database for backup
-      // storage.insertContactSubmission({ name, email, projectType, budget, message });
+      // Store in database for backup
+      await storage.insertContactSubmission({ name, email, projectType, budget, message });
 
       return res.json({ ok: true });
     } catch (error) {
