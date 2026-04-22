@@ -16,3 +16,24 @@ export const insertUserSchema = createInsertSchema(users).pick({
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+
+export const contactSubmissions = pgTable("contact_submissions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  projectType: text("project_type"),
+  budget: text("budget"),
+  message: text("message").notNull(),
+  sentAt: text("sent_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const insertContactSubmissionSchema = createInsertSchema(contactSubmissions).pick({
+  name: true,
+  email: true,
+  projectType: true,
+  budget: true,
+  message: true,
+});
+
+export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
+export type ContactSubmission = typeof contactSubmissions.$inferSelect;
