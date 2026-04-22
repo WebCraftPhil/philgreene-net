@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.philgreene.net/</loc></url>
-  <url><loc>https://www.philgreene.net/contact</loc></url>
-  <url><loc>https://www.philgreene.net/privacy-policy</loc></url>
-  <url><loc>https://www.philgreene.net/terms</loc></url>
-  <url><loc>https://www.philgreene.net/cookie-policy</loc></url>
-  <url><loc>https://www.philgreene.net/refund-policy</loc></url>
-  <url><loc>https://www.philgreene.net/disclaimer</loc></url>
-  <url><loc>https://www.philgreene.net/accessibility</loc></url>
+  <url><loc>https://philgreene.net/</loc></url>
+  <url><loc>https://philgreene.net/projects</loc></url>
+  <url><loc>https://philgreene.net/about</loc></url>
+  <url><loc>https://philgreene.net/contact</loc></url>
 </urlset>

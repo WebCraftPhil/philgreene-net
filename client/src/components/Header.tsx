@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'wouter'
 import { Button } from '@/components/ui/button'
 import { Moon, Sun, Menu, X } from 'lucide-react'
 
@@ -12,21 +11,20 @@ export default function Header({ onThemeToggle, isDark }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navItems = [
-    { href: '/#about', label: 'About' },
-    { href: '/#services', label: 'Services' },
-    { href: '/#projects', label: 'Projects' },
-    { href: '/contact', label: 'Contact' },
+    { href: '#about', label: 'About' },
+    { href: '#services', label: 'Services' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#contact', label: 'Contact' }
   ]
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="font-semibold text-foreground hover:text-primary transition-colors">
-            Phil Greene
-          </Link>
 
-          <nav className="hidden md:flex items-center space-x-6" aria-label="Primary">
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -37,19 +35,31 @@ export default function Header({ onThemeToggle, isDark }: HeaderProps) {
                 {item.label}
               </a>
             ))}
-            <Link href="/privacy-policy" className="text-foreground/80 hover:text-primary transition-colors px-3 py-2 rounded-md">
-              Privacy
-            </Link>
           </nav>
 
+          {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon" onClick={onThemeToggle} data-testid="button-theme-toggle">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onThemeToggle}
+              data-testid="button-theme-toggle"
+            >
               {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </Button>
+            <Button data-testid="button-hire-me">
+              Hire Me
             </Button>
           </div>
 
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
-            <Button variant="ghost" size="icon" onClick={onThemeToggle} data-testid="button-theme-toggle-mobile">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onThemeToggle}
+              data-testid="button-theme-toggle-mobile"
+            >
               {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
             <Button
@@ -63,9 +73,10 @@ export default function Header({ onThemeToggle, isDark }: HeaderProps) {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 py-4 bg-card/50 backdrop-blur-sm rounded-lg border border-border">
-            <nav className="flex flex-col space-y-2" aria-label="Mobile">
+            <nav className="flex flex-col space-y-2">
               {navItems.map((item) => (
                 <a
                   key={item.href}
@@ -77,12 +88,11 @@ export default function Header({ onThemeToggle, isDark }: HeaderProps) {
                   {item.label}
                 </a>
               ))}
-              <Link
-                href="/privacy-policy"
-                className="px-4 py-2 text-foreground/80 hover:text-primary hover:bg-accent/20 transition-colors rounded-md"
-              >
-                Privacy Policy
-              </Link>
+              <div className="px-4 pt-2">
+                <Button className="w-full" data-testid="button-hire-me-mobile">
+                  Hire Me
+                </Button>
+              </div>
             </nav>
           </div>
         )}
