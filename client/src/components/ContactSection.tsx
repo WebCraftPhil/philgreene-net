@@ -29,6 +29,22 @@ export default function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const getSubmissionErrorMessage = (error: unknown) => {
+    if (!(error instanceof Error)) {
+      return "Failed to send message. Please try again later."
+    }
+
+    const responseBody = error.message.replace(/^\d+:\s*/, "")
+
+    try {
+      const parsed = JSON.parse(responseBody) as { error?: unknown }
+      if (typeof parsed.error === "string" && parsed.error.trim()) {
+        return parsed.error
+      }
+    } catch {}
+
+    return "Failed to send message. Please try again later."
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -45,7 +61,7 @@ export default function ContactSection() {
     } catch (error) {
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message. Please try again later.",
+        description: getSubmissionErrorMessage(error),
         variant: "destructive",
       })
     } finally {
