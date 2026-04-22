@@ -247,6 +247,15 @@ export default function ContactSection() {
                     />
                   </div>
 
+
+                  <p className="text-sm text-muted-foreground">
+                    By submitting this form, you agree that your information may be used to
+                    respond to your inquiry in accordance with the{' '}
+                    <a className="text-primary underline" href="/privacy-policy">
+                      Privacy Policy
+                    </a>.
+                  </p>
+
                   <Button 
                     type="submit" 
                     className="w-full group" 
