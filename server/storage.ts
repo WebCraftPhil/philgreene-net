@@ -12,9 +12,11 @@ export interface IStorage {
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
+  private usersByUsername: Map<string, User>;
 
   constructor() {
     this.users = new Map();
+    this.usersByUsername = new Map();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -22,18 +24,14 @@ export class MemStorage implements IStorage {
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    for (const user of this.users.values()) {
-      if (user.username === username) {
-        return user;
-      }
-    }
-    return undefined;
+    return this.usersByUsername.get(username);
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
+    this.usersByUsername.set(user.username, user);
     return user;
   }
 }
