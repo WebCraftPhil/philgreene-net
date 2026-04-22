@@ -184,6 +184,10 @@ export default function ContactSection() {
                 <CardDescription>
                   Fill out the form below and I'll get back to you within 24 hours with a detailed proposal.
                 </CardDescription>
+                <p className="text-sm text-muted-foreground">
+                  Information submitted through this site may be used to respond to inquiries as described in the
+                  <a className="ml-1 text-primary underline" href="/privacy-policy">Privacy Policy</a>.
+                </p>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
