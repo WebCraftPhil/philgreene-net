@@ -10,10 +10,6 @@ import { randomUUID } from "crypto";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
-if (!db && process.env.DATABASE_URL) {
-  throw new Error("Database connection failed despite DATABASE_URL being present");
-}
-
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
