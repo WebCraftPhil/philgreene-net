@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -24,7 +24,7 @@ export const contactSubmissions = pgTable("contact_submissions", {
   projectType: text("project_type"),
   budget: text("budget"),
   message: text("message").notNull(),
-  sentAt: text("sent_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  sentAt: timestamp("sent_at", { withTimezone: true, mode: "date" }).notNull().defaultNow(),
 });
 
 export const insertContactSubmissionSchema = createInsertSchema(contactSubmissions).pick({

@@ -78,7 +78,7 @@ export class MemStorage implements IStorage {
       id,
       projectType: submission.projectType ?? null,
       budget: submission.budget ?? null,
-      sentAt: new Date().toISOString()
+      sentAt: new Date()
     };
     this.submissions.set(id, result);
     return result;
