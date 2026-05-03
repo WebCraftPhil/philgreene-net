@@ -1,11 +1,8 @@
-
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://philgreene.net/sitemap.xml
+Sitemap: https://www.philgreene.net/sitemap.xml
 
-# AI/LLM Bot specific allowances
 User-agent: GPTBot
 Allow: /
 
@@ -20,12 +17,3 @@ Allow: /
 
 User-agent: Claude-Web
 Allow: /
-
-# Content priorities for AI scanning
-# About page contains professional background
-# Projects showcase technical work
-# Blog contains thoughts and insights
-# Contact for professional inquiries
-
-# Crawl delay (optional - removes if causing issues)
-Crawl-delay: 1

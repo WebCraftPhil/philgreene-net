@@ -1,4 +1,5 @@
 import { Switch, Route, useLocation } from "wouter";
+import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,14 +15,25 @@ import Footer from "@/components/Footer";
 import NotFound from "@/pages/not-found";
 import PrivacyPage from "@/pages/privacy";
 import TermsPage from "@/pages/terms";
+import CookiePolicyPage from "@/pages/cookie-policy";
+import RefundPolicyPage from "@/pages/refund-policy";
+import DisclaimerPage from "@/pages/disclaimer";
+import AccessibilityPage from "@/pages/accessibility";
+import ContactPage from "@/pages/contact";
 
 function HomePage() {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="min-h-screen">
-      <Header onThemeToggle={toggleTheme} isDark={theme === 'dark'} />
-      <main>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:bg-background focus:text-foreground focus:border focus:border-primary focus:px-3 focus:py-2 focus:rounded"
+      >
+        Skip to main content
+      </a>
+      <Header onThemeToggle={toggleTheme} isDark={theme === "dark"} />
+      <main id="main-content">
         <HeroSection />
         <AboutSection />
         <ServicesSection />
@@ -33,6 +45,16 @@ function HomePage() {
   );
 }
 
+function RedirectRoute({ to }: { to: string }) {
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    navigate(to, { replace: true });
+  }, [navigate, to]);
+
+  return null;
+}
+
 function AppLayout() {
   const [location] = useLocation();
 
@@ -40,8 +62,36 @@ function AppLayout() {
     <div className="min-h-screen">
       <Switch>
         <Route path="/" component={HomePage} />
-        <Route path="/privacy" component={PrivacyPage} />
+
+        <Route path="/privacy-policy" component={PrivacyPage} />
+        <Route path="/privacy">
+          <RedirectRoute to="/privacy-policy" />
+        </Route>
+
         <Route path="/terms" component={TermsPage} />
+        <Route path="/terms-of-service">
+          <RedirectRoute to="/terms" />
+        </Route>
+
+        <Route path="/cookie-policy" component={CookiePolicyPage} />
+        <Route path="/cookies">
+          <RedirectRoute to="/cookie-policy" />
+        </Route>
+
+        <Route path="/refund-policy" component={RefundPolicyPage} />
+        <Route path="/returns">
+          <RedirectRoute to="/refund-policy" />
+        </Route>
+
+        <Route path="/disclaimer" component={DisclaimerPage} />
+
+        <Route path="/accessibility" component={AccessibilityPage} />
+        <Route path="/accessibility-statement">
+          <RedirectRoute to="/accessibility" />
+        </Route>
+
+        <Route path="/contact" component={ContactPage} />
+
         <Route component={NotFound} />
       </Switch>
       {location !== "/" && <Footer />}

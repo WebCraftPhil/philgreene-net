@@ -223,12 +223,15 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
+const projectsBySlug = new Map(projects.map((p) => [p.slug, p]));
+const caseStudiesBySlug = new Map(caseStudies.map((s) => [s.slug, s]));
+
 export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find(project => project.slug === slug);
+  return projectsBySlug.get(slug);
 }
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
-  return caseStudies.find(study => study.slug === slug);
+  return caseStudiesBySlug.get(slug);
 }
 
 export function getFeaturedProjects(): Project[] {

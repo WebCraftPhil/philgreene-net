@@ -1,3 +1,5 @@
+import SeoHead from "@/components/SeoHead";
+
 export default function PrivacyPage() {
   const effectiveDate = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/New_York',
@@ -7,7 +9,12 @@ export default function PrivacyPage() {
   }).format(new Date())
 
   return (
-    <main className="min-h-screen bg-background text-foreground pt-24 pb-16">
+    <main id="main-content" className="min-h-screen bg-background text-foreground pt-24 pb-16">
+      <SeoHead
+        title="Privacy Policy | Phil Greene"
+        description="Read the Privacy Policy for philgreene.net, including what information may be collected and how it is used."
+        canonicalPath="/privacy-policy"
+      />
       <div className="max-w-3xl mx-auto px-4 space-y-8">
         <header className="space-y-3">
           <h1 className="text-4xl font-bold">Privacy Policy</h1>

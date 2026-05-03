@@ -17,6 +17,7 @@ import {
   CheckCircle
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { apiRequest } from '@/lib/queryClient'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -28,21 +29,44 @@ export default function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const getSubmissionErrorMessage = (error: unknown) => {
+    if (!(error instanceof Error)) {
+      return "Failed to send message. Please try again later."
+    }
+
+    const responseBody = error.message.replace(/^\d+:\s*/, "")
+
+    try {
+      const parsed = JSON.parse(responseBody) as { error?: unknown }
+      if (typeof parsed.error === "string" && parsed.error.trim()) {
+        return parsed.error
+      }
+    } catch {}
+
+    return "Failed to send message. Please try again later."
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // todo: remove mock functionality
-    setTimeout(() => {
-      console.log('Form submitted:', formData)
+    try {
+      await apiRequest('POST', '/api/contact', formData)
+
       toast({
         title: "Message Sent!",
         description: "Thank you for reaching out. I'll get back to you within 24 hours.",
       })
       setFormData({ name: '', email: '', projectType: '', budget: '', message: '' })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: getSubmissionErrorMessage(error),
+        variant: "destructive",
+      })
+    } finally {
       setIsSubmitting(false)
-    }, 2000)
+    }
   }
 
   const handleInputChange = (field: string, value: string) => {
@@ -160,6 +184,10 @@ export default function ContactSection() {
                 <CardDescription>
                   Fill out the form below and I'll get back to you within 24 hours with a detailed proposal.
                 </CardDescription>
+                <p className="text-sm text-muted-foreground">
+                  Information submitted through this site may be used to respond to inquiries as described in the
+                  <a className="ml-1 text-primary underline" href="/privacy-policy">Privacy Policy</a>.
+                </p>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">

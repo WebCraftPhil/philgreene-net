@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import SeoHead from "@/components/SeoHead";
 
 export default function TermsPage() {
   const effectiveDate = new Intl.DateTimeFormat("en-US", {
@@ -8,12 +8,13 @@ export default function TermsPage() {
     day: "numeric",
   }).format(new Date());
 
-  useEffect(() => {
-    document.title = "Terms of Service";
-  }, []);
-
   return (
-    <main className="min-h-screen bg-background text-foreground pt-24 pb-16">
+    <main id="main-content" className="min-h-screen bg-background text-foreground pt-24 pb-16">
+      <SeoHead
+        title="Terms of Service | Phil Greene"
+        description="Read the Terms of Service for philgreene.net, including user responsibilities, disclaimers, and legal terms."
+        canonicalPath="/terms"
+      />
       <div className="max-w-3xl mx-auto px-4 space-y-8">
         <header className="space-y-3">
           <h1 className="text-4xl font-bold">Terms of Service</h1>

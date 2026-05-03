@@ -47,6 +47,20 @@ app.use((req, res, next) => {
     throw err;
   });
 
+  const routeRedirects: Record<string, string> = {
+    "/privacy": "/privacy-policy",
+    "/terms-of-service": "/terms",
+    "/cookies": "/cookie-policy",
+    "/returns": "/refund-policy",
+    "/accessibility-statement": "/accessibility",
+  };
+
+  Object.entries(routeRedirects).forEach(([from, to]) => {
+    app.get(from, (_req, res) => {
+      res.redirect(301, to);
+    });
+  });
+
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
