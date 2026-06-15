@@ -12,6 +12,7 @@ import ServicesSection from "@/components/ServicesSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import SeoHead from "@/components/SeoHead";
 import NotFound from "@/pages/not-found";
 import PrivacyPage from "@/pages/privacy";
 import TermsPage from "@/pages/terms";
@@ -25,23 +26,30 @@ function HomePage() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:bg-background focus:text-foreground focus:border focus:border-primary focus:px-3 focus:py-2 focus:rounded"
-      >
-        Skip to main content
-      </a>
-      <Header onThemeToggle={toggleTheme} isDark={theme === "dark"} />
-      <main id="main-content">
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <SeoHead 
+        title="Phil Greene | Data Analyst & SEO Automation Builder" 
+        description="B.S. Data Science student and technical builder turning raw data into practical tools for e-commerce and local business growth." 
+        canonicalPath="/" 
+      />
+      <div className="min-h-screen">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:bg-background focus:text-foreground focus:border focus:border-primary focus:px-3 focus:py-2 focus:rounded"
+        >
+          Skip to main content
+        </a>
+        <Header onThemeToggle={toggleTheme} isDark={theme === "dark"} />
+        <main id="main-content">
+          <HeroSection />
+          <AboutSection />
+          <ServicesSection />
+          <ProjectsSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
 

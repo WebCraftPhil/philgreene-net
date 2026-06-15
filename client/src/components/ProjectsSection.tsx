@@ -10,7 +10,7 @@ const projects = [
     id: 'cronpost',
     title: 'CronPost',
     description: 'Automated social media posting platform with intelligent scheduling and analytics',
-    role: 'Full Stack Developer & Product Manager',
+    role: 'Data Analyst & SEO Automation Builder',
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Redis', 'AWS', 'Tailwind CSS'],
     outcomes: [
       'Reduced manual posting time by 80%',
@@ -27,7 +27,7 @@ const projects = [
     id: 'legal-leaflet',
     title: 'LegalLeaflet',
     description: 'AI-powered legal document analysis and contract review platform',
-    role: 'Lead Developer & AI Integration Specialist',
+    role: 'Data Analyst & AI Automation Specialist',
     stack: ['Python', 'FastAPI', 'OpenAI GPT-4', 'React', 'PostgreSQL', 'Docker'],
     outcomes: [
       'Reduced contract review time by 70%',
@@ -79,9 +79,9 @@ const projects = [
     role: 'Shop Owner & Artisan',
     stack: ['Etsy Platform', 'Product Photography', 'Inventory Management', 'Customer Relations', 'SEO Optimization', 'Social Media'],
     outcomes: [
-      'Established successful Etsy storefront',
+      'E-commerce data operations for 500+ orders',
       'Built loyal customer base',
-      'Achieved consistent monthly sales',
+      'Optimized product catalog through sales trend analysis',
     ],
     screenshot: '/projects/stellar-styles-etsy-screenshot.png',
     link: 'https://stellarstylesandmore.etsy.com',

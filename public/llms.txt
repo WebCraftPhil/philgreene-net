@@ -1,0 +1,31 @@
+# Phil Greene
+
+Phil Greene is a B.S. Data Science student at Southern New Hampshire University and a technical builder specializing in data analytics and SEO automation. He transitions from a hands-on service background into technical problem-solving, leveraging Python, SQL, and AI workflows.
+
+## Profile
+- Role: Data Analyst / SEO Automation Builder
+- Location: Manchester, New Hampshire
+- Tech Stack: Python (Pandas, NumPy, Automation), SQL, GitHub, Google Search Console, AI APIs
+- Education: B.S. Data Science (In Progress), SNHU
+
+## Key Projects
+
+### LegalLeaflet
+AI-powered contract generation for solo freelancers.
+- Tech: Python, Django, AI APIs
+- Outcome: Live MVP for automated contract creation.
+
+### Manchester Junk Hauling SEO
+Data-driven local SEO and search analytics automation.
+- Tech: Google Search Console, Python
+- Outcome: Automated content workflows and verified visibility growth.
+
+### Stellar Styles & More (Etsy)
+E-commerce data operations and conversion optimization.
+- Stats: 500+ sales
+- Outcome: Profitable store optimized through sales trend analysis.
+
+## Links
+- Website: https://philgreene.net
+- GitHub: https://github.com/WebCraftPhil
+- LinkedIn: https://linkedin.com/in/phil.greene1

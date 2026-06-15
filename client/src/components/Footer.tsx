@@ -14,9 +14,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Github, href: 'https://github.com/WebCraftPhil', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://linkedin.com/in/phil.greene1', label: 'LinkedIn' },
+    { icon: Twitter, href: 'https://twitter.com/vtguy65', label: 'Twitter' },
     { icon: Mail, href: 'mailto:me@philgreene.net', label: 'Email' }
   ]
 

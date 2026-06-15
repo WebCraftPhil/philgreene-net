@@ -27,14 +27,14 @@ export default function HeroSection() {
           <span className="text-sm font-medium">Available for Freelance Projects</span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight glitch-hover" data-text="Web Solutions">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight glitch-hover" data-text="Data & SEO Automation">
           <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent text-rainbow-hover">
-            Web Solutions
+            Data & SEO Automation
           </span>
         </h1>
 
         <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-          I craft cutting-edge web applications and unlock insights from data. 
+          I turn raw data into practical tools for e-commerce and local business growth. 
           Let's build something extraordinary together.
         </p>
 

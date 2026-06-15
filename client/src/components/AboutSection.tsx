@@ -44,7 +44,7 @@ export default function AboutSection() {
             </div>
 
             <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm a full-stack developer and beginner data analyst who loves turning complex challenges into simple, intuitive solutions. 
+              I'm a B.S. Data Science student and technical builder who loves turning complex challenges into simple, intuitive solutions. 
               I've been sharpening my skills by building real projects that apply both coding and data analysis in practical ways.
             </p>
 
