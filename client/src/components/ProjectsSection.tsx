@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -91,20 +91,22 @@ const projects = [
   },
 ];
 
+const categories = [
+  { id: 'all', label: 'All Projects' },
+  { id: 'automation', label: 'Automation' },
+  { id: 'legal-tech', label: 'Legal Tech' },
+  { id: 'ecommerce', label: 'E-commerce' },
+  { id: 'digital-products', label: 'Digital Products' }
+]
+
 export default function ProjectsSection() {
   const [filter, setFilter] = useState('all')
 
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'automation', label: 'Automation' },
-    { id: 'legal-tech', label: 'Legal Tech' },
-    { id: 'ecommerce', label: 'E-commerce' },
-    { id: 'digital-products', label: 'Digital Products' }
-  ]
-
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === filter)
+  const filteredProjects = useMemo(() => {
+    return filter === 'all'
+      ? projects
+      : projects.filter(project => project.category === filter)
+  }, [filter])
 
   return (
     <section id="projects" className="py-24 bg-card">
