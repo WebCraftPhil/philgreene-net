@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { auditRequestSchema, createAuditEmail } from '../shared/contact'
-import { sendEmail } from '../server/sendgrid'
+import { sendEmail } from '../server/email'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -23,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const email = createAuditEmail(parsed.data)
   const sent = await sendEmail({
     to: 'me@philgreene.net',
-    from: process.env.SENDGRID_FROM_EMAIL ?? '',
+    from: process.env.MAILTRAP_FROM_EMAIL ?? '',
     replyTo: parsed.data.email,
     ...email,
   })

@@ -1,7 +1,7 @@
 import type { Express } from 'express'
 import { createServer, type Server } from 'http'
 import { auditRequestSchema, createAuditEmail } from '../shared/contact'
-import { sendEmail } from './sendgrid'
+import { sendEmail } from './email'
 
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post('/api/contact', async (req, res) => {
@@ -20,7 +20,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const email = createAuditEmail(parsed.data)
     const sent = await sendEmail({
       to: 'me@philgreene.net',
-      from: process.env.SENDGRID_FROM_EMAIL ?? '',
+      from: process.env.MAILTRAP_FROM_EMAIL ?? '',
       replyTo: parsed.data.email,
       ...email,
     })

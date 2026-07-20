@@ -46,11 +46,11 @@ The production client output is written to `dist/public`. The Express bundle is 
 
 Copy `.env.example` to the environment used by the deployment and configure:
 
-- `SENDGRID_API_KEY`: required for email delivery
-- `SENDGRID_FROM_EMAIL`: required and must be a verified SendGrid sender
+- `MAILTRAP_API_KEY`: required for production email delivery
+- `MAILTRAP_FROM_EMAIL`: required and must use a verified Mailtrap sending domain
 - `VITE_PLAUSIBLE_DOMAIN`: optional; when present, the client loads Plausible for this domain
 
-Audit requests are sent to `me@philgreene.net`. The form includes browser validation, server-side Zod validation, escaped email output, a honeypot field, explicit success and error states, and a direct email fallback. Missing SendGrid configuration returns an error rather than a false success.
+Audit requests are sent to `me@philgreene.net`. The form includes browser validation, server-side Zod validation, escaped email output, a honeypot field, explicit success and error states, and a direct email fallback. Missing Mailtrap configuration returns an error rather than a false success.
 
 ## Analytics events
 
@@ -75,7 +75,7 @@ When Plausible is configured, the site emits:
 - API function: `/api/contact`
 - SPA fallback: all non-API routes rewrite to `/index.html`
 
-For self-hosting, run `npm run build` followed by `npm start` and provide `PORT`, `SENDGRID_API_KEY`, and `SENDGRID_FROM_EMAIL`.
+For self-hosting, run `npm run build` followed by `npm start` and provide `PORT`, `MAILTRAP_API_KEY`, and `MAILTRAP_FROM_EMAIL`.
 
 ## Design references
 
