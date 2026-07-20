@@ -12,6 +12,7 @@ if (process.env.SENDGRID_API_KEY) {
 interface EmailParams {
   to: string;
   from: string;
+  replyTo?: string;
   subject: string;
   text?: string;
   html?: string;
@@ -20,25 +21,20 @@ interface EmailParams {
 export async function sendEmail(params: EmailParams): Promise<boolean> {
   const apiKey = process.env.SENDGRID_API_KEY;
   
-  if (!apiKey) {
-    console.log('Email would be sent:', params);
+  if (!apiKey || !params.from) {
+    console.warn('SendGrid email skipped because credentials or sender are missing');
     return false;
   }
 
   try {
-    const emailData: any = {
+    const emailData = {
       to: params.to,
       from: params.from,
       subject: params.subject,
+      text: params.text ?? '',
+      ...(params.html ? { html: params.html } : {}),
+      ...(params.replyTo ? { replyTo: params.replyTo } : {}),
     };
-    
-    if (params.text) {
-      emailData.text = params.text;
-    }
-    
-    if (params.html) {
-      emailData.html = params.html;
-    }
 
     await mailService.send(emailData);
     return true;

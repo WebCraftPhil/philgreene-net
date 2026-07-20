@@ -1,15 +1,12 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.philgreene.net/sitemap.xml
+Sitemap: https://philgreene.net/sitemap.xml
 
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
-Allow: /
-
-User-agent: CCBot
 Allow: /
 
 User-agent: anthropic-ai

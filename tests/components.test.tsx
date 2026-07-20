@@ -1,17 +1,35 @@
-import { describe, it, expect } from 'vitest';
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import { auditRequestSchema, createAuditEmail } from '../shared/contact'
 
-describe('Basic Tests', () => {
-  it('should pass basic math', () => {
-    expect(2 + 2).toBe(4);
-  });
+const validRequest = {
+  name: 'Sam Owner',
+  businessName: 'Sam Service Co',
+  email: 'sam@example.com',
+  phone: '603-555-0123',
+  websiteUrl: 'https://example.com',
+  businessType: 'Plumbing',
+  problem: 'Calls are missed when the team is on a job.',
+  preferredContact: 'Email',
+  companyWebsite: '',
+}
 
-  it('should handle strings', () => {
-    expect('hello world').toContain('world');
-  });
+test('accepts a complete lead-loss audit request', () => {
+  const result = auditRequestSchema.safeParse(validRequest)
+  assert.equal(result.success, true)
+})
 
-  it('should work with arrays', () => {
-    const arr = [1, 2, 3];
-    expect(arr).toHaveLength(3);
-    expect(arr).toContain(2);
-  });
-});
+test('rejects spam honeypot submissions', () => {
+  const result = auditRequestSchema.safeParse({ ...validRequest, companyWebsite: 'spam.example' })
+  assert.equal(result.success, false)
+})
+
+test('escapes user content in the email HTML', () => {
+  const parsed = auditRequestSchema.parse({
+    ...validRequest,
+    problem: '<script>alert("test")</script>',
+  })
+  const email = createAuditEmail(parsed)
+  assert.equal(email.html.includes('<script>'), false)
+  assert.equal(email.html.includes('&lt;script&gt;'), true)
+})

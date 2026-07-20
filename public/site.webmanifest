@@ -1,27 +1,17 @@
 {
-  "name": "Phil Greene Portfolio",
+  "name": "Phil Greene Lead Recovery Systems",
   "short_name": "Phil Greene",
-  "description": "Creator Automation & SaaS Developer Portfolio",
+  "description": "Websites and follow-up systems for local service businesses.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#33658a",
-  "theme_color": "#33658a",
-  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#102a2c",
   "icons": [
     {
-      "src": "/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png"
-    },
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png"
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

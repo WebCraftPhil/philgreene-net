@@ -1,31 +1,27 @@
 # Phil Greene
 
-Phil Greene is a B.S. Data Science student at Southern New Hampshire University and a technical builder specializing in data analytics and SEO automation. He transitions from a hands-on service background into technical problem-solving, leveraging Python, SQL, and AI workflows.
+Phil Greene helps local service businesses turn more calls, website visits, and estimate requests into paying customers.
 
-## Profile
-- Role: Data Analyst / SEO Automation Builder
-- Location: Manchester, New Hampshire
-- Tech Stack: Python (Pandas, NumPy, Automation), SQL, GitHub, Google Search Console, AI APIs
-- Education: B.S. Data Science (In Progress), SNHU
+## Primary service
 
-## Key Projects
+The Local Lead Recovery System combines conversion-focused website design, lead capture, missed-call text-back, SMS and email follow-up, appointment booking, CRM pipelines, review requests, and lead reporting.
 
-### LegalLeaflet
-AI-powered contract generation for solo freelancers.
-- Tech: Python, Django, AI APIs
-- Outcome: Live MVP for automated contract creation.
+## Who it serves
 
-### Manchester Junk Hauling SEO
-Data-driven local SEO and search analytics automation.
-- Tech: Google Search Console, Python
-- Outcome: Automated content workflows and verified visibility growth.
+Local roofers, junk-removal companies, landscapers, painters, remodelers, cleaning companies, auto-repair shops, electricians, plumbers, HVAC companies, and similar service businesses.
 
-### Stellar Styles & More (Etsy)
-E-commerce data operations and conversion optimization.
-- Stats: 500+ sales
-- Outcome: Profitable store optimized through sales trend analysis.
+## Location and contact
+
+- Manchester, New Hampshire
+- Email: me@philgreene.net
+- Website: https://philgreene.net
+
+## Technical background
+
+Phil combines web development, automation, analytics, e-commerce operations, and experience in service, industrial, hospitality, and construction-adjacent environments. He is pursuing a B.S. in Data Science at Southern New Hampshire University.
 
 ## Links
-- Website: https://philgreene.net
+
+- Technical work: https://philgreene.net/projects
 - GitHub: https://github.com/WebCraftPhil
 - LinkedIn: https://linkedin.com/in/phil.greene1

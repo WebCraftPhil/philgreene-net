@@ -1,134 +1,82 @@
-# philgreene-net
+# philgreene.net
 
-Personal portfolio site for Phil Greene — data analyst and full‑stack developer. Built with Next.js 15 (App Router), React 19, TypeScript, and Tailwind CSS v4. It showcases projects, a blog, an about page, and a contact form with polished UI and subtle motion effects.
+Client-acquisition website for Phil Greene's local business growth services. The primary offer is a Local Lead Recovery System that combines conversion-focused pages, lead capture, follow-up, CRM organization, review requests, and reporting.
 
-## Tech Stack
+## Stack
 
-- Next.js 15 (App Router) + React 19
-- TypeScript + ESLint (Flat config via `eslint.config.mjs`)
-- Tailwind CSS v4 (design tokens via CSS variables in `app/globals.css`)
-- Framer Motion (hero animations)
-- shadcn/ui configuration scaffold (`components.json`), not actively used for components
+- Vite 5, React 18, and TypeScript
+- Wouter client-side routing
+- Tailwind CSS 3 plus project-specific CSS design tokens
+- Express for local development and self-hosted production serving
+- Vercel static deployment plus `api/contact.ts` serverless function
+- SendGrid for audit-request email delivery
+- Optional Plausible analytics
 
-## Features
+## Routes
 
-- Portfolio pages: `Home`, `Projects`, `Blog`, `About`, `Contact`
-- Animated hero with Framer Motion and gradient visuals
-- Projects grid backed by typed data models and helpers
-- Consistent design system using CSS variables and Tailwind utilities
-- Basic SEO metadata via `export const metadata`
-- Responsive layout with sticky header and mobile nav
+- `/` focused Lead Recovery System landing page
+- `/projects` selected technical work organized by capability
+- `/contact` lead-loss audit form
+- `/privacy-policy`, `/terms`, `/cookie-policy`, `/refund-policy`, `/disclaimer`, `/accessibility`
 
-## Project Structure
+Legacy URL aliases are preserved in the client router and Express server.
 
-- `philgreene-net-fresh/app/layout.tsx`: Root layout, global metadata, header injection
-- `philgreene-net-fresh/app/globals.css`: Tailwind v4 setup, CSS variables, utilities, components
-- `philgreene-net-fresh/app/page.tsx`: Home page (Hero + Featured Projects + Services + CTA)
-- `philgreene-net-fresh/app/projects/page.tsx`: Projects listing (grid + category counts)
-- `philgreene-net-fresh/app/blog/page.tsx`: Blog listing (static sample posts)
-- `philgreene-net-fresh/app/about/page.tsx`: About/skills/resume download card
-- `philgreene-net-fresh/app/contact/page.tsx`: Client‑side contact form (no backend yet)
-- `philgreene-net-fresh/components/Header.tsx`: Sticky responsive nav
-- `philgreene-net-fresh/components/HeroSection.tsx`: Animated hero section
-- `philgreene-net-fresh/components/ProjectCard.tsx`: Card used in project grids
-- `philgreene-net-fresh/lib/projects.ts`: Project data + helpers (e.g., `getFeaturedProjects`)
-- `philgreene-net-fresh/types/projects.ts`: Type definitions for projects/case studies/blog posts
-- `philgreene-net-fresh/next.config.ts`: Next.js config (defaults)
-- `philgreene-net-fresh/package.json`: Scripts and dependencies
-
-Note: The repository root also contains an `app/` and `components/` directory separate from `philgreene-net-fresh/`. This README documents the app under `philgreene-net-fresh/`.
-
-## Getting Started
-
-Prerequisites:
-
-- Node.js 18.18+ (or 20+ recommended)
-- npm (repo includes `package-lock.json`)
-
-Install dependencies:
+## Local development
 
 ```bash
-npm install
-```
-
-Run the dev server:
-
-```bash
+npm ci
 npm run dev
-# ➜ http://localhost:3000
 ```
 
-Build and start:
+The Express development server listens on `PORT`, defaulting to `5000`.
 
-```bash
-npm run build
-npm start
-```
-
-Lint:
+## Verification
 
 ```bash
 npm run lint
+npm run check
+npm test
+npm run test:e2e
+npm run build
 ```
 
-## Configuration
+The production client output is written to `dist/public`. The Express bundle is written to `dist/index.js`.
 
-- Environment variables: none required for local development.
-- Tailwind: Tailwind v4 is imported in `app/globals.css` with a custom design token system (CSS variables for colors, radii, shadows, etc.). Dark mode uses the `.dark` variant (`@custom-variant dark`).
-- Global styles are loaded via `import "./globals.css"` in `app/layout.tsx`.
-- Tailwind scans `pages`, `components`, and `app` directories in `tailwind.config.js`.
-- ESLint: Flat config extends `next/core-web-vitals` and `next/typescript`.
+## Audit form configuration
 
-## Content & Data
+Copy `.env.example` to the environment used by the deployment and configure:
 
-- Projects are defined in `philgreene-net-fresh/lib/projects.ts#L1` using the `Project` and `CaseStudy` types from `philgreene-net-fresh/types/projects.ts#L1`.
-- `getFeaturedProjects()` filters featured items for the home page; `projects` is used for the projects grid.
-- Screenshots referenced under `/projects/*.svg` assume assets exist in `public/projects/`. Add files there or update paths.
+- `SENDGRID_API_KEY`: required for email delivery
+- `SENDGRID_FROM_EMAIL`: required and must be a verified SendGrid sender
+- `VITE_PLAUSIBLE_DOMAIN`: optional; when present, the client loads Plausible for this domain
 
-### Adding a Project
+Audit requests are sent to `me@philgreene.net`. The form includes browser validation, server-side Zod validation, escaped email output, a honeypot field, explicit success and error states, and a direct email fallback. Missing SendGrid configuration returns an error rather than a false success.
 
-1. Add a new object to `projects` in `philgreene-net-fresh/lib/projects.ts#L1`.
-2. Provide a unique `id` and `slug`, `title`, `description`, `role`, `stack`, `outcomes`, `category`, `featured`, and `screenshot` path.
-3. Optionally add a case study entry in `caseStudies` if you want deeper details.
+## Analytics events
 
-## Pages Overview
+When Plausible is configured, the site emits:
 
-- `Home` (`philgreene-net-fresh/app/page.tsx`): hero with typed typing effect, featured projects, services, and CTA.
-- `Projects` (`philgreene-net-fresh/app/projects/page.tsx`): projects grid and category cards.
-- `Blog` (`philgreene-net-fresh/app/blog/page.tsx`): static list of draft posts/categories for structure.
-- `About` (`philgreene-net-fresh/app/about/page.tsx`): skills matrices and resume download CTA (`/resume-phil-greene.pdf`).
-- `Contact` (`philgreene-net-fresh/app/contact/page.tsx`): client‑only form with simulated submission (console log); wire up to an API route to make it functional.
+- `hero_cta_clicked`
+- `audit_form_started`
+- `audit_form_submitted`
+- `pilot_cta_clicked`
+- `email_link_clicked`
+- `services_viewed`
+- `workflow_viewed`
+
+`phone_link_clicked` is defined in the typed event catalog but is not emitted because no public business phone number is configured. Add it only when a verified phone number is available.
 
 ## Deployment
 
-Recommended: Vercel
+`vercel.json` keeps the existing Vercel shape:
 
-- Framework preset: Next.js
-- Build command: `next build` (uses Turbopack flag in package script)
-- Install command: `npm install`
-- Output: `.next` (default)
-- Use a single primary domain in your hosting provider and avoid conflicting
-  redirects between `philgreene.net` and `www.philgreene.net` to prevent redirect
-  loops.
+- build command: `npm run build`
+- static output: `dist/public`
+- API function: `/api/contact`
+- SPA fallback: all non-API routes rewrite to `/index.html`
 
-No special `next.config.ts` options are required for a basic deployment.
+For self-hosting, run `npm run build` followed by `npm start` and provide `PORT`, `SENDGRID_API_KEY`, and `SENDGRID_FROM_EMAIL`.
 
-## Scripts
+## Design references
 
-- `dev`: `next dev --turbopack`
-- `build`: `next build --turbopack`
-- `start`: `next start`
-- `lint`: `eslint`
-
-## Roadmap / Todos
-
-- Implement `/api/contact` (or external email service) and connect the contact form
-- Add case study routes (`/projects/[slug]`) using data from `caseStudies`
-- Replace static blog placeholder with content source (MDX, CMS, or file‑based)
-- Add missing images to `public/projects/` (or update references)
-- Consider enabling TypeScript strict mode for tighter type safety
-- Add tests for data utilities and basic rendering checks
-
-## License
-
-MIT — see `philgreene-net-fresh/LICENSE`.
+The coordinated concept images used for implementation and visual QA live in `docs/design/`.

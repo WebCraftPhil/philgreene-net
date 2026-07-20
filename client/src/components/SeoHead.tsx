@@ -1,95 +1,86 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 interface SeoHeadProps {
-  title: string;
-  description: string;
-  canonicalPath: string;
+  title: string
+  description: string
+  canonicalPath: string
 }
+
+const siteUrl = 'https://philgreene.net'
 
 export default function SeoHead({ title, description, canonicalPath }: SeoHeadProps) {
   useEffect(() => {
-    document.title = title;
+    document.title = title
 
-    const ensureMeta = (name: string, property?: string) => {
-      const selector = property ? `meta[property="${property}"]` : `meta[name="${name}"]`;
-      let tag = document.head.querySelector(selector) as HTMLMetaElement | null;
+    const setMeta = (selector: string, attribute: 'name' | 'property', key: string, content: string) => {
+      let tag = document.head.querySelector(selector) as HTMLMetaElement | null
       if (!tag) {
-        tag = document.createElement("meta");
-        if (property) {
-          tag.setAttribute("property", property);
-        } else {
-          tag.setAttribute("name", name);
-        }
-        document.head.appendChild(tag);
+        tag = document.createElement('meta')
+        tag.setAttribute(attribute, key)
+        document.head.appendChild(tag)
       }
-      return tag;
-    };
+      tag.content = content
+    }
 
-    const ensureCanonical = () => {
-      let link = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-      if (!link) {
-        link = document.createElement("link");
-        link.setAttribute("rel", "canonical");
-        document.head.appendChild(link);
-      }
-      return link;
-    };
+    const canonicalUrl = `${siteUrl}${canonicalPath}`
+    setMeta('meta[name="description"]', 'name', 'description', description)
+    setMeta('meta[name="robots"]', 'name', 'robots', 'index, follow')
+    setMeta('meta[property="og:title"]', 'property', 'og:title', title)
+    setMeta('meta[property="og:description"]', 'property', 'og:description', description)
+    setMeta('meta[property="og:type"]', 'property', 'og:type', 'website')
+    setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
+    setMeta('meta[property="og:image"]', 'property', 'og:image', `${siteUrl}/og-image.svg`)
+    setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title)
+    setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description)
+    setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image')
+    setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', `${siteUrl}/og-image.svg`)
 
-    const ensureSchema = () => {
-      let script = document.head.querySelector('script[type="application/ld+json"]') as HTMLScriptElement | null;
-      if (!script) {
-        script = document.createElement("script");
-        script.setAttribute("type", "application/ld+json");
-        document.head.appendChild(script);
-      }
-      return script;
-    };
+    let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.rel = 'canonical'
+      document.head.appendChild(canonical)
+    }
+    canonical.href = canonicalUrl
 
-    ensureMeta("description").setAttribute("content", description);
-    ensureMeta("robots").setAttribute("content", "index, follow");
-    
-    // Open Graph
-    ensureMeta("", "og:title").setAttribute("content", title);
-    ensureMeta("", "og:description").setAttribute("content", description);
-    ensureMeta("", "og:type").setAttribute("content", "website");
-    
-    // Twitter
-    ensureMeta("twitter:title").setAttribute("content", title);
-    ensureMeta("twitter:description").setAttribute("content", description);
-    ensureMeta("twitter:card").setAttribute("content", "summary_large_image");
+    let schema = document.head.querySelector('script[data-dynamic-schema]') as HTMLScriptElement | null
+    if (!schema) {
+      schema = document.createElement('script')
+      schema.type = 'application/ld+json'
+      schema.dataset.dynamicSchema = 'true'
+      document.head.appendChild(schema)
+    }
 
-    const canonicalUrl = `https://philgreene.net${canonicalPath}`;
-    ensureCanonical().setAttribute("href", canonicalUrl);
-
-    // Inject Schema
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Phil Greene",
-      "jobTitle": "Data Analyst & SEO Automation Specialist",
-      "url": "https://philgreene.net",
-      "sameAs": [
-        "https://linkedin.com/in/phil.greene1",
-        "https://github.com/WebCraftPhil",
-        "https://twitter.com/vtguy65"
-      ],
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "Southern New Hampshire University",
-        "description": "B.S. Data Science (In Progress)"
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: 'Phil Greene',
+      url: siteUrl,
+      email: 'me@philgreene.net',
+      description: 'Conversion-focused websites and lead follow-up systems for local service businesses.',
+      areaServed: {
+        '@type': 'AdministrativeArea',
+        name: 'New Hampshire',
       },
-      "knowsAbout": [
-        "Data Analysis",
-        "SEO Automation",
-        "Python",
-        "SQL",
-        "Machine Learning",
-        "Local SEO",
-        "E-commerce"
-      ]
-    };
-    ensureSchema().textContent = JSON.stringify(schema);
-  }, [canonicalPath, description, title]);
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Manchester',
+        addressRegion: 'NH',
+        addressCountry: 'US',
+      },
+      sameAs: [
+        'https://github.com/WebCraftPhil',
+        'https://linkedin.com/in/phil.greene1',
+      ],
+      serviceType: [
+        'Local business website design',
+        'Lead recovery systems',
+        'CRM automation for service businesses',
+        'Missed-call text-back',
+        'GoHighLevel setup',
+      ],
+    })
+  }, [canonicalPath, description, title])
 
-  return null;
+  return null
 }

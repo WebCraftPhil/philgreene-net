@@ -1,15 +1,14 @@
 import { Switch, Route, useLocation } from "wouter";
 import { useEffect } from "react";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider, useTheme } from "@/components/ThemeProvider";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import ProblemSection from "@/components/ProblemSection";
 import AboutSection from "@/components/AboutSection";
+import SolutionSection from "@/components/SolutionSection";
+import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
-import ProjectsSection from "@/components/ProjectsSection";
+import PilotSection from "@/components/PilotSection";
+import ProofSection from "@/components/ProofSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SeoHead from "@/components/SeoHead";
@@ -21,34 +20,27 @@ import RefundPolicyPage from "@/pages/refund-policy";
 import DisclaimerPage from "@/pages/disclaimer";
 import AccessibilityPage from "@/pages/accessibility";
 import ContactPage from "@/pages/contact";
+import ProjectsPage from "@/pages/projects";
 
 function HomePage() {
-  const { theme, toggleTheme } = useTheme();
-
   return (
     <>
-      <SeoHead 
-        title="Phil Greene | Data Analyst & SEO Automation Builder" 
-        description="B.S. Data Science student and technical builder turning raw data into practical tools for e-commerce and local business growth." 
-        canonicalPath="/" 
+      <SeoHead
+        title="Local Business Lead Recovery Systems | Phil Greene"
+        description="Conversion-focused websites, missed-call text-back, CRM automation, and lead follow-up systems for local service businesses in Manchester, NH and beyond."
+        canonicalPath="/"
       />
-      <div className="min-h-screen">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:bg-background focus:text-foreground focus:border focus:border-primary focus:px-3 focus:py-2 focus:rounded"
-        >
-          Skip to main content
-        </a>
-        <Header onThemeToggle={toggleTheme} isDark={theme === "dark"} />
-        <main id="main-content">
-          <HeroSection />
-          <AboutSection />
-          <ServicesSection />
-          <ProjectsSection />
-          <ContactSection />
-        </main>
-        <Footer />
-      </div>
+      <main id="main-content">
+        <HeroSection />
+        <ProblemSection />
+        <SolutionSection />
+        <ProcessSection />
+        <ServicesSection />
+        <PilotSection />
+        <ProofSection />
+        <AboutSection />
+        <ContactSection />
+      </main>
     </>
   );
 }
@@ -64,12 +56,14 @@ function RedirectRoute({ to }: { to: string }) {
 }
 
 function AppLayout() {
-  const [location] = useLocation();
-
   return (
     <div className="min-h-screen">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <Header />
       <Switch>
         <Route path="/" component={HomePage} />
+
+        <Route path="/projects" component={ProjectsPage} />
 
         <Route path="/privacy-policy" component={PrivacyPage} />
         <Route path="/privacy">
@@ -102,22 +96,13 @@ function AppLayout() {
 
         <Route component={NotFound} />
       </Switch>
-      {location !== "/" && <Footer />}
+      <Footer />
     </div>
   );
 }
 
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark">
-        <TooltipProvider>
-          <Toaster />
-          <AppLayout />
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
+  return <AppLayout />;
 }
 
 export default App;

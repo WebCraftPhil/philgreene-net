@@ -1,132 +1,50 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { 
-  Code2, 
-  Smartphone, 
-  Database, 
-  BarChart3, 
-  Brain, 
-  TrendingUp, 
-  Palette, 
-  Zap 
+import {
+  BarChart3,
+  CalendarDays,
+  FileText,
+  MessageSquareReply,
+  PanelsTopLeft,
+  Settings2,
+  Star,
+  UsersRound,
 } from 'lucide-react'
+import { useTrackedSection } from '@/hooks/use-tracked-section'
+
+const services = [
+  { icon: PanelsTopLeft, title: 'Website and Landing Page Design', text: 'Clear pages built around calls, estimates, and appointments.' },
+  { icon: MessageSquareReply, title: 'Missed-Call Text-Back', text: 'A fast, useful response when you cannot answer the phone.' },
+  { icon: UsersRound, title: 'Lead Capture and CRM', text: 'Every inquiry organized in one simple pipeline.' },
+  { icon: FileText, title: 'Estimate Follow-Up', text: 'Natural reminders that keep open quotes from disappearing.' },
+  { icon: CalendarDays, title: 'Appointment Booking', text: 'An easy next step for leads who are ready to schedule.' },
+  { icon: Star, title: 'Review Automation', text: 'Timely requests that make it easier for happy customers to respond.' },
+  { icon: BarChart3, title: 'Lead Reporting', text: 'A plain-language view of sources, status, and outcomes.' },
+  { icon: Settings2, title: 'Ongoing System Management', text: 'Monitoring, updates, and practical improvements after launch.' },
+]
 
 export default function ServicesSection() {
-  const services = [
-    {
-      icon: Code2,
-      title: 'Web Development',
-      description: 'Custom web applications built with modern technologies and best practices.',
-      features: ['React & Next.js', 'TypeScript', 'API Development', 'Performance Optimization'],
-      color: 'text-primary'
-    },
-    {
-      icon: Smartphone,
-      title: 'Responsive Design',
-      description: 'Mobile-first designs that work perfectly across all devices and screen sizes.',
-      features: ['Mobile-First', 'Cross-Browser', 'UI/UX Design', 'Accessibility'],
-      color: 'text-accent'
-    },
-    {
-      icon: Database,
-      title: 'Backend Solutions',
-      description: 'Scalable server architectures and database designs for robust applications.',
-      features: ['Node.js', 'PostgreSQL', 'MongoDB', 'Cloud Deployment'],
-      color: 'text-primary'
-    },
-    {
-      icon: BarChart3,
-      title: 'Data Analysis',
-      description: 'Transform your data into actionable insights with advanced analytics.',
-      features: ['Statistical Analysis', 'Data Visualization', 'Python/R', 'Business Intelligence'],
-      color: 'text-accent'
-    },
-    {
-      icon: Brain,
-      title: 'Machine Learning',
-      description: 'Implement AI solutions to automate processes and predict outcomes.',
-      features: ['Predictive Models', 'Classification', 'Natural Language Processing', 'Deep Learning'],
-      color: 'text-primary'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Business Intelligence',
-      description: 'Create dashboards and reports that drive data-driven decision making.',
-      features: ['Interactive Dashboards', 'KPI Tracking', 'Automated Reporting', 'Data Pipelines'],
-      color: 'text-accent'
-    }
-  ]
+  const sectionRef = useTrackedSection('services_viewed')
 
   return (
-    <section id="services" className="py-24 bg-background">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary mb-6">
-            <Zap className="w-4 h-4" />
-            <span className="text-sm font-medium">What I Do</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Services
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            I offer comprehensive web development and data analysis services to help your business thrive in the digital age.
+    <section ref={sectionRef} id="services" className="services-section section" aria-labelledby="services-heading">
+      <div className="site-container services-grid">
+        <div className="section-heading services-intro">
+          <h2 id="services-heading">Services that support the whole lead journey</h2>
+          <p>
+            I use the tools that fit the job. GoHighLevel can power the CRM, automation, booking,
+            and reporting, but the software is only useful when the customer journey works.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto mt-8"></div>
+          <a className="text-link" href="#audit">Tell me where leads get stuck</a>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
-            const IconComponent = service.icon
-            return (
-              <Card 
-                key={index} 
-                className="hover-elevate group transition-all duration-300 border-border/50"
-                data-testid={`card-service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                <CardHeader className="pb-4">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <IconComponent className={`w-6 h-6 ${service.color}`} />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-card-foreground">
-                    {service.title}
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground leading-relaxed">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {service.features.map((feature) => (
-                      <Badge 
-                        key={feature} 
-                        variant="outline" 
-                        className="text-xs hover-elevate"
-                        data-testid={`badge-feature-${feature.toLowerCase().replace(/\s+/g, '-')}`}
-                      >
-                        {feature}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
-        </div>
-
-        <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-2xl p-8 border border-border/50">
-            <Palette className="w-12 h-12 text-primary mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-foreground mb-4">
-              Custom Solutions
-            </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-              Don't see exactly what you need? I love tackling unique challenges and creating 
-              custom solutions tailored to your specific requirements.
-            </p>
-            <Badge className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Let's Discuss Your Project
-            </Badge>
-          </div>
+        <div className="service-list">
+          {services.map(({ icon: Icon, title, text }) => (
+            <article key={title}>
+              <Icon aria-hidden="true" />
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
