@@ -4,10 +4,11 @@ import { useLocation } from 'wouter'
 import { trackEvent } from '@/lib/analytics'
 
 const navItems = [
-  { href: 'services', label: 'Services' },
+  { href: 'websites', label: 'Websites' },
   { href: 'how-it-works', label: 'How It Works' },
-  { href: 'who-its-for', label: "Who It's For" },
-  { href: 'about', label: 'About' },
+  { href: 'automation', label: 'Automation' },
+  { href: 'packages', label: 'Packages' },
+  { href: 'work', label: 'Work' },
   { href: 'audit', label: 'Contact' },
 ]
 
@@ -35,7 +36,7 @@ export default function Header() {
     <header className="site-header">
       <div className="site-container header-inner">
         <a className="wordmark" href="/" aria-label="Phil Greene home">
-          <span aria-hidden="true">PG</span>
+          <img src="/pg-logo.png" width="42" height="42" alt="" aria-hidden="true" />
           <strong>Phil Greene</strong>
         </a>
 
@@ -50,9 +51,9 @@ export default function Header() {
         <a
           className="button button-primary header-cta"
           href={`${homePrefix}#audit`}
-          onClick={() => trackEvent('hero_cta_clicked', { placement: 'header' })}
+          onClick={() => trackEvent('website_audit_cta_clicked', { placement: 'header' })}
         >
-          Get a Free Audit
+          Free Website Audit
         </a>
 
         <button
@@ -78,11 +79,11 @@ export default function Header() {
             className="button button-primary"
             href={`${homePrefix}#audit`}
             onClick={() => {
-              trackEvent('hero_cta_clicked', { placement: 'mobile_header' })
+              trackEvent('website_audit_cta_clicked', { placement: 'mobile_header' })
               setIsOpen(false)
             }}
           >
-            Get a Free Audit
+            Free Website Audit
           </a>
         </nav>
       )}

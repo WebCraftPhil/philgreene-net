@@ -13,7 +13,7 @@ export const auditRequestSchema = z.object({
   phone: z.string().trim().min(7, 'A valid phone number is required').max(30),
   websiteUrl: optionalWebsite.default(''),
   businessType: z.string().trim().min(1, 'Business type is required').max(100),
-  problem: z.string().trim().min(10, 'Please share a little more about the lead problem').max(1500),
+  problem: z.string().trim().min(10, 'Please share a little more about the website or lead problem').max(1500),
   preferredContact: z.enum(['Email', 'Phone call', 'Text message']),
   companyWebsite: z.string().max(0).optional().default(''),
 })
@@ -36,7 +36,7 @@ export function createAuditEmail(request: AuditRequest) {
   return {
     subject: `Free audit request from ${request.businessName}`,
     text: [
-      'New lead-loss audit request',
+      'New website audit request',
       '',
       `Name: ${request.name}`,
       `Business: ${request.businessName}`,
@@ -46,13 +46,13 @@ export function createAuditEmail(request: AuditRequest) {
       `Business type: ${request.businessType}`,
       `Preferred contact: ${request.preferredContact}`,
       '',
-      'Biggest lead or follow-up problem:',
+      'Biggest website, lead-capture, or follow-up problem:',
       request.problem,
       '',
       `Submitted: ${submittedAt}`,
     ].join('\n'),
     html: `
-      <h2>New lead-loss audit request</h2>
+      <h2>New website audit request</h2>
       <p><strong>Name:</strong> ${escapeHtml(request.name)}</p>
       <p><strong>Business:</strong> ${escapeHtml(request.businessName)}</p>
       <p><strong>Email:</strong> ${escapeHtml(request.email)}</p>
@@ -60,10 +60,9 @@ export function createAuditEmail(request: AuditRequest) {
       <p><strong>Website:</strong> ${escapeHtml(website)}</p>
       <p><strong>Business type:</strong> ${escapeHtml(request.businessType)}</p>
       <p><strong>Preferred contact:</strong> ${escapeHtml(request.preferredContact)}</p>
-      <h3>Biggest lead or follow-up problem</h3>
+      <h3>Biggest website, lead-capture, or follow-up problem</h3>
       <p>${escapeHtml(request.problem).replaceAll('\n', '<br>')}</p>
       <p><small>Submitted: ${submittedAt}</small></p>
     `,
   }
 }
-

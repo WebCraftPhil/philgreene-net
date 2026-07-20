@@ -29,11 +29,13 @@ export default function SeoHead({ title, description, canonicalPath }: SeoHeadPr
     setMeta('meta[property="og:description"]', 'property', 'og:description', description)
     setMeta('meta[property="og:type"]', 'property', 'og:type', 'website')
     setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
-    setMeta('meta[property="og:image"]', 'property', 'og:image', `${siteUrl}/og-image.svg`)
+    setMeta('meta[property="og:image"]', 'property', 'og:image', `${siteUrl}/og-image.png`)
+    setMeta('meta[property="og:image:width"]', 'property', 'og:image:width', '1200')
+    setMeta('meta[property="og:image:height"]', 'property', 'og:image:height', '630')
     setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title)
     setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description)
     setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image')
-    setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', `${siteUrl}/og-image.svg`)
+    setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', `${siteUrl}/og-image.png`)
 
     let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
     if (!canonical) {
@@ -57,7 +59,7 @@ export default function SeoHead({ title, description, canonicalPath }: SeoHeadPr
       name: 'Phil Greene',
       url: siteUrl,
       email: 'me@philgreene.net',
-      description: 'Conversion-focused websites and lead follow-up systems for local service businesses.',
+      description: 'Conversion-focused websites, lead capture, AI reception, follow-up, and review-request systems for local service businesses.',
       areaServed: {
         '@type': 'AdministrativeArea',
         name: 'New Hampshire',
@@ -74,10 +76,13 @@ export default function SeoHead({ title, description, canonicalPath }: SeoHeadPr
       ],
       serviceType: [
         'Local business website design',
+        'Conversion-focused website design',
+        'Lead capture and appointment booking',
+        'AI reception and customer communication',
+        'Customer follow-up automation',
+        'Google review request systems',
         'Lead recovery systems',
         'CRM automation for service businesses',
-        'Missed-call text-back',
-        'GoHighLevel setup',
       ],
     })
   }, [canonicalPath, description, title])

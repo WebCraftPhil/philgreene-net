@@ -1,10 +1,14 @@
 # Phil Greene
 
-Phil Greene helps local service businesses turn more calls, website visits, and estimate requests into paying customers.
+Phil Greene builds conversion-focused websites and practical automation for owner-operated local service businesses.
 
-## Primary service
+## Core service
 
-The Local Lead Recovery System combines conversion-focused website design, lead capture, missed-call text-back, SMS and email follow-up, appointment booking, CRM pipelines, review requests, and lead reporting.
+High-Converting Websites are the starting point: clear messaging, mobile usability, quote and contact forms, calls and booking paths, local SEO foundations, and analytics.
+
+## Additional services
+
+Lead capture, missed-call text-back, CRM pipelines, appointment booking, automated follow-up, AI reception, honest review requests, and customer reactivation can be added where useful. The Complete Lead Recovery System is the bundled offer.
 
 ## Who it serves
 
@@ -22,6 +26,6 @@ Phil combines web development, automation, analytics, e-commerce operations, and
 
 ## Links
 
-- Technical work: https://philgreene.net/projects
+- Work and demonstrations: https://philgreene.net/projects
 - GitHub: https://github.com/WebCraftPhil
 - LinkedIn: https://linkedin.com/in/phil.greene1

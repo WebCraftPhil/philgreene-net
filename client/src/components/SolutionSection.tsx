@@ -1,47 +1,29 @@
-import { BarChart3, Magnet, MessageCircleReply, Repeat2 } from 'lucide-react'
+import { BarChart3, CalendarCheck2, FileCheck2, MapPinned, MessageSquareText, Smartphone } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 
-const outcomes = [
-  {
-    icon: Magnet,
-    name: 'Attract',
-    text: 'A clear, professional website or landing page built to generate calls and estimate requests.',
-  },
-  {
-    icon: MessageCircleReply,
-    name: 'Respond',
-    text: 'Immediate confirmations, missed-call text-back, lead notifications, and appointment options.',
-  },
-  {
-    icon: Repeat2,
-    name: 'Follow up',
-    text: 'Automated but natural SMS and email follow-up for inquiries, estimates, and unresponsive leads.',
-  },
-  {
-    icon: BarChart3,
-    name: 'Measure',
-    text: 'A simple CRM pipeline and reporting that shows where leads came from and what happened to them.',
-  },
-]
+const features = [
+  [MessageSquareText, 'Clear messaging', 'A focused offer that helps the right customer quickly understand why they should call.'],
+  [Smartphone, 'Mobile-first usability', 'Fast, readable pages with calls and quote requests always within reach.'],
+  [FileCheck2, 'Better forms', 'Low-friction quote and contact forms designed around the information you actually need.'],
+  [CalendarCheck2, 'Calls and bookings', 'Simple paths for customers who are ready to call, schedule, or request an estimate.'],
+  [MapPinned, 'Local SEO foundations', 'Strong page structure, service-area signals, metadata, and crawlable content.'],
+  [BarChart3, 'Useful analytics', 'See which pages and actions contribute to real inquiries—not just traffic.'],
+] as const
 
 export default function SolutionSection() {
   return (
-    <section className="solution-section section" aria-labelledby="solution-heading">
-      <div className="site-container">
-        <div className="section-heading section-heading-wide">
-          <h2 id="solution-heading">One system that helps you capture, follow up with, and convert more leads.</h2>
+    <section id="websites" className="solution-section section" aria-labelledby="solution-heading">
+      <div className="site-container website-grid">
+        <div className="section-heading website-intro">
+          <p className="section-label">The core offer</p>
+          <h2 id="solution-heading">High-converting websites built to turn attention into action.</h2>
+          <p>Your website should make it easy to trust you, understand the service, and take the next step. That is the foundation everything else builds on.</p>
+          <a className="text-link" href="#audit" onClick={() => trackEvent('website_audit_cta_clicked', { placement: 'websites' })}>Show me what my website is missing</a>
         </div>
-        <div className="outcome-rail">
-          {outcomes.map(({ icon: Icon, name, text }, index) => (
-            <article key={name}>
-              <div className="outcome-index">0{index + 1}</div>
-              <Icon aria-hidden="true" />
-              <h3>{name}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
+        <div className="website-feature-grid">
+          {features.map(([Icon, title, text]) => <article key={title}><Icon aria-hidden="true" /><h3>{title}</h3><p>{text}</p></article>)}
         </div>
       </div>
     </section>
   )
 }
-

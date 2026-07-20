@@ -1,5 +1,5 @@
 import { Switch, Route, useLocation } from "wouter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
@@ -21,13 +21,36 @@ import DisclaimerPage from "@/pages/disclaimer";
 import AccessibilityPage from "@/pages/accessibility";
 import ContactPage from "@/pages/contact";
 import ProjectsPage from "@/pages/projects";
+import AiReceptionSection from "@/components/AiReceptionSection";
+import RetentionSection from "@/components/RetentionSection";
+import GuidedLeadAssistant from "@/components/GuidedLeadAssistant";
+import type { AuditPrefill, PackageId } from "@/types/audit";
+import { packageNames } from "@/lib/assistant";
+import { trackEvent } from "@/lib/analytics";
 
 function HomePage() {
+  const [auditPrefill, setAuditPrefill] = useState<AuditPrefill | undefined>()
+
+  const sendToAudit = (prefill?: AuditPrefill) => {
+    if (prefill) setAuditPrefill(prefill)
+    window.requestAnimationFrame(() => document.querySelector('#audit')?.scrollIntoView({ behavior: 'smooth' }))
+  }
+
+  const selectPackage = (selectedPackage: PackageId) => {
+    trackEvent('package_selected', { package: selectedPackage })
+    sendToAudit({
+      websiteUrl: '',
+      businessType: '',
+      problem: `I am interested in the ${packageNames[selectedPackage]} package.`,
+      selectedPackage,
+    })
+  }
+
   return (
     <>
       <SeoHead
-        title="Local Business Lead Recovery Systems | Phil Greene"
-        description="Conversion-focused websites, missed-call text-back, CRM automation, and lead follow-up systems for local service businesses in Manchester, NH and beyond."
+        title="Local Business Websites & Automation | Phil Greene"
+        description="Conversion-focused websites, lead capture, follow-up, AI reception, and review-request systems for owner-operated local service businesses."
         canonicalPath="/"
       />
       <main id="main-content">
@@ -36,11 +59,14 @@ function HomePage() {
         <SolutionSection />
         <ProcessSection />
         <ServicesSection />
-        <PilotSection />
+        <AiReceptionSection />
+        <RetentionSection />
+        <PilotSection onSelectPackage={selectPackage} />
         <ProofSection />
         <AboutSection />
-        <ContactSection />
+        <ContactSection prefill={auditPrefill} />
       </main>
+      <GuidedLeadAssistant onComplete={sendToAudit} />
     </>
   );
 }

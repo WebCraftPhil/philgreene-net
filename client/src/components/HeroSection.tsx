@@ -1,74 +1,39 @@
-import {
-  ArrowDown,
-  ArrowRight,
-  CalendarCheck,
-  MailCheck,
-  MessageSquareText,
-  PhoneMissed,
-  Star,
-} from 'lucide-react'
+import { ArrowDown, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
-
-const stages = [
-  { icon: PhoneMissed, label: 'Lead comes in', detail: 'Missed call or form' },
-  { icon: MessageSquareText, label: 'Immediate response', detail: 'Helpful confirmation' },
-  { icon: MailCheck, label: 'Follow-up', detail: 'Text and email' },
-  { icon: CalendarCheck, label: 'Booking or estimate', detail: 'Clear next step' },
-  { icon: Star, label: 'Review request', detail: 'After the job' },
-]
 
 export default function HeroSection() {
   return (
     <section className="hero-section">
       <div className="site-container hero-grid">
         <div className="hero-copy">
-          <h1>Stop Losing Good Leads to Slow Follow-Up</h1>
+          <p className="hero-eyebrow">Websites &amp; Automation for Local Businesses</p>
+          <h1>Better Websites.<br />More Calls.<br /><span>More Booked Jobs.</span></h1>
           <p>
-            I build conversion-focused websites and automated follow-up systems for local service
-            businesses. When someone calls, submits a form, or requests an estimate, your business
-            responds quickly and keeps following up until the opportunity is won or closed.
+            I build conversion-focused websites for owner-operated home-service businesses, then add
+            lead capture, follow-up, AI reception, and reputation tools where they can genuinely help.
           </p>
           <div className="button-row">
-            <a
-              className="button button-primary"
-              href="#audit"
-              onClick={() => trackEvent('hero_cta_clicked', { placement: 'hero' })}
-            >
-              Get a Free Lead-Loss Audit
-              <ArrowRight aria-hidden="true" />
+            <a className="button button-primary" href="#audit" onClick={() => {
+              trackEvent('hero_cta_clicked', { placement: 'hero' })
+              trackEvent('website_audit_cta_clicked', { placement: 'hero' })
+            }}>
+              Get My Free Website Audit <ArrowRight aria-hidden="true" />
             </a>
-            <a className="button button-secondary" href="#how-it-works">
-              See How It Works
-              <ArrowDown aria-hidden="true" />
+            <a className="button button-secondary" href="#customer-loss">
+              See Where Leads Get Lost <ArrowDown aria-hidden="true" />
             </a>
           </div>
+          <ul className="hero-trust" aria-label="What the audit includes">
+            <li><CheckCircle2 aria-hidden="true" />No-pressure review</li>
+            <li><CheckCircle2 aria-hidden="true" />Clear priorities</li>
+            <li><CheckCircle2 aria-hidden="true" />Built for local businesses</li>
+          </ul>
         </div>
 
-        <div className="workflow-demo" aria-label="Demonstration of a lead recovery workflow">
-          <div className="demo-heading">
-            <strong>Lead recovery workflow</strong>
-            <span>Demonstration only</span>
-          </div>
-          <ol className="workflow-list">
-            {stages.map((stage, index) => {
-              const Icon = stage.icon
-              return (
-                <li key={stage.label}>
-                  <div className="workflow-number">{index + 1}</div>
-                  <div className="workflow-icon"><Icon aria-hidden="true" /></div>
-                  <div>
-                    <strong>{stage.label}</strong>
-                    <span>{stage.detail}</span>
-                  </div>
-                  {index < stages.length - 1 && <ArrowRight className="workflow-arrow" aria-hidden="true" />}
-                </li>
-              )
-            })}
-          </ol>
-          <div className="message-preview">
-            <span>Example immediate response</span>
-            <p>Hi, thanks for reaching out. I received your request and will be in touch shortly.</p>
-          </div>
+        <div className="hero-art" aria-hidden="true">
+          <div className="hero-glow" />
+          <img src="/pg-landscape-transparent.png" width="1200" height="630" alt="" />
+          <div className="hero-art-note"><strong>Website first.</strong><span>Automation where it earns its keep.</span></div>
         </div>
       </div>
     </section>

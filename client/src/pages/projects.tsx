@@ -32,17 +32,17 @@ export default function ProjectsPage() {
   return (
     <main id="main-content" className="projects-page">
       <SeoHead
-        title="Technical Work and Projects | Phil Greene"
-        description="Selected web applications, analytics, automation, and e-commerce work by Phil Greene."
+        title="Work & Demonstrations | Phil Greene"
+        description="Honest demonstrations and selected work showing local-business websites, lead capture, automation, analytics, and customer communication systems."
         canonicalPath="/projects"
       />
       <section className="projects-hero section">
         <div className="site-container">
-          <p className="section-label">Selected technical work</p>
-          <h1>Technical work organized around business capability</h1>
+          <p className="section-label">Work &amp; demonstrations</p>
+          <h1>Practical examples of websites, automation, and customer journeys.</h1>
           <p>
-            A focused selection of projects that demonstrate web development, automation, analytics,
-            product building, and e-commerce operations. Demonstrations are labeled as demonstrations.
+            A focused selection of work showing how I think through clear interfaces, useful data,
+            and connected business systems. Demonstrations are not client case studies or claimed results.
           </p>
         </div>
       </section>
@@ -63,11 +63,10 @@ export default function ProjectsPage() {
       </section>
       <section className="projects-cta section">
         <div className="site-container">
-          <h2>Need the customer-facing system, not just the code?</h2>
-          <a className="button button-primary" href="/#audit">Request a Free Audit <ArrowRight aria-hidden="true" /></a>
+          <h2>Want to see what your own website could improve?</h2>
+          <a className="button button-primary" href="/#audit">Get My Free Website Audit <ArrowRight aria-hidden="true" /></a>
         </div>
       </section>
     </main>
   )
 }
-

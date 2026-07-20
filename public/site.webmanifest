@@ -1,17 +1,11 @@
 {
-  "name": "Phil Greene Lead Recovery Systems",
+  "name": "Phil Greene — Websites & Automation",
   "short_name": "Phil Greene",
-  "description": "Websites and follow-up systems for local service businesses.",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#102a2c",
   "icons": [
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    }
-  ]
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#0C1118",
+  "background_color": "#0C1118",
+  "display": "standalone"
 }

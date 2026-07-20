@@ -7,13 +7,14 @@ export default function Footer() {
       <div className="site-container footer-main">
         <div>
           <a className="footer-wordmark" href="/">Phil Greene</a>
-          <p>Websites and follow-up systems that help local service businesses turn more inquiries into customers.</p>
+          <p>Better websites and practical automation for local businesses that depend on calls, quotes, and booked work.</p>
         </div>
         <nav aria-label="Footer navigation">
-          <a href="/#services">Services</a>
+          <a href="/#websites">Websites</a>
           <a href="/#how-it-works">How It Works</a>
-          <a href="/#who-its-for">Who It&apos;s For</a>
-          <a href="/projects">Technical Work</a>
+          <a href="/#automation">Automation</a>
+          <a href="/#packages">Packages</a>
+          <a href="/projects">Work &amp; Demonstrations</a>
           <a href="/#audit">Contact</a>
         </nav>
         <div className="footer-contact">

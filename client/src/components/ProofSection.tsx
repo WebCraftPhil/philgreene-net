@@ -13,7 +13,7 @@ const industries = [
 export default function ProofSection() {
   return (
     <>
-      <section id="who-its-for" className="audience-section section" aria-labelledby="audience-heading">
+      <section className="audience-section section" aria-labelledby="audience-heading">
         <div className="site-container audience-grid">
           <div className="section-heading">
             <h2 id="audience-heading">Best for businesses where one good lead matters</h2>
@@ -31,11 +31,12 @@ export default function ProofSection() {
         </div>
       </section>
 
-      <section className="proof-section section" aria-labelledby="proof-heading">
+      <section id="work" className="proof-section section" aria-labelledby="proof-heading">
         <div className="site-container">
           <div className="section-heading section-heading-wide proof-heading">
-            <h2 id="proof-heading">See the system before you trust it.</h2>
-            <p>These are demonstrations and sample systems, not client case studies or claimed results.</p>
+            <p className="section-label">Demonstrations &amp; sample systems</p>
+            <h2 id="proof-heading">See how the pieces work before you trust them with your customers.</h2>
+            <p>These are demonstrations and sample systems—not client case studies or claimed results. Measured case studies will replace them after successful pilots.</p>
           </div>
           <div className="demo-grid">
             <article>
@@ -67,11 +68,10 @@ export default function ProofSection() {
               <strong>Practical operating experience.</strong> I have run an Etsy business and worked
               across service, industrial, hospitality, and construction-adjacent environments.
             </p>
-            <a href="/projects">View technical work</a>
+            <a href="/projects">View work &amp; demonstrations</a>
           </div>
         </div>
       </section>
     </>
   )
 }
-

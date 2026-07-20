@@ -2,6 +2,8 @@ import { useRef, useState } from 'react'
 import { AlertCircle, ArrowRight, CheckCircle2, Mail } from 'lucide-react'
 import { apiRequest } from '@/lib/queryClient'
 import { trackEvent } from '@/lib/analytics'
+import type { AuditPrefill } from '@/types/audit'
+import { packageNames } from '@/lib/assistant'
 
 type FormState = {
   name: string
@@ -50,12 +52,30 @@ function parseSubmissionError(error: unknown) {
   return 'Your request could not be sent. Please email me directly instead.'
 }
 
-export default function ContactSection() {
-  const [formData, setFormData] = useState(initialFormState)
+export default function ContactSection({ prefill }: { prefill?: AuditPrefill }) {
+  const [formData, setFormData] = useState<FormState>(() => ({
+    ...initialFormState,
+    websiteUrl: prefill?.websiteUrl ?? '',
+    businessType: prefill?.businessType ?? '',
+    problem: prefill?.problem ?? '',
+  }))
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const [appliedPrefill, setAppliedPrefill] = useState(prefill)
+  const [selectedPackage, setSelectedPackage] = useState(prefill?.selectedPackage)
   const hasStarted = useRef(false)
+
+  if (prefill && prefill !== appliedPrefill) {
+    setAppliedPrefill(prefill)
+    setSelectedPackage(prefill.selectedPackage)
+    setFormData((current) => ({
+      ...current,
+      websiteUrl: current.websiteUrl.trim() ? current.websiteUrl : prefill.websiteUrl,
+      businessType: current.businessType.trim() ? current.businessType : prefill.businessType,
+      problem: current.problem.trim() ? current.problem : prefill.problem,
+    }))
+  }
 
   const updateField = (field: keyof FormState, value: string) => {
     setFormData((current) => ({ ...current, [field]: value }))
@@ -74,10 +94,14 @@ export default function ContactSection() {
     setIsSubmitting(true)
 
     try {
-      await apiRequest('POST', '/api/contact', formData)
+      const problem = selectedPackage && !formData.problem.includes(packageNames[selectedPackage])
+        ? `${formData.problem}\n\nSelected package: ${packageNames[selectedPackage]}.`
+        : formData.problem
+      await apiRequest('POST', '/api/contact', { ...formData, problem })
       setIsSubmitted(true)
       setFormData(initialFormState)
       trackEvent('audit_form_submitted', { business_type: formData.businessType })
+      trackEvent('audit_submitted', { business_type: formData.businessType })
     } catch (error) {
       setErrorMessage(parseSubmissionError(error))
     } finally {
@@ -89,14 +113,14 @@ export default function ContactSection() {
     <section id="audit" className="audit-section section" aria-labelledby="audit-heading">
       <div className="site-container audit-grid">
         <div className="audit-copy">
-          <p className="section-label">Free lead-loss audit</p>
-          <h2 id="audit-heading">How many leads are slipping through the cracks?</h2>
+          <p className="section-label">Free website audit</p>
+          <h2 id="audit-heading">Find the clearest path to more calls and booked work.</h2>
           <p>
-            I will review your website and follow-up process and identify the biggest opportunities
-            to improve lead response and conversion.
+            I will review your website, messaging, mobile experience, lead capture, and follow-up
+            process—then show you the most useful improvements to make first.
           </p>
           <ul>
-            <li><CheckCircle2 aria-hidden="true" />A practical review of your current customer journey</li>
+            <li><CheckCircle2 aria-hidden="true" />A practical review of your website and customer journey</li>
             <li><CheckCircle2 aria-hidden="true" />Clear priorities, without a high-pressure sales call</li>
             <li><CheckCircle2 aria-hidden="true" />A direct recommendation on what to fix first</li>
           </ul>
@@ -157,7 +181,7 @@ export default function ContactSection() {
                   </select>
                 </label>
                 <label className="form-span-2">
-                  <span>Biggest lead-generation or follow-up problem *</span>
+                  <span>Biggest website, lead-capture, or follow-up problem *</span>
                   <textarea name="problem" rows={4} value={formData.problem} onChange={(e) => updateField('problem', e.target.value)} required minLength={10} maxLength={1500} />
                 </label>
                 <label className="form-span-2">
@@ -184,7 +208,7 @@ export default function ContactSection() {
               )}
 
               <button className="button button-primary form-submit" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending request...' : 'Request My Free Audit'}
+                {isSubmitting ? 'Sending request...' : 'Get My Free Website Audit'}
                 {!isSubmitting && <ArrowRight aria-hidden="true" />}
               </button>
               <p className="form-privacy">By submitting, you agree that I may contact you about this request. See the <a href="/privacy-policy">Privacy Policy</a>.</p>

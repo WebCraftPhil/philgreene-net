@@ -7,6 +7,11 @@ export type ConversionEvent =
   | 'phone_link_clicked'
   | 'services_viewed'
   | 'workflow_viewed'
+  | 'assistant_opened'
+  | 'assistant_completed'
+  | 'package_selected'
+  | 'website_audit_cta_clicked'
+  | 'audit_submitted'
 
 declare global {
   interface Window {
@@ -38,4 +43,3 @@ export function trackEvent(
 ) {
   window.plausible?.(name, properties ? { props: properties } : undefined)
 }
-
