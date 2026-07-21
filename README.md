@@ -9,7 +9,7 @@ Client-acquisition website for Phil Greene's local business growth services. The
 - Tailwind CSS 3 plus project-specific CSS design tokens
 - Express for local development and self-hosted production serving
 - Vercel static deployment plus `api/contact.ts` serverless function
-- SendGrid for audit-request email delivery
+- Mailtrap for audit-request email delivery
 - Optional Plausible analytics
 
 ## Routes
