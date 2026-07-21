@@ -15,6 +15,7 @@ interface EmailParams {
   subject: string
   text?: string
   html?: string
+  category?: string
 }
 
 export async function sendEmail(params: EmailParams): Promise<boolean> {
@@ -31,7 +32,7 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
       text: params.text ?? '',
       ...(params.html ? { html: params.html } : {}),
       ...(params.replyTo ? { reply_to: { email: params.replyTo } } : {}),
-      category: 'audit-request',
+      category: params.category ?? 'audit-request',
     })
     return true
   } catch (error) {

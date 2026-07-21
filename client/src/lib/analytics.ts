@@ -12,6 +12,16 @@ export type ConversionEvent =
   | 'package_selected'
   | 'website_audit_cta_clicked'
   | 'audit_submitted'
+  | 'scanner_opened'
+  | 'scan_started'
+  | 'scan_succeeded'
+  | 'scan_failed'
+  | 'top_findings_viewed'
+  | 'report_gate_started'
+  | 'report_requested'
+  | 'full_report_viewed'
+  | 'scanner_audit_clicked'
+  | 'no_website_selected'
 
 declare global {
   interface Window {

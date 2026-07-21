@@ -21,15 +21,23 @@ import DisclaimerPage from "@/pages/disclaimer";
 import AccessibilityPage from "@/pages/accessibility";
 import ContactPage from "@/pages/contact";
 import ProjectsPage from "@/pages/projects";
+import WebsiteCheckupPage from "@/pages/website-checkup";
 import AiReceptionSection from "@/components/AiReceptionSection";
 import RetentionSection from "@/components/RetentionSection";
-import GuidedLeadAssistant from "@/components/GuidedLeadAssistant";
+import { MessageSquareText } from "lucide-react";
 import type { AuditPrefill, PackageId } from "@/types/audit";
 import { packageNames } from "@/lib/assistant";
 import { trackEvent } from "@/lib/analytics";
 
 function HomePage() {
-  const [auditPrefill, setAuditPrefill] = useState<AuditPrefill | undefined>()
+  const [auditPrefill, setAuditPrefill] = useState<AuditPrefill | undefined>(() => {
+    try {
+      const saved = sessionStorage.getItem('phil-audit-prefill')
+      if (!saved) return undefined
+      sessionStorage.removeItem('phil-audit-prefill')
+      return JSON.parse(saved) as AuditPrefill
+    } catch { return undefined }
+  })
 
   const sendToAudit = (prefill?: AuditPrefill) => {
     if (prefill) setAuditPrefill(prefill)
@@ -66,7 +74,10 @@ function HomePage() {
         <AboutSection />
         <ContactSection prefill={auditPrefill} />
       </main>
-      <GuidedLeadAssistant onComplete={sendToAudit} />
+      <a className="checkup-trigger" href="/website-checkup" onClick={() => trackEvent('scanner_opened', { placement: 'floating' })}>
+        <MessageSquareText aria-hidden="true" />
+        <span><strong>Website Checkup</strong><small>See what may be costing leads</small></span>
+      </a>
     </>
   );
 }
@@ -90,6 +101,8 @@ function AppLayout() {
         <Route path="/" component={HomePage} />
 
         <Route path="/projects" component={ProjectsPage} />
+
+        <Route path="/website-checkup" component={WebsiteCheckupPage} />
 
         <Route path="/privacy-policy" component={PrivacyPage} />
         <Route path="/privacy">

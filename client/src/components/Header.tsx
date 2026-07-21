@@ -9,6 +9,7 @@ const navItems = [
   { href: 'automation', label: 'Automation' },
   { href: 'packages', label: 'Packages' },
   { href: 'work', label: 'Work' },
+  { href: '/website-checkup', label: 'Checkup', direct: true },
   { href: 'audit', label: 'Contact' },
 ]
 
@@ -42,7 +43,7 @@ export default function Header() {
 
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a key={item.href} href={`${homePrefix}#${item.href}`}>
+            <a key={item.href} href={item.direct ? item.href : `${homePrefix}#${item.href}`}>
               {item.label}
             </a>
           ))}
@@ -71,7 +72,7 @@ export default function Header() {
       {isOpen && (
         <nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">
           {navItems.map((item) => (
-            <a key={item.href} href={`${homePrefix}#${item.href}`} onClick={() => setIsOpen(false)}>
+            <a key={item.href} href={item.direct ? item.href : `${homePrefix}#${item.href}`} onClick={() => setIsOpen(false)}>
               {item.label}
             </a>
           ))}
