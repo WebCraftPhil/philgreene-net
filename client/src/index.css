@@ -1754,7 +1754,7 @@ p {
 .scanner-results-head { display: flex; justify-content: space-between; gap: 46px; align-items: center; border-bottom: 1px solid #b7c8cf; padding-bottom: 42px; }
 .scanner-results-head h2 { max-width: 760px; margin-bottom: 12px; font-size: clamp(2.4rem, 4.7vw, 4.2rem); font-weight: 800; }
 .scanner-results-head a { color: var(--orange-dark); font-size: .82rem; font-weight: 800; overflow-wrap: anywhere; }
-.score-ring { --score: 0deg; flex: 0 0 auto; display: grid; width: 164px; height: 164px; place-items: center; border-radius: 50%; background: conic-gradient(var(--blue) var(--score), #d4e0e5 var(--score)); }
+.score-ring { --score: 0deg; position: relative; flex: 0 0 auto; display: grid; width: 164px; height: 164px; place-items: center; border-radius: 50%; background: conic-gradient(var(--blue) var(--score), #d4e0e5 var(--score)); }
 .score-ring::before { position: absolute; width: 132px; height: 132px; border-radius: 50%; background: var(--mist); content: ''; }
 .score-ring > div { position: relative; display: grid; text-align: center; }
 .score-ring strong { font-size: 2.8rem; line-height: 1; }

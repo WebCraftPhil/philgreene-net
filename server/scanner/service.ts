@@ -19,10 +19,11 @@ export async function runWebsiteScan(body: unknown, remoteIp?: string) {
   }
 }
 
-export async function unlockWebsiteReport(body: unknown) {
+export async function unlockWebsiteReport(body: unknown, remoteIp?: string) {
   const parsed = reportRequestSchema.safeParse(body)
   if (!parsed.success) throw new ScannerRequestError(parsed.error.issues[0]?.message ?? 'Check your details and try again.', 400)
   if (parsed.data.companyWebsite) return { ok: true as const, report: decryptReport(parsed.data.reportToken), emailSent: true }
+  await verifyTurnstile(parsed.data.turnstileToken, remoteIp, 'report_unlock')
   const report = decryptReport(parsed.data.reportToken)
   const from = process.env.MAILTRAP_FROM_EMAIL ?? ''
   const visitorEmail = createVisitorReportEmail(report, parsed.data.name)

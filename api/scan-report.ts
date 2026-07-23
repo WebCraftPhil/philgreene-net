@@ -4,9 +4,10 @@ import { ScannerRequestError, unlockWebsiteReport } from '../server/scanner/serv
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ ok: false, error: 'Method not allowed' }) }
   try {
-    return res.json(await unlockWebsiteReport(req.body))
+    return res.json(await unlockWebsiteReport(req.body, req.ip))
   } catch (error) {
-    const status = error instanceof ScannerRequestError ? error.status : 422
-    return res.status(status).json({ ok: false, error: error instanceof Error ? error.message : 'The report could not be opened.' })
+    const status = error instanceof ScannerRequestError ? error.status : 500
+    const message = error instanceof ScannerRequestError ? error.message : 'The report could not be opened.'
+    return res.status(status).json({ ok: false, error: message })
   }
 }

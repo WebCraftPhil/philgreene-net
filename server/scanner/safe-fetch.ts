@@ -36,6 +36,49 @@ function inIpv4Range(address: string, base: string, prefix: number) {
   return (ipv4ToNumber(address) & mask) === (ipv4ToNumber(base) & mask)
 }
 
+function extractIpv4FromIpv6(address: string): string | null {
+  const normalized = address.toLowerCase()
+  
+  // Handle IPv4-mapped: ::ffff:a.b.c.d or ::ffff:0:a.b.c.d (RFC 4291, Section 2.5.5.2)
+  // Match the IPv4 part in dotted-decimal format
+  const ipv4MappedMatch = normalized.match(/^::ffff:(?:0:)?((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/)
+  if (ipv4MappedMatch) {
+    return ipv4MappedMatch[1]
+  }
+  
+  // Handle IPv4-compatible: ::a.b.c.d (deprecated, RFC 4291, Section 2.5.5.1)
+  const ipv4CompatibleMatch = normalized.match(/^::((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/)
+  if (ipv4CompatibleMatch) {
+    return ipv4CompatibleMatch[1]
+  }
+  
+  return null
+}
+
+function isIpv6PrivateOrReserved(address: string): boolean {
+  const normalized = address.toLowerCase()
+  
+  // Unspecified address (RFC 4291, Section 2.5.2)
+  if (normalized === '::') return true
+  
+  // Loopback address (RFC 4291, Section 2.5.3)
+  if (normalized === '::1') return true
+  
+  // Link-local addresses (RFC 4291, Section 2.5.6)
+  if (normalized.startsWith('fe80:')) return true
+  
+  // Unique local addresses (RFC 4193)
+  if (normalized.startsWith('fc00:') || normalized.startsWith('fd00:')) return true
+  
+  // Documentation prefix (RFC 3849)
+  if (normalized.startsWith('2001:db8:')) return true
+  
+  // Multicast addresses (RFC 4291, Section 2.7)
+  if (normalized.startsWith('ff00:')) return true
+  
+  return false
+}
+
 export function isPublicIp(address: string) {
   const family = net.isIP(address)
   if (family === 4) {
@@ -48,12 +91,15 @@ export function isPublicIp(address: string) {
     return !blocked.some(([base, prefix]) => inIpv4Range(address, base, prefix))
   }
   if (family === 6) {
-    const compact = address.toLowerCase()
-    return !(
-      compact === '::' || compact === '::1' || compact.startsWith('fc') || compact.startsWith('fd') ||
-      compact.startsWith('fe8') || compact.startsWith('fe9') || compact.startsWith('fea') || compact.startsWith('feb') ||
-      compact.startsWith('ff') || compact.startsWith('2001:db8:') || compact.startsWith('::ffff:')
-    )
+    // Check for IPv4-mapped or IPv4-compatible addresses
+    const extractedIpv4 = extractIpv4FromIpv6(address)
+    if (extractedIpv4) {
+      // Validate the extracted IPv4 against IPv4 private/reserved rules
+      return isPublicIp(extractedIpv4)
+    }
+    
+    // Check against IPv6 private/reserved ranges
+    return !isIpv6PrivateOrReserved(address)
   }
   return false
 }

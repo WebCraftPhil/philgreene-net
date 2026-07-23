@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState, type FormEvent, type CSSProperties } from 'react'
 import { AlertCircle, ArrowRight, Check, CheckCircle2, ClipboardCheck, Globe2, LoaderCircle, LockKeyhole, Mail, PhoneCall, Search, ShieldCheck, Sparkles, Wrench } from 'lucide-react'
 import SeoHead from '@/components/SeoHead'
 import TurnstileWidget from '@/components/TurnstileWidget'
@@ -32,10 +32,13 @@ export default function WebsiteCheckupPage() {
   const [isUnlocking, setIsUnlocking] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
   const [operational, setOperational] = useState(initialOperational)
+  const [gateTurnstileToken, setGateTurnstileToken] = useState('')
+  const [gateTurnstileReset, setGateTurnstileReset] = useState(0)
+  const gateTokenHandler = useCallback((token: string) => setGateTurnstileToken(token), [])
   const gateStarted = useRef(false)
   const tokenHandler = useCallback((token: string) => setTurnstileToken(token), [])
 
-  const runScan = async (event: React.FormEvent) => {
+  const runScan = async (event: FormEvent) => {
     event.preventDefault()
     setScanError('')
     if (!turnstileToken) { setScanError('Complete the quick website verification first.'); return }
@@ -58,18 +61,23 @@ export default function WebsiteCheckupPage() {
     } finally { setIsScanning(false) }
   }
 
-  const unlockReport = async (event: React.FormEvent) => {
+  const unlockReport = async (event: FormEvent) => {
     event.preventDefault()
     setGateError('')
+    if (!gateTurnstileToken) { setGateError('Complete the verification to unlock the report.'); setIsUnlocking(false); return }
     setIsUnlocking(true)
     trackEvent('report_requested')
     try {
-      const response = await apiRequest('POST', '/api/scan-report', { reportToken, ...gate })
+      const response = await apiRequest('POST', '/api/scan-report', { reportToken, turnstileToken: gateTurnstileToken, ...gate })
       const result = await response.json() as ReportResponse
       setReport(result.report)
       setEmailSent(result.emailSent)
       trackEvent('full_report_viewed', { score: result.report.score.overall ?? 'limited' })
-    } catch (error) { setGateError(readError(error, 'The full report could not be opened. Please try again.')) }
+    } catch (error) { 
+      setGateError(readError(error, 'The full report could not be opened. Please try again.'))
+      setGateTurnstileToken('')
+      setGateTurnstileReset((value) => value + 1)
+    }
     finally { setIsUnlocking(false) }
   }
 
@@ -141,6 +149,7 @@ export default function WebsiteCheckupPage() {
               <label><span>Business name</span><input autoComplete="organization" value={gate.businessName} onChange={(e) => setGate({ ...gate, businessName: e.target.value })} /></label>
               <label><span>Type of business</span><input placeholder="Plumbing, roofing, cleaning..." value={gate.businessType} onChange={(e) => setGate({ ...gate, businessType: e.target.value })} /></label>
               <label className="honeypot" aria-hidden="true">Company website<input tabIndex={-1} autoComplete="off" value={gate.companyWebsite} onChange={(e) => setGate({ ...gate, companyWebsite: e.target.value })} /></label>
+              <TurnstileWidget onToken={gateTokenHandler} resetKey={gateTurnstileReset} action="report_unlock" />
               {gateError && <div className="scanner-error" role="alert"><AlertCircle aria-hidden="true" /><span>{gateError}</span></div>}
               <button className="button button-primary" disabled={isUnlocking}>{isUnlocking ? 'Opening report...' : 'Show My Full Report'}{!isUnlocking && <ArrowRight aria-hidden="true" />}</button>
               <p>By continuing, you agree that I may email this report and follow up about your website. See the <a href="/privacy-policy">Privacy Policy</a>.</p>
@@ -156,7 +165,7 @@ export default function WebsiteCheckupPage() {
 
 function HowScannerWorks() { return <section className="scanner-method section"><div className="site-container"><div className="section-heading"><p className="section-label">What the checkup reviews</p><h2>A practical look at the path from visitor to inquiry.</h2><p>This is not a giant technical audit. It focuses on the signals most likely to affect whether a local customer understands, trusts, and contacts the business.</p></div><div className="scanner-method-grid"><article><PhoneCall aria-hidden="true" /><span>01</span><h3>Lead capture</h3><p>Tap-to-call links, estimate forms, booking paths, CTA language, and above-the-fold clarity.</p></article><article><Sparkles aria-hidden="true" /><span>02</span><h3>Trust and local relevance</h3><p>Reviews, credentials, service-area language, contact details, and local business markup.</p></article><article><Wrench aria-hidden="true" /><span>03</span><h3>Technical essentials</h3><p>Page titles, descriptions, headings, mobile viewport, HTTPS, indexability, and initial response.</p></article></div></div></section> }
 
-function ScoreRing({ score }: { score: number | null }) { return <div className={`score-ring score-${scoreTone(score)}`} style={{ '--score': `${(score ?? 0) * 3.6}deg` } as React.CSSProperties}><div><strong>{score ?? 'N/A'}</strong><span>{score === null ? 'manual review' : 'out of 100'}</span></div></div> }
+function ScoreRing({ score }: { score: number | null }) { return <div className={`score-ring score-${scoreTone(score)}`} style={{ '--score': `${(score ?? 0) * 3.6}deg` } as CSSProperties}><div><strong>{score ?? 'N/A'}</strong><span>{score === null ? 'manual review' : 'out of 100'}</span></div></div> }
 function ScoreBar({ label, score }: { label: string; score: number | null }) { return <div><div><span>{label}</span><strong>{score === null ? 'Review needed' : `${score}/100`}</strong></div><div className="score-track"><span className={score === null ? 'is-limited' : ''} style={{ width: `${score ?? 100}%` }} /></div></div> }
 
 function FindingCard({ finding, index, preview = false }: { finding: ScanFinding; index: number; preview?: boolean }) { return <article className="finding-card"><div className="finding-index">{String(index).padStart(2, '0')}</div><div className="finding-body"><div className="finding-tags"><span>{finding.impact} impact</span><span>{finding.effort} effort</span><span>{finding.source}</span></div><h3>{finding.title}</h3><p>{finding.summary}</p>{!preview && <><div className="finding-detail"><strong>What the scan found</strong><p>{finding.evidence}</p></div><div className="finding-fix"><Wrench aria-hidden="true" /><div><strong>Recommended fix</strong><p>{finding.recommendation}</p></div></div></>}</div></article> }

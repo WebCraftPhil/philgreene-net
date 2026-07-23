@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import type { FindingCategory, FindingSource, ScanFinding, WebsiteScanReport, ScanScore, PageFacts } from '../../shared/scanner'
 
 const baseURL = 'http://127.0.0.1:4173'
 
@@ -56,17 +57,40 @@ test('work and demonstrations route renders', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Analytics and reporting' })).toBeVisible()
 })
 
-const topFinding = {
-  id: 'lead-form', category: 'lead-capture', source: 'automated', title: 'Give visitors a form or booking option',
+const topFinding: ScanFinding = {
+  id: 'lead-form', category: 'lead-capture' as FindingCategory, source: 'automated' as FindingSource, title: 'Give visitors a form or booking option',
   summary: 'Some good prospects will not call, especially after hours.', evidence: 'No form was found.',
   recommendation: 'Add a short estimate form with an immediate confirmation.', impact: 'high', effort: 'moderate', pointsLost: 18, passed: false,
 }
 
-const scanReport = {
-  version: 1, requestedUrl: 'https://roofer.example/', scannedUrl: 'https://roofer.example/', scannedAt: '2026-07-21T12:00:00.000Z',
-  score: { overall: 62, leadCapture: 48, trustLocal: 65, technical: 88 },
-  facts: { title: 'Roofer', description: '', h1: ['Roofing'], phoneLinks: 1, emailLinks: 0, forms: 0, bookingLinks: 0, primaryCtas: ['Call'], reviewMentions: 1, trustMentions: 1, localMentions: 1, hasLocalBusinessSchema: false, hasViewport: true, hasHttps: true, hasRobotsMetaBlock: false, hasSitemap: null, hasRobotsTxt: null, fetchedUrl: 'https://roofer.example/', loadTimeMs: 300, clientRendered: false },
-  topFindings: [topFinding], findings: [topFinding], strengths: [{ ...topFinding, id: 'phone', title: 'Visitors can tap to call', passed: true }],
+const scanReportFacts: PageFacts = {
+  title: 'Roofer', description: '', h1: ['Roofing'], phoneLinks: 1, emailLinks: 0, forms: 0, bookingLinks: 0, primaryCtas: ['Call'], reviewMentions: 1, trustMentions: 1, localMentions: 1, hasLocalBusinessSchema: false, hasViewport: true, hasHttps: true, hasRobotsMetaBlock: false, hasSitemap: null, hasRobotsTxt: null, fetchedUrl: 'https://roofer.example/', loadTimeMs: 300, clientRendered: false,
+}
+
+const scanReportScore: ScanScore = { overall: 62, leadCapture: 48, trustLocal: 65, technical: 88 }
+
+const scanReport: WebsiteScanReport = {
+  version: 1,
+  requestedUrl: 'https://roofer.example/',
+  scannedUrl: 'https://roofer.example/',
+  scannedAt: '2026-07-21T12:00:00.000Z',
+  score: scanReportScore,
+  facts: scanReportFacts,
+  topFindings: [topFinding],
+  findings: [topFinding],
+  strengths: [{
+    id: 'phone',
+    category: 'lead-capture' as FindingCategory,
+    source: 'automated' as FindingSource,
+    title: 'Visitors can tap to call',
+    summary: '',
+    evidence: '',
+    recommendation: '',
+    impact: 'low',
+    effort: 'quick',
+    pointsLost: 0,
+    passed: true,
+  }],
   caveats: ['This automated check does not submit forms.'],
 }
 

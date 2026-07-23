@@ -22,7 +22,7 @@ function loadTurnstile() {
   document.head.appendChild(script)
 }
 
-export default function TurnstileWidget({ onToken, resetKey }: { onToken: (token: string) => void; resetKey: number }) {
+export default function TurnstileWidget({ onToken, resetKey, action = 'website_scan' }: { onToken: (token: string) => void; resetKey: number; action?: string }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const widgetIdRef = useRef<string>()
   const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY?.trim() || (import.meta.env.DEV ? '1x00000000000000000000AA' : '')
@@ -43,7 +43,7 @@ export default function TurnstileWidget({ onToken, resetKey }: { onToken: (token
       containerRef.current.replaceChildren()
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
         sitekey: siteKey,
-        action: 'website_scan',
+        action: action,
         theme: 'light',
         size: 'flexible',
         callback: (token: string) => onToken(token),
@@ -58,7 +58,7 @@ export default function TurnstileWidget({ onToken, resetKey }: { onToken: (token
       if (widgetIdRef.current && window.turnstile) window.turnstile.remove(widgetIdRef.current)
       widgetIdRef.current = undefined
     }
-  }, [onToken, resetKey, siteKey])
+  }, [onToken, resetKey, siteKey, action])
 
   if (!siteKey) return <p className="scanner-config-error" role="alert">Website verification is being configured. You can still request a manual audit below.</p>
   return <div ref={containerRef} className="turnstile-slot" aria-label="Website verification" />

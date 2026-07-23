@@ -12,6 +12,7 @@ export const reportRequestSchema = z.object({
   businessName: z.string().trim().max(120).optional().default(''),
   businessType: z.string().trim().max(100).optional().default(''),
   companyWebsite: z.string().max(0).optional().default(''),
+  turnstileToken: z.string().trim().min(1).max(2048),
 })
 
 export type FindingCategory = 'lead-capture' | 'trust-local' | 'technical'

@@ -9,16 +9,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       return res.json(await runWebsiteScan(req.body, req.ip))
     } catch (error) {
-      const status = error instanceof Error && 'status' in error ? Number(error.status) || 422 : 422
-      return res.status(status).json({ ok: false, error: error instanceof Error ? error.message : 'The scan could not be completed.' })
+      const status = error instanceof Error && 'status' in error ? Number(error.status) || 500 : 500
+      const message = error instanceof Error && 'status' in error && Number(error.status) < 500 ? error.message : 'The scan could not be completed.'
+      return res.status(status).json({ ok: false, error: message })
     }
   })
 
   app.post('/api/scan-report', async (req, res) => {
     try {
-      return res.json(await unlockWebsiteReport(req.body))
+      return res.json(await unlockWebsiteReport(req.body, req.ip))
     } catch (error) {
-      return res.status(422).json({ ok: false, error: error instanceof Error ? error.message : 'The report could not be opened.' })
+      const status = error instanceof Error && 'status' in error ? Number(error.status) || 500 : 500
+      const message = error instanceof Error && 'status' in error && Number(error.status) < 500 ? error.message : 'The report could not be opened.'
+      return res.status(status).json({ ok: false, error: message })
     }
   })
 

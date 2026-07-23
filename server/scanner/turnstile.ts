@@ -8,7 +8,7 @@ type SiteverifyResponse = {
   'error-codes'?: string[]
 }
 
-export async function verifyTurnstile(token: string, remoteIp?: string) {
+export async function verifyTurnstile(token: string, remoteIp?: string, expectedAction: string = 'website_scan') {
   const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL_ENV === 'production')
   const secret = process.env.TURNSTILE_SECRET_KEY || (!isProduction ? TEST_SECRET : '')
   if (!secret) throw new Error('Website verification is not configured.')
@@ -24,7 +24,7 @@ export async function verifyTurnstile(token: string, remoteIp?: string) {
     })
     const result = await response.json() as SiteverifyResponse
     if (!result.success) throw new Error('Website verification failed. Refresh the check and try again.')
-    if (result.action && result.action !== 'website_scan') throw new Error('Website verification did not match this request.')
+    if (result.action && result.action !== expectedAction) throw new Error('Website verification did not match this request.')
     if (isProduction && result.hostname && !['philgreene.net', 'www.philgreene.net'].includes(result.hostname)) {
       throw new Error('Website verification came from an unexpected host.')
     }
