@@ -23,6 +23,9 @@ test('scores a conversion-ready local service homepage and preserves evidence', 
   assert.ok(report.score.overall >= 75)
   assert.equal(report.facts.phoneLinks, 1)
   assert.equal(report.facts.hasLocalBusinessSchema, true)
+  assert.match(report.leadPathSummary, /tap-to-call/)
+  assert.match(report.leadPathSummary, /contact form/)
+  assert.ok(report.factsSummary.some((item) => item.label === 'Phone links' && item.status === 'good'))
   assert.ok(report.strengths.length > 0)
 })
 
@@ -32,6 +35,22 @@ test('prioritizes missing contact and trust paths on a thin homepage', () => {
   assert.equal(report.topFindings.length, 3)
   assert.ok(report.findings.some((finding) => finding.id === 'lead-form'))
   assert.ok(report.findings.some((finding) => finding.id === 'reviews'))
+  assert.match(report.leadPathSummary, /no clear contact path/)
+  assert.ok(report.quickWins.some((finding) => finding.id === 'phone-link'))
+  assert.ok(report.factsSummary.some((item) => item.label === 'Forms' && item.status === 'warning'))
+})
+
+test('summarizes a form-only lead path without overstating call options', () => {
+  const report = analyzeWebsite({
+    requestedUrl: 'https://example.com/',
+    finalUrl: 'https://example.com/',
+    html: '<html><head><title>Manchester Junk Removal Estimates</title><meta name="description" content="Junk removal estimates for Manchester NH homeowners and businesses."><meta name="viewport" content="width=device-width"></head><body><main><section><h1>Request a junk removal estimate</h1><p>Serving Manchester NH with simple junk pickup estimates.</p><form><input name="name"></form></section></main></body></html>',
+    loadTimeMs: 500,
+  })
+
+  assert.match(report.leadPathSummary, /contact form/)
+  assert.doesNotMatch(report.leadPathSummary, /tap-to-call/)
+  assert.ok(report.quickWins.some((finding) => finding.id === 'phone-link'))
 })
 
 test('does not fabricate a conversion score for a client-rendered app shell', () => {
@@ -45,6 +64,7 @@ test('does not fabricate a conversion score for a client-rendered app shell', ()
   assert.equal(report.score.leadCapture, null)
   assert.equal(report.topFindings[0]?.source, 'manual-review')
   assert.match(report.topFindings[0]?.title ?? '', /rendered customer-journey review/)
+  assert.match(report.leadPathSummary, /rendered page review needed/)
 })
 
 test('encrypted scanner reports survive round-trip and reject tampering', () => {

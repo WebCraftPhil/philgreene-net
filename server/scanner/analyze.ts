@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio'
-import type { ScanFinding, ScanScore, WebsiteScanReport } from '../../shared/scanner.js'
+import type { FactSummaryItem, PageFacts, ScanFinding, ScanScore, WebsiteScanReport } from '../../shared/scanner.js'
 
 type FindingInput = Omit<ScanFinding, 'source'>
 
@@ -26,6 +26,54 @@ function rank(findings: ScanFinding[]) {
   return [...findings].sort((a, b) =>
     (impact[b.impact] * 10 + effort[b.effort] + b.pointsLost) - (impact[a.impact] * 10 + effort[a.effort] + a.pointsLost),
   )
+}
+
+function countLabel(count: number, singular: string, plural = `${singular}s`) {
+  return `${count} ${count === 1 ? singular : plural}`
+}
+
+function buildLeadPathSummary(facts: PageFacts) {
+  if (facts.clientRendered) return 'Website visit -> rendered page review needed before the lead path can be scored'
+
+  const contactPaths: string[] = []
+  if (facts.phoneLinks > 0) contactPaths.push('tap-to-call')
+  if (facts.forms > 0) contactPaths.push('contact form')
+  if (facts.bookingLinks > 0) contactPaths.push('booking path')
+  if (!contactPaths.length && facts.emailLinks > 0) contactPaths.push('email link')
+
+  if (!contactPaths.length) return 'Website visit -> no clear contact path found'
+
+  const trustGap = facts.reviewMentions === 0 && facts.trustMentions === 0 ? ' -> trust proof missing' : ''
+  return `Website visit -> ${contactPaths.join(' + ')}${trustGap}`
+}
+
+function buildFactsSummary(facts: PageFacts): FactSummaryItem[] {
+  return [
+    { label: 'Phone links', value: countLabel(facts.phoneLinks, 'tap-to-call link'), status: facts.phoneLinks > 0 ? 'good' : 'warning' },
+    { label: 'Forms', value: countLabel(facts.forms, 'form'), status: facts.forms > 0 ? 'good' : 'warning' },
+    { label: 'Booking paths', value: countLabel(facts.bookingLinks, 'booking link'), status: facts.bookingLinks > 0 ? 'good' : 'neutral' },
+    { label: 'CTA examples', value: facts.primaryCtas.length ? facts.primaryCtas.slice(0, 2).join(', ') : 'None detected', status: facts.primaryCtas.length ? 'good' : 'warning' },
+    { label: 'Review mentions', value: String(facts.reviewMentions), status: facts.reviewMentions > 0 ? 'good' : 'warning' },
+    { label: 'Trust mentions', value: String(facts.trustMentions), status: facts.trustMentions > 0 ? 'good' : 'warning' },
+    { label: 'Local signals', value: String(facts.localMentions), status: facts.localMentions > 0 ? 'good' : 'warning' },
+    { label: 'Page title', value: facts.title ? `${facts.title.length} characters` : 'Missing', status: facts.title ? 'good' : 'warning' },
+    { label: 'Search description', value: facts.description ? `${facts.description.length} characters` : 'Missing', status: facts.description ? 'good' : 'warning' },
+    { label: 'Mobile viewport', value: facts.hasViewport ? 'Present' : 'Missing', status: facts.hasViewport ? 'good' : 'warning' },
+    { label: 'HTTPS', value: facts.hasHttps ? 'Yes' : 'No', status: facts.hasHttps ? 'good' : 'warning' },
+    { label: 'HTML response', value: `${(facts.loadTimeMs / 1000).toFixed(1)}s`, status: facts.loadTimeMs < 2500 ? 'good' : 'warning' },
+  ]
+}
+
+function selectQuickWins(findings: ScanFinding[]) {
+  const priority = ['clear-offer', 'phone-link', 'contact-options', 'local-relevance', 'credentials', 'cta-language', 'local-schema', 'page-title', 'meta-description', 'heading', 'viewport', 'indexability']
+  const candidates = findings.filter((item) => item.effort === 'quick' && ['high', 'medium'].includes(item.impact))
+  return [...candidates]
+    .sort((a, b) => {
+      const aIndex = priority.indexOf(a.id)
+      const bIndex = priority.indexOf(b.id)
+      return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex)
+    })
+    .slice(0, 3)
 }
 
 export function analyzeWebsite(input: { requestedUrl: string; finalUrl: string; html: string; loadTimeMs: number }): WebsiteScanReport {
@@ -84,6 +132,8 @@ export function analyzeWebsite(input: { requestedUrl: string; finalUrl: string; 
   manualFinding.source = 'manual-review'
   const reportFindings = clientRendered ? [manualFinding, ...failed] : failed
   const strengths = rank(visibleFindings.filter((item) => item.passed)).slice(0, 5)
+  const facts: PageFacts = { title, description, h1, phoneLinks, emailLinks, forms, bookingLinks, primaryCtas, reviewMentions, trustMentions, localMentions, hasLocalBusinessSchema, hasViewport, hasHttps: input.finalUrl.startsWith('https:'), hasRobotsMetaBlock, hasSitemap: null, hasRobotsTxt: null, fetchedUrl: input.finalUrl, loadTimeMs: input.loadTimeMs, clientRendered }
+  const quickWins = selectQuickWins(reportFindings)
 
   return {
     version: 1,
@@ -91,7 +141,10 @@ export function analyzeWebsite(input: { requestedUrl: string; finalUrl: string; 
     scannedUrl: input.finalUrl,
     scannedAt: new Date().toISOString(),
     score,
-    facts: { title, description, h1, phoneLinks, emailLinks, forms, bookingLinks, primaryCtas, reviewMentions, trustMentions, localMentions, hasLocalBusinessSchema, hasViewport, hasHttps: input.finalUrl.startsWith('https:'), hasRobotsMetaBlock, hasSitemap: null, hasRobotsTxt: null, fetchedUrl: input.finalUrl, loadTimeMs: input.loadTimeMs, clientRendered },
+    facts,
+    factsSummary: buildFactsSummary(facts),
+    quickWins,
+    leadPathSummary: buildLeadPathSummary(facts),
     topFindings: reportFindings.slice(0, 3),
     findings: reportFindings,
     strengths,

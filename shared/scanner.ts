@@ -62,6 +62,12 @@ export type PageFacts = {
   clientRendered: boolean
 }
 
+export type FactSummaryItem = {
+  label: string
+  value: string
+  status: 'good' | 'warning' | 'neutral'
+}
+
 export type WebsiteScanReport = {
   version: 1
   requestedUrl: string
@@ -69,6 +75,9 @@ export type WebsiteScanReport = {
   scannedAt: string
   score: ScanScore
   facts: PageFacts
+  factsSummary: FactSummaryItem[]
+  quickWins: ScanFinding[]
+  leadPathSummary: string
   topFindings: ScanFinding[]
   findings: ScanFinding[]
   strengths: ScanFinding[]
@@ -78,7 +87,7 @@ export type WebsiteScanReport = {
 export type ScanResponse = {
   ok: true
   reportToken: string
-  preview: Pick<WebsiteScanReport, 'requestedUrl' | 'scannedUrl' | 'scannedAt' | 'score' | 'topFindings' | 'caveats'>
+  preview: Pick<WebsiteScanReport, 'requestedUrl' | 'scannedUrl' | 'scannedAt' | 'score' | 'factsSummary' | 'quickWins' | 'leadPathSummary' | 'topFindings' | 'caveats'>
 }
 
 export type ReportResponse = {

@@ -15,7 +15,7 @@ export async function runWebsiteScan(body: unknown, remoteIp?: string) {
   return {
     ok: true as const,
     reportToken: encryptReport(report),
-    preview: { requestedUrl: report.requestedUrl, scannedUrl: report.scannedUrl, scannedAt: report.scannedAt, score: report.score, topFindings: report.topFindings, caveats: report.caveats },
+    preview: { requestedUrl: report.requestedUrl, scannedUrl: report.scannedUrl, scannedAt: report.scannedAt, score: report.score, factsSummary: report.factsSummary, quickWins: report.quickWins, leadPathSummary: report.leadPathSummary, topFindings: report.topFindings, caveats: report.caveats },
   }
 }
 
