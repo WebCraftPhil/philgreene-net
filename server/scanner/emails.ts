@@ -1,4 +1,4 @@
-import type { WebsiteScanReport } from '../../shared/scanner'
+import type { WebsiteScanReport } from '../../shared/scanner.js'
 
 function escapeHtml(value: string) {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;')

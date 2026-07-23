@@ -1,5 +1,5 @@
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto'
-import type { WebsiteScanReport } from '../../shared/scanner'
+import type { WebsiteScanReport } from '../../shared/scanner.js'
 
 const TOKEN_LIFETIME_MS = 30 * 60 * 1000
 

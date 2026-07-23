@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { runWebsiteScan, ScannerRequestError } from '../server/scanner/service'
+import { runWebsiteScan, ScannerRequestError } from '../server/scanner/service.js'
 
 function clientIp(req: VercelRequest) {
   const forwarded = req.headers['x-forwarded-for']

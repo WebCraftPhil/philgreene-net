@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio'
-import type { ScanFinding, ScanScore, WebsiteScanReport } from '../../shared/scanner'
+import type { ScanFinding, ScanScore, WebsiteScanReport } from '../../shared/scanner.js'
 
 type FindingInput = Omit<ScanFinding, 'source'>
 

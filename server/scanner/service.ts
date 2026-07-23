@@ -1,10 +1,10 @@
-import { analyzeWebsite } from './analyze'
-import { decryptReport, encryptReport } from './report-token'
-import { safeFetchHtml } from './safe-fetch'
-import { verifyTurnstile } from './turnstile'
-import { reportRequestSchema, scanRequestSchema } from '../../shared/scanner'
-import { createOwnerLeadEmail, createVisitorReportEmail } from './emails'
-import { sendEmail } from '../email'
+import { analyzeWebsite } from './analyze.js'
+import { decryptReport, encryptReport } from './report-token.js'
+import { safeFetchHtml } from './safe-fetch.js'
+import { verifyTurnstile } from './turnstile.js'
+import { reportRequestSchema, scanRequestSchema } from '../../shared/scanner.js'
+import { createOwnerLeadEmail, createVisitorReportEmail } from './emails.js'
+import { sendEmail } from '../email.js'
 
 export async function runWebsiteScan(body: unknown, remoteIp?: string) {
   const parsed = scanRequestSchema.safeParse(body)

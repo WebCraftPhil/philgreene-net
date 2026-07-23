@@ -158,7 +158,7 @@ export default function WebsiteCheckupPage() {
         </div>
       </section>}
 
-      <section className="scanner-no-site"><div className="site-container"><div><p className="section-label">No website yet?</p><h2>You can still find your best next step.</h2><p>Tell me what kind of business you run and how leads reach you now. I can review the customer journey without a website.</p></div><button className="button button-secondary" onClick={() => { sessionStorage.setItem('phil-audit-prefill', JSON.stringify({ websiteUrl: '', businessType: '', problem: 'I do not have a website yet and want help planning a lead-capture system.' })); trackEvent('no_website_selected'); window.location.href = '/#audit' }}>Start Without a Website<ArrowRight aria-hidden="true" /></button></div></section>
+      <section className="scanner-no-site"><div className="site-container"><div><p className="section-label">No website yet?</p><h2>You can still find your best next step.</h2><p>Tell me what kind of business you run and how leads reach you now. I can review the customer journey without a website.</p></div><a className="button button-secondary" href="/#audit" onClick={() => { sessionStorage.setItem('phil-audit-prefill', JSON.stringify({ websiteUrl: '', businessType: '', problem: 'I do not have a website yet and want help planning a lead-capture system.' })); trackEvent('no_website_selected') }}>Start Without a Website<ArrowRight aria-hidden="true" /></a></div></section>
     </main>
   )
 }
