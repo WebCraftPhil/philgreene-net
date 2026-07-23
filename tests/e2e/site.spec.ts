@@ -111,6 +111,69 @@ async function mockScanner(page: import('@playwright/test').Page) {
   await page.route('**/api/scan-report', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, report: scanReport, emailSent: true }) }))
 }
 
+async function installAnalyticsSpy(page: import('@playwright/test').Page) {
+  await page.addInitScript(() => {
+    Object.assign(window, {
+      __analyticsEvents: [],
+      plausible: (event: string, options?: { props?: Record<string, string | number | boolean> }) => {
+        const store = (window as unknown as { __analyticsEvents: { event: string; props?: Record<string, string | number | boolean> }[] }).__analyticsEvents
+        store.push({ event, props: options?.props })
+      },
+    })
+  })
+}
+
+async function installShareMocks(page: import('@playwright/test').Page, mode: 'success' | 'cancel' | 'failure' | 'clipboard' | 'clipboard-failure' | 'unsupported') {
+  await page.addInitScript((shareMode) => {
+    Object.assign(window, { __shareCalls: [], __clipboardWrites: [] })
+    const win = window as unknown as { __shareCalls: ShareData[]; __clipboardWrites: string[] }
+
+    if (shareMode === 'success') {
+      Object.defineProperty(navigator, 'share', { configurable: true, value: async (data: ShareData) => { win.__shareCalls.push(data) } })
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async (value: string) => { win.__clipboardWrites.push(value) } } })
+      return
+    }
+
+    if (shareMode === 'cancel') {
+      Object.defineProperty(navigator, 'share', { configurable: true, value: async (data: ShareData) => { win.__shareCalls.push(data); throw new DOMException('cancelled', 'AbortError') } })
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async (value: string) => { win.__clipboardWrites.push(value) } } })
+      return
+    }
+
+    if (shareMode === 'failure') {
+      Object.defineProperty(navigator, 'share', { configurable: true, value: async (data: ShareData) => { win.__shareCalls.push(data); throw new Error('share unavailable') } })
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async (value: string) => { win.__clipboardWrites.push(value) } } })
+      return
+    }
+
+    Object.defineProperty(navigator, 'share', { configurable: true, value: undefined })
+    if (shareMode === 'clipboard' || shareMode === 'clipboard-failure') {
+      Object.defineProperty(navigator, 'clipboard', {
+        configurable: true,
+        value: {
+          writeText: async (value: string) => {
+            if (shareMode === 'clipboard-failure') throw new Error('copy unavailable')
+            win.__clipboardWrites.push(value)
+          },
+        },
+      })
+      return
+    }
+
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: undefined })
+  }, mode)
+}
+
+async function runMockedScanner(page: import('@playwright/test').Page) {
+  await mockScanner(page)
+  await page.goto(`${baseURL}/website-checkup`)
+  await page.getByLabel('Website address').fill('roofer.example')
+  const scanButton = page.getByRole('button', { name: 'Scan My Website' })
+  await expect(scanButton).toBeEnabled()
+  await scanButton.click()
+  await expect(page.getByRole('heading', { name: 'Know someone whose website could be getting more leads?' })).toBeVisible()
+}
+
 test('Website Checkup scans, unlocks the report, and prefills the audit', async ({ page }) => {
   await mockScanner(page)
   await page.goto(`${baseURL}/website-checkup`)
@@ -123,6 +186,8 @@ test('Website Checkup scans, unlocks the report, and prefills the audit', async 
   await expect(page.getByRole('heading', { name: 'Make it easy to request a quote or book' }).first()).toBeVisible()
   await expect(page.getByText('Get More Leads').first()).toBeVisible()
   await expect(page.getByText('Phil can implement').first()).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Know someone whose website could be getting more leads?' })).toBeVisible()
+  await expect(page.getByText('https://philgreene.net/website-checkup')).toBeVisible()
   await page.getByLabel('Name *').fill('Sam Owner')
   await page.getByLabel('Email *').fill('sam@example.com')
   await page.getByLabel('Business name').fill('Sam Roofing')
@@ -147,4 +212,126 @@ test('Website Checkup has no mobile overflow and shows useful scan errors', asyn
   await expect(scanButton).toBeEnabled()
   await scanButton.click()
   await expect(page.getByRole('alert')).toContainText('That website could not be found')
+})
+
+test('Website Checkup shares the public scanner URL with Web Share API', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'success')
+  await runMockedScanner(page)
+  await page.getByRole('button', { name: 'Share this free checkup' }).click()
+  await expect(page.getByRole('status')).toContainText('Nothing from your scan was included.')
+
+  const state = await page.evaluate(() => ({
+    shareCalls: (window as unknown as { __shareCalls: ShareData[] }).__shareCalls,
+    events: (window as unknown as { __analyticsEvents: { event: string; props?: Record<string, string | number | boolean> }[] }).__analyticsEvents,
+  }))
+
+  expect(state.shareCalls).toHaveLength(1)
+  expect(state.shareCalls[0]).toEqual({
+    title: 'Free Website Checkup',
+    text: 'I found this free website checkup that shows where a business website may be losing leads. Try yours here:',
+    url: 'https://philgreene.net/website-checkup',
+  })
+  expect(JSON.stringify(state.shareCalls)).not.toContain('roofer.example')
+  expect(JSON.stringify(state.shareCalls)).not.toContain('62')
+  expect(state.events.map((item) => item.event)).toContain('scanner_share_clicked')
+  expect(state.events.map((item) => item.event)).toContain('scanner_share_completed')
+  expect(state.events.find((item) => item.event === 'scanner_share_clicked')?.props).toMatchObject({ share_method: 'web_share', report_state: 'preview', page_location: '/website-checkup', web_share_supported: true })
+})
+
+test('Website Checkup treats Web Share cancellation as non-alarming', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'cancel')
+  await runMockedScanner(page)
+  await page.getByRole('button', { name: 'Share this free checkup' }).click()
+  await expect(page.getByRole('status')).toContainText('Share cancelled. Nothing was sent.')
+
+  const events = await page.evaluate(() => (window as unknown as { __analyticsEvents: { event: string }[] }).__analyticsEvents.map((item) => item.event))
+  expect(events).toContain('scanner_share_cancelled')
+  expect(events).not.toContain('scanner_share_failed')
+})
+
+test('Website Checkup falls back to clipboard after Web Share failure', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'failure')
+  await runMockedScanner(page)
+  await page.getByRole('button', { name: 'Share this free checkup' }).click()
+  await expect(page.getByRole('status')).toContainText('Link copied. You can send it anywhere.')
+
+  const state = await page.evaluate(() => ({
+    clipboardWrites: (window as unknown as { __clipboardWrites: string[] }).__clipboardWrites,
+    events: (window as unknown as { __analyticsEvents: { event: string }[] }).__analyticsEvents.map((item) => item.event),
+  }))
+  expect(state.clipboardWrites).toEqual(['https://philgreene.net/website-checkup'])
+  expect(state.events).toContain('scanner_share_failed')
+  expect(state.events).toContain('scanner_link_copied')
+})
+
+test('Website Checkup copies the public link when Web Share is unavailable', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'clipboard')
+  await runMockedScanner(page)
+  await page.getByRole('button', { name: 'Share this free checkup' }).click()
+  await expect(page.getByRole('status')).toContainText('Link copied. You can send it anywhere.')
+
+  const state = await page.evaluate(() => ({
+    clipboardWrites: (window as unknown as { __clipboardWrites: string[] }).__clipboardWrites,
+    events: (window as unknown as { __analyticsEvents: { event: string; props?: Record<string, string | number | boolean> }[] }).__analyticsEvents,
+  }))
+  expect(state.clipboardWrites).toEqual(['https://philgreene.net/website-checkup'])
+  expect(state.events.find((item) => item.event === 'scanner_share_clicked')?.props).toMatchObject({ share_method: 'clipboard', clipboard_supported: true, web_share_supported: false })
+  expect(state.events.map((item) => item.event)).toContain('scanner_link_copied')
+})
+
+test('Website Checkup handles clipboard failure with a manual link fallback', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'clipboard-failure')
+  await runMockedScanner(page)
+  await page.getByRole('button', { name: 'Copy checkup link' }).click()
+  await expect(page.getByRole('status')).toContainText('I could not copy it automatically.')
+  await expect(page.getByRole('link', { name: 'https://philgreene.net/website-checkup' })).toBeVisible()
+
+  const events = await page.evaluate(() => (window as unknown as { __analyticsEvents: { event: string }[] }).__analyticsEvents.map((item) => item.event))
+  expect(events).toContain('scanner_link_copy_failed')
+})
+
+test('Website Checkup handles browsers without share or clipboard support', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'unsupported')
+  await runMockedScanner(page)
+  await page.getByRole('button', { name: 'Share this free checkup' }).click()
+  await expect(page.getByRole('status')).toContainText('Copying is not available here.')
+  await expect(page.getByRole('link', { name: 'https://philgreene.net/website-checkup' })).toBeVisible()
+
+  const event = await page.evaluate(() => (window as unknown as { __analyticsEvents: { event: string; props?: Record<string, string | number | boolean> }[] }).__analyticsEvents.find((item) => item.event === 'scanner_link_copy_failed'))
+  expect(event?.props).toMatchObject({ share_method: 'manual', clipboard_supported: false, web_share_supported: false })
+})
+
+test('Website Checkup website-manager email action shares no private result data', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'clipboard')
+  await runMockedScanner(page)
+  const link = page.getByRole('link', { name: 'Send this to the person who manages my website' })
+  const href = decodeURIComponent(await link.getAttribute('href') ?? '')
+
+  expect(href).toContain('mailto:?subject=Free website checkup&body=')
+  expect(href).toContain('https://philgreene.net/website-checkup')
+  expect(href).not.toContain('roofer.example')
+  expect(href).not.toContain('62')
+  expect(href).not.toContain('Sam Owner')
+  await link.click()
+  const events = await page.evaluate(() => (window as unknown as { __analyticsEvents: { event: string }[] }).__analyticsEvents.map((item) => item.event))
+  expect(events).toContain('scanner_email_forward_clicked')
+})
+
+test('Website Checkup share section works by keyboard and fits on mobile', async ({ page }) => {
+  await installAnalyticsSpy(page)
+  await installShareMocks(page, 'clipboard')
+  await page.setViewportSize({ width: 390, height: 844 })
+  await runMockedScanner(page)
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390)
+
+  await page.getByRole('button', { name: 'Share this free checkup' }).focus()
+  await page.keyboard.press('Enter')
+  await expect(page.getByRole('status')).toContainText('Link copied. You can send it anywhere.')
 })

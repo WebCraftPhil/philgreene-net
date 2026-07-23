@@ -1,13 +1,15 @@
 import { useCallback, useMemo, useRef, useState, type FormEvent, type CSSProperties } from 'react'
-import { AlertCircle, ArrowRight, Check, CheckCircle2, ClipboardCheck, Globe2, LoaderCircle, LockKeyhole, Mail, Map, PhoneCall, Search, ShieldCheck, Sparkles, Wrench } from 'lucide-react'
+import { AlertCircle, ArrowRight, Check, CheckCircle2, Clipboard, ClipboardCheck, Globe2, LoaderCircle, LockKeyhole, Mail, Map, PhoneCall, Search, Send, Share2, ShieldCheck, Sparkles, Wrench } from 'lucide-react'
 import SeoHead from '@/components/SeoHead'
 import TurnstileWidget from '@/components/TurnstileWidget'
 import { apiRequest } from '@/lib/queryClient'
 import { trackEvent } from '@/lib/analytics'
+import { PUBLIC_SCANNER_URL, buildScannerForwardMailto, buildScannerShareData, buildScannerShareEventProps, isShareCancellation, type ScannerReportState, type ScannerShareMethod } from '@/lib/scanner-share'
 import type { ReportResponse, ScanFinding, ScanResponse, WebsiteScanReport } from '@shared/scanner'
 import type { AuditPrefill } from '@/types/audit'
 
 type OperationalAnswers = { missedCalls: string; responseTime: string; estimateFollowup: string; reviewRequests: string }
+type ShareStatus = { tone: 'success' | 'neutral' | 'error'; message: string }
 const initialOperational: OperationalAnswers = { missedCalls: '', responseTime: '', estimateFollowup: '', reviewRequests: '' }
 
 function readError(error: unknown, fallback: string) {
@@ -143,6 +145,7 @@ export default function WebsiteCheckupPage() {
           <div className="scanner-findings-heading"><div><p className="section-label">Fix these first</p><h2>Your highest-priority opportunities</h2></div><span>Business outcome view</span></div>
           <div className="top-findings">{preview.topFindings.map((item, index) => <FindingCard key={item.id} finding={item} index={index + 1} preview />)}</div>
           <QuickWins findings={preview.quickWins} />
+          <ShareCheckup reportState={report ? 'unlocked' : 'preview'} />
 
           {!report ? <div className="report-gate">
             <div className="report-gate-copy"><LockKeyhole aria-hidden="true" /><p className="section-label">Unlock the full checkup</p><h2>Get every finding and the recommended fix.</h2><p>The full report shows the complete priority list, what the scanner found, what to change, and which parts already help customers call, request a quote, or trust the business. I will also email you a copy.</p><ul><li><CheckCircle2 aria-hidden="true" />Complete findings and strengths</li><li><CheckCircle2 aria-hidden="true" />Impact, effort, and implementation labels</li><li><CheckCircle2 aria-hidden="true" />A practical summary you can act on</li></ul></div>
@@ -176,6 +179,93 @@ function FactsSnapshot({ items }: { items: WebsiteScanReport['factsSummary'] }) 
 function QuickWins({ findings }: { findings: ScanFinding[] }) {
   if (!findings.length) return null
   return <div className="quick-wins"><div><p className="section-label">Fix these first this week</p><h2>Fastest useful improvements</h2></div><div>{findings.map((finding) => <article key={finding.id}><CheckCircle2 aria-hidden="true" /><div><h3>{finding.title}</h3><p>{finding.recommendation}</p></div></article>)}</div></div>
+}
+
+function ShareCheckup({ reportState }: { reportState: ScannerReportState }) {
+  const [status, setStatus] = useState<ShareStatus>()
+
+  const getSupport = useCallback(() => ({
+    webShareSupported: typeof navigator !== 'undefined' && typeof navigator.share === 'function',
+    clipboardSupported: typeof navigator !== 'undefined' && typeof navigator.clipboard?.writeText === 'function',
+  }), [])
+
+  const eventProps = useCallback((shareMethod: ScannerShareMethod) => {
+    const support = getSupport()
+    return buildScannerShareEventProps({
+      shareMethod,
+      pageLocation: typeof window === 'undefined' ? '/website-checkup' : window.location.pathname,
+      reportState,
+      ...support,
+    })
+  }, [getSupport, reportState])
+
+  const copyLink = useCallback(async () => {
+    const { clipboardSupported } = getSupport()
+    if (!clipboardSupported) {
+      trackEvent('scanner_link_copy_failed', eventProps('manual'))
+      setStatus({ tone: 'neutral', message: 'Copying is not available here. Select the link below and send it wherever you need.' })
+      return false
+    }
+
+    try {
+      await navigator.clipboard.writeText(PUBLIC_SCANNER_URL)
+      trackEvent('scanner_link_copied', eventProps('clipboard'))
+      setStatus({ tone: 'success', message: 'Link copied. You can send it anywhere.' })
+      return true
+    } catch {
+      trackEvent('scanner_link_copy_failed', eventProps('clipboard'))
+      setStatus({ tone: 'neutral', message: 'I could not copy it automatically. Select the link below and send it anywhere.' })
+      return false
+    }
+  }, [eventProps, getSupport])
+
+  const shareCheckup = useCallback(async () => {
+    const { webShareSupported } = getSupport()
+    const shareMethod: ScannerShareMethod = webShareSupported ? 'web_share' : 'clipboard'
+    trackEvent('scanner_share_clicked', eventProps(shareMethod))
+
+    if (!webShareSupported) {
+      await copyLink()
+      return
+    }
+
+    try {
+      await navigator.share(buildScannerShareData())
+      trackEvent('scanner_share_completed', eventProps('web_share'))
+      setStatus({ tone: 'success', message: 'Share sheet opened. Nothing from your scan was included.' })
+    } catch (error) {
+      if (isShareCancellation(error)) {
+        trackEvent('scanner_share_cancelled', eventProps('web_share'))
+        setStatus({ tone: 'neutral', message: 'Share cancelled. Nothing was sent.' })
+        return
+      }
+
+      trackEvent('scanner_share_failed', eventProps('web_share'))
+      setStatus({ tone: 'neutral', message: 'Sharing was not available here. Trying to copy the public link instead.' })
+      await copyLink()
+    }
+  }, [copyLink, eventProps, getSupport])
+
+  return <section className="scanner-share" aria-labelledby="scanner-share-heading">
+    <div>
+      <p className="section-label">Share the checkup</p>
+      <h2 id="scanner-share-heading">Know someone whose website could be getting more leads?</h2>
+      <p>Send them this free website checkup. It shares only the public scanner link, not your website, score, or report.</p>
+    </div>
+    <div className="scanner-share-actions">
+      <button className="button button-primary" type="button" onClick={shareCheckup}>
+        <Share2 aria-hidden="true" />Share this free checkup
+      </button>
+      <button className="button button-secondary" type="button" onClick={copyLink}>
+        <Clipboard aria-hidden="true" />Copy checkup link
+      </button>
+      <a className="scanner-forward-link" href={buildScannerForwardMailto()} onClick={() => trackEvent('scanner_email_forward_clicked', eventProps('mailto'))}>
+        <Send aria-hidden="true" />Send this to the person who manages my website
+      </a>
+      <p className="scanner-share-url"><span>Public link:</span> <a href={PUBLIC_SCANNER_URL}>{PUBLIC_SCANNER_URL}</a></p>
+      <p className={`scanner-share-status ${status ? `status-${status.tone}` : ''}`} aria-live="polite" role="status">{status?.message ?? ''}</p>
+    </div>
+  </section>
 }
 
 function FindingCard({ finding, index, preview = false }: { finding: ScanFinding; index: number; preview?: boolean }) { return <article className="finding-card"><div className="finding-index">{String(index).padStart(2, '0')}</div><div className="finding-body"><div className="finding-tags"><span>{finding.outcomeCategory}</span><span>{finding.impact} impact</span><span>{finding.effort} effort</span><span>{finding.implementationFit}</span></div><h3>{finding.title}</h3><p>{finding.summary}</p>{!preview && <><div className="finding-detail"><strong>What the scan found</strong><p>{finding.evidence}</p>{finding.technicalLabel && <p className="finding-technical">Technical note: {finding.technicalLabel}</p>}</div><div className="finding-fix"><Wrench aria-hidden="true" /><div><strong>Recommended fix</strong><p>{finding.recommendation}</p></div></div></>}</div></article> }

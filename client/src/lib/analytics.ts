@@ -22,6 +22,13 @@ export type ConversionEvent =
   | 'full_report_viewed'
   | 'scanner_audit_clicked'
   | 'no_website_selected'
+  | 'scanner_share_clicked'
+  | 'scanner_share_completed'
+  | 'scanner_share_cancelled'
+  | 'scanner_share_failed'
+  | 'scanner_link_copied'
+  | 'scanner_link_copy_failed'
+  | 'scanner_email_forward_clicked'
 
 declare global {
   interface Window {
