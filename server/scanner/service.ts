@@ -25,12 +25,11 @@ export async function unlockWebsiteReport(body: unknown, remoteIp?: string) {
   if (parsed.data.companyWebsite) return { ok: true as const, report: decryptReport(parsed.data.reportToken), emailSent: true }
   await verifyTurnstile(parsed.data.turnstileToken, remoteIp, 'report_unlock')
   const report = decryptReport(parsed.data.reportToken)
-  const from = process.env.MAILTRAP_FROM_EMAIL ?? ''
   const visitorEmail = createVisitorReportEmail(report, parsed.data.name)
   const ownerEmail = createOwnerLeadEmail(report, parsed.data)
   const [visitorSent] = await Promise.all([
-    sendEmail({ to: parsed.data.email, from, replyTo: 'me@philgreene.net', ...visitorEmail, category: 'website-checkup' }),
-    sendEmail({ to: 'me@philgreene.net', from, replyTo: parsed.data.email, ...ownerEmail, category: 'scanner-lead' }),
+    sendEmail({ to: parsed.data.email, replyTo: 'me@philgreene.net', ...visitorEmail, category: 'website-checkup' }),
+    sendEmail({ to: 'me@philgreene.net', replyTo: parsed.data.email, ...ownerEmail, category: 'scanner-lead' }),
   ])
   return { ok: true as const, report, emailSent: visitorSent }
 }

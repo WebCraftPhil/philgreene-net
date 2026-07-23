@@ -3,6 +3,7 @@ dist
 .DS_Store
 .env
 .env.*
+mailtrap.env
 !.env.example
 server/public
 vite.config.ts.*

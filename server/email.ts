@@ -1,16 +1,9 @@
 import { MailtrapClient } from 'mailtrap'
 
-const apiKey = process.env.MAILTRAP_API_KEY
-
-if (!apiKey) {
-  console.warn('MAILTRAP_API_KEY environment variable not set - email sending will be disabled')
-}
-
-const mailtrapClient = apiKey ? new MailtrapClient({ token: apiKey }) : null
-
 interface EmailParams {
   to: string
-  from: string
+  from?: string
+  fromName?: string
   replyTo?: string
   subject: string
   text?: string
@@ -18,16 +11,30 @@ interface EmailParams {
   category?: string
 }
 
+export function getMailtrapConfig() {
+  return {
+    apiKey: process.env.MAILTRAP_API_KEY ?? process.env.MAILTRAP_API_TOKEN ?? '',
+    fromEmail: process.env.MAILTRAP_FROM_EMAIL ?? process.env.DEFAULT_FROM_EMAIL ?? '',
+    fromName: process.env.MAILTRAP_FROM_NAME ?? 'Phil Greene',
+  }
+}
+
 export async function sendEmail(params: EmailParams): Promise<boolean> {
-  if (!mailtrapClient || !params.from) {
+  const config = getMailtrapConfig()
+  const fromEmail = params.from ?? config.fromEmail
+  const fromName = params.fromName ?? config.fromName
+
+  if (!config.apiKey || !fromEmail) {
     console.warn('Mailtrap email skipped because credentials or sender are missing')
     return false
   }
 
   try {
+    const mailtrapClient = new MailtrapClient({ token: config.apiKey })
+
     await mailtrapClient.send({
       to: [{ email: params.to }],
-      from: { name: 'Phil Greene', email: params.from },
+      from: { name: fromName, email: fromEmail },
       subject: params.subject,
       text: params.text ?? '',
       ...(params.html ? { html: params.html } : {}),

@@ -10,6 +10,7 @@
     "lint": "eslint client/src server api shared tests lib --max-warnings=0",
     "check": "tsc",
     "test": "tsx --test tests/*.test.ts tests/*.test.tsx",
+    "mailtrap:test-send": "node --env-file=.env --import tsx scripts/send-mailtrap-test.ts",
     "test:e2e": "playwright test",
     "db:push": "drizzle-kit push"
   },

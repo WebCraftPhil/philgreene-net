@@ -23,7 +23,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const email = createAuditEmail(parsed.data)
   const sent = await sendEmail({
     to: 'me@philgreene.net',
-    from: process.env.MAILTRAP_FROM_EMAIL ?? '',
     replyTo: parsed.data.email,
     ...email,
   })
