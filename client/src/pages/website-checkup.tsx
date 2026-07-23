@@ -98,7 +98,7 @@ export default function WebsiteCheckupPage() {
 
   return (
     <main id="main-content" className="scanner-page">
-      <SeoHead title="Free Website Lead Checkup | Phil Greene" description="Scan your local service business website for lead-capture, trust, local SEO, and technical gaps. Get practical priorities in minutes." canonicalPath="/website-checkup" />
+      <SeoHead title="Free Website Lead Checkup | Phil Greene" description="Scan your local service business website for call, quote-request, trust, local visibility, and mobile usability gaps. Get practical priorities in minutes." canonicalPath="/website-checkup" />
       <section className="scanner-hero">
         <div className="site-container scanner-hero-grid">
           <div>
@@ -118,9 +118,9 @@ export default function WebsiteCheckupPage() {
               <div className="scanner-url-field"><Globe2 aria-hidden="true" /><input id="scanner-url" type="text" inputMode="url" autoCapitalize="none" autoCorrect="off" placeholder="yourbusiness.com" value={url} onChange={(event) => setUrl(event.target.value)} required maxLength={500} /></div>
               <TurnstileWidget onToken={tokenHandler} resetKey={turnstileReset} />
               {scanError && <div className="scanner-error" role="alert"><AlertCircle aria-hidden="true" /><span>{scanError}</span></div>}
-              <button className="button button-primary scanner-submit" type="submit" disabled={isScanning || !url.trim() || !turnstileToken}>{isScanning ? <><LoaderCircle className="scanner-spinner" aria-hidden="true" />Scanning the lead path...</> : <>Scan My Website<ArrowRight aria-hidden="true" /></>}</button>
+              <button className="button button-primary scanner-submit" type="submit" disabled={isScanning || !url.trim() || !turnstileToken}>{isScanning ? <><LoaderCircle className="scanner-spinner" aria-hidden="true" />Checking the customer path...</> : <>Scan My Website<ArrowRight aria-hidden="true" /></>}</button>
             </form>
-            <p className="scanner-privacy"><ShieldCheck aria-hidden="true" />Protected by Cloudflare Turnstile. The scanner reads public homepage HTML and never submits forms.</p>
+            <p className="scanner-privacy"><ShieldCheck aria-hidden="true" />Protected by Cloudflare Turnstile. The scanner reads the public homepage and never submits forms.</p>
           </div>
         </div>
       </section>
@@ -134,18 +134,18 @@ export default function WebsiteCheckupPage() {
             <ScoreRing score={preview.score.overall} />
           </div>
           <div className="score-breakdown">
-            <ScoreBar label="Lead capture" score={preview.score.leadCapture} />
-            <ScoreBar label="Trust and local relevance" score={preview.score.trustLocal} />
-            <ScoreBar label="Technical essentials" score={preview.score.technical} />
+            <ScoreBar label="Calls and inquiries" score={preview.score.leadCapture} />
+            <ScoreBar label="Trust and local visibility" score={preview.score.trustLocal} />
+            <ScoreBar label="Ease of use and speed" score={preview.score.technical} />
           </div>
           <LeadPathSummary summary={preview.leadPathSummary} />
           <FactsSnapshot items={preview.factsSummary} />
-          <div className="scanner-findings-heading"><div><p className="section-label">Fix these first</p><h2>Your highest-priority opportunities</h2></div><span>Automated checks and review flags</span></div>
+          <div className="scanner-findings-heading"><div><p className="section-label">Fix these first</p><h2>Your highest-priority opportunities</h2></div><span>Business outcome view</span></div>
           <div className="top-findings">{preview.topFindings.map((item, index) => <FindingCard key={item.id} finding={item} index={index + 1} preview />)}</div>
           <QuickWins findings={preview.quickWins} />
 
           {!report ? <div className="report-gate">
-            <div className="report-gate-copy"><LockKeyhole aria-hidden="true" /><p className="section-label">Unlock the full checkup</p><h2>Get every finding and the recommended fix.</h2><p>The full report shows the complete priority list, what the scanner found, what to change, and which parts already support conversion. I will also email you a copy.</p><ul><li><CheckCircle2 aria-hidden="true" />Complete findings and strengths</li><li><CheckCircle2 aria-hidden="true" />Impact and effort labels</li><li><CheckCircle2 aria-hidden="true" />Audit-ready summary you can act on</li></ul></div>
+            <div className="report-gate-copy"><LockKeyhole aria-hidden="true" /><p className="section-label">Unlock the full checkup</p><h2>Get every finding and the recommended fix.</h2><p>The full report shows the complete priority list, what the scanner found, what to change, and which parts already help customers call, request a quote, or trust the business. I will also email you a copy.</p><ul><li><CheckCircle2 aria-hidden="true" />Complete findings and strengths</li><li><CheckCircle2 aria-hidden="true" />Impact, effort, and implementation labels</li><li><CheckCircle2 aria-hidden="true" />A practical summary you can act on</li></ul></div>
             <form onSubmit={unlockReport} onFocus={() => { if (!gateStarted.current) { gateStarted.current = true; trackEvent('report_gate_started') } }}>
               <label><span>Name *</span><input autoComplete="name" value={gate.name} onChange={(e) => setGate({ ...gate, name: e.target.value })} required /></label>
               <label><span>Email *</span><input type="email" autoComplete="email" value={gate.email} onChange={(e) => setGate({ ...gate, email: e.target.value })} required /></label>
@@ -166,19 +166,19 @@ export default function WebsiteCheckupPage() {
   )
 }
 
-function HowScannerWorks() { return <section className="scanner-method section"><div className="site-container"><div className="section-heading"><p className="section-label">What the checkup reviews</p><h2>A practical look at the path from visitor to inquiry.</h2><p>This is not a giant technical audit. It focuses on the signals most likely to affect whether a local customer understands, trusts, and contacts the business.</p></div><div className="scanner-method-grid"><article><PhoneCall aria-hidden="true" /><span>01</span><h3>Lead capture</h3><p>Tap-to-call links, estimate forms, booking paths, CTA language, and above-the-fold clarity.</p></article><article><Sparkles aria-hidden="true" /><span>02</span><h3>Trust and local relevance</h3><p>Reviews, credentials, service-area language, contact details, and local business markup.</p></article><article><Wrench aria-hidden="true" /><span>03</span><h3>Technical essentials</h3><p>Page titles, descriptions, headings, mobile viewport, HTTPS, indexability, and initial response.</p></article></div></div></section> }
+function HowScannerWorks() { return <section className="scanner-method section"><div className="site-container"><div className="section-heading"><p className="section-label">What the checkup reviews</p><h2>A practical look at the path from visitor to inquiry.</h2><p>This is not a giant technical audit. It focuses on the signals most likely to affect whether a local customer understands, trusts, and contacts the business.</p></div><div className="scanner-method-grid"><article><PhoneCall aria-hidden="true" /><span>01</span><h3>Calls and inquiries</h3><p>Tap-to-call links, quote forms, booking options, clear button text, and a strong first impression.</p></article><article><Sparkles aria-hidden="true" /><span>02</span><h3>Trust and local visibility</h3><p>Reviews, credentials, service-area language, contact details, and accurate business details search engines can read.</p></article><article><Wrench aria-hidden="true" /><span>03</span><h3>Ease of use and speed</h3><p>Search result copy, page headings, phone-friendly setup, secure loading, and initial page response.</p></article></div></div></section> }
 
 function ScoreRing({ score }: { score: number | null }) { return <div className={`score-ring score-${scoreTone(score)}`} style={{ '--score': `${(score ?? 0) * 3.6}deg` } as CSSProperties}><div><strong>{score ?? 'N/A'}</strong><span>{score === null ? 'manual review' : 'out of 100'}</span></div></div> }
 function ScoreBar({ label, score }: { label: string; score: number | null }) { return <div><div><span>{label}</span><strong>{score === null ? 'Review needed' : `${score}/100`}</strong></div><div className="score-track"><span className={score === null ? 'is-limited' : ''} style={{ width: `${score ?? 100}%` }} /></div></div> }
 
-function LeadPathSummary({ summary }: { summary: string }) { return <div className="lead-path-summary"><Map aria-hidden="true" /><div><p className="section-label">Lead path detected</p><strong>{summary}</strong></div></div> }
-function FactsSnapshot({ items }: { items: WebsiteScanReport['factsSummary'] }) { return <div className="facts-snapshot"><div><p className="section-label">What the scanner found</p><h2>Concrete signals from the homepage HTML</h2></div><dl>{items.map((item) => <div key={item.label} className={`fact-status-${item.status}`}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div> }
+function LeadPathSummary({ summary }: { summary: string }) { return <div className="lead-path-summary"><Map aria-hidden="true" /><div><p className="section-label">Customer path detected</p><strong>{summary}</strong></div></div> }
+function FactsSnapshot({ items }: { items: WebsiteScanReport['factsSummary'] }) { return <div className="facts-snapshot"><div><p className="section-label">What the scanner found</p><h2>Visible signals from the homepage</h2></div><dl>{items.map((item) => <div key={item.label} className={`fact-status-${item.status}`}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div> }
 function QuickWins({ findings }: { findings: ScanFinding[] }) {
   if (!findings.length) return null
   return <div className="quick-wins"><div><p className="section-label">Fix these first this week</p><h2>Fastest useful improvements</h2></div><div>{findings.map((finding) => <article key={finding.id}><CheckCircle2 aria-hidden="true" /><div><h3>{finding.title}</h3><p>{finding.recommendation}</p></div></article>)}</div></div>
 }
 
-function FindingCard({ finding, index, preview = false }: { finding: ScanFinding; index: number; preview?: boolean }) { return <article className="finding-card"><div className="finding-index">{String(index).padStart(2, '0')}</div><div className="finding-body"><div className="finding-tags"><span>{finding.impact} impact</span><span>{finding.effort} effort</span><span>{finding.source}</span></div><h3>{finding.title}</h3><p>{finding.summary}</p>{!preview && <><div className="finding-detail"><strong>What the scan found</strong><p>{finding.evidence}</p></div><div className="finding-fix"><Wrench aria-hidden="true" /><div><strong>Recommended fix</strong><p>{finding.recommendation}</p></div></div></>}</div></article> }
+function FindingCard({ finding, index, preview = false }: { finding: ScanFinding; index: number; preview?: boolean }) { return <article className="finding-card"><div className="finding-index">{String(index).padStart(2, '0')}</div><div className="finding-body"><div className="finding-tags"><span>{finding.outcomeCategory}</span><span>{finding.impact} impact</span><span>{finding.effort} effort</span><span>{finding.implementationFit}</span></div><h3>{finding.title}</h3><p>{finding.summary}</p>{!preview && <><div className="finding-detail"><strong>What the scan found</strong><p>{finding.evidence}</p>{finding.technicalLabel && <p className="finding-technical">Technical note: {finding.technicalLabel}</p>}</div><div className="finding-fix"><Wrench aria-hidden="true" /><div><strong>Recommended fix</strong><p>{finding.recommendation}</p></div></div></>}</div></article> }
 
 function FullReport({ report, emailSent, operational, setOperational, onAudit }: { report: WebsiteScanReport; emailSent: boolean; operational: OperationalAnswers; setOperational: (value: OperationalAnswers) => void; onAudit: () => void }) {
   return <div className="full-report">
@@ -186,7 +186,7 @@ function FullReport({ report, emailSent, operational, setOperational, onAudit }:
     <LeadPathSummary summary={report.leadPathSummary} />
     <FactsSnapshot items={report.factsSummary} />
     <QuickWins findings={report.quickWins} />
-    <div className="full-report-heading"><div><p className="section-label">Complete automated findings</p><h2>What to improve next</h2></div><span>{report.findings.length} opportunities found</span></div>
+    <div className="full-report-heading"><div><p className="section-label">Complete findings</p><h2>What to improve next</h2></div><span>{report.findings.length} opportunities found</span></div>
     <div className="all-findings">{report.findings.map((item, index) => <FindingCard key={item.id} finding={item} index={index + 1} />)}</div>
     <div className="strengths"><div><p className="section-label">What is already helping</p><h2>Strengths to preserve</h2></div><div>{report.strengths.map((item) => <article key={item.id}><CheckCircle2 aria-hidden="true" /><div><h3>{item.title}</h3><p>{item.evidence}</p></div></article>)}</div></div>
     <div className="operational-check"><div><ClipboardCheck aria-hidden="true" /><p className="section-label">Reality check</p><h2>The website is only part of the lead journey.</h2><p>These answers are owner-reported and are not included in the automated score. They help identify what may happen after someone calls or submits a form.</p></div><div className="operational-grid"><OperationalField label="What happens to missed calls?" value={operational.missedCalls} onChange={(value) => setOperational({ ...operational, missedCalls: value })} options={['They get an automatic text', 'We call back manually', 'It varies', 'I am not sure']} /><OperationalField label="How quickly are web leads answered?" value={operational.responseTime} onChange={(value) => setOperational({ ...operational, responseTime: value })} options={['Within 5 minutes', 'Within an hour', 'Same day', 'It varies or I am not sure']} /><OperationalField label="Are unclosed estimates followed up?" value={operational.estimateFollowup} onChange={(value) => setOperational({ ...operational, estimateFollowup: value })} options={['Yes, consistently', 'Sometimes', 'Rarely', 'I am not sure']} /><OperationalField label="Are happy customers asked for reviews?" value={operational.reviewRequests} onChange={(value) => setOperational({ ...operational, reviewRequests: value })} options={['Yes, consistently', 'Sometimes', 'Rarely', 'I am not sure']} /></div></div>

@@ -17,15 +17,20 @@ export const reportRequestSchema = z.object({
 
 export type FindingCategory = 'lead-capture' | 'trust-local' | 'technical'
 export type FindingSource = 'automated' | 'owner-reported' | 'manual-review'
+export type BusinessOutcomeCategory = 'Get More Leads' | 'Improve Google Visibility' | 'Build Customer Trust' | 'Make the Website Easier to Use' | 'Improve Website Performance'
+export type ImplementationFit = 'Phil can implement' | 'Needs manual review'
 
 export type ScanFinding = {
   id: string
   category: FindingCategory
+  outcomeCategory: BusinessOutcomeCategory
   source: FindingSource
   title: string
   summary: string
   evidence: string
   recommendation: string
+  technicalLabel?: string
+  implementationFit: ImplementationFit
   impact: 'high' | 'medium' | 'low'
   effort: 'quick' | 'moderate' | 'project'
   pointsLost: number

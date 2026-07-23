@@ -1801,6 +1801,7 @@ p {
 .finding-detail { margin-top: 21px; border-top: 1px solid var(--mist-strong); padding-top: 18px; }
 .finding-detail strong, .finding-fix strong { color: var(--ink); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; }
 .finding-detail p, .finding-fix p { margin: 5px 0 0; font-size: .8rem; }
+.finding-detail .finding-technical { color: var(--ink-soft); font-size: .7rem; }
 .finding-fix { display: grid; grid-template-columns: 24px 1fr; gap: 12px; margin-top: 16px; background: var(--mist); padding: 16px; }
 .finding-fix svg { width: 20px; color: var(--blue); }
 

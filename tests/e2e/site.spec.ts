@@ -58,9 +58,9 @@ test('work and demonstrations route renders', async ({ page }) => {
 })
 
 const topFinding: ScanFinding = {
-  id: 'lead-form', category: 'lead-capture' as FindingCategory, source: 'automated' as FindingSource, title: 'Give visitors a form or booking option',
-  summary: 'Some good prospects will not call, especially after hours.', evidence: 'No form was found.',
-  recommendation: 'Add a short estimate form with an immediate confirmation.', impact: 'high', effort: 'moderate', pointsLost: 18, passed: false,
+  id: 'lead-form', category: 'lead-capture' as FindingCategory, outcomeCategory: 'Get More Leads', source: 'automated' as FindingSource, title: 'Make it easy to request a quote or book',
+  summary: 'Some good prospects will not call, especially after hours. A short form or booking path gives them another way in.', evidence: 'No form was found.',
+  recommendation: 'Add a short estimate form with an immediate confirmation.', technicalLabel: 'Lead form or booking path', implementationFit: 'Phil can implement', impact: 'high', effort: 'moderate', pointsLost: 18, passed: false,
 }
 
 const scanReportFacts: PageFacts = {
@@ -76,16 +76,24 @@ const scanReport: WebsiteScanReport = {
   scannedAt: '2026-07-21T12:00:00.000Z',
   score: scanReportScore,
   facts: scanReportFacts,
+  factsSummary: [
+    { label: 'Phone call path', value: '1 tap-to-call link', status: 'good' },
+    { label: 'Quote or contact form', value: '0 forms', status: 'warning' },
+  ],
+  quickWins: [topFinding],
+  leadPathSummary: 'The homepage points visitors toward tap-to-call, but customer trust proof may be missing.',
   topFindings: [topFinding],
   findings: [topFinding],
   strengths: [{
     id: 'phone',
     category: 'lead-capture' as FindingCategory,
+    outcomeCategory: 'Get More Leads',
     source: 'automated' as FindingSource,
-    title: 'Visitors can tap to call',
+    title: 'Visitors can tap to call from a phone',
     summary: '',
     evidence: '',
     recommendation: '',
+    implementationFit: 'Phil can implement',
     impact: 'low',
     effort: 'quick',
     pointsLost: 0,
@@ -99,7 +107,7 @@ async function mockScanner(page: import('@playwright/test').Page) {
     contentType: 'application/javascript',
     body: `window.turnstile={render:function(el,o){setTimeout(function(){o.callback('test-token')},0);return'test-widget'},remove:function(){},reset:function(){}}`,
   }))
-  await page.route('**/api/scan', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, reportToken: 'test-report-token-that-is-long-enough', preview: { requestedUrl: scanReport.requestedUrl, scannedUrl: scanReport.scannedUrl, scannedAt: scanReport.scannedAt, score: scanReport.score, topFindings: scanReport.topFindings, caveats: scanReport.caveats } }) }))
+  await page.route('**/api/scan', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, reportToken: 'test-report-token-that-is-long-enough', preview: { requestedUrl: scanReport.requestedUrl, scannedUrl: scanReport.scannedUrl, scannedAt: scanReport.scannedAt, score: scanReport.score, factsSummary: scanReport.factsSummary, quickWins: scanReport.quickWins, leadPathSummary: scanReport.leadPathSummary, topFindings: scanReport.topFindings, caveats: scanReport.caveats } }) }))
   await page.route('**/api/scan-report', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, report: scanReport, emailSent: true }) }))
 }
 
@@ -112,7 +120,9 @@ test('Website Checkup scans, unlocks the report, and prefills the audit', async 
   await expect(scanButton).toBeEnabled()
   await scanButton.click()
   await expect(page.getByText('62')).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Give visitors a form or booking option' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Make it easy to request a quote or book' }).first()).toBeVisible()
+  await expect(page.getByText('Get More Leads').first()).toBeVisible()
+  await expect(page.getByText('Phil can implement').first()).toBeVisible()
   await page.getByLabel('Name *').fill('Sam Owner')
   await page.getByLabel('Email *').fill('sam@example.com')
   await page.getByLabel('Business name').fill('Sam Roofing')

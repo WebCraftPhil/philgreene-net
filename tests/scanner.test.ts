@@ -25,19 +25,63 @@ test('scores a conversion-ready local service homepage and preserves evidence', 
   assert.equal(report.facts.hasLocalBusinessSchema, true)
   assert.match(report.leadPathSummary, /tap-to-call/)
   assert.match(report.leadPathSummary, /contact form/)
-  assert.ok(report.factsSummary.some((item) => item.label === 'Phone links' && item.status === 'good'))
+  assert.ok(report.factsSummary.some((item) => item.label === 'Phone call path' && item.status === 'good'))
   assert.ok(report.strengths.length > 0)
+  assert.ok(report.strengths.every((finding) => finding.outcomeCategory && finding.implementationFit))
 })
 
 test('prioritizes missing contact and trust paths on a thin homepage', () => {
   const report = analyzeWebsite({ requestedUrl: 'https://example.com/', finalUrl: 'https://example.com/', html: '<html><head><title>Home</title></head><body><h1>Welcome</h1></body></html>', loadTimeMs: 300 })
   assert.ok(report.score.overall < 50)
   assert.equal(report.topFindings.length, 3)
+  assert.deepEqual(report.topFindings.map((finding) => finding.id), ['clear-offer', 'local-relevance', 'lead-form'])
   assert.ok(report.findings.some((finding) => finding.id === 'lead-form'))
   assert.ok(report.findings.some((finding) => finding.id === 'reviews'))
-  assert.match(report.leadPathSummary, /no clear contact path/)
+  assert.match(report.leadPathSummary, /No clear way to call/)
   assert.ok(report.quickWins.some((finding) => finding.id === 'phone-link'))
-  assert.ok(report.factsSummary.some((item) => item.label === 'Forms' && item.status === 'warning'))
+  assert.ok(report.factsSummary.some((item) => item.label === 'Quote or contact form' && item.status === 'warning'))
+})
+
+test('uses plain-English recommendation titles with secondary technical labels', () => {
+  const report = analyzeWebsite({ requestedUrl: 'https://example.com/', finalUrl: 'https://example.com/', html: '<html><head><title>Home</title></head><body><h1>Welcome</h1></body></html>', loadTimeMs: 300 })
+  const phone = report.findings.find((finding) => finding.id === 'phone-link')
+  const schema = report.findings.find((finding) => finding.id === 'local-schema')
+  const cta = report.findings.find((finding) => finding.id === 'cta-language')
+
+  assert.equal(phone?.title, 'Make it easy to call from a phone')
+  assert.match(phone?.summary ?? '', /local customers/)
+  assert.equal(phone?.technicalLabel, 'Tap-to-call link')
+  assert.equal(schema?.title, 'Help Google understand your business')
+  assert.match(schema?.summary ?? '', /services, location, and service area/)
+  assert.equal(schema?.technicalLabel, 'LocalBusiness schema')
+  assert.equal(cta?.title, 'Use buttons that say what happens next')
+  assert.doesNotMatch(cta?.summary ?? '', /\bCTA\b/)
+})
+
+test('assigns recommendations to business-outcome categories', () => {
+  const report = analyzeWebsite({ requestedUrl: 'https://example.com/', finalUrl: 'https://example.com/', html: '<html><head><title>Home</title></head><body><h1>Welcome</h1></body></html>', loadTimeMs: 300 })
+  const slowReport = analyzeWebsite({ requestedUrl: 'https://example.com/', finalUrl: 'https://example.com/', html: '<html><head><title>Home</title></head><body><h1>Welcome</h1></body></html>', loadTimeMs: 6000 })
+  const categories = new Set(report.findings.map((finding) => finding.outcomeCategory))
+  const slowCategories = new Set(slowReport.findings.map((finding) => finding.outcomeCategory))
+
+  assert.ok(categories.has('Get More Leads'))
+  assert.ok(categories.has('Improve Google Visibility'))
+  assert.ok(categories.has('Build Customer Trust'))
+  assert.ok(categories.has('Make the Website Easier to Use'))
+  assert.ok(slowCategories.has('Improve Website Performance'))
+  assert.equal(report.findings.find((finding) => finding.id === 'local-schema')?.outcomeCategory, 'Improve Google Visibility')
+  assert.equal(report.findings.find((finding) => finding.id === 'reviews')?.outcomeCategory, 'Build Customer Trust')
+  assert.equal(report.findings.find((finding) => finding.id === 'phone-link')?.outcomeCategory, 'Get More Leads')
+})
+
+test('keeps impact, effort, and implementation labels on visible findings', () => {
+  const report = analyzeWebsite({ requestedUrl: 'https://example.com/', finalUrl: 'https://example.com/', html: '<html><head><title>Home</title></head><body><h1>Welcome</h1></body></html>', loadTimeMs: 300 })
+  const slowReport = analyzeWebsite({ requestedUrl: 'https://example.com/', finalUrl: 'https://example.com/', html: '<html><head><title>Home</title></head><body><h1>Welcome</h1></body></html>', loadTimeMs: 6000 })
+
+  assert.equal(report.findings.find((finding) => finding.id === 'phone-link')?.impact, 'high')
+  assert.equal(report.findings.find((finding) => finding.id === 'phone-link')?.effort, 'quick')
+  assert.equal(report.findings.find((finding) => finding.id === 'phone-link')?.implementationFit, 'Phil can implement')
+  assert.equal(slowReport.findings.find((finding) => finding.id === 'response-time')?.implementationFit, 'Needs manual review')
 })
 
 test('summarizes a form-only lead path without overstating call options', () => {
@@ -63,8 +107,9 @@ test('does not fabricate a conversion score for a client-rendered app shell', ()
   assert.equal(report.score.overall, null)
   assert.equal(report.score.leadCapture, null)
   assert.equal(report.topFindings[0]?.source, 'manual-review')
-  assert.match(report.topFindings[0]?.title ?? '', /rendered customer-journey review/)
-  assert.match(report.leadPathSummary, /rendered page review needed/)
+  assert.equal(report.topFindings[0]?.title, 'Review the real page visitors see')
+  assert.equal(report.topFindings[0]?.outcomeCategory, 'Get More Leads')
+  assert.match(report.leadPathSummary, /manual review/)
 })
 
 test('encrypted scanner reports survive round-trip and reject tampering', () => {
