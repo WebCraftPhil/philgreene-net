@@ -24,7 +24,6 @@ import ProjectsPage from "@/pages/projects";
 import WebsiteCheckupPage from "@/pages/website-checkup";
 import AiReceptionSection from "@/components/AiReceptionSection";
 import RetentionSection from "@/components/RetentionSection";
-import { MessageSquareText } from "lucide-react";
 import type { AuditPrefill, PackageId } from "@/types/audit";
 import { packageNames } from "@/lib/assistant";
 import { trackEvent } from "@/lib/analytics";
@@ -74,10 +73,6 @@ function HomePage() {
         <AboutSection />
         <ContactSection prefill={auditPrefill} />
       </main>
-      <a className="checkup-trigger" href="/website-checkup" onClick={() => trackEvent('scanner_opened', { placement: 'floating' })}>
-        <MessageSquareText aria-hidden="true" />
-        <span><strong>Website Checkup</strong><small>See what may be costing leads</small></span>
-      </a>
     </>
   );
 }
