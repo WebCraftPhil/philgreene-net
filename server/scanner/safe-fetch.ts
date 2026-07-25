@@ -40,9 +40,24 @@ function extractIpv4FromIpv6(address: string): string | null {
   const normalized = address.toLowerCase()
 
   // Handle NAT64 prefix: 64:ff9b::/96 (RFC 6052)
-  const nat64Match = normalized.match(/^64:ff9b::((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/)
+  // The NAT64 prefix is 64:ff9b::/96, meaning first 96 bits are 0x64ff9b00000000000000
+  // The remaining 32 bits encode an IPv4 address
+  // Match addresses like 64:ff9b::192.0.2.1 or 64:ff9b::c000:201
+  const nat64Match = normalized.match(/^64:ff9b::(?:([0-9a-f]{1,8})|((?:[0-9]{1,3}\.){3}[0-9]{1,3}))$/)
   if (nat64Match) {
-    return nat64Match[1]
+    if (nat64Match[2]) {
+      // Already in dotted-decimal format
+      return nat64Match[2]
+    }
+    if (nat64Match[1]) {
+      // Hex format - convert to IPv4
+      const hex = nat64Match[1].padStart(8, '0')
+      const part1 = parseInt(hex.slice(0, 2), 16)
+      const part2 = parseInt(hex.slice(2, 4), 16)
+      const part3 = parseInt(hex.slice(4, 6), 16)
+      const part4 = parseInt(hex.slice(6, 8), 16)
+      return `${part1}.${part2}.${part3}.${part4}`
+    }
   }
 
   // Handle IPv4-mapped: ::ffff:a.b.c.d or ::ffff:0:a.b.c.d (RFC 4291, Section 2.5.5.2)
@@ -72,7 +87,8 @@ function isIpv6PrivateOrReserved(address: string): boolean {
 
   // Link-local addresses (RFC 4291, Section 2.5.6)
   // Check first 10 bits (fe80 through febf)
-  if (normalized.startsWith('fe8') && !normalized.startsWith('fec')) return true
+  if (normalized.startsWith('fe8') || normalized.startsWith('fe9') || 
+      normalized.startsWith('fea') || normalized.startsWith('feb')) return true
 
   // Unique local addresses (RFC 4193)
   if (normalized.startsWith('fc00:') || normalized.startsWith('fd00:')) return true
