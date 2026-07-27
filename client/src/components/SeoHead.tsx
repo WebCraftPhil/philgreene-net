@@ -4,11 +4,12 @@ interface SeoHeadProps {
   title: string
   description: string
   canonicalPath: string
+  imagePath?: string
 }
 
 const siteUrl = 'https://philgreene.net'
 
-export default function SeoHead({ title, description, canonicalPath }: SeoHeadProps) {
+export default function SeoHead({ title, description, canonicalPath, imagePath = '/og-image.png' }: SeoHeadProps) {
   useEffect(() => {
     document.title = title
 
@@ -23,19 +24,20 @@ export default function SeoHead({ title, description, canonicalPath }: SeoHeadPr
     }
 
     const canonicalUrl = `${siteUrl}${canonicalPath}`
+    const imageUrl = imagePath.startsWith('http') ? imagePath : `${siteUrl}${imagePath.startsWith('/') ? '' : '/'}${imagePath}`
     setMeta('meta[name="description"]', 'name', 'description', description)
     setMeta('meta[name="robots"]', 'name', 'robots', 'index, follow')
     setMeta('meta[property="og:title"]', 'property', 'og:title', title)
     setMeta('meta[property="og:description"]', 'property', 'og:description', description)
     setMeta('meta[property="og:type"]', 'property', 'og:type', 'website')
     setMeta('meta[property="og:url"]', 'property', 'og:url', canonicalUrl)
-    setMeta('meta[property="og:image"]', 'property', 'og:image', `${siteUrl}/og-image.png`)
+    setMeta('meta[property="og:image"]', 'property', 'og:image', imageUrl)
     setMeta('meta[property="og:image:width"]', 'property', 'og:image:width', '1200')
     setMeta('meta[property="og:image:height"]', 'property', 'og:image:height', '630')
     setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title)
     setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description)
     setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', 'summary_large_image')
-    setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', `${siteUrl}/og-image.png`)
+    setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', imageUrl)
 
     let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
     if (!canonical) {
@@ -85,7 +87,7 @@ export default function SeoHead({ title, description, canonicalPath }: SeoHeadPr
         'CRM automation for service businesses',
       ],
     })
-  }, [canonicalPath, description, title])
+  }, [canonicalPath, description, imagePath, title])
 
   return null
 }

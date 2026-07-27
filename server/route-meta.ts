@@ -13,7 +13,7 @@ export const routeMeta: RouteMeta[] = [
     title: 'Free Website Lead Checkup | Phil Greene',
     description: 'Scan your local business website for call, quote-request, trust, local visibility, and mobile usability gaps. Get practical priorities in minutes.',
     canonicalUrl: 'https://philgreene.net/website-checkup',
-    imageUrl: 'https://philgreene.net/og-image.png',
+    imageUrl: 'https://philgreene.net/website-checkup-og.svg',
     imageAlt: 'Phil Greene free website checkup for local businesses',
   },
 ]

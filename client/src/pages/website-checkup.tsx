@@ -100,7 +100,7 @@ export default function WebsiteCheckupPage() {
 
   return (
     <main id="main-content" className="scanner-page">
-      <SeoHead title="Free Website Lead Checkup | Phil Greene" description="Scan your local service business website for call, quote-request, trust, local visibility, and mobile usability gaps. Get practical priorities in minutes." canonicalPath="/website-checkup" />
+      <SeoHead title="Free Website Lead Checkup | Phil Greene" description="Scan your local service business website for call, quote-request, trust, local visibility, and mobile usability gaps. Get practical priorities in minutes." canonicalPath="/website-checkup" imagePath="/website-checkup-og.svg" />
       <section className="scanner-hero">
         <div className="site-container scanner-hero-grid">
           <div>
