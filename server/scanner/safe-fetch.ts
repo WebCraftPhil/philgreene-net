@@ -42,21 +42,36 @@ function extractIpv4FromIpv6(address: string): string | null {
   // Handle NAT64 prefix: 64:ff9b::/96 (RFC 6052)
   // The NAT64 prefix is 64:ff9b::/96, meaning first 96 bits are 0x64ff9b00000000000000
   // The remaining 32 bits encode an IPv4 address
-  // Match addresses like 64:ff9b::192.0.2.1 or 64:ff9b::c000:201
-  const nat64Match = normalized.match(/^64:ff9b::(?:([0-9a-f]{1,8})|((?:[0-9]{1,3}\.){3}[0-9]{1,3}))$/)
+  // Match addresses like 64:ff9b::192.0.2.1 (dotted-decimal) or 64:ff9b::c000:201 (hex groups)
+  const nat64Match = normalized.match(/^64:ff9b::/)
   if (nat64Match) {
-    if (nat64Match[2]) {
-      // Already in dotted-decimal format
-      return nat64Match[2]
+    // Extract everything after 64:ff9b::
+    const remainder = normalized.slice(nat64Match[0].length)
+
+    // Check for dotted-decimal IPv4
+    const dottedMatch = remainder.match(/^((?:[0-9]{1,3}\.){3}[0-9]{1,3})$/)
+    if (dottedMatch) {
+      return dottedMatch[1]
     }
-    if (nat64Match[1]) {
-      // Hex format - convert to IPv4
-      const hex = nat64Match[1].padStart(8, '0')
-      const part1 = parseInt(hex.slice(0, 2), 16)
-      const part2 = parseInt(hex.slice(2, 4), 16)
-      const part3 = parseInt(hex.slice(4, 6), 16)
-      const part4 = parseInt(hex.slice(6, 8), 16)
-      return `${part1}.${part2}.${part3}.${part4}`
+
+    // Check for hex groups representing the last 32 bits
+    const hexGroups = remainder.split(':')
+    if (hexGroups.length === 1 || hexGroups.length === 2) {
+      if (!hexGroups.every((group) => /^[0-9a-f]{1,4}$/.test(group))) {
+        return null
+      }
+
+      const high = hexGroups.length === 2 ? parseInt(hexGroups[0], 16) : 0
+      const low = parseInt(hexGroups[hexGroups.length - 1], 16)
+      const value = (high * 0x10000) + low
+
+      if (Number.isSafeInteger(value) && value >= 0 && value <= 0xffffffff) {
+        const part1 = (value >>> 24) & 0xff
+        const part2 = (value >>> 16) & 0xff
+        const part3 = (value >>> 8) & 0xff
+        const part4 = value & 0xff
+        return `${part1}.${part2}.${part3}.${part4}`
+      }
     }
   }
 

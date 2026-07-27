@@ -18,6 +18,38 @@ test('blocks private, loopback, reserved, and documentation IP ranges', () => {
   assert.equal(isPublicIp('2606:4700:4700::1111'), true)
 })
 
+test('handles NAT64 addresses in compressed and expanded forms', () => {
+  // NAT64 addresses (64:ff9b::/96) should extract the embedded IPv4
+  // Compressed form with dotted-decimal
+  assert.equal(isPublicIp('64:ff9b::192.0.2.1'), false, 'NAT64 with dotted-decimal should be private (TEST-NET-1)')
+  
+  // Expanded hex form
+  assert.equal(isPublicIp('64:ff9b::c000:201'), false, 'NAT64 with hex should be private (192.0.2.1)')
+  assert.equal(isPublicIp('64:ff9b::0000:0000'), false, 'NAT64 with all zeros should be private')
+  
+  // Non-NAT64 addresses should not be affected
+  assert.equal(isPublicIp('2001:db8::1'), false, 'Documentation address should be private')
+  assert.equal(isPublicIp('2606:4700:4700::1111'), true, 'Public IPv6 should remain public')
+})
+
+test('blocks complete link-local range fe80::/10', () => {
+  // Link-local addresses range from fe80::/10 to febf::/10
+  // This includes prefixes: fe8, fe9, fea, feb
+  for (const prefix of ['fe80:', 'fe90:', 'fea0:', 'feb0:', 'febf:']) {
+    assert.equal(isPublicIp(`${prefix}1234:5678:9abc:def0`), false, `Link-local with ${prefix} should be private`)
+  }
+  
+  // Also test some middle values
+  assert.equal(isPublicIp('fe8f:1234:5678:9abc:def0:1234:5678:9abc'), false, 'fe8f prefix should be private')
+  assert.equal(isPublicIp('fe9f:1234:5678:9abc:def0:1234:5678:9abc'), false, 'fe9f prefix should be private')
+  assert.equal(isPublicIp('feaf:1234:5678:9abc:def0:1234:5678:9abc'), false, 'feaf prefix should be private')
+  assert.equal(isPublicIp('febf:1234:5678:9abc:def0:1234:5678:9abc'), false, 'febf prefix should be private')
+  
+  // fec0 and above should NOT be link-local (though fec0-febf is actually site-local, deprecated)
+  // Our current implementation only checks fe8-feb
+  assert.equal(isPublicIp('fec0:1234:5678:9abc:def0:1234:5678:9abc'), true, 'fec0 and above should not be blocked by link-local check')
+})
+
 test('scores a conversion-ready local service homepage and preserves evidence', () => {
   const report = analyzeWebsite({ requestedUrl: 'https://example.com/', finalUrl: 'https://example.com/', html: strongHtml, loadTimeMs: 420 })
   assert.ok(report.score.overall >= 75)
