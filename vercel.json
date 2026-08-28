@@ -8,6 +8,14 @@
       "destination": "/api/$1"
     },
     {
+      "source": "/website-checkup",
+      "destination": "/website-checkup/index.html"
+    },
+    {
+      "source": "/website-checkup/",
+      "destination": "/website-checkup/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
+  let capturedJsonResponse: Record<string, unknown> | undefined = undefined;
 
   const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {
@@ -39,12 +39,27 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
+  app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+    const details = err && typeof err === 'object' ? err as { status?: number; statusCode?: number; message?: string } : {}
+    const status = details.status || details.statusCode || 500;
+    const message = details.message || "Internal Server Error";
 
     res.status(status).json({ message });
     throw err;
+  });
+
+  const routeRedirects: Record<string, string> = {
+    "/privacy": "/privacy-policy",
+    "/terms-of-service": "/terms",
+    "/cookies": "/cookie-policy",
+    "/returns": "/refund-policy",
+    "/accessibility-statement": "/accessibility",
+  };
+
+  Object.entries(routeRedirects).forEach(([from, to]) => {
+    app.get(from, (_req, res) => {
+      res.redirect(301, to);
+    });
   });
 
   // importantly only setup vite in development and after
@@ -64,7 +79,6 @@ app.use((req, res, next) => {
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
   });

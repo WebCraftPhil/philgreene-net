@@ -5,6 +5,7 @@ import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
+import { applyRouteMeta, findRouteMeta } from "./route-meta";
 
 const viteLogger = createLogger();
 
@@ -54,6 +55,10 @@ export async function setupVite(app: Express, server: Server) {
 
       // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
+      const routeMeta = findRouteMeta(url);
+      if (routeMeta) {
+        template = applyRouteMeta(template, routeMeta);
+      }
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
@@ -79,7 +84,13 @@ export function serveStatic(app: Express) {
   app.use(express.static(distPath));
 
   // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  app.use("*", (req, res) => {
+    const routeMeta = findRouteMeta(req.originalUrl);
+    if (routeMeta) {
+      res.sendFile(path.resolve(distPath, routeMeta.path.slice(1), "index.html"));
+      return;
+    }
+
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }

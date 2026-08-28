@@ -1,3 +1,5 @@
+import SeoHead from "@/components/SeoHead";
+
 export default function PrivacyPage() {
   const effectiveDate = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/New_York',
@@ -7,7 +9,12 @@ export default function PrivacyPage() {
   }).format(new Date())
 
   return (
-    <main className="min-h-screen bg-background text-foreground pt-24 pb-16">
+    <main id="main-content" className="min-h-screen bg-background text-foreground pt-24 pb-16">
+      <SeoHead
+        title="Privacy Policy | Phil Greene"
+        description="Read the Privacy Policy for philgreene.net, including what information may be collected and how it is used."
+        canonicalPath="/privacy-policy"
+      />
       <div className="max-w-3xl mx-auto px-4 space-y-8">
         <header className="space-y-3">
           <h1 className="text-4xl font-bold">Privacy Policy</h1>
@@ -42,6 +49,11 @@ export default function PrivacyPage() {
               collect basic technical logs such as IP address, browser type, device
               information, and request timing for security and performance.
             </li>
+            <li>
+              <strong>Website checkup information:</strong> If you use the website scanner, we
+              process the public website address you enter, the resulting automated findings,
+              and any name, email, or business details you provide to unlock the full report.
+            </li>
           </ul>
         </section>
 
@@ -69,13 +81,14 @@ export default function PrivacyPage() {
         <section className="space-y-2">
           <h2 className="text-2xl font-semibold">5) Analytics and Third-Party Services</h2>
           <p className="text-muted-foreground">
-            The codebase includes optional support for analytics events with Plausible and
-            Google Analytics. Those services are only active if separately configured.
+            The site includes optional, privacy-focused analytics events with Plausible. It is
+            only active when separately configured.
           </p>
           <p className="text-muted-foreground">
-            Contact form delivery may use SendGrid to send messages to the site owner. If
-            analytics or additional third-party services are added later, this policy will be
-            updated.
+            Contact forms and website checkup reports may use Mailtrap for email delivery.
+            Cloudflare Turnstile helps protect the scanner from automated abuse, and Vercel
+            hosts the website and its server-side functions. The scanner requests only the
+            public page entered and does not submit forms on that site.
           </p>
         </section>
 

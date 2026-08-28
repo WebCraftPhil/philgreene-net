@@ -1,65 +1,142 @@
 import { Switch, Route, useLocation } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider, useTheme } from "@/components/ThemeProvider";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import ProblemSection from "@/components/ProblemSection";
 import AboutSection from "@/components/AboutSection";
+import SolutionSection from "@/components/SolutionSection";
+import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
-import ProjectsSection from "@/components/ProjectsSection";
+import PilotSection from "@/components/PilotSection";
+import ProofSection from "@/components/ProofSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import SeoHead from "@/components/SeoHead";
 import NotFound from "@/pages/not-found";
 import PrivacyPage from "@/pages/privacy";
 import TermsPage from "@/pages/terms";
+import CookiePolicyPage from "@/pages/cookie-policy";
+import RefundPolicyPage from "@/pages/refund-policy";
+import DisclaimerPage from "@/pages/disclaimer";
+import AccessibilityPage from "@/pages/accessibility";
+import ContactPage from "@/pages/contact";
+import ProjectsPage from "@/pages/projects";
+import WebsiteCheckupPage from "@/pages/website-checkup";
+import AiReceptionSection from "@/components/AiReceptionSection";
+import RetentionSection from "@/components/RetentionSection";
+import type { AuditPrefill, PackageId } from "@/types/audit";
+import { packageNames } from "@/lib/assistant";
+import { trackEvent } from "@/lib/analytics";
 
 function HomePage() {
-  const { theme, toggleTheme } = useTheme();
+  const [auditPrefill, setAuditPrefill] = useState<AuditPrefill | undefined>(() => {
+    try {
+      const saved = sessionStorage.getItem('phil-audit-prefill')
+      if (!saved) return undefined
+      sessionStorage.removeItem('phil-audit-prefill')
+      return JSON.parse(saved) as AuditPrefill
+    } catch { return undefined }
+  })
+
+  const sendToAudit = (prefill?: AuditPrefill) => {
+    if (prefill) setAuditPrefill(prefill)
+    window.requestAnimationFrame(() => document.querySelector('#audit')?.scrollIntoView({ behavior: 'smooth' }))
+  }
+
+  const selectPackage = (selectedPackage: PackageId) => {
+    trackEvent('package_selected', { package: selectedPackage })
+    sendToAudit({
+      websiteUrl: '',
+      businessType: '',
+      problem: `I am interested in the ${packageNames[selectedPackage]} package.`,
+      selectedPackage,
+    })
+  }
 
   return (
-    <div className="min-h-screen">
-      <Header onThemeToggle={toggleTheme} isDark={theme === 'dark'} />
-      <main>
+    <>
+      <SeoHead
+        title="Local Business Websites & Automation | Phil Greene"
+        description="Conversion-focused websites, lead capture, follow-up, AI reception, and review-request systems for owner-operated local service businesses."
+        canonicalPath="/"
+      />
+      <main id="main-content">
         <HeroSection />
-        <AboutSection />
+        <ProblemSection />
+        <SolutionSection />
+        <ProcessSection />
         <ServicesSection />
-        <ProjectsSection />
-        <ContactSection />
+        <AiReceptionSection />
+        <RetentionSection />
+        <PilotSection onSelectPackage={selectPackage} />
+        <ProofSection />
+        <AboutSection />
+        <ContactSection prefill={auditPrefill} />
       </main>
+    </>
+  );
+}
+
+function RedirectRoute({ to }: { to: string }) {
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    navigate(to, { replace: true });
+  }, [navigate, to]);
+
+  return null;
+}
+
+function AppLayout() {
+  return (
+    <div className="min-h-screen">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <Header />
+      <Switch>
+        <Route path="/" component={HomePage} />
+
+        <Route path="/projects" component={ProjectsPage} />
+
+        <Route path="/website-checkup" component={WebsiteCheckupPage} />
+
+        <Route path="/privacy-policy" component={PrivacyPage} />
+        <Route path="/privacy">
+          <RedirectRoute to="/privacy-policy" />
+        </Route>
+
+        <Route path="/terms" component={TermsPage} />
+        <Route path="/terms-of-service">
+          <RedirectRoute to="/terms" />
+        </Route>
+
+        <Route path="/cookie-policy" component={CookiePolicyPage} />
+        <Route path="/cookies">
+          <RedirectRoute to="/cookie-policy" />
+        </Route>
+
+        <Route path="/refund-policy" component={RefundPolicyPage} />
+        <Route path="/returns">
+          <RedirectRoute to="/refund-policy" />
+        </Route>
+
+        <Route path="/disclaimer" component={DisclaimerPage} />
+
+        <Route path="/accessibility" component={AccessibilityPage} />
+        <Route path="/accessibility-statement">
+          <RedirectRoute to="/accessibility" />
+        </Route>
+
+        <Route path="/contact" component={ContactPage} />
+
+        <Route component={NotFound} />
+      </Switch>
       <Footer />
     </div>
   );
 }
 
-function AppLayout() {
-  const [location] = useLocation();
-
-  return (
-    <div className="min-h-screen">
-      <Switch>
-        <Route path="/" component={HomePage} />
-        <Route path="/privacy" component={PrivacyPage} />
-        <Route path="/terms" component={TermsPage} />
-        <Route component={NotFound} />
-      </Switch>
-      {location !== "/" && <Footer />}
-    </div>
-  );
-}
-
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark">
-        <TooltipProvider>
-          <Toaster />
-          <AppLayout />
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
+  return <AppLayout />;
 }
 
 export default App;
