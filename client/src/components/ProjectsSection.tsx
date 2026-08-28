@@ -96,8 +96,8 @@ const categories = [
   { id: 'automation', label: 'Automation' },
   { id: 'legal-tech', label: 'Legal Tech' },
   { id: 'ecommerce', label: 'E-commerce' },
-  { id: 'digital-products', label: 'Digital Products' }
-]
+  { id: 'digital-products', label: 'Digital Products' },
+];
 
 export default function ProjectsSection() {
   const [filter, setFilter] = useState('all')
