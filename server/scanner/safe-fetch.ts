@@ -142,13 +142,17 @@ export function isPublicIp(address: string) {
   return false
 }
 
-async function resolvePublicTarget(url: URL) {
+async function resolvePublicTarget(url: URL, dnsCache?: Map<string, LookupAddress>) {
   if (!['http:', 'https:'].includes(url.protocol)) throw new SafeFetchError('Only http and https websites can be scanned.')
   if (url.username || url.password) throw new SafeFetchError('Website addresses cannot include a username or password.')
   if (url.port && !['80', '443'].includes(url.port)) throw new SafeFetchError('That website uses a port the scanner cannot access.')
   const hostname = url.hostname.toLowerCase().replace(/\.$/, '')
   if (hostname === 'localhost' || hostname.endsWith('.localhost') || net.isIP(hostname)) {
     throw new SafeFetchError('Private network and direct IP addresses cannot be scanned.')
+  }
+  const cached = dnsCache?.get(hostname)
+  if (cached) {
+    return cached
   }
   let addresses: LookupAddress[]
   try {
@@ -160,7 +164,9 @@ async function resolvePublicTarget(url: URL) {
   if (!approved.length || approved.length !== addresses.length) {
     throw new SafeFetchError('Private or reserved network addresses cannot be scanned.')
   }
-  return approved[0]
+  const target = approved[0]
+  dnsCache?.set(hostname, target)
+  return target
 }
 
 function requestHtml(url: URL, target: LookupAddress): Promise<{ status: number; headers: http.IncomingHttpHeaders; body: string }> {
@@ -208,9 +214,10 @@ export async function safeFetchHtml(input: string) {
   const startedAt = Date.now()
   let url = normalizeWebsiteUrl(input)
   const requestedUrl = url.toString()
+  const dnsCache = new Map<string, LookupAddress>()
 
   for (let redirect = 0; redirect <= MAX_REDIRECTS; redirect += 1) {
-    const target = await resolvePublicTarget(url)
+    const target = await resolvePublicTarget(url, dnsCache)
     const response = await requestHtml(url, target)
     if ([301, 302, 303, 307, 308].includes(response.status)) {
       const location = response.headers.location
