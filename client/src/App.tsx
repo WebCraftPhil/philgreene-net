@@ -1,5 +1,5 @@
 import { Switch, Route, useLocation } from "wouter";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
@@ -24,33 +24,17 @@ import ProjectsPage from "@/pages/projects";
 import WebsiteCheckupPage from "@/pages/website-checkup";
 import AiReceptionSection from "@/components/AiReceptionSection";
 import RetentionSection from "@/components/RetentionSection";
-import type { AuditPrefill, PackageId } from "@/types/audit";
-import { packageNames } from "@/lib/assistant";
+import type { PackageId } from "@/types/audit";
 import { trackEvent } from "@/lib/analytics";
 
 function HomePage() {
-  const [auditPrefill, setAuditPrefill] = useState<AuditPrefill | undefined>(() => {
-    try {
-      const saved = sessionStorage.getItem('phil-audit-prefill')
-      if (!saved) return undefined
-      sessionStorage.removeItem('phil-audit-prefill')
-      return JSON.parse(saved) as AuditPrefill
-    } catch { return undefined }
-  })
-
-  const sendToAudit = (prefill?: AuditPrefill) => {
-    if (prefill) setAuditPrefill(prefill)
+  const sendToAudit = () => {
     window.requestAnimationFrame(() => document.querySelector('#audit')?.scrollIntoView({ behavior: 'smooth' }))
   }
 
   const selectPackage = (selectedPackage: PackageId) => {
     trackEvent('package_selected', { package: selectedPackage })
-    sendToAudit({
-      websiteUrl: '',
-      businessType: '',
-      problem: `I am interested in the ${packageNames[selectedPackage]} package.`,
-      selectedPackage,
-    })
+    sendToAudit()
   }
 
   return (
@@ -71,7 +55,7 @@ function HomePage() {
         <PilotSection onSelectPackage={selectPackage} />
         <ProofSection />
         <AboutSection />
-        <ContactSection prefill={auditPrefill} />
+        <ContactSection />
       </main>
     </>
   );

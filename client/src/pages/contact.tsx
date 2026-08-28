@@ -5,8 +5,8 @@ export default function ContactPage() {
   return (
     <main id="main-content">
       <SeoHead
-        title="Request a Free Lead-Loss Audit | Phil Greene"
-        description="Request a practical review of your local service business website, lead response, and follow-up process."
+        title="Contact Phil Greene | Websites & Automation"
+        description="Contact Phil Greene by email about websites, lead follow-up, and automation for local service businesses."
         canonicalPath="/contact"
       />
       <ContactSection />

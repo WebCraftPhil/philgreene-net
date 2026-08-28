@@ -1,5 +1,5 @@
 import { GraduationCap, MapPin } from 'lucide-react'
-import profilePhoto from '../assets/profile-photo-optimized.jpg'
+import profilePhoto from '../assets/phil-g.png'
 
 export default function AboutSection() {
   return (

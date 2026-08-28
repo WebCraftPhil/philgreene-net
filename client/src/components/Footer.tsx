@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, MapPin } from 'lucide-react'
+import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
 export default function Footer() {
@@ -19,6 +19,9 @@ export default function Footer() {
         </nav>
         <div className="footer-contact">
           <span><MapPin aria-hidden="true" /> Manchester, New Hampshire</span>
+          <a href="tel:+16036986286" onClick={() => trackEvent('phone_link_clicked', { placement: 'footer' })}>
+            <Phone aria-hidden="true" /> (603) 698-6286
+          </a>
           <a href="mailto:me@philgreene.net" onClick={() => trackEvent('email_link_clicked', { placement: 'footer' })}>
             <Mail aria-hidden="true" /> me@philgreene.net
           </a>
