@@ -298,12 +298,30 @@ export function analyzeWebsite(input: { requestedUrl: string; finalUrl: string; 
   const title = $('title').first().text().trim()
   const description = $('meta[name="description"]').attr('content')?.trim() ?? ''
   const h1 = $('h1').map((_, element) => $(element).text().replace(/\s+/g, ' ').trim()).get().filter(Boolean)
-  const anchorTexts = $('a, button').map((_, element) => $(element).text().replace(/\s+/g, ' ').trim()).get().filter(Boolean)
+  const anchorTexts: string[] = []
+  let phoneLinks = 0
+  let emailLinks = 0
+  let bookingLinks = 0
+
+  $('a, button').each((_, element) => {
+    const $el = $(element)
+    const text = $el.text().replace(/\s+/g, ' ').trim()
+    if (text) {
+      anchorTexts.push(text)
+    }
+
+    if (element.name === 'a') {
+      const href = $el.attr('href')
+      if (href !== undefined) {
+        if (href.startsWith('tel:')) phoneLinks++
+        if (href.startsWith('mailto:')) emailLinks++
+        if (bookingWords.test(href) || bookingWords.test(text)) bookingLinks++
+      }
+    }
+  })
+
   const primaryCtas = anchorTexts.filter((text) => actionWords.test(text)).slice(0, 8)
-  const phoneLinks = $('a[href^="tel:"]').length
-  const emailLinks = $('a[href^="mailto:"]').length
   const forms = $('form').length
-  const bookingLinks = $('a[href]').filter((_, element) => bookingWords.test($(element).attr('href') ?? '') || bookingWords.test($(element).text())).length
   const jsonLd = $('script[type="application/ld+json"]').map((_, element) => $(element).text()).get().join(' ')
   const hasLocalBusinessSchema = /LocalBusiness|ProfessionalService|HomeAndConstructionBusiness/i.test(jsonLd)
   const hasViewport = Boolean($('meta[name="viewport"]').attr('content'))
