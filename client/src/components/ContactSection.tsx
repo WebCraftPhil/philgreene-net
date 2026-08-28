@@ -42,10 +42,16 @@ export default function ContactSection() {
       })
       setFormData({ name: '', email: '', projectType: '', budget: '', message: '' })
     } catch (error) {
+      const apiError =
+        error instanceof Error
+          ? /"error"\s*:\s*"([^"]+)"/.exec(error.message)?.[1]
+          : undefined
+
       toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message. Please try again later.",
-        variant: "destructive",
+        title: 'Error',
+        description:
+          apiError ?? 'Failed to send message. Please try again later.',
+        variant: 'destructive',
       })
     } finally {
       setIsSubmitting(false)
