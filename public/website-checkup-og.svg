@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Free Website Lead Checkup">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf5" />
+      <stop offset="1" stop-color="#f8f3ee" />
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#102a2c" />
+      <stop offset="1" stop-color="#0b1a1d" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="0" y="0" width="1200" height="18" fill="#f0642f" />
+
+  <g transform="translate(72 72)">
+    <rect x="0" y="0" width="250" height="46" rx="23" fill="#102a2c" />
+    <text x="24" y="31" font-family="Manrope,Arial,sans-serif" font-size="20" font-weight="700" fill="#ffffff">WEBSITE CHECKUP</text>
+  </g>
+
+  <text x="72" y="190" font-family="Manrope,Arial,sans-serif" font-size="76" font-weight="800" fill="#102a2c">Find where leads</text>
+  <text x="72" y="272" font-family="Manrope,Arial,sans-serif" font-size="76" font-weight="800" fill="#102a2c">are getting lost</text>
+  <text x="72" y="338" font-family="Manrope,Arial,sans-serif" font-size="28" font-weight="500" fill="#496064">Free review for local service businesses: calls, quote requests, trust, and mobile usability.</text>
+
+  <g transform="translate(72 390)">
+    <rect x="0" y="0" width="176" height="56" rx="28" fill="#f0642f" />
+    <text x="30" y="36" font-family="Manrope,Arial,sans-serif" font-size="24" font-weight="700" fill="#ffffff">Get the scan</text>
+    <rect x="196" y="0" width="182" height="56" rx="28" fill="#ffffff" stroke="#d9e3e5" />
+    <text x="228" y="36" font-family="Manrope,Arial,sans-serif" font-size="22" font-weight="700" fill="#102a2c">No sales call</text>
+  </g>
+
+  <g transform="translate(734 108)">
+    <rect x="0" y="0" width="394" height="414" rx="32" fill="url(#panel)" />
+    <rect x="28" y="28" width="338" height="48" rx="14" fill="#162f33" stroke="#284245" />
+    <circle cx="54" cy="52" r="7" fill="#f0642f" />
+    <circle cx="76" cy="52" r="7" fill="#f7c56f" />
+    <circle cx="98" cy="52" r="7" fill="#7ad3c5" />
+
+    <rect x="28" y="100" width="338" height="194" rx="22" fill="#ffffff" />
+    <rect x="52" y="126" width="96" height="16" rx="8" fill="#dfe7e8" />
+    <rect x="52" y="154" width="232" height="28" rx="14" fill="#102a2c" />
+    <rect x="52" y="198" width="266" height="14" rx="7" fill="#d9e3e5" />
+    <rect x="52" y="222" width="190" height="14" rx="7" fill="#d9e3e5" />
+    <rect x="52" y="254" width="116" height="30" rx="15" fill="#f0642f" />
+
+    <g transform="translate(48 316)">
+      <rect x="0" y="0" width="86" height="70" rx="16" fill="#13282b" />
+      <rect x="14" y="16" width="58" height="10" rx="5" fill="#f0642f" />
+      <rect x="14" y="34" width="42" height="8" rx="4" fill="#6d8689" />
+      <rect x="14" y="50" width="50" height="8" rx="4" fill="#6d8689" />
+
+      <rect x="100" y="0" width="86" height="70" rx="16" fill="#13282b" />
+      <rect x="114" y="16" width="58" height="10" rx="5" fill="#f0642f" />
+      <rect x="114" y="34" width="42" height="8" rx="4" fill="#6d8689" />
+      <rect x="114" y="50" width="50" height="8" rx="4" fill="#6d8689" />
+
+      <rect x="200" y="0" width="86" height="70" rx="16" fill="#13282b" />
+      <rect x="214" y="16" width="58" height="10" rx="5" fill="#f0642f" />
+      <rect x="214" y="34" width="42" height="8" rx="4" fill="#6d8689" />
+      <rect x="214" y="50" width="50" height="8" rx="4" fill="#6d8689" />
+    </g>
+  </g>
+</svg>
