@@ -146,12 +146,9 @@ export default function TermsPage() {
         <section className="space-y-2">
           <h2 className="text-2xl font-semibold">12) Governing Law and Venue</h2>
           <p className="text-muted-foreground">
-            These Terms are governed by the laws of [STATE], without regard to
+            These Terms are governed by the laws of the State of New Hampshire, without regard to
             conflict of laws rules. Any dispute will be brought in courts of
-            competent jurisdiction in [STATE].
-          </p>
-          <p className="text-muted-foreground">
-            TODO: Confirm the preferred U.S. state for governing law and venue.
+            competent jurisdiction in the State of New Hampshire.
           </p>
         </section>
 
