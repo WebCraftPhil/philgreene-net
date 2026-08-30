@@ -1,0 +1,31 @@
+# Phil Greene
+
+Phil Greene builds conversion-focused websites and practical automation for owner-operated local service businesses.
+
+## Core service
+
+High-Converting Websites are the starting point: clear messaging, mobile usability, quote and contact forms, calls and booking paths, local SEO foundations, and analytics.
+
+## Additional services
+
+Lead capture, missed-call text-back, CRM pipelines, appointment booking, automated follow-up, AI reception, honest review requests, and customer reactivation can be added where useful. The Complete Lead Recovery System is the bundled offer.
+
+## Who it serves
+
+Local roofers, junk-removal companies, landscapers, painters, remodelers, cleaning companies, auto-repair shops, electricians, plumbers, HVAC companies, and similar service businesses.
+
+## Location and contact
+
+- Manchester, New Hampshire
+- Email: me@philgreene.net
+- Website: https://philgreene.net
+
+## Technical background
+
+Phil combines web development, automation, analytics, e-commerce operations, and experience in service, industrial, hospitality, and construction-adjacent environments. He is pursuing a B.S. in Data Science at Southern New Hampshire University.
+
+## Links
+
+- Work and demonstrations: https://philgreene.net/projects
+- GitHub: https://github.com/WebCraftPhil
+- LinkedIn: https://linkedin.com/in/phil.greene1
