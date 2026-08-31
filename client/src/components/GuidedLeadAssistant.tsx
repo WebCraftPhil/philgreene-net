@@ -100,7 +100,17 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
               <button ref={closeRef} type="button" onClick={closeAssistant} aria-label="Close Website Checkup"><X aria-hidden="true" /></button>
             </div>
             <p id="assistant-description" className="assistant-privacy">Four quick questions. Your answers stay in this browser until you choose to submit the audit form.</p>
-            <div className="assistant-progress" aria-label={`Step ${Math.min(step + 1, 5)} of 5`}><span style={{ width: `${((step + 1) / 5) * 100}%` }} /></div>
+            <div
+              className="assistant-progress"
+              role="progressbar"
+              aria-label="Checkup progress"
+              aria-valuenow={Math.min(step + 1, 5)}
+              aria-valuemin={1}
+              aria-valuemax={5}
+              aria-valuetext={`Step ${Math.min(step + 1, 5)} of 5`}
+            >
+              <span style={{ width: `${((step + 1) / 5) * 100}%` }} />
+            </div>
 
             <div className="assistant-body">
               {step === 0 && (
