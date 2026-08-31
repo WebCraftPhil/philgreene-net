@@ -50,6 +50,10 @@ export default function PrivacyPage() {
               information, and request timing for security and performance.
             </li>
             <li>
+              <strong>SMS communication:</strong> If you opt in to SMS communication, we collect
+              your mobile phone number.
+            </li>
+            <li>
               <strong>Website checkup information:</strong> If you use the website scanner, we
               process the public website address you enter, the resulting automated findings,
               and any name, email, or business details you provide to unlock the full report.
@@ -97,6 +101,12 @@ export default function PrivacyPage() {
           <p className="text-muted-foreground">
             Information is not sold. Information may be shared with service providers only as
             needed to run the site and handle contact requests.
+          </p>
+          <p className="text-muted-foreground">
+            No mobile information will be shared with third parties/affiliates for
+            marketing/promotional purposes. All the above categories exclude text messaging
+            originator opt-in data and consent; this information will not be shared with any
+            third parties.
           </p>
         </section>
 

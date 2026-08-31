@@ -93,7 +93,34 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-2xl font-semibold">7) Links to Third Parties</h2>
+          <h2 className="text-2xl font-semibold">7) SMS Messaging</h2>
+          <p className="text-muted-foreground">
+            If you opt in to SMS messaging from philgreene.net, you agree to receive
+            text messages from Phil Greene at the mobile number you provide. These
+            messages may include responses to your inquiry, project follow-up, and
+            other site-related communications.
+          </p>
+          <p className="text-muted-foreground">
+            Message frequency varies. Message and data rates may apply.
+          </p>
+          <p className="text-muted-foreground">
+            You can opt out at any time by replying STOP. For help, reply HELP or email{" "}
+            <a className="text-primary underline" href="mailto:me@philgreene.net">
+              me@philgreene.net
+            </a>
+            .
+          </p>
+          <p className="text-muted-foreground">
+            See our{" "}
+            <a className="text-primary underline" href="/privacy-policy">
+              Privacy Policy
+            </a>{" "}
+            for details on how your information is collected and shared.
+          </p>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-2xl font-semibold">8) Links to Third Parties</h2>
           <p className="text-muted-foreground">
             This website may link to third-party websites or services. Those
             websites are controlled by third parties, and we are not responsible
@@ -102,7 +129,7 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-2xl font-semibold">8) Disclaimers</h2>
+          <h2 className="text-2xl font-semibold">9) Disclaimers</h2>
           <p className="text-muted-foreground">
             This website is provided on an "as is" and "as available" basis,
             without warranties of any kind, express or implied, to the fullest
@@ -115,7 +142,7 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-2xl font-semibold">9) Limitation of Liability</h2>
+          <h2 className="text-2xl font-semibold">10) Limitation of Liability</h2>
           <p className="text-muted-foreground">
             To the fullest extent permitted by law, philgreene.net and its owner
             will not be liable for indirect, incidental, special, consequential,
@@ -125,7 +152,7 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-2xl font-semibold">10) Indemnification</h2>
+          <h2 className="text-2xl font-semibold">11) Indemnification</h2>
           <p className="text-muted-foreground">
             To the extent permitted by law, you agree to defend, indemnify, and
             hold harmless philgreene.net and its owner from claims, liabilities,
@@ -135,7 +162,7 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-2xl font-semibold">11) Changes to the Service and Terms</h2>
+          <h2 className="text-2xl font-semibold">12) Changes to the Service and Terms</h2>
           <p className="text-muted-foreground">
             We may update, change, or discontinue parts of the website at any time.
             We may also revise these Terms from time to time. Updates are effective
@@ -144,7 +171,7 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-2xl font-semibold">12) Governing Law and Venue</h2>
+          <h2 className="text-2xl font-semibold">13) Governing Law and Venue</h2>
           <p className="text-muted-foreground">
             These Terms are governed by the laws of the State of New Hampshire, without regard to
             conflict of laws rules. Any dispute will be brought in courts of
@@ -153,7 +180,7 @@ export default function TermsPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-2xl font-semibold">13) Contact</h2>
+          <h2 className="text-2xl font-semibold">14) Contact</h2>
           <p className="text-muted-foreground">
             Questions about these Terms? Email{" "}
             <a className="text-primary underline" href="mailto:me@philgreene.net">
