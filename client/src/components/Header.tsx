@@ -62,7 +62,7 @@ export default function Header() {
           type="button"
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
-          aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+          aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
           onClick={() => setIsOpen((current) => !current)}
         >
           {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
