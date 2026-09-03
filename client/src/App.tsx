@@ -24,7 +24,8 @@ import ProjectsPage from "@/pages/projects";
 import WebsiteCheckupPage from "@/pages/website-checkup";
 import AiReceptionSection from "@/components/AiReceptionSection";
 import RetentionSection from "@/components/RetentionSection";
-import type { PackageId } from "@/types/audit";
+import GuidedLeadAssistant from "@/components/GuidedLeadAssistant";
+import type { PackageId, AuditPrefill } from "@/types/audit";
 import { trackEvent } from "@/lib/analytics";
 
 function HomePage() {
@@ -34,6 +35,11 @@ function HomePage() {
 
   const selectPackage = (selectedPackage: PackageId) => {
     trackEvent('package_selected', { package: selectedPackage })
+    sendToAudit()
+  }
+
+  const handleAssistantComplete = (prefill: AuditPrefill) => {
+    sessionStorage.setItem('phil-audit-prefill', JSON.stringify(prefill))
     sendToAudit()
   }
 
@@ -57,6 +63,7 @@ function HomePage() {
         <AboutSection />
         <ContactSection />
       </main>
+      <GuidedLeadAssistant onComplete={handleAssistantComplete} />
     </>
   );
 }
