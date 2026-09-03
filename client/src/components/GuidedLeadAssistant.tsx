@@ -67,6 +67,14 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
     }
   }, [isOpen])
 
+  useEffect(() => {
+    if (!isOpen || step === 0) return
+    const firstField = dialogRef.current?.querySelector<HTMLElement>(
+      '.assistant-body select, .assistant-body input, .assistant-result'
+    )
+    firstField?.focus()
+  }, [isOpen, step])
+
   const reset = () => {
     setAnswers(initialAnswers)
     setStep(0)
@@ -104,18 +112,18 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
 
             <div className="assistant-body">
               {step === 0 && (
-                <label className="assistant-field">
+                <label className="assistant-field" htmlFor="assistant-business-type">
                   <span>What kind of business do you run?</span>
-                  <select value={answers.businessType} onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}>
+                  <select id="assistant-business-type" value={answers.businessType} onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}>
                     <option value="">Choose a business type</option>
                     {businessTypes.map((type) => <option key={type} value={type}>{type}</option>)}
                   </select>
                 </label>
               )}
               {step === 1 && (
-                <label className="assistant-field">
+                <label className="assistant-field" htmlFor="assistant-website-url">
                   <span>What is your website address?</span>
-                  <input type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
+                  <input id="assistant-website-url" type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
                   <small>No website yet? Leave this blank and continue.</small>
                 </label>
               )}
@@ -126,7 +134,7 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
                 ['website', 'The website is unclear or outdated'], ['capture', 'Visitors are not becoming leads'], ['missed-calls', 'Calls or messages go unanswered'], ['slow-follow-up', 'Follow-up is too slow or inconsistent'], ['reviews-retention', 'Reviews and past-customer follow-up'], ['multiple', 'Several of these problems'],
               ]} />}
               {step === 4 && (
-                <div className="assistant-result" role="status">
+                <div className="assistant-result" role="status" aria-live="polite" tabIndex={-1}>
                   <CheckCircle2 aria-hidden="true" />
                   <p>Your recommended starting point</p>
                   <h3>{recommendation}</h3>
