@@ -100,7 +100,7 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
               <button ref={closeRef} type="button" onClick={closeAssistant} aria-label="Close Website Checkup"><X aria-hidden="true" /></button>
             </div>
             <p id="assistant-description" className="assistant-privacy">Four quick questions. Your answers stay in this browser until you choose to submit the audit form.</p>
-            <div className="assistant-progress" aria-label={`Step ${Math.min(step + 1, 5)} of 5`}><span style={{ width: `${((step + 1) / 5) * 100}%` }} /></div>
+            <div className="assistant-progress" role="progressbar" aria-valuenow={Math.min(step + 1, 5)} aria-valuemin={1} aria-valuemax={5} aria-label={`Step ${Math.min(step + 1, 5)} of 5`}><span style={{ width: `${((step + 1) / 5) * 100}%` }} /></div>
 
             <div className="assistant-body">
               {step === 0 && (
@@ -119,10 +119,10 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
                   <small>No website yet? Leave this blank and continue.</small>
                 </label>
               )}
-              {step === 2 && <ChoiceQuestion legend="What would you most like to improve?" value={answers.primaryGoal} onChange={(primaryGoal) => setAnswers((current) => ({ ...current, primaryGoal }))} options={[
+              {step === 2 && <ChoiceQuestion name="primaryGoal" legend="What would you most like to improve?" value={answers.primaryGoal} onChange={(primaryGoal) => setAnswers((current) => ({ ...current, primaryGoal }))} options={[
                 ['calls', 'Get more phone calls'], ['quotes', 'Generate more quote requests'], ['appointments', 'Book more appointments'], ['follow-up', 'Improve lead follow-up'],
               ]} />}
-              {step === 3 && <ChoiceQuestion legend="Where do you think customers are being lost?" value={answers.problem} onChange={(problem) => setAnswers((current) => ({ ...current, problem }))} options={[
+              {step === 3 && <ChoiceQuestion name="problem" legend="Where do you think customers are being lost?" value={answers.problem} onChange={(problem) => setAnswers((current) => ({ ...current, problem }))} options={[
                 ['website', 'The website is unclear or outdated'], ['capture', 'Visitors are not becoming leads'], ['missed-calls', 'Calls or messages go unanswered'], ['slow-follow-up', 'Follow-up is too slow or inconsistent'], ['reviews-retention', 'Reviews and past-customer follow-up'], ['multiple', 'Several of these problems'],
               ]} />}
               {step === 4 && (
@@ -155,13 +155,13 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
   )
 }
 
-function ChoiceQuestion({ legend, value, onChange, options }: { legend: string; value: string; onChange: (value: string) => void; options: string[][] }) {
+function ChoiceQuestion({ name, legend, value, onChange, options }: { name: string; legend: string; value: string; onChange: (value: string) => void; options: string[][] }) {
   return (
     <fieldset className="assistant-choices">
       <legend>{legend}</legend>
       {options.map(([optionValue, label]) => (
         <label key={optionValue} className={value === optionValue ? 'is-selected' : ''}>
-          <input type="radio" name={legend} value={optionValue} checked={value === optionValue} onChange={() => onChange(optionValue)} />
+          <input type="radio" name={name} value={optionValue} checked={value === optionValue} onChange={() => onChange(optionValue)} />
           <span>{label}</span>
         </label>
       ))}
