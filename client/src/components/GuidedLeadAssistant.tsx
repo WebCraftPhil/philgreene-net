@@ -100,13 +100,17 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
               <button ref={closeRef} type="button" onClick={closeAssistant} aria-label="Close Website Checkup"><X aria-hidden="true" /></button>
             </div>
             <p id="assistant-description" className="assistant-privacy">Four quick questions. Your answers stay in this browser until you choose to submit the audit form.</p>
-            <div className="assistant-progress" aria-label={`Step ${Math.min(step + 1, 5)} of 5`}><span style={{ width: `${((step + 1) / 5) * 100}%` }} /></div>
+            <div className="assistant-progress" aria-label="Website Checkup navigation" role="progressbar" aria-valuenow={Math.min(step + 1, 5)} aria-valuemin={1} aria-valuemax={5} aria-valuetext={`Step ${Math.min(step + 1, 5)} of 5`}><span style={{ width: `${((step + 1) / 5) * 100}%` }} /></div>
 
             <div className="assistant-body">
               {step === 0 && (
                 <label className="assistant-field">
                   <span>What kind of business do you run?</span>
-                  <select value={answers.businessType} onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}>
+                  <select
+                    value={answers.businessType}
+                    aria-required="true"
+                    onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}
+                  >
                     <option value="">Choose a business type</option>
                     {businessTypes.map((type) => <option key={type} value={type}>{type}</option>)}
                   </select>
@@ -115,8 +119,15 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
               {step === 1 && (
                 <label className="assistant-field">
                   <span>What is your website address?</span>
-                  <input type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
-                  <small>No website yet? Leave this blank and continue.</small>
+                  <input
+                    type="url"
+                    inputMode="url"
+                    placeholder="https://yourbusiness.com (optional)"
+                    value={answers.websiteUrl}
+                    aria-describedby="assistant-website-url-hint"
+                    onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))}
+                  />
+                  <small id="assistant-website-url-hint">No website yet? Leave this blank and continue.</small>
                 </label>
               )}
               {step === 2 && <ChoiceQuestion legend="What would you most like to improve?" value={answers.primaryGoal} onChange={(primaryGoal) => setAnswers((current) => ({ ...current, primaryGoal }))} options={[
