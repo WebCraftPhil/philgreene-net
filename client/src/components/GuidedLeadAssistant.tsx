@@ -84,7 +84,7 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
 
   return (
     <>
-      <button ref={triggerRef} className="checkup-trigger" type="button" onClick={openAssistant} aria-haspopup="dialog">
+      <button ref={triggerRef} className="checkup-trigger" type="button" onClick={openAssistant} aria-haspopup="dialog" aria-expanded={isOpen}>
         <MessageSquareText aria-hidden="true" />
         <span><strong>Website Checkup</strong><small>Find your best next step</small></span>
       </button>
