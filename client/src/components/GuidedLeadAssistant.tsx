@@ -84,7 +84,15 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
 
   return (
     <>
-      <button ref={triggerRef} className="checkup-trigger" type="button" onClick={openAssistant} aria-haspopup="dialog">
+      <button
+        ref={triggerRef}
+        className="checkup-trigger"
+        type="button"
+        onClick={openAssistant}
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+        aria-label="Website Checkup - Find your best next step"
+      >
         <MessageSquareText aria-hidden="true" />
         <span><strong>Website Checkup</strong><small>Find your best next step</small></span>
       </button>
@@ -115,8 +123,15 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
               {step === 1 && (
                 <label className="assistant-field">
                   <span>What is your website address?</span>
-                  <input type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
-                  <small>No website yet? Leave this blank and continue.</small>
+                  <input
+                    type="url"
+                    inputMode="url"
+                    placeholder="https://yourbusiness.com (optional)"
+                    value={answers.websiteUrl}
+                    onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))}
+                    aria-describedby="assistant-website-help"
+                  />
+                  <small id="assistant-website-help">No website yet? Leave this blank and continue.</small>
                 </label>
               )}
               {step === 2 && <ChoiceQuestion legend="What would you most like to improve?" value={answers.primaryGoal} onChange={(primaryGoal) => setAnswers((current) => ({ ...current, primaryGoal }))} options={[
