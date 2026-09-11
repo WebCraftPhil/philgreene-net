@@ -104,18 +104,18 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
 
             <div className="assistant-body">
               {step === 0 && (
-                <label className="assistant-field">
+                <label htmlFor="assistant-business-type" className="assistant-field">
                   <span>What kind of business do you run?</span>
-                  <select value={answers.businessType} onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}>
+                  <select id="assistant-business-type" value={answers.businessType} onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}>
                     <option value="">Choose a business type</option>
                     {businessTypes.map((type) => <option key={type} value={type}>{type}</option>)}
                   </select>
                 </label>
               )}
               {step === 1 && (
-                <label className="assistant-field">
+                <label htmlFor="assistant-website-url" className="assistant-field">
                   <span>What is your website address?</span>
-                  <input type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
+                  <input id="assistant-website-url" type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
                   <small>No website yet? Leave this blank and continue.</small>
                 </label>
               )}
@@ -159,12 +159,15 @@ function ChoiceQuestion({ legend, value, onChange, options }: { legend: string; 
   return (
     <fieldset className="assistant-choices">
       <legend>{legend}</legend>
-      {options.map(([optionValue, label]) => (
-        <label key={optionValue} className={value === optionValue ? 'is-selected' : ''}>
-          <input type="radio" name={legend} value={optionValue} checked={value === optionValue} onChange={() => onChange(optionValue)} />
-          <span>{label}</span>
-        </label>
-      ))}
+      {options.map(([optionValue, label]) => {
+        const optionId = `choice-${optionValue}`
+        return (
+          <label key={optionValue} htmlFor={optionId} className={value === optionValue ? 'is-selected' : ''}>
+            <input id={optionId} type="radio" name={legend} value={optionValue} checked={value === optionValue} onChange={() => onChange(optionValue)} aria-label={label} />
+            <span>{label}</span>
+          </label>
+        )
+      })}
     </fieldset>
   )
 }
