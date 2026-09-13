@@ -157,7 +157,7 @@ export default function WebsiteCheckupPage() {
               <label className="honeypot" aria-hidden="true">Company website<input tabIndex={-1} autoComplete="off" value={gate.companyWebsite} onChange={(e) => setGate({ ...gate, companyWebsite: e.target.value })} /></label>
               <TurnstileWidget onToken={gateTokenHandler} resetKey={gateTurnstileReset} action="report_unlock" />
               {gateError && <div className="scanner-error" role="alert"><AlertCircle aria-hidden="true" /><span>{gateError}</span></div>}
-              <button className="button button-primary" disabled={isUnlocking}>{isUnlocking ? 'Opening report...' : 'Show My Full Report'}{!isUnlocking && <ArrowRight aria-hidden="true" />}</button>
+              <button className="button button-primary" disabled={isUnlocking}>{isUnlocking ? <><LoaderCircle className="scanner-spinner" aria-hidden="true" />Opening report...</> : <>Show My Full Report<ArrowRight aria-hidden="true" /></>}</button>
               <p>By continuing, you agree that I may email this report and follow up about your website. See the <a href="/privacy-policy">Privacy Policy</a>.</p>
             </form>
           </div> : <FullReport report={report} emailSent={emailSent} operational={operational} setOperational={setOperational} onAudit={requestAudit} />}
