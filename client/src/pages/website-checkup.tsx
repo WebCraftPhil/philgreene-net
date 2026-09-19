@@ -183,6 +183,8 @@ function QuickWins({ findings }: { findings: ScanFinding[] }) {
 
 function ShareCheckup({ reportState }: { reportState: ScannerReportState }) {
   const [status, setStatus] = useState<ShareStatus>()
+  const [isCopied, setIsCopied] = useState(false)
+  const copyTimeoutRef = useRef<number>()
 
   const getSupport = useCallback(() => ({
     webShareSupported: typeof navigator !== 'undefined' && typeof navigator.share === 'function',
@@ -211,6 +213,9 @@ function ShareCheckup({ reportState }: { reportState: ScannerReportState }) {
       await navigator.clipboard.writeText(PUBLIC_SCANNER_URL)
       trackEvent('scanner_link_copied', eventProps('clipboard'))
       setStatus({ tone: 'success', message: 'Link copied. You can send it anywhere.' })
+      setIsCopied(true)
+      if (copyTimeoutRef.current) window.clearTimeout(copyTimeoutRef.current)
+      copyTimeoutRef.current = window.setTimeout(() => setIsCopied(false), 2000)
       return true
     } catch {
       trackEvent('scanner_link_copy_failed', eventProps('clipboard'))
@@ -257,7 +262,8 @@ function ShareCheckup({ reportState }: { reportState: ScannerReportState }) {
         <Share2 aria-hidden="true" />Share this free checkup
       </button>
       <button className="button button-secondary" type="button" onClick={copyLink}>
-        <Clipboard aria-hidden="true" />Copy checkup link
+        {isCopied ? <ClipboardCheck aria-hidden="true" /> : <Clipboard aria-hidden="true" />}
+        {isCopied ? 'Link copied!' : 'Copy checkup link'}
       </button>
       <a className="scanner-forward-link" href={buildScannerForwardMailto()} onClick={() => trackEvent('scanner_email_forward_clicked', eventProps('mailto'))}>
         <Send aria-hidden="true" />Send this to the person who manages my website
