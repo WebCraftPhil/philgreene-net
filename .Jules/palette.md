@@ -1,0 +1,3 @@
+## 2025-02-17 - Accessible Progress Indicators and Immediate Copy Feedback
+**Learning:** Modal progress steps in multi-step lead assistants should use standard ARIA progressbar semantics (`role="progressbar"`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, `aria-valuetext`) to ensure screen readers announce step transitions. Copy buttons should provide instant, inline visual feedback right on the button label to confirm the action without forcing user eye movement.
+**Action:** Always include `role="progressbar"` with `aria-value*` attributes on multi-step indicators, and add temporary 2-second visual feedback (e.g., `<ClipboardCheck /> Link copied!`) to copy buttons.
