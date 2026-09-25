@@ -1,0 +1,5 @@
+
+> rest-express@1.0.0 start /app
+> NODE_ENV=production node dist/index.js
+
+1:59:21 PM [express] serving on port 5000
