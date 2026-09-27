@@ -24,6 +24,7 @@ import ProjectsPage from "@/pages/projects";
 import WebsiteCheckupPage from "@/pages/website-checkup";
 import AiReceptionSection from "@/components/AiReceptionSection";
 import RetentionSection from "@/components/RetentionSection";
+import GuidedLeadAssistant from "@/components/GuidedLeadAssistant";
 import type { PackageId } from "@/types/audit";
 import { trackEvent } from "@/lib/analytics";
 
@@ -114,6 +115,10 @@ function AppLayout() {
 
         <Route component={NotFound} />
       </Switch>
+      <GuidedLeadAssistant onComplete={(prefill) => {
+        sessionStorage.setItem('phil-audit-prefill', JSON.stringify(prefill))
+        document.querySelector('#audit')?.scrollIntoView({ behavior: 'smooth' })
+      }} />
       <Footer />
     </div>
   );
