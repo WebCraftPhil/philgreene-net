@@ -48,14 +48,11 @@ export class DatabaseStorage implements IStorage {
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private submissions: Map<string, ContactSubmission>;
-
-  constructor() {
-    this.users = new Map();
-    this.submissions = new Map();
   private usersByUsername: Map<string, User>;
 
   constructor() {
     this.users = new Map();
+    this.submissions = new Map();
     this.usersByUsername = new Map();
   }
 
