@@ -2277,6 +2277,7 @@ p {
 .assistant-progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--blue), var(--magenta)); transition: width 180ms ease; }
 .assistant-body { min-height: 260px; padding: 34px 0 20px; }
 .assistant-field { display: grid; gap: 12px; }
+.assistant-field > label,
 .assistant-field > span,
 .assistant-choices legend { margin-bottom: 4px; color: var(--ink); font-size: 1.22rem; font-weight: 800; line-height: 1.25; }
 .assistant-field input,

@@ -104,20 +104,20 @@ export default function GuidedLeadAssistant({ onComplete }: Props) {
 
             <div className="assistant-body">
               {step === 0 && (
-                <label className="assistant-field">
-                  <span>What kind of business do you run?</span>
-                  <select value={answers.businessType} onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}>
+                <div className="assistant-field">
+                  <label htmlFor="assistant-business-type">What kind of business do you run?</label>
+                  <select id="assistant-business-type" value={answers.businessType} onChange={(event) => setAnswers((current) => ({ ...current, businessType: event.target.value }))}>
                     <option value="">Choose a business type</option>
                     {businessTypes.map((type) => <option key={type} value={type}>{type}</option>)}
                   </select>
-                </label>
+                </div>
               )}
               {step === 1 && (
-                <label className="assistant-field">
-                  <span>What is your website address?</span>
-                  <input type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
-                  <small>No website yet? Leave this blank and continue.</small>
-                </label>
+                <div className="assistant-field">
+                  <label htmlFor="assistant-website-url">What is your website address?</label>
+                  <input id="assistant-website-url" type="url" inputMode="url" placeholder="https://yourbusiness.com (optional)" value={answers.websiteUrl} aria-describedby="assistant-website-url-help" onChange={(event) => setAnswers((current) => ({ ...current, websiteUrl: event.target.value }))} />
+                  <small id="assistant-website-url-help">No website yet? Leave this blank and continue.</small>
+                </div>
               )}
               {step === 2 && <ChoiceQuestion legend="What would you most like to improve?" value={answers.primaryGoal} onChange={(primaryGoal) => setAnswers((current) => ({ ...current, primaryGoal }))} options={[
                 ['calls', 'Get more phone calls'], ['quotes', 'Generate more quote requests'], ['appointments', 'Book more appointments'], ['follow-up', 'Improve lead follow-up'],
