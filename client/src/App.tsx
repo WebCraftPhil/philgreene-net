@@ -24,7 +24,8 @@ import ProjectsPage from "@/pages/projects";
 import WebsiteCheckupPage from "@/pages/website-checkup";
 import AiReceptionSection from "@/components/AiReceptionSection";
 import RetentionSection from "@/components/RetentionSection";
-import type { PackageId } from "@/types/audit";
+import GuidedLeadAssistant from "@/components/GuidedLeadAssistant";
+import type { AuditPrefill, PackageId } from "@/types/audit";
 import { trackEvent } from "@/lib/analytics";
 
 function HomePage() {
@@ -72,6 +73,15 @@ function RedirectRoute({ to }: { to: string }) {
 }
 
 function AppLayout() {
+  const handleAssistantComplete = (prefill: AuditPrefill) => {
+    sessionStorage.setItem('phil-audit-prefill', JSON.stringify(prefill))
+    if (window.location.pathname === '/') {
+      window.requestAnimationFrame(() => document.querySelector('#audit')?.scrollIntoView({ behavior: 'smooth' }))
+    } else {
+      window.location.href = '/#audit'
+    }
+  }
+
   return (
     <div className="min-h-screen">
       <a href="#main-content" className="skip-link">Skip to main content</a>
@@ -114,6 +124,7 @@ function AppLayout() {
 
         <Route component={NotFound} />
       </Switch>
+      <GuidedLeadAssistant onComplete={handleAssistantComplete} />
       <Footer />
     </div>
   );
