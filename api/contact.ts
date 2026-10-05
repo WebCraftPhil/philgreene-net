@@ -1,9 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { sendEmail } from '../server/sendgrid';
+import { auditRequestSchema, createAuditEmail } from '../shared/contact.js';
+import { sendEmail } from '../server/email.js';
 import { storage } from '../server/storage';
-import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { auditRequestSchema, createAuditEmail } from '../shared/contact.js'
-import { sendEmail } from '../server/email.js'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
