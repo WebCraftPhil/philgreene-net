@@ -26,8 +26,8 @@ export default function Footer() {
             <Mail aria-hidden="true" /> me@philgreene.net
           </a>
           <div className="social-links">
-            <a href="https://github.com/WebCraftPhil" target="_blank" rel="noreferrer" aria-label="Phil Greene on GitHub"><Github aria-hidden="true" /></a>
-            <a href="https://linkedin.com/in/phil.greene1" target="_blank" rel="noreferrer" aria-label="Phil Greene on LinkedIn"><Linkedin aria-hidden="true" /></a>
+            <a href="https://github.com/WebCraftPhil" target="_blank" rel="noopener noreferrer" aria-label="Phil Greene on GitHub (opens in a new tab)"><Github aria-hidden="true" /></a>
+            <a href="https://linkedin.com/in/phil.greene1" target="_blank" rel="noopener noreferrer" aria-label="Phil Greene on LinkedIn (opens in a new tab)"><Linkedin aria-hidden="true" /></a>
           </div>
         </div>
       </div>
