@@ -172,7 +172,27 @@ export default function WebsiteCheckupPage() {
 function HowScannerWorks() { return <section className="scanner-method section"><div className="site-container"><div className="section-heading"><p className="section-label">What the checkup reviews</p><h2>A practical look at the path from visitor to inquiry.</h2><p>This is not a giant technical audit. It focuses on the signals most likely to affect whether a local customer understands, trusts, and contacts the business.</p></div><div className="scanner-method-grid"><article><PhoneCall aria-hidden="true" /><span>01</span><h3>Calls and inquiries</h3><p>Tap-to-call links, quote forms, booking options, clear button text, and a strong first impression.</p></article><article><Sparkles aria-hidden="true" /><span>02</span><h3>Trust and local visibility</h3><p>Reviews, credentials, service-area language, contact details, and accurate business details search engines can read.</p></article><article><Wrench aria-hidden="true" /><span>03</span><h3>Ease of use and speed</h3><p>Search result copy, page headings, phone-friendly setup, secure loading, and initial page response.</p></article></div></div></section> }
 
 function ScoreRing({ score }: { score: number | null }) { return <div className={`score-ring score-${scoreTone(score)}`} style={{ '--score': `${(score ?? 0) * 3.6}deg` } as CSSProperties}><div><strong>{score ?? 'N/A'}</strong><span>{score === null ? 'manual review' : 'out of 100'}</span></div></div> }
-function ScoreBar({ label, score }: { label: string; score: number | null }) { return <div><div><span>{label}</span><strong>{score === null ? 'Review needed' : `${score}/100`}</strong></div><div className="score-track"><span className={score === null ? 'is-limited' : ''} style={{ width: `${score ?? 100}%` }} /></div></div> }
+function ScoreBar({ label, score }: { label: string; score: number | null }) {
+  return (
+    <div>
+      <div>
+        <span>{label}</span>
+        <strong>{score === null ? 'Review needed' : `${score}/100`}</strong>
+      </div>
+      <div
+        className="score-track"
+        role="progressbar"
+        aria-label={label}
+        aria-valuenow={score ?? 0}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuetext={score === null ? 'Review needed' : `${score} out of 100`}
+      >
+        <span className={score === null ? 'is-limited' : ''} style={{ width: `${score ?? 100}%` }} />
+      </div>
+    </div>
+  )
+}
 
 function LeadPathSummary({ summary }: { summary: string }) { return <div className="lead-path-summary"><Map aria-hidden="true" /><div><p className="section-label">Customer path detected</p><strong>{summary}</strong></div></div> }
 function FactsSnapshot({ items }: { items: WebsiteScanReport['factsSummary'] }) { return <div className="facts-snapshot"><div><p className="section-label">What the scanner found</p><h2>Visible signals from the homepage</h2></div><dl>{items.map((item) => <div key={item.label} className={`fact-status-${item.status}`}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></div> }
