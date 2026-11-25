@@ -9,12 +9,44 @@ export interface RouteMeta {
 
 export const routeMeta: RouteMeta[] = [
   {
-    path: '/website-checkup',
-    title: 'Free Website Lead Checkup | Phil Greene',
-    description: 'Scan your local business website for call, quote-request, trust, local visibility, and mobile usability gaps. Get practical priorities in minutes.',
-    canonicalUrl: 'https://philgreene.net/website-checkup',
-    imageUrl: 'https://philgreene.net/website-checkup-og.svg',
-    imageAlt: 'Phil Greene free website checkup for local businesses',
+    path: '/about',
+    title: 'About | Phil Greene',
+    description: 'Background, principles, and story of Phillip Greene—from hands-on trades to SNHU Data Analytics, AI systems, and Iron & Ink Systems.',
+    canonicalUrl: 'https://philgreene.net/about',
+    imageUrl: 'https://philgreene.net/og-image.png',
+    imageAlt: 'Phil Greene — About',
+  },
+  {
+    path: '/projects',
+    title: 'Projects & Case Studies | Phil Greene',
+    description: 'Data analytics workbooks, Python pipelines, n8n AI workflows, Raspberry Pi 5 + Hailo-10H local AI lab, and Iron & Ink Systems.',
+    canonicalUrl: 'https://philgreene.net/projects',
+    imageUrl: 'https://philgreene.net/og-image.png',
+    imageAlt: 'Phil Greene — Projects',
+  },
+  {
+    path: '/writing',
+    title: 'Writing & Digital Garden | Phil Greene',
+    description: 'Essays, field notes, and evergreen technical notes on data analytics, AI workflows, local hardware, and building practical systems.',
+    canonicalUrl: 'https://philgreene.net/writing',
+    imageUrl: 'https://philgreene.net/og-image.png',
+    imageAlt: 'Phil Greene — Writing',
+  },
+  {
+    path: '/now',
+    title: 'Now | Phil Greene',
+    description: 'What Phillip Greene is focused on right now: SNHU Data Analytics, Raspberry Pi 5 + Hailo-10H local AI lab, n8n workflows, and Iron & Ink Systems.',
+    canonicalUrl: 'https://philgreene.net/now',
+    imageUrl: 'https://philgreene.net/og-image.png',
+    imageAlt: 'Phil Greene — Now',
+  },
+  {
+    path: '/resume',
+    title: 'Résumé | Phil Greene',
+    description: 'Education, technical skills, and experience for Phillip Greene—Data Analytics student at SNHU, software builder, and automation engineer.',
+    canonicalUrl: 'https://philgreene.net/resume',
+    imageUrl: 'https://philgreene.net/og-image.png',
+    imageAlt: 'Phil Greene — Résumé',
   },
 ]
 

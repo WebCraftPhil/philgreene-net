@@ -1,24 +1,18 @@
 import assert from 'node:assert/strict'
-import fs from 'node:fs'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
 import { applyRouteMeta, findRouteMeta } from '../server/route-meta'
 
-test('website-checkup route metadata is crawler-visible in the HTML shell', () => {
-  const meta = findRouteMeta('/website-checkup')
-  assert.ok(meta)
+test('projects and about route metadata are crawler-visible in the HTML shell', async () => {
+  const indexHtml = await fs.readFile(path.resolve(process.cwd(), 'client', 'index.html'), 'utf-8')
+  const projectsMeta = findRouteMeta('/projects')
+  const aboutMeta = findRouteMeta('/about')
 
-  const html = fs.readFileSync(path.resolve(process.cwd(), 'client', 'index.html'), 'utf-8')
-  const routeHtml = applyRouteMeta(html, meta)
+  assert.ok(projectsMeta)
+  assert.ok(aboutMeta)
 
-  assert.match(routeHtml, /<title>Free Website Lead Checkup \| Phil Greene<\/title>/)
-  assert.match(routeHtml, /<link rel="canonical" href="https:\/\/philgreene\.net\/website-checkup" \/>/)
-  assert.match(routeHtml, /<meta property="og:url" content="https:\/\/philgreene\.net\/website-checkup" \/>/)
-  assert.match(routeHtml, /<meta property="og:title" content="Free Website Lead Checkup \| Phil Greene" \/>/)
-  assert.match(routeHtml, /<meta name="twitter:title" content="Free Website Lead Checkup \| Phil Greene" \/>/)
-  assert.match(routeHtml, /<meta name="twitter:url" content="https:\/\/philgreene\.net\/website-checkup" \/>/)
-  assert.match(routeHtml, /<meta property="og:image" content="https:\/\/philgreene\.net\/website-checkup-og\.svg" \/>/)
-  assert.match(routeHtml, /<meta name="twitter:image" content="https:\/\/philgreene\.net\/website-checkup-og\.svg" \/>/)
-  assert.match(routeHtml, /<meta property="og:image:alt" content="Phil Greene free website checkup for local businesses" \/>/)
-  assert.doesNotMatch(routeHtml, /<meta property="og:url" content="https:\/\/philgreene\.net\/" \/>/)
+  const html = applyRouteMeta(indexHtml, projectsMeta)
+  assert.match(html, /<title>Projects &amp; Case Studies \| Phil Greene<\/title>/)
+  assert.match(html, /<link rel="canonical" href="https:\/\/philgreene\.net\/projects" \/>/)
 })

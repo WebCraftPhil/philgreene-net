@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import { useLocation } from 'wouter'
-import { trackEvent } from '@/lib/analytics'
+import { Link, useLocation } from 'wouter'
+import ThemeToggle from './ThemeToggle'
 
 const navItems = [
-  { href: 'websites', label: 'Websites' },
-  { href: 'how-it-works', label: 'How It Works' },
-  { href: 'automation', label: 'Automation' },
-  { href: 'packages', label: 'Packages' },
-  { href: 'work', label: 'Work' },
-  { href: '/website-checkup', label: 'Checkup', direct: true },
-  { href: 'audit', label: 'Contact' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/now', label: 'Now' },
+  { href: '/resume', label: 'Résumé' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [location] = useLocation()
-  const homePrefix = location === '/' ? '' : '/'
 
   useEffect(() => {
-    if (!isOpen) {
-      return
-    }
+    setIsOpen(false)
+  }, [location])
+
+  useEffect(() => {
+    if (!isOpen) return
 
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -33,59 +33,60 @@ export default function Header() {
     return () => document.removeEventListener('keydown', closeOnEscape)
   }, [isOpen])
 
+  const isRouteActive = (href: string) =>
+    location === href || (href !== '/' && location.startsWith(`${href}/`))
+
   return (
     <header className="site-header">
       <div className="site-container header-inner">
-        <a className="wordmark" href="/" aria-label="Phil Greene home">
-          <img src="/pg-logo.png" width="42" height="42" alt="" aria-hidden="true" />
-          <strong>Phil Greene</strong>
-        </a>
+        <Link href="/" className="wordmark" aria-label="Phil Greene home">
+          <span>
+            pg<span className="wordmark-dot">.</span>
+          </span>
+          <span className="wordmark-sub hidden sm:inline">philgreene.net</span>
+        </Link>
 
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.direct ? item.href : `${homePrefix}#${item.href}`}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <div className="header-nav-group">
+          <nav className="desktop-nav" aria-label="Primary navigation">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={isRouteActive(item.href) ? 'is-active' : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        <a
-          className="button button-primary header-cta"
-          href={`${homePrefix}#audit`}
-          onClick={() => trackEvent('website_audit_cta_clicked', { placement: 'header' })}
-        >
-          Free Website Audit
-        </a>
-
-        <button
-          className="menu-button"
-          type="button"
-          aria-expanded={isOpen}
-          aria-controls="mobile-navigation"
-          aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
-          onClick={() => setIsOpen((current) => !current)}
-        >
-          {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
+          <div className="header-controls">
+            <ThemeToggle />
+            <button
+              className="menu-button"
+              type="button"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
+              aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+              onClick={() => setIsOpen((current) => !current)}
+            >
+              {isOpen ? <X size={18} aria-hidden="true" /> : <Menu size={18} aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
       </div>
 
       {isOpen && (
         <nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">
           {navItems.map((item) => (
-            <a key={item.href} href={item.direct ? item.href : `${homePrefix}#${item.href}`} onClick={() => setIsOpen(false)}>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={isRouteActive(item.href) ? 'is-active' : undefined}
+              onClick={() => setIsOpen(false)}
+            >
               {item.label}
-            </a>
+            </Link>
           ))}
-          <a
-            className="button button-primary"
-            href={`${homePrefix}#audit`}
-            onClick={() => {
-              trackEvent('website_audit_cta_clicked', { placement: 'mobile_header' })
-              setIsOpen(false)
-            }}
-          >
-            Free Website Audit
-          </a>
         </nav>
       )}
     </header>

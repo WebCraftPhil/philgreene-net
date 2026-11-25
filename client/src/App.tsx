@@ -1,137 +1,101 @@
-import { Switch, Route, useLocation } from "wouter";
-import { useEffect } from "react";
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import ProblemSection from "@/components/ProblemSection";
-import AboutSection from "@/components/AboutSection";
-import SolutionSection from "@/components/SolutionSection";
-import ProcessSection from "@/components/ProcessSection";
-import ServicesSection from "@/components/ServicesSection";
-import PilotSection from "@/components/PilotSection";
-import ProofSection from "@/components/ProofSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import SeoHead from "@/components/SeoHead";
-import NotFound from "@/pages/not-found";
-import PrivacyPage from "@/pages/privacy";
-import TermsPage from "@/pages/terms";
-import CookiePolicyPage from "@/pages/cookie-policy";
-import RefundPolicyPage from "@/pages/refund-policy";
-import DisclaimerPage from "@/pages/disclaimer";
-import AccessibilityPage from "@/pages/accessibility";
-import ContactPage from "@/pages/contact";
-import ProjectsPage from "@/pages/projects";
-import WebsiteCheckupPage from "@/pages/website-checkup";
-import AiReceptionSection from "@/components/AiReceptionSection";
-import RetentionSection from "@/components/RetentionSection";
-import GuidedLeadAssistant from "@/components/GuidedLeadAssistant";
-import type { AuditPrefill, PackageId } from "@/types/audit";
-import { trackEvent } from "@/lib/analytics";
-
-function HomePage() {
-  const sendToAudit = () => {
-    window.requestAnimationFrame(() => document.querySelector('#audit')?.scrollIntoView({ behavior: 'smooth' }))
-  }
-
-  const selectPackage = (selectedPackage: PackageId) => {
-    trackEvent('package_selected', { package: selectedPackage })
-    sendToAudit()
-  }
-
-  return (
-    <>
-      <SeoHead
-        title="Local Business Websites & Automation | Phil Greene"
-        description="Conversion-focused websites, lead capture, follow-up, AI reception, and review-request systems for owner-operated local service businesses."
-        canonicalPath="/"
-      />
-      <main id="main-content">
-        <HeroSection />
-        <ProblemSection />
-        <SolutionSection />
-        <ProcessSection />
-        <ServicesSection />
-        <AiReceptionSection />
-        <RetentionSection />
-        <PilotSection onSelectPackage={selectPackage} />
-        <ProofSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
-    </>
-  );
-}
+import { useEffect } from 'react'
+import { Route, Switch, useLocation } from 'wouter'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import AboutPage from '@/pages/about'
+import AccessibilityPage from '@/pages/accessibility'
+import ArticlePage from '@/pages/article'
+import ContactPage from '@/pages/contact'
+import CookiePolicyPage from '@/pages/cookie-policy'
+import DisclaimerPage from '@/pages/disclaimer'
+import HomePage from '@/pages/home'
+import NotFound from '@/pages/not-found'
+import NowPage from '@/pages/now'
+import PrivacyPage from '@/pages/privacy'
+import ProjectDetailPage from '@/pages/project-detail'
+import ProjectsPage from '@/pages/projects'
+import RefundPolicyPage from '@/pages/refund-policy'
+import ResumePage from '@/pages/resume'
+import TermsPage from '@/pages/terms'
+import WritingPage from '@/pages/writing'
 
 function RedirectRoute({ to }: { to: string }) {
-  const [, navigate] = useLocation();
+  const [, navigate] = useLocation()
 
   useEffect(() => {
-    navigate(to, { replace: true });
-  }, [navigate, to]);
+    navigate(to, { replace: true })
+  }, [navigate, to])
 
-  return null;
+  return null
 }
 
-function AppLayout() {
-  const handleAssistantComplete = (prefill: AuditPrefill) => {
-    sessionStorage.setItem('phil-audit-prefill', JSON.stringify(prefill))
-    if (window.location.pathname === '/') {
-      window.requestAnimationFrame(() => document.querySelector('#audit')?.scrollIntoView({ behavior: 'smooth' }))
-    } else {
-      window.location.href = '/#audit'
-    }
-  }
+function ScrollToTop() {
+  const [location] = useLocation()
 
-  return (
-    <div className="min-h-screen">
-      <a href="#main-content" className="skip-link">Skip to main content</a>
-      <Header />
-      <Switch>
-        <Route path="/" component={HomePage} />
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [location])
 
-        <Route path="/projects" component={ProjectsPage} />
-
-        <Route path="/website-checkup" component={WebsiteCheckupPage} />
-
-        <Route path="/privacy-policy" component={PrivacyPage} />
-        <Route path="/privacy">
-          <RedirectRoute to="/privacy-policy" />
-        </Route>
-
-        <Route path="/terms" component={TermsPage} />
-        <Route path="/terms-of-service">
-          <RedirectRoute to="/terms" />
-        </Route>
-
-        <Route path="/cookie-policy" component={CookiePolicyPage} />
-        <Route path="/cookies">
-          <RedirectRoute to="/cookie-policy" />
-        </Route>
-
-        <Route path="/refund-policy" component={RefundPolicyPage} />
-        <Route path="/returns">
-          <RedirectRoute to="/refund-policy" />
-        </Route>
-
-        <Route path="/disclaimer" component={DisclaimerPage} />
-
-        <Route path="/accessibility" component={AccessibilityPage} />
-        <Route path="/accessibility-statement">
-          <RedirectRoute to="/accessibility" />
-        </Route>
-
-        <Route path="/contact" component={ContactPage} />
-
-        <Route component={NotFound} />
-      </Switch>
-      <GuidedLeadAssistant onComplete={handleAssistantComplete} />
-      <Footer />
-    </div>
-  );
+  return null
 }
 
 function App() {
-  return <AppLayout />;
+  return (
+    <ThemeProvider>
+      <ScrollToTop />
+      <div className="flex min-h-screen flex-col">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        <Header />
+        <div className="flex-1">
+          <Switch>
+            <Route path="/" component={HomePage} />
+            <Route path="/about" component={AboutPage} />
+            <Route path="/projects" component={ProjectsPage} />
+            <Route path="/projects/:slug" component={ProjectDetailPage} />
+            <Route path="/writing" component={WritingPage} />
+            <Route path="/writing/:slug" component={ArticlePage} />
+            <Route path="/now" component={NowPage} />
+            <Route path="/resume" component={ResumePage} />
+            <Route path="/contact" component={ContactPage} />
+
+            {/* Legacy URL Redirects */}
+            <Route path="/website-checkup">
+              <RedirectRoute to="/projects/iron-and-ink-systems" />
+            </Route>
+            <Route path="/privacy">
+              <RedirectRoute to="/privacy-policy" />
+            </Route>
+            <Route path="/terms-of-service">
+              <RedirectRoute to="/terms" />
+            </Route>
+            <Route path="/cookies">
+              <RedirectRoute to="/cookie-policy" />
+            </Route>
+            <Route path="/returns">
+              <RedirectRoute to="/refund-policy" />
+            </Route>
+            <Route path="/accessibility-statement">
+              <RedirectRoute to="/accessibility" />
+            </Route>
+
+            {/* Legal Pages */}
+            <Route path="/privacy-policy" component={PrivacyPage} />
+            <Route path="/terms" component={TermsPage} />
+            <Route path="/cookie-policy" component={CookiePolicyPage} />
+            <Route path="/refund-policy" component={RefundPolicyPage} />
+            <Route path="/disclaimer" component={DisclaimerPage} />
+            <Route path="/accessibility" component={AccessibilityPage} />
+
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+        <Footer />
+      </div>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App

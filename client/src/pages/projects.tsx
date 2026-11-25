@@ -1,72 +1,68 @@
-import { ArrowRight, BarChart3, Bot, Globe2, ShoppingBag } from 'lucide-react'
+import { useState } from 'react'
+import ProjectCard from '@/components/ProjectCard'
 import SeoHead from '@/components/SeoHead'
-
-const capabilities = [
-  {
-    icon: BarChart3,
-    title: 'Analytics and reporting',
-    description: 'SEO opportunity reporting and practical dashboards that turn scattered data into clear next steps.',
-    examples: ['Manchester Junk Hauling SEO analysis', 'Search opportunity reporting'],
-  },
-  {
-    icon: Globe2,
-    title: 'Web applications',
-    description: 'Responsive products and conversion-focused experiences built around a real user workflow.',
-    examples: ['LegalLeaflet contract tools', 'Lead recovery workflow demonstration'],
-  },
-  {
-    icon: Bot,
-    title: 'Automation and AI workflows',
-    description: 'Connected systems for content, follow-up, data processing, and repeatable operations.',
-    examples: ['Local SEO content workflow', 'Marketing production automations'],
-  },
-  {
-    icon: ShoppingBag,
-    title: 'E-commerce systems',
-    description: 'Hands-on marketplace operations, product analysis, and tooling shaped by running an Etsy business.',
-    examples: ['Etsy analytics tools', 'Stellar Styles and More operations'],
-  },
-]
+import { projectCategories, projects, type ProjectCategory } from '@/data/projects'
 
 export default function ProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<'All' | ProjectCategory>('All')
+
+  const visibleProjects =
+    selectedCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory)
+
   return (
-    <main id="main-content" className="projects-page">
+    <>
       <SeoHead
-        title="Work & Demonstrations | Phil Greene"
-        description="Honest demonstrations and selected work showing local-business websites, lead capture, automation, analytics, and customer communication systems."
+        title="Projects & Case Studies | Phil Greene"
+        description="Data analytics workbooks, Python pipelines, n8n AI workflows, Raspberry Pi 5 + Hailo-10H local AI lab, and Iron & Ink Systems."
         canonicalPath="/projects"
       />
-      <section className="projects-hero section">
+      <main id="main-content" className="section-pad">
         <div className="site-container">
-          <p className="section-label">Work &amp; demonstrations</p>
-          <h1>Practical examples of websites, automation, and customer journeys.</h1>
-          <p>
-            A focused selection of work showing how I think through clear interfaces, useful data,
-            and connected business systems. Demonstrations are not client case studies or claimed results.
-          </p>
+          <div className="max-w-3xl">
+            <p className="eyebrow-mono">Portfolio / Case Studies</p>
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+              Selected Projects
+            </h1>
+            <p className="mt-4 text-base leading-relaxed text-[var(--text-secondary)]">
+              Case studies documented with a focus on problem framing, technical architecture,
+              analytical trade-offs, and honest lessons learned.
+            </p>
+          </div>
+
+          <div
+            className="mt-8 flex flex-wrap gap-2"
+            role="group"
+            aria-label="Filter projects by category"
+          >
+            {projectCategories.map((category) => {
+              const isActive = selectedCategory === category
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setSelectedCategory(category)}
+                  aria-pressed={isActive}
+                  className={
+                    isActive
+                      ? 'btn btn-primary min-h-9 px-4 text-xs'
+                      : 'btn btn-secondary min-h-9 px-4 text-xs'
+                  }
+                >
+                  {category}
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {visibleProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
         </div>
-      </section>
-      <section className="section">
-        <div className="site-container capability-list">
-          {capabilities.map(({ icon: Icon, title, description, examples }, index) => (
-            <article key={title}>
-              <div className="capability-number">0{index + 1}</div>
-              <Icon aria-hidden="true" />
-              <div>
-                <h2>{title}</h2>
-                <p>{description}</p>
-                <ul>{examples.map((example) => <li key={example}>{example}</li>)}</ul>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="projects-cta section">
-        <div className="site-container">
-          <h2>Want to see what your own website could improve?</h2>
-          <a className="button button-primary" href="/#audit">Get My Free Website Audit <ArrowRight aria-hidden="true" /></a>
-        </div>
-      </section>
-    </main>
+      </main>
+    </>
   )
 }

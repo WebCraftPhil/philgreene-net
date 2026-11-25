@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { cn } from '../lib/utils'
+import { cn } from '../client/src/lib/utils'
 
 test('combines class names', () => {
   assert.equal(cn('foo', 'bar'), 'foo bar')

@@ -1,50 +1,57 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { auditRequestSchema, createAuditEmail } from '../shared/contact'
-import { buildAssistantPrefill, recommendPackage } from '../client/src/lib/assistant'
+import { auditRequestSchema, createAuditEmail, personalInquirySchema } from '../shared/contact'
+import { getProjectBySlug, projects } from '../client/src/data/projects'
+import { articles, getArticleBySlug } from '../client/src/data/writing'
 
-const validRequest = {
-  name: 'Sam Owner',
-  businessName: 'Sam Service Co',
-  email: 'sam@example.com',
-  phone: '603-555-0123',
-  websiteUrl: 'https://example.com',
-  businessType: 'Plumbing',
-  problem: 'Calls are missed when the team is on a job.',
-  preferredContact: 'Email',
+const validPersonalInquiry = {
+  name: 'Jordan Rivera',
+  email: 'jordan@example.com',
+  topic: 'Data Analytics / Engineering',
+  message: 'Enjoyed reading your notes on the Raspberry Pi 5 and Hailo-10H local AI lab.',
   companyWebsite: '',
 }
 
-test('accepts a complete lead-loss audit request', () => {
-  const result = auditRequestSchema.safeParse(validRequest)
+test('accepts a valid personal inquiry submission', () => {
+  const result = personalInquirySchema.safeParse(validPersonalInquiry)
   assert.equal(result.success, true)
 })
 
 test('rejects spam honeypot submissions', () => {
-  const result = auditRequestSchema.safeParse({ ...validRequest, companyWebsite: 'spam.example' })
+  const result = auditRequestSchema.safeParse({
+    ...validPersonalInquiry,
+    companyWebsite: 'spam.example',
+  })
   assert.equal(result.success, false)
 })
 
-test('escapes user content in the email HTML', () => {
+test('escapes user content in inquiry email HTML', () => {
   const parsed = auditRequestSchema.parse({
-    ...validRequest,
-    problem: '<script>alert("test")</script>',
+    ...validPersonalInquiry,
+    message: '<script>alert("xss")</script> Hello from the portfolio test.',
   })
   const email = createAuditEmail(parsed)
   assert.equal(email.html.includes('<script>'), false)
   assert.equal(email.html.includes('&lt;script&gt;'), true)
 })
 
-test('recommends the website package for a website-only problem', () => {
-  assert.equal(recommendPackage({ businessType: 'Plumbing', websiteUrl: '', primaryGoal: 'calls', problem: 'website' }), 'website')
+test('includes all five initial featured projects and resolves them by slug', () => {
+  assert.equal(projects.length, 5)
+  for (const slug of [
+    'tableau-superstore-sales-analysis',
+    'python-stock-screener',
+    'ai-agent-n8n-automation-workflows',
+    'raspberry-pi-5-hailo-10h-local-ai-lab',
+    'iron-and-ink-systems',
+  ]) {
+    const found = getProjectBySlug(slug)
+    assert.ok(found, `Expected project ${slug} to exist`)
+  }
 })
 
-test('recommends lead capture for booking and follow-up gaps', () => {
-  assert.equal(recommendPackage({ businessType: 'HVAC', websiteUrl: '', primaryGoal: 'appointments', problem: 'capture' }), 'website-lead-capture')
-})
-
-test('recommends the complete system for missed calls and includes it in prefill context', () => {
-  const prefill = buildAssistantPrefill({ businessType: 'Roofing', websiteUrl: 'https://roofer.example', primaryGoal: 'calls', problem: 'missed-calls' })
-  assert.equal(prefill.selectedPackage, 'lead-recovery-system')
-  assert.match(prefill.problem, /Complete Lead Recovery System/)
+test('resolves all writing articles by slug', () => {
+  assert.ok(articles.length >= 3)
+  for (const article of articles) {
+    assert.ok(getArticleBySlug(article.slug))
+  }
 })

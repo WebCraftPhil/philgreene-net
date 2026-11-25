@@ -7,7 +7,7 @@
     "dev": "NODE_ENV=development tsx server/index.ts",
     "build": "vite build && tsx scripts/generate-route-html.ts && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
-    "lint": "eslint client/src server api shared tests lib --max-warnings=0",
+    "lint": "eslint client/src server api shared tests --max-warnings=0",
     "check": "tsc",
     "test": "tsx --test tests/*.test.ts tests/*.test.tsx",
     "mailtrap:test-send": "node --env-file=.env --import tsx scripts/send-mailtrap-test.ts",
