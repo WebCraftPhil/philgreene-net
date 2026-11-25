@@ -55,8 +55,6 @@ export default function SeoHead({
     setMeta('meta[property="og:image:height"]', 'property', 'og:image:height', '630')
     if (publishedTime) {
       setMeta('meta[property="article:published_time"]', 'property', 'article:published_time', publishedTime)
-    } else {
-      document.head.querySelector('meta[property="article:published_time"]')?.remove()
     }
     setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title)
     setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description)
