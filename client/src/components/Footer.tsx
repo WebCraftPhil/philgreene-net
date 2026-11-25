@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, MapPin } from 'lucide-react'
+import { Github, Linkedin, Mail, MapPin, ShoppingBag } from 'lucide-react'
 import { Link } from 'wouter'
 import { profile } from '@/data/profile'
 
@@ -80,6 +80,16 @@ export default function Footer() {
                   className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--border-default)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)]"
                 >
                   <Linkedin size={16} aria-hidden="true" />
+                </a>
+                <a
+                  href={profile.gumroadUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Phil Greene Gumroad Shop"
+                  title="Gumroad Shop"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--border-default)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)]"
+                >
+                  <ShoppingBag size={16} aria-hidden="true" />
                 </a>
               </div>
             </div>

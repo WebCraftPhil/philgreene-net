@@ -97,7 +97,8 @@ export default function SeoHead({
         },
         sameAs: [
           'https://github.com/WebCraftPhil',
-          'https://linkedin.com/in/phil.greene1',
+          'https://www.linkedin.com/in/philgreene89/',
+          'https://vtguy65.gumroad.com',
           'https://ironandinksystems.com',
         ],
       }

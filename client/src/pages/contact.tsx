@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Github, Linkedin, Mail, MapPin, Send } from 'lucide-react'
+import { CheckCircle2, Github, Linkedin, Mail, MapPin, Send, ShoppingBag } from 'lucide-react'
 import SeoHead from '@/components/SeoHead'
 import { profile } from '@/data/profile'
 import { apiRequest } from '@/lib/queryClient'
@@ -78,7 +78,7 @@ export default function ContactPage() {
                     {profile.email}
                   </a>
                 </div>
-                <div className="flex items-center gap-3 pt-2">
+                <div className="flex flex-wrap items-center gap-3 pt-2">
                   <a
                     href={profile.githubUrl}
                     target="_blank"
@@ -94,6 +94,14 @@ export default function ContactPage() {
                     className="btn btn-secondary min-h-10 px-4 text-xs"
                   >
                     <Linkedin size={15} aria-hidden="true" /> LinkedIn
+                  </a>
+                  <a
+                    href={profile.gumroadUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-secondary min-h-10 px-4 text-xs"
+                  >
+                    <ShoppingBag size={15} aria-hidden="true" /> Gumroad Shop
                   </a>
                 </div>
               </div>
