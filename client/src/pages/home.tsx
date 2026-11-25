@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState, type KeyboardEvent } from 'react'
 import { ArrowRight, ArrowUpRight, Cpu, Database, Layers, Terminal } from 'lucide-react'
 import { Link } from 'wouter'
 import ProjectCard from '@/components/ProjectCard'
@@ -55,10 +55,29 @@ const disciplines = [
   },
 ]
 
+const disciplinePanelId = 'discipline-panel'
+
 export default function HomePage() {
   const [activeDiscipline, setActiveDiscipline] = useState(disciplines[0].id)
+  const tablistRef = useRef<HTMLDivElement>(null)
   const currentDiscipline =
     disciplines.find((item) => item.id === activeDiscipline) ?? disciplines[0]
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, tabId: string) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+      return
+    }
+    event.preventDefault()
+    const index = disciplines.findIndex((item) => item.id === tabId)
+    if (index === -1) {
+      return
+    }
+    const direction = event.key === 'ArrowLeft' ? -1 : 1
+    const nextIndex = (index + direction + disciplines.length) % disciplines.length
+    setActiveDiscipline(disciplines[nextIndex].id)
+    const tabs = tablistRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+    tabs?.[nextIndex]?.focus()
+  }
 
   const publishedProjects = projects.filter((project) => project.published !== false)
   const featuredProjects = publishedProjects.filter((project) => project.featuredOnHome).slice(0, 4)
@@ -113,6 +132,7 @@ export default function HomePage() {
               </div>
 
               <div
+                ref={tablistRef}
                 className="grid grid-cols-2 border-b border-[var(--border-default)]"
                 role="tablist"
                 aria-label="Core disciplines"
@@ -123,8 +143,12 @@ export default function HomePage() {
                     <button
                       key={id}
                       type="button"
+                      id={`discipline-tab-${id}`}
                       role="tab"
                       aria-selected={isSelected}
+                      aria-controls={disciplinePanelId}
+                      tabIndex={isSelected ? 0 : -1}
+                      onKeyDown={(event) => handleTabKeyDown(event, id)}
                       onClick={() => setActiveDiscipline(id)}
                       className={`flex items-center gap-2.5 border-b border-r border-[var(--border-default)] px-4 py-3.5 text-left text-xs font-semibold transition-colors last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 ${
                         isSelected
@@ -142,7 +166,12 @@ export default function HomePage() {
                 })}
               </div>
 
-              <div className="p-6" role="tabpanel">
+              <div
+                id={disciplinePanelId}
+                className="p-6"
+                role="tabpanel"
+                aria-labelledby={`discipline-tab-${currentDiscipline.id}`}
+              >
                 <p className="font-mono-meta mb-2 text-xs text-[var(--accent-warm)]">
                   {currentDiscipline.focus}
                 </p>

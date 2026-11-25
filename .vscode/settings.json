@@ -1,0 +1,10 @@
+{
+    "composio.selectedAgents": [
+        "cursor",
+        "gemini",
+        "opencode",
+        "codex",
+        "claude-code",
+        "copilot"
+    ]
+}

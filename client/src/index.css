@@ -8,6 +8,7 @@
   --bg-surface: #e6ebe9;
   --bg-elevated: #ffffff;
   --accent-primary: #32766c;
+  --accent-label: #265450;
   --accent-primary-hover: #265d55;
   --accent-secondary: #495968;
   --accent-warm: #7a6a53;
@@ -58,6 +59,7 @@
   --bg-surface: #252f38;
   --bg-elevated: #1c232b;
   --accent-primary: #5fa89d;
+  --accent-label: #5fa89d;
   --accent-primary-hover: #74b8ae;
   --accent-secondary: #8b9db5;
   --accent-warm: #d1c4af;
@@ -70,7 +72,7 @@
   --field-border: #8d9fae;
   --header-bg: rgba(22, 27, 34, 0.9);
   --grid-line: rgba(139, 157, 181, 0.08);
-  --focus-ring: rgba(95, 168, 157, 0.5);
+  --focus-ring: #5fa89d;
   --status-success: #5fa89d;
   --status-error: #e07a6f;
 
@@ -471,7 +473,6 @@ pre,
 .field-textarea:focus,
 .field-select:focus {
   border-color: var(--accent-primary);
-  outline: none;
 }
 
 /* Footer */

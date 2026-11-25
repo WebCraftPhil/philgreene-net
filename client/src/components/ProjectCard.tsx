@@ -7,7 +7,7 @@ export default function ProjectCard({ project }: { project: ProjectCaseStudy }) 
     <article className="surface-card surface-card-interactive flex h-full flex-col justify-between p-6">
       <div>
         <div className="mb-4 flex items-center justify-between gap-3">
-          <span className="font-mono-meta text-xs text-[var(--accent-primary)]">
+          <span className="font-mono-meta text-xs text-[var(--accent-label)]">
             {project.index} / {project.category}
           </span>
           <span className="meta-pill">{project.status}</span>

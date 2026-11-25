@@ -63,7 +63,7 @@ export default function AboutPage() {
                 + Hailo-10H edge hardware), and practical entrepreneurship through{' '}
                 <Link
                   href="/projects/iron-and-ink-systems"
-                  className="text-action-link"
+                  className="text-action-link underline"
                 >
                   Iron &amp; Ink Systems
                 </Link>
