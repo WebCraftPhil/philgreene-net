@@ -19,30 +19,27 @@ function getSystemTheme(): Theme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-function getInitialTheme(): Theme {
+function getInitialThemeState(): { theme: Theme; hasExplicitPreference: boolean } {
+  let stored: string | null = null
   try {
-    const stored = window.localStorage.getItem('theme')
-    if (stored === 'dark' || stored === 'light') {
-      return stored
-    }
+    stored = window.localStorage.getItem('theme')
   } catch {
     // Ignore storage access errors in restricted contexts
   }
-  return getSystemTheme()
+  if (stored === 'dark' || stored === 'light') {
+    return { theme: stored, hasExplicitPreference: true }
+  }
+  return { theme: getSystemTheme(), hasExplicitPreference: false }
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState | undefined>(undefined)
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(getInitialTheme)
-  const [hasExplicitPreference, setHasExplicitPreference] = useState<boolean>(() => {
-    try {
-      const stored = window.localStorage.getItem('theme')
-      return stored === 'dark' || stored === 'light'
-    } catch {
-      return false
-    }
-  })
+  const [initialThemeState] = useState(getInitialThemeState)
+  const [theme, setThemeState] = useState<Theme>(initialThemeState.theme)
+  const [hasExplicitPreference, setHasExplicitPreference] = useState<boolean>(
+    initialThemeState.hasExplicitPreference
+  )
 
   useEffect(() => {
     const root = window.document.documentElement

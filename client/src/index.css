@@ -369,8 +369,14 @@ pre,
   transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
 }
 
-.btn:hover {
-  transform: translateY(-1px);
+@media (prefers-reduced-motion: no-preference) {
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .surface-card-interactive:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .btn-primary {
@@ -420,7 +426,6 @@ pre,
 
 .surface-card-interactive:hover {
   border-color: var(--accent-primary);
-  transform: translateY(-2px);
 }
 
 .meta-pill {
@@ -466,7 +471,6 @@ pre,
 .field-input::placeholder,
 .field-textarea::placeholder {
   color: var(--text-secondary);
-  opacity: 0.75;
 }
 
 .field-input:focus,

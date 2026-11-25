@@ -109,7 +109,7 @@ export default function ContactPage() {
 
             <div className="surface-card p-7">
               {submitted ? (
-                <div className="space-y-4 py-6">
+                <div role="status" className="space-y-4 py-6">
                   <CheckCircle2
                     size={28}
                     aria-hidden="true"
