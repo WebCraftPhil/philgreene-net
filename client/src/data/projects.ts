@@ -60,6 +60,7 @@ export const projects: ProjectCaseStudy[] = [
       'An exploratory and executive-facing Tableau workbook dissecting profitability across product sub-categories, discount tiers, and regional shipping patterns.',
     stack: ['Tableau', 'Calculated Fields', 'LOD Expressions', 'Data Storytelling', 'SQL'],
     featuredOnHome: true,
+    repoUrl: 'https://github.com/WebCraftPhil/superstore-sales-analysis',
     context: {
       problem:
         'Top-line revenue in retail datasets frequently masks unprofitable product lines—especially when aggressive discounting and shipping overhead silently erode net margin.',

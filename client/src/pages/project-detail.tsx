@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ExternalLink, Github } from 'lucide-react'
 import { Link, useRoute } from 'wouter'
 import SeoHead from '@/components/SeoHead'
 import { getProjectBySlug, projects } from '@/data/projects'
@@ -52,16 +52,28 @@ export default function ProjectDetailPage() {
               ))}
             </div>
 
-            {project.externalUrl && (
-              <div className="mt-6">
-                <a
-                  href={project.externalUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-secondary min-h-10 px-4 text-xs"
-                >
-                  Visit {project.title} <ExternalLink size={14} aria-hidden="true" />
-                </a>
+            {(project.externalUrl || project.repoUrl) && (
+              <div className="mt-6 flex flex-wrap gap-3">
+                {project.externalUrl && (
+                  <a
+                    href={project.externalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-secondary min-h-10 px-4 text-xs"
+                  >
+                    Visit {project.title} <ExternalLink size={14} aria-hidden="true" />
+                  </a>
+                )}
+                {project.repoUrl && (
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-secondary min-h-10 px-4 text-xs"
+                  >
+                    <Github size={14} aria-hidden="true" /> View on GitHub
+                  </a>
+                )}
               </div>
             )}
           </header>
