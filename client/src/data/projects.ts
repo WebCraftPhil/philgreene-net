@@ -123,6 +123,7 @@ export const projects: ProjectCaseStudy[] = [
       'A Python-based screening tool designed to fetch market data, normalize financial ratios, and rank equities against transparent, user-defined criteria.',
     stack: ['Python', 'pandas', 'NumPy', 'Market Data APIs', 'CLI'],
     featuredOnHome: true,
+    repoUrl: 'https://github.com/WebCraftPhil/stock-screener-polygon-yfinance',
     context: {
       problem:
         'Web-based stock screeners lock filtering logic behind opaque UI presets, making it hard to combine custom fundamental ratios, handle missing fields consistently, or version-control screening rules.',
