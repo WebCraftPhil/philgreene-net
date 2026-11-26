@@ -1,4 +1,4 @@
-looks like it still needs some work as well but import { useEffect } from 'react'
+import { useEffect } from 'react'
 
 interface SeoHeadProps {
   title: string
